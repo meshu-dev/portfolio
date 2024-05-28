@@ -10,5 +10,7 @@ class ProfileDetail extends Model
 
     protected $fillable = ['key', 'value'];
 
+    protected $hidden = ['id'];
+
     public $timestamps = false;
 }

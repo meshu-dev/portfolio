@@ -10,4 +10,9 @@ class SkillTypeRepository
     {
         return SkillType::with('skills')->get();
     }
+
+    public function getAllPublic()
+    {
+        return SkillType::with(['skills'])->public()->get();
+    }
 }

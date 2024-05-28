@@ -10,4 +10,10 @@ class ProfileDetailRepository
     {
         return ProfileDetail::get();
     }
+
+    public function getKeyValues()
+    {
+        return $this->getAll()
+                    ->mapWithKeys(fn ($item) => [$item->key => $item->value]);
+    }
 }

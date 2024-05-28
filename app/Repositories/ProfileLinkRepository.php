@@ -10,4 +10,9 @@ class ProfileLinkRepository
     {
         return ProfileLink::get();
     }
+
+    public function getAllPublic()
+    {
+        return ProfileLink::public()->get();
+    }
 }

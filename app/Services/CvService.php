@@ -21,16 +21,21 @@ class CvService
 
     public function get()
     {
+        $details         = $this->profileDetailRepository->getKeyValues();
+        $links           = $this->profileLinkRepository->getAll();
+        $skills          = $this->skillTypeRepository->getAll();
+        $workExperiences = $this->workExperienceRepository->getAll();
+
         return [
             'profile' => [
-                'details' => $this->profileDetailRepository->getAll(),
-                'links'   => $this->profileLinkRepository->getAll()
+                'details' => $details,
+                'links'   => $links
             ],
-            'skills' => [
-                $this->skillTypeRepository->getAll()
+            'skill_groups' => [
+                $skills
             ],
-            'workExperiences' => [
-                $this->workExperienceRepository->getAll()
+            'work_experiences' => [
+                $workExperiences
             ]
         ];
     }

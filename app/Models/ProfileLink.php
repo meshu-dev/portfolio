@@ -10,5 +10,7 @@ class ProfileLink extends Model
 
     protected $fillable = ['name', 'url'];
 
+    protected $hidden = ['id'];
+
     public $timestamps = false;
 }
