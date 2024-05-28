@@ -31,12 +31,8 @@ class CvService
                 'details' => $details,
                 'links'   => $links
             ],
-            'skill_groups' => [
-                $skills
-            ],
-            'work_experiences' => [
-                $workExperiences
-            ]
+            'skill_groups'     => $skills,
+            'work_experiences' => $workExperiences
         ];
     }
 }

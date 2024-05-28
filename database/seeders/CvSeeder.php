@@ -45,9 +45,9 @@ class CvSeeder extends Seeder
                 'image_url' => 'https://cv.meshu.app/images/linkedin-icon.png'
             ],
             [
-                'name'      => 'GitHub',
-                'url'       => 'https://github.com/meshu-dev',
-                'image_url' => 'https://cv.meshu.app/images/github-icon.png'
+                'name'      => 'Portfolio',
+                'url'       => 'https://meshu.net',
+                'image_url' => 'https://cv.meshu.app/images/site-icon.png'
             ]
         ]);
 
@@ -126,6 +126,7 @@ class CvSeeder extends Seeder
         WorkExperience::insert([
             [
                 'title'       => 'Software Developer',
+                'company'     => 'Tucasi',
                 'location'    => 'Eastleigh',
                 'date'        => 'Nov 20 – Present',
                 'description' => 'Currently working on school payment apps, previously worked on a seat planner app',
@@ -139,6 +140,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'title'       => 'PHP Developer',
+                'company'     => 'MRI Software',
                 'location'    => 'Sutton Coldfield',
                 'date'        => 'Jul 19 – Oct 20',
                 'description' => 'Worked in the housing repair services team for MRI software',
@@ -150,6 +152,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'title'       => 'Senior Developer',
+                'company'     => 'MoreNiche',
                 'location'    => 'Nottingham',
                 'date'        => 'Jan 18 – Jul 19',
                 'description' => 'MoreNiche is an affiliate network that specialise in fitness products',
@@ -162,6 +165,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'title'       => 'Web Developer',
+                'company'     => 'FPS Distribution',
                 'location'    => 'Stratford-upon-Avon',
                 'date'        => 'Jun 16 – Jan 18',
                 'description' => 'FPS distribution is a b2b company providing car parts to their clients',
@@ -172,6 +176,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'title'       => 'Software Developer',
+                'company'     => 'Carphone Warehouse',
                 'location'    => 'Loughborough',
                 'date'        => 'Jun 15 – Apr 16',
                 'description' => 'This carphone Warehouse branch involved work with TalkTalk, E2Save and Mobiles',
@@ -182,6 +187,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'title'       => 'Web Developer',
+                'company'     => 'Twist Digital',
                 'location'    => 'Nottingham',
                 'date'        => 'Apr 13 – Jun 15',
                 'description' => 'Twist Digital was an affiliate network that provided health, beauty, fitness and adult products',

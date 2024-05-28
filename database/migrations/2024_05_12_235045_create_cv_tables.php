@@ -40,6 +40,7 @@ return new class extends Migration
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('company');
             $table->string('location');
             $table->string('date');
             $table->string('description');
