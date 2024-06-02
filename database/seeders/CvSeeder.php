@@ -6,7 +6,7 @@ use App\Models\{
     ProfileDetail,
     ProfileLink,
     Skill,
-    SkillType,
+    Technology,
     WorkExperience
 };
 use Illuminate\Database\Seeder;
@@ -17,6 +17,13 @@ class CvSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
+    {
+        $this->addProfileData();
+        $this->addSkills();
+        $this->addWorkExperiences();
+    }
+
+    protected function addProfileData()
     {
         ProfileDetail::insert([
             [
@@ -50,79 +57,30 @@ class CvSeeder extends Seeder
                 'image_url' => 'https://cv.meshu.app/images/site-icon.png'
             ]
         ]);
+    }
 
-        $backendType   = SkillType::create(['name' => 'Backend']);
-        $frontendType  = SkillType::create(['name' => 'Frontend']);
-        $frameworkType = SkillType::create(['name' => 'Frameworks']);
-        $otherType     = SkillType::create(['name' => 'Other']);
+    protected function addSkills()
+    {
+        $backendSkill   = Skill::create(['name' => 'Backend']);
+        $frontendSkill  = Skill::create(['name' => 'Frontend']);
+        $frameworkSkill = Skill::create(['name' => 'Frameworks']);
+        $miscSkill      = Skill::create(['name' => 'Misc']);
 
-        Skill::insert([
-            [
-                'skill_type_id' => $backendType->id,
-                'name'          => 'PHP'
-            ],
-            [
-                'skill_type_id' => $backendType->id,
-                'name'          => 'MySQL'
-            ],
-            [
-                'skill_type_id' => $backendType->id,
-                'name'          => 'NodeJS'
-            ],
-            [
-                'skill_type_id' => $backendType->id,
-                'name'          => 'Java'
-            ],
-            [
-                'skill_type_id' => $frontendType->id,
-                'name'          => 'Angular'
-            ],
-            [
-                'skill_type_id' => $frontendType->id,
-                'name'          => 'Backbone.js'
-            ],
-            [
-                'skill_type_id' => $frontendType->id,
-                'name'          => 'jQuery'
-            ],
-            [
-                'skill_type_id' => $frontendType->id,
-                'name'          => 'SASS'
-            ],
-            [
-                'skill_type_id' => $frameworkType->id,
-                'name'          => 'Laravel'
-            ],
-            [
-                'skill_type_id' => $frameworkType->id,
-                'name'          => 'Symfony'
-            ],
-            [
-                'skill_type_id' => $frameworkType->id,
-                'name'          => 'Express.js'
-            ],
-            [
-                'skill_type_id' => $frameworkType->id,
-                'name'          => 'Legacy'
-            ],
-            [
-                'skill_type_id' => $otherType->id,
-                'name'          => 'Amazon AWS'
-            ],
-            [
-                'skill_type_id' => $otherType->id,
-                'name'          => 'Mobile apps'
-            ],
-            [
-                'skill_type_id' => $otherType->id,
-                'name'          => 'Unit testing'
-            ],
-            [
-                'skill_type_id' => $otherType->id,
-                'name'          => 'Docker'
-            ]
-        ]);
+        $this->addSkillTechnologies($backendSkill, ['PHP', 'MySQL', 'Node.js', 'Java']);
+        $this->addSkillTechnologies($frontendSkill, ['Vue.js', 'React', 'Angular', 'TailwindCSS']);
+        $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Express.js', 'Symfony']);
+        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']);
+    }
 
+    protected function addSkillTechnologies(Skill $skill, array $technologies)
+    {
+        foreach ($technologies as $technology) {
+            $skill->technologies()->save(Technology::where('name', $technology)->first());
+        }
+    }
+
+    protected function addWorkExperiences()
+    {
         WorkExperience::insert([
             [
                 'title'       => 'Software Developer',

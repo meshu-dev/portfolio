@@ -24,17 +24,23 @@ return new class extends Migration
             $table->string('image_url');
         });
 
-        Schema::create('skill_types', function (Blueprint $table) {
+        Schema::create('technologies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
         });
 
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('skill_type_id');
             $table->string('name');
+        });
 
-            $table->foreign('skill_type_id')->references('id')->on('skill_types');
+        Schema::create('skill_technologies', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('technology_id');
+
+            $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('work_experiences', function (Blueprint $table) {
@@ -55,8 +61,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('profile_details');
         Schema::dropIfExists('profile_links');
+        Schema::dropIfExists('technologies');
         Schema::dropIfExists('skills');
-        Schema::dropIfExists('skill_types');
+        Schema::dropIfExists('skill_technologies');
         Schema::dropIfExists('work_experiences');
     }
 };

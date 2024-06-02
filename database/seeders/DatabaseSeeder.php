@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CvSeeder::class
+            TechnologySeeder::class,
+            CvSeeder::class,
+            PortfolioSeeder::class
         ]);
     }
 }

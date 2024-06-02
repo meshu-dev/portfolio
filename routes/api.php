@@ -8,3 +8,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/cv', [App\Http\Controllers\CvController::class, 'get']);
+Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'get']);

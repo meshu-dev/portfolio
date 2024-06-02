@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
     protected $table = 'skills';
 
-    protected $fillable = ['skill_type_id', 'name'];
+    protected $fillable = ['name'];
 
-    protected $hidden = ['id', 'skill_type_id'];
+    protected $hidden = ['id'];
 
     public $timestamps = false;
+
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class, 'skill_technologies', 'skill_id', 'technology_id');
+    }
 }
