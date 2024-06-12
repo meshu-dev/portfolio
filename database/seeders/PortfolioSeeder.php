@@ -6,7 +6,9 @@ use App\Models\{
     File,
     Project,
     Repository,
-    Technology
+    Skill,
+    Technology,
+    Text
 };
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -18,53 +20,108 @@ class PortfolioSeeder extends Seeder
      */
     public function run(): void
     {
-        // Repositories
-        $cvRepo = Repository::create([
-            'name' => 'CV',
-            'url'  => 'https://github.com/meshu-dev/cv'
-        ]);
+        $this->addAboutText();
+        $this->addSkills();
 
-        $mailerRepo = Repository::create([
-            'name' => 'Mailer',
-            'url'  => 'https://github.com/meshu-dev/mailer'
-        ]);
+        $repositories = $this->addRepositories();
 
-        $siteRepo = Repository::create([
-            'name' => 'Sites',
-            'url'  => 'https://github.com/meshu-dev/sites'
-        ]);
+        $this->addProjects($repositories);
+    }
 
-        $cryptoRepo = Repository::create([
-            'name' => 'Crypto',
-            'url'  => 'https://github.com/meshu-dev/crypto'
-        ]);
+    protected function addRepositories(): array
+    {
+        return [
+            'cvRepo' => Repository::create([
+                'name' => 'CV',
+                'url'  => 'https://github.com/meshu-dev/cv'
+            ]),
+            'mailerRepo' => Repository::create([
+                'name' => 'Mailer',
+                'url'  => 'https://github.com/meshu-dev/mailer'
+            ]),
+            'siteRepo' => Repository::create([
+                'name' => 'Sites',
+                'url'  => 'https://github.com/meshu-dev/sites'
+            ]),
+            'cryptoRepo' => Repository::create([
+                'name' => 'Crypto',
+                'url'  => 'https://github.com/meshu-dev/crypto'
+            ]),
+            'cryptoApiRepo' => Repository::create([
+                'name' => 'Crypto API',
+                'url'  => 'https://github.com/meshu-dev/crypto-api'
+            ]),
+            'backlogRepo' => Repository::create([
+                'name' => 'Backlog',
+                'url'  => 'https://github.com/meshu-dev/backlog'
+            ]),
+            'backlogApiRepo' => Repository::create([
+                'name' => 'Backlog API',
+                'url'  => 'https://github.com/meshu-dev/backlog-api'
+            ]),
+            'adminRepo' => Repository::create([
+                'name' => 'Admin',
+                'url'  => 'https://github.com/meshu-dev/admin'
+            ]),
+            'requireDevRepo' => Repository::create([
+                'name' => 'RequireDev',
+                'url'  => 'https://github.com/meshu-dev/requiredev'
+            ])
+        ];
+    }
 
-        $cryptoApiRepo = Repository::create([
-            'name' => 'Crypto API',
-            'url'  => 'https://github.com/meshu-dev/crypto-api'
-        ]);
+    protected function addAboutText()
+    {
+        $aboutMe = "I'm a full stack developer with web development experience in PHP / Javascript, Amazon AWS linux server related setup / maintenance work and mobile development implementing native / web apps for both Android and iOS devices.
 
-        $backlogRepo = Repository::create([
-            'name' => 'Backlog',
-            'url'  => 'https://github.com/meshu-dev/backlog'
-        ]);
+        For a long time I've been interested in software development and continue to spend time researching and improving upon my skills and experience in new and popular technologies.";
 
-        $backlogApiRepo = Repository::create([
-            'name' => 'Backlog API',
-            'url'  => 'https://github.com/meshu-dev/backlog-api'
+        Text::insert([
+            'name'  => 'about',
+            'value' => $aboutMe
         ]);
+    }
 
-        $adminRepo = Repository::create([
-            'name' => 'Admin',
-            'url'  => 'https://github.com/meshu-dev/admin'
-        ]);
+    protected function addSkills()
+    {
+        $portfolioSkill = Skill::create(['name' => 'Portfolio']);
 
-        $requireDevRepo = Repository::create([
-            'name' => 'RequireDev',
-            'url'  => 'https://github.com/meshu-dev/requiredev'
-        ]);
+        $this->addSkillTechnologies(
+            $portfolioSkill,
+            [
+                'PHP',
+                'Laravel',
+                'Node.js',
+                'MySQL',
+                'MongoDB',
+                'Vue.js',
+                'React',
+                'Angular'
+            ]
+        );
+    }
 
-        // Projects
+    protected function addSkillTechnologies(Skill $skill, array $technologies)
+    {
+        foreach ($technologies as $technology) {
+            $skill->technologies()->save(Technology::where('name', $technology)->first());
+        }
+    }
+
+    protected function addProjects(array $repositories): void
+    {
+        [
+            $cvRepo,
+            $mailerRepo,
+            $siteRepo,
+            $cryptoRepo,
+            $cryptoApiRepo,
+            $backlogRepo,
+            $backlogApiRepo,
+            $adminRepo,
+            $requireDevRepo
+        ] = $repositories;
+
         $backlogProject = Project::create([
             'name'        => 'Backlog',
             'description' => 'Backlog manager for movies and TV shows',
@@ -85,7 +142,7 @@ class PortfolioSeeder extends Seeder
 
         $adminProject->repositories()->save($adminRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['Laravel', 'MySQL', 'React']);
+        $this->addProjectTechnologies($adminProject, ['Laravel', 'MySQL', 'React']);
         $this->addProjectFile('admin.jpg');
 
         $requireDevProject = Project::create([
@@ -96,7 +153,7 @@ class PortfolioSeeder extends Seeder
 
         $requireDevProject->repositories()->save($requireDevRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['Wordpress', 'React', 'Next.js', 'GraphQL']);
+        $this->addProjectTechnologies($requireDevProject, ['Wordpress', 'React', 'Next.js', 'GraphQL']);
         $this->addProjectFile('requiredev.jpg');
 
         $cvProject = Project::create([
@@ -107,7 +164,7 @@ class PortfolioSeeder extends Seeder
 
         $cvProject->repositories()->save($cvRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'MongoDB']);
+        $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'MongoDB']);
         $this->addProjectFile('cv.jpg');
 
         $mailerProject = Project::create([
@@ -118,7 +175,7 @@ class PortfolioSeeder extends Seeder
 
         $mailerProject->repositories()->save($mailerRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['React', 'Next.js']);
+        $this->addProjectTechnologies($mailerProject, ['React', 'Next.js']);
         $this->addProjectFile('mailer.jpg');
 
         $sitesProject = Project::create([
@@ -129,7 +186,7 @@ class PortfolioSeeder extends Seeder
 
         $sitesProject->repositories()->save($siteRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'PostgreSQL']);
+        $this->addProjectTechnologies($sitesProject, ['React', 'Next.js', 'PostgreSQL']);
         $this->addProjectFile('sites.jpg');
 
         $cryptoProject = Project::create([
@@ -141,11 +198,11 @@ class PortfolioSeeder extends Seeder
         $cryptoProject->repositories()->save($cryptoApiRepo);
         $cryptoProject->repositories()->save($cryptoRepo);
 
-        $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'MongoDB']);
+        $this->addProjectTechnologies($cryptoProject, ['React', 'Next.js', 'MongoDB']);
         $this->addProjectFile('crypto.jpg');
     }
 
-    protected function addProjectFile($filename)
+    protected function addProjectFile($filename): void
     {
         $projectFileUrl = Storage::disk('s3')->url($filename);
 
@@ -157,7 +214,7 @@ class PortfolioSeeder extends Seeder
         }
     }
 
-    protected function addProjectTechnologies(Project $project, array $technologies)
+    protected function addProjectTechnologies(Project $project, array $technologies): void
     {
         foreach ($technologies as $technology) {
             $project->technologies()->save(Technology::where('name', $technology)->first());

@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProfileLink extends Model
+class Text extends Model
 {
-    protected $table = 'profile_links';
+    protected $table = 'texts';
 
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['name', 'value'];
 
     protected $hidden = ['id'];
 

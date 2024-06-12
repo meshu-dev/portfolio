@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profile_details', function (Blueprint $table) {
+        Schema::create('texts', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
+            $table->string('name');
             $table->string('value');
         });
 
-        Schema::create('profile_links', function (Blueprint $table) {
+        Schema::create('icons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');
@@ -59,8 +59,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_details');
-        Schema::dropIfExists('profile_links');
+        Schema::dropIfExists('texts');
+        Schema::dropIfExists('icons');
         Schema::dropIfExists('technologies');
         Schema::dropIfExists('skills');
         Schema::dropIfExists('skill_technologies');

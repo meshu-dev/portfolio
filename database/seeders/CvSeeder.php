@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\{
     File,
-    ProfileDetail,
-    ProfileLink,
+    Text,
+    Icon,
     Skill,
     Technology,
     WorkExperience
@@ -28,22 +28,22 @@ class CvSeeder extends Seeder
 
     protected function addProfileData()
     {
-        ProfileDetail::insert([
+        Text::insert([
             [
-                'key'   => 'name',
+                'name'  => 'fullname',
                 'value' => 'Harmesh Uppal'
             ],
             [
-                'key'   => 'intro',
+                'name'  => 'intro',
                 'value' => 'Full-stack developer with over 12 years experience in PHP and JavaScript'
             ],
             [
-                'key'   => 'location',
+                'name'  => 'location',
                 'value' => 'West Midlands, UK'
             ]
         ]);
 
-        ProfileLink::insert([
+        Icon::insert([
             [
                 'name'      => 'GitHub',
                 'url'       => 'https://github.com/meshu-dev',

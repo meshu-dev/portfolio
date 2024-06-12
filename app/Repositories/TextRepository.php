@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\ProfileDetail;
+use App\Models\Text;
 
-class ProfileDetailRepository
+class TextRepository
 {
     public function getAll()
     {
-        return ProfileDetail::get();
+        return Text::get();
     }
 
     public function getKeyValues()

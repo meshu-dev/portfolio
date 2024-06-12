@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Repositories\{
-    ProfileDetailRepository,
-    ProfileLinkRepository,
+    TextRepository,
+    IconRepository,
     SkillRepository,
     WorkExperienceRepository
 };
@@ -12,8 +12,8 @@ use App\Repositories\{
 class CvService
 {
     public function __construct(
-        protected ProfileDetailRepository $profileDetailRepository,
-        protected ProfileLinkRepository $profileLinkRepository,
+        protected TextRepository $textRepository,
+        protected IconRepository $iconRepository,
         protected SkillRepository $skillRepository,
         protected WorkExperienceRepository $workExperienceRepository
     ) {
@@ -21,15 +21,15 @@ class CvService
 
     public function get()
     {
-        $details         = $this->profileDetailRepository->getKeyValues();
-        $links           = $this->profileLinkRepository->getAll();
+        $details         = $this->textRepository->getKeyValues();
+        $icons           = $this->iconRepository->getAll();
         $skills          = $this->skillRepository->getAll();
         $workExperiences = $this->workExperienceRepository->getAll();
 
         return [
             'profile' => [
                 'details' => $details,
-                'links'   => $links
+                'icons'   => $icons
             ],
             'skill_groups'     => $skills,
             'work_experiences' => $workExperiences
