@@ -31,39 +31,39 @@ class PortfolioSeeder extends Seeder
     protected function addRepositories(): array
     {
         return [
-            'cvRepo' => Repository::create([
+            Repository::create([
                 'name' => 'CV',
                 'url'  => 'https://github.com/meshu-dev/cv'
             ]),
-            'mailerRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Mailer',
                 'url'  => 'https://github.com/meshu-dev/mailer'
             ]),
-            'siteRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Sites',
                 'url'  => 'https://github.com/meshu-dev/sites'
             ]),
-            'cryptoRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Crypto',
                 'url'  => 'https://github.com/meshu-dev/crypto'
             ]),
-            'cryptoApiRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Crypto API',
                 'url'  => 'https://github.com/meshu-dev/crypto-api'
             ]),
-            'backlogRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Backlog',
                 'url'  => 'https://github.com/meshu-dev/backlog'
             ]),
-            'backlogApiRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Backlog API',
                 'url'  => 'https://github.com/meshu-dev/backlog-api'
             ]),
-            'adminRepo' => Repository::create([
+            Repository::create([
                 'name' => 'Admin',
                 'url'  => 'https://github.com/meshu-dev/admin'
             ]),
-            'requireDevRepo' => Repository::create([
+            Repository::create([
                 'name' => 'RequireDev',
                 'url'  => 'https://github.com/meshu-dev/requiredev'
             ])
@@ -72,9 +72,11 @@ class PortfolioSeeder extends Seeder
 
     protected function addAboutText()
     {
-        $aboutMe = "I'm a full stack developer with web development experience in PHP / Javascript, Amazon AWS linux server related setup / maintenance work and mobile development implementing native / web apps for both Android and iOS devices.
-
-        For a long time I've been interested in software development and continue to spend time researching and improving upon my skills and experience in new and popular technologies.";
+        $aboutMe = "I'm a full stack developer with web development experience in PHP / Javascript, " .
+            "Amazon AWS linux server related setup / maintenance work and mobile development implementing " .
+            "native / web apps for both Android and iOS devices.\n\n" .
+            "For a long time I've been interested in software development and continue to spend time researching " .
+            "and improving upon my skills and experience in new and popular technologies.";
 
         Text::insert([
             'name'  => 'about',
