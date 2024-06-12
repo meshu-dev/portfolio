@@ -3,11 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\{
+    File,
     Project,
     Repository,
     Technology
 };
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioSeeder extends Seeder
 {
@@ -73,6 +75,7 @@ class PortfolioSeeder extends Seeder
         $backlogProject->repositories()->save($backlogRepo);
 
         $this->addProjectTechnologies($backlogProject, ['Laravel', 'MySQL', 'Vue.js']);
+        $this->addProjectFile('backlog.jpg');
 
         $adminProject = Project::create([
             'name'        => 'Admin',
@@ -83,6 +86,7 @@ class PortfolioSeeder extends Seeder
         $adminProject->repositories()->save($adminRepo);
 
         $this->addProjectTechnologies($backlogProject, ['Laravel', 'MySQL', 'React']);
+        $this->addProjectFile('admin.jpg');
 
         $requireDevProject = Project::create([
             'name'        => 'RequireDev',
@@ -93,6 +97,7 @@ class PortfolioSeeder extends Seeder
         $requireDevProject->repositories()->save($requireDevRepo);
 
         $this->addProjectTechnologies($backlogProject, ['Wordpress', 'React', 'Next.js', 'GraphQL']);
+        $this->addProjectFile('requiredev.jpg');
 
         $cvProject = Project::create([
             'name'        => 'CV',
@@ -103,6 +108,7 @@ class PortfolioSeeder extends Seeder
         $cvProject->repositories()->save($cvRepo);
 
         $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'MongoDB']);
+        $this->addProjectFile('cv.jpg');
 
         $mailerProject = Project::create([
             'name'        => 'Mailer',
@@ -113,6 +119,7 @@ class PortfolioSeeder extends Seeder
         $mailerProject->repositories()->save($mailerRepo);
 
         $this->addProjectTechnologies($backlogProject, ['React', 'Next.js']);
+        $this->addProjectFile('mailer.jpg');
 
         $sitesProject = Project::create([
             'name'        => 'Sites',
@@ -123,6 +130,7 @@ class PortfolioSeeder extends Seeder
         $sitesProject->repositories()->save($siteRepo);
 
         $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'PostgreSQL']);
+        $this->addProjectFile('sites.jpg');
 
         $cryptoProject = Project::create([
             'name'        => 'Crypto',
@@ -134,6 +142,19 @@ class PortfolioSeeder extends Seeder
         $cryptoProject->repositories()->save($cryptoRepo);
 
         $this->addProjectTechnologies($backlogProject, ['React', 'Next.js', 'MongoDB']);
+        $this->addProjectFile('crypto.jpg');
+    }
+
+    protected function addProjectFile($filename)
+    {
+        $projectFileUrl = Storage::disk('s3')->url($filename);
+
+        if ($projectFileUrl) {
+            File::insert([
+                'name' => $filename,
+                'url'  => $projectFileUrl
+            ]);
+        }
     }
 
     protected function addProjectTechnologies(Project $project, array $technologies)

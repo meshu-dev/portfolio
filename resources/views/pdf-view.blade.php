@@ -31,8 +31,8 @@
                             <div class="max-w-200 mb-5">
                                 <div class="font-bold">{{ $skillGroup['name'] }}</div>
                                 <ul class="list-disc ml-10">
-                                    @foreach ($skillGroup['skills'] as $skill)
-                                        <li>{{ $skill['name'] }}</li>
+                                    @foreach ($skillGroup['technologies'] as $technology)
+                                        <li>{{ $technology['name'] }}</li>
                                     @endforeach
                                 </ul>
                             </div>

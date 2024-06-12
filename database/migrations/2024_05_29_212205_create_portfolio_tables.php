@@ -12,8 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->text('url');
         });
 
@@ -49,13 +50,13 @@ return new class extends Migration
             $table->foreign('technology_id')->references('id')->on('technologies');
         });
 
-        Schema::create('project_images', function (Blueprint $table) {
+        Schema::create('project_files', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('file_id');
 
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('file_id')->references('id')->on('files');
         });
     }
 
@@ -66,12 +67,12 @@ return new class extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('files');
         Schema::dropIfExists('repositories');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('project_repositories');
         Schema::dropIfExists('project_technologies');
-        Schema::dropIfExists('project_images');
+        Schema::dropIfExists('project_files');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

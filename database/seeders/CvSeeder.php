@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\{
+    File,
     ProfileDetail,
     ProfileLink,
     Skill,
@@ -10,6 +11,7 @@ use App\Models\{
     WorkExperience
 };
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class CvSeeder extends Seeder
 {
@@ -21,6 +23,7 @@ class CvSeeder extends Seeder
         $this->addProfileData();
         $this->addSkills();
         $this->addWorkExperiences();
+        $this->addPdf();
     }
 
     protected function addProfileData()
@@ -156,5 +159,17 @@ class CvSeeder extends Seeder
                 ])
             ]
         ]);
+    }
+
+    protected function addPdf()
+    {
+        $cvFileUrl = Storage::disk('s3')->url('cv.pdf');
+
+        if ($cvFileUrl) {
+            File::insert([
+                'name' => 'cv.pdf',
+                'url'  => $cvFileUrl
+            ]);
+        }
     }
 }
