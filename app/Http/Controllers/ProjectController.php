@@ -14,10 +14,10 @@ class ProjectController extends Controller
     {
         $projectData = Cache::get('projects');
 
-        //if ($cvData) {
+        if (!$projectData) {
             $projectData = $projectRepository->getAll();
             Cache::forever('projects', $projectData);
-        //}
+        }
 
         return response()->json(['data' => $projectData]);
     }

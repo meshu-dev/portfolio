@@ -14,10 +14,10 @@ class CvController extends Controller
     {
         $cvData = Cache::get('cv');
 
-        //if ($cvData) {
+        if (!$cvData) {
             $cvData = $cvService->get();
             Cache::forever('cv', $cvData);
-        //}
+        }
 
         return response()->json(['data' => $cvData]);
     }

@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/cv', [App\Http\Controllers\CvController::class, 'get']);
 Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'get']);
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'sendMessage']);
