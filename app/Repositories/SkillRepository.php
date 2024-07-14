@@ -15,4 +15,11 @@ class SkillRepository
     {
         return Skill::with(['technologies'])->public()->get();
     }
+
+    public function getCvSkills()
+    {
+        return Skill::with("technologies")
+            ->whereIn("name", ["Backend", "Frontend", "Frameworks", "Misc"])
+            ->get();
+    }
 }

@@ -23,7 +23,7 @@ class CvService
     {
         $details         = $this->textRepository->getKeyValues();
         $icons           = $this->iconRepository->getAll();
-        $skills          = $this->skillRepository->getAll();
+        $skills          = $this->skillRepository->getCvSkills();
         $workExperiences = $this->workExperienceRepository->getAll();
 
         return [
