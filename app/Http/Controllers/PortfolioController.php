@@ -43,7 +43,7 @@ class PortfolioController extends Controller
     }
 
     /**
-     * Get text and skills list for the portfolio about page.
+     * Get projects for the portfolio projects page.
      */
     public function getProjects()
     {
