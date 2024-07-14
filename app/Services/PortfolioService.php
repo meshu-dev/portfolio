@@ -24,11 +24,11 @@ class PortfolioService
 
     public function getAbout()
     {
-        $aboutText       = $this->textRepository->getByNames(["about"]);
+        $textList        = $this->textRepository->getByNames(["about"])->toArray();
         $portfolioSkills = $this->skillRepository->getByNames(["portfolio"]);
 
         return [
-            'text'   => $aboutText,
+            'text'   => $textList['about'],
             'skills' => $portfolioSkills
         ];
     }

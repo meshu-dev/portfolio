@@ -47,13 +47,13 @@ class PortfolioController extends Controller
      */
     public function getProjects()
     {
-        $about = Cache::get('portfolioAbout');
+        $projects = Cache::get('portfolioProjects');
 
-        if (!$about) {
-            $about = $this->portfolioService->getAbout();
-            Cache::forever('portfolioAbout', $about);
+        if (!$projects) {
+            $projects = $this->portfolioService->getProjects();
+            Cache::forever('portfolioProjects', $projects);
         }
 
-        return response()->json(['data' => $about]);
+        return response()->json(['data' => $projects]);
     }
 }
