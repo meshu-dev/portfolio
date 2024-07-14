@@ -19,11 +19,11 @@ class CvService
     ) {
     }
 
-    public function get()
+    public function getData()
     {
-        $details         = $this->textRepository->getKeyValues();
+        $details         = $this->textRepository->getByNames(["fullname", "intro", "location"]);
         $icons           = $this->iconRepository->getAll();
-        $skills          = $this->skillRepository->getCvSkills();
+        $skills          = $this->skillRepository->getByNames(["Backend", "Frontend", "Frameworks", "Misc"]);
         $workExperiences = $this->workExperienceRepository->getAll();
 
         return [

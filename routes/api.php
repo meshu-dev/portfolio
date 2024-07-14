@@ -8,5 +8,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/cv', [App\Http\Controllers\CvController::class, 'get']);
-Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'get']);
+
+Route::prefix('portfolio')->group(function () {
+    Route::get('/intro', [App\Http\Controllers\PortfolioController::class, 'getIntro']);
+    Route::get('/about', [App\Http\Controllers\PortfolioController::class, 'getAbout']);
+    Route::get('/projects', [App\Http\Controllers\PortfolioController::class, 'getProjects']);
+});
+
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'sendMessage']);

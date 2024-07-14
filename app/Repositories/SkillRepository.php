@@ -11,15 +11,10 @@ class SkillRepository
         return Skill::with('technologies')->get();
     }
 
-    public function getAllPublic()
-    {
-        return Skill::with(['technologies'])->public()->get();
-    }
-
-    public function getCvSkills()
+    public function getByNames(array $names)
     {
         return Skill::with("technologies")
-            ->whereIn("name", ["Backend", "Frontend", "Frameworks", "Misc"])
+            ->whereIn("name", $names)
             ->get();
     }
 }

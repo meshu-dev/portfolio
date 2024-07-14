@@ -11,9 +11,10 @@ class TextRepository
         return Text::get();
     }
 
-    public function getKeyValues()
+    public function getByNames(array $names)
     {
-        return $this->getAll()
-                    ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
+        return Text::whereIn("name", $names)
+            ->get()
+            ->mapWithKeys(fn($item) => [$item->name => $item->value]);
     }
 }

@@ -20,6 +20,7 @@ class PortfolioSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->addIntroText();
         $this->addAboutText();
         $this->addSkills();
 
@@ -68,6 +69,19 @@ class PortfolioSeeder extends Seeder
                 'url'  => 'https://github.com/meshu-dev/requiredev'
             ])
         ];
+    }
+
+    protected function addIntroText()
+    {
+        Text::insert([
+            'name'  => 'portfolio_intro_1',
+            'value' => "Hello, I'm Mesh"
+        ]);
+
+        Text::insert([
+            'name'  => 'portfolio_intro_2',
+            'value' => "I'm a Software Developer with 13 years experience"
+        ]);
     }
 
     protected function addAboutText()

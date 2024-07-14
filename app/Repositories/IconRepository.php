@@ -10,9 +10,4 @@ class IconRepository
     {
         return Icon::get();
     }
-
-    public function getAllPublic()
-    {
-        return Icon::public()->get();
-    }
 }

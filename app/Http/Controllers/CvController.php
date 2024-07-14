@@ -15,7 +15,7 @@ class CvController extends Controller
         $cvData = Cache::get('cv');
 
         if (!$cvData) {
-            $cvData = $cvService->get();
+            $cvData = $cvService->getData();
             Cache::forever('cv', $cvData);
         }
 
