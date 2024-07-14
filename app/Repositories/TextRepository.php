@@ -14,6 +14,6 @@ class TextRepository
     public function getKeyValues()
     {
         return $this->getAll()
-                    ->mapWithKeys(fn ($item) => [$item->key => $item->value]);
+                    ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
     }
 }

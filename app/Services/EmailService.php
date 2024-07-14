@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use App\Mail\ContactEmail;
+use Illuminate\Support\Facades\Mail;
+
 class EmailService
 {
-    public function sendContactEmail()
+    public function sendContactEmail(array $params)
     {
-        // TODO
+        Mail::to(config('mail.to.address'))->send(
+            new ContactEmail($params)
+        );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\EmailService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -23,8 +24,8 @@ class SendContactEmailJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(EmailService $emailService): void
     {
-        //
+        $emailService->sendContactEmail($this->params);
     }
 }
