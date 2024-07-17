@@ -22,8 +22,8 @@ class Project extends Model
         return $this->belongsToMany(Technology::class, 'project_technologies', 'project_id', 'technology_id');
     }
 
-    public function images()
+    public function files()
     {
-        return $this->belongsToMany(Image::class, 'project_images', 'project_id', 'image_id');
+        return $this->belongsToMany(File::class, 'project_files', 'project_id', 'file_id');
     }
 }

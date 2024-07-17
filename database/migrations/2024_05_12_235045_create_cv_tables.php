@@ -17,13 +17,6 @@ return new class extends Migration
             $table->text('value');
         });
 
-        Schema::create('icons', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('url');
-            $table->string('image_url');
-        });
-
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -60,7 +53,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('texts');
-        Schema::dropIfExists('icons');
         Schema::dropIfExists('technologies');
         Schema::dropIfExists('skills');
         Schema::dropIfExists('skill_technologies');

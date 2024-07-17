@@ -17,14 +17,7 @@ class PortfolioController extends Controller
      */
     public function getIntro()
     {
-        $introDetails = Cache::get('portfolioIntroDetails');
-
-        if (!$introDetails) {
-            $introDetails = $this->portfolioService->getIntroDetails();
-            Cache::forever('portfolioIntroDetails', $introDetails);
-        }
-
-        return response()->json(['data' => $introDetails]);
+        return $this->getData('portfolio-intro-details', 'getIntroDetails');
     }
 
     /**
@@ -32,14 +25,7 @@ class PortfolioController extends Controller
      */
     public function getAbout()
     {
-        $about = Cache::get('portfolioAbout');
-
-        if (!$about) {
-            $about = $this->portfolioService->getAbout();
-            Cache::forever('portfolioAbout', $about);
-        }
-
-        return response()->json(['data' => $about]);
+        return $this->getData('portfolio-about', 'getAbout');
     }
 
     /**
@@ -47,13 +33,18 @@ class PortfolioController extends Controller
      */
     public function getProjects()
     {
-        $projects = Cache::get('portfolioProjects');
+        return $this->getData('portfolio-projects', 'getProjects');
+    }
 
-        if (!$projects) {
-            $projects = $this->portfolioService->getProjects();
-            Cache::forever('portfolioProjects', $projects);
+    protected function getData(string $cacheKey, string $function)
+    {
+        $data = Cache::get($cacheKey);
+
+        if (!$data) {
+            $data = $this->portfolioService->{$function}();
+            Cache::forever($cacheKey, $data);
         }
 
-        return response()->json(['data' => $projects]);
+        return response()->json(['data' => $data]);
     }
 }

@@ -33,7 +33,7 @@ class UploadFiles extends Command
             $filename = basename($localFile);
             $file     = new File(storage_path('app/files') . '/' . $filename);
 
-            Storage::disk('s3')->putFileAs('', $file, $filename, 'public');
+            $result = Storage::disk('s3')->putFileAs('', $file, $filename, 'public');
         }
     }
 }

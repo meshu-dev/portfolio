@@ -13,4 +13,9 @@ class Icon extends Model
     protected $hidden = ['id'];
 
     public $timestamps = false;
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'icon_files', 'icon_id', 'file_id');
+    }
 }

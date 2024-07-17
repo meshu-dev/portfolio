@@ -58,6 +58,28 @@ return new class extends Migration
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('file_id')->references('id')->on('files');
         });
+
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('icons', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('url');
+        });
+
+        Schema::create('icon_files', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('icon_id');
+            $table->unsignedBigInteger('file_id');
+
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('icon_id')->references('id')->on('icons');
+            $table->foreign('file_id')->references('id')->on('files');
+        });
     }
 
     /**
@@ -73,6 +95,9 @@ return new class extends Migration
         Schema::dropIfExists('project_repositories');
         Schema::dropIfExists('project_technologies');
         Schema::dropIfExists('project_files');
+        Schema::dropIfExists('types');
+        Schema::dropIfExists('icons');
+        Schema::dropIfExists('icon_files');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

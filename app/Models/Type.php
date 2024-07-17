@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class Type extends Model
 {
-    protected $table = 'files';
+    protected $table = 'types';
 
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['id', 'name'];
 
     public $timestamps = false;
 }

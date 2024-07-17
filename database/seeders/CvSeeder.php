@@ -43,6 +43,7 @@ class CvSeeder extends Seeder
             ]
         ]);
 
+        /*
         Icon::insert([
             [
                 'name'      => 'GitHub',
@@ -59,7 +60,7 @@ class CvSeeder extends Seeder
                 'url'       => 'https://meshu.net',
                 'image_url' => 'https://cv.meshu.app/images/site-icon.png'
             ]
-        ]);
+        ]); */
     }
 
     protected function addSkills()
