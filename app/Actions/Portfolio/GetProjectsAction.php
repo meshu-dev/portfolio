@@ -2,42 +2,19 @@
 
 namespace App\Actions\Portfolio;
 
-use App\Http\Resources\{
-    SkillResource,
-    SiteResource,
-    WorkExperienceResource
-};
-use App\Repositories\{
-    TextRepository,
-    SiteRepository,
-    SkillRepository,
-    WorkExperienceRepository
-};
-use App\Services\CvService;
+use App\Http\Resources\ProjectResource;
+use App\Repositories\ProjectRepository;
 
 class GetProjectsAction
 {
     public function __construct(
-        protected TextRepository $textRepository,
-        protected SiteRepository $siteRepository,
-        protected SkillRepository $skillRepository,
-        protected WorkExperienceRepository $workExperienceRepository
+        protected ProjectRepository $projectRepository
     ) { }
 
     public function execute(): array
     {
-        $details         = $this->textRepository->getByNames(["fullname", "intro", "location"]);
-        $sites           = $this->siteRepository->getAll();
-        $skills          = $this->skillRepository->getByNames(["Backend", "Frontend", "Frameworks", "Misc"]);
-        $workExperiences = $this->workExperienceRepository->getAll();
-
         return [
-            'profile' => [
-                'details' => $details,
-                'sites'   => SiteResource::collection($sites)
-            ],
-            'skill_groups'     => SkillResource::collection($skills),
-            'work_experiences' => WorkExperienceResource::collection($workExperiences)
+            'projects' => ProjectResource::collection($this->projectRepository->getAll())
         ];
     }
 }

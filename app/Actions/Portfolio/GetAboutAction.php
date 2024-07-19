@@ -2,11 +2,7 @@
 
 namespace App\Actions\Portfolio;
 
-use App\Http\Resources\{
-    SkillResource,
-    SiteResource,
-    WorkExperienceResource
-};
+use App\Http\Resources\SkillResource;
 use App\Repositories\{
     TextRepository,
     SkillRepository
@@ -23,11 +19,11 @@ class GetAboutAction
     public function execute(): array
     {
         $textList        = $this->textRepository->getByNames(["about"])->toArray();
-        $portfolioSkills = $this->skillRepository->getByNames(["portfolio"]);
+        $portfolioSkills = $this->skillRepository->getByNames(["Portfolio"]);
 
         return [
             'text'   => $textList['about'],
-            'skills' => $portfolioSkills
+            'skills' => SkillResource::collection($portfolioSkills)
         ];
     }
 }

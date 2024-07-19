@@ -40,4 +40,19 @@ class PortfolioController extends Controller
 
         return response()->json(['data' => $data]);
     }
+
+    /**
+     * Get projects for the portfolio projects page.
+     */
+    public function getProjects(GetProjectsAction $getProjectsAction)
+    {
+        $data = Cache::get('portfolio-projects');
+
+        // if (!$data) {
+            $data = $getProjectsAction->execute();
+            Cache::forever('portfolio-projects', $data);
+        //}
+
+        return response()->json(['data' => $data]);
+    }
 }
