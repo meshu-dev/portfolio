@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Icon extends Model
+class Site extends Model
 {
-    protected $table = 'icons';
+    protected $table = 'sites';
 
     protected $fillable = ['name', 'url'];
-
-    protected $hidden = ['id'];
 
     public $timestamps = false;
 
     public function files()
     {
-        return $this->belongsToMany(File::class, 'icon_files', 'icon_id', 'file_id');
+        return $this->belongsToMany(File::class, 'site_files', 'site_id', 'file_id');
     }
 }

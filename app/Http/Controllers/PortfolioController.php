@@ -2,48 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PortfolioService;
+use App\Actions\Portfolio\{
+    GetIntroAction,
+    GetAboutAction,
+    GetProjectsAction
+};
 use Illuminate\Support\Facades\Cache;
 
 class PortfolioController extends Controller
 {
-    public function __construct(
-        protected PortfolioService $portfolioService
-    ) {
-    }
-
     /**
      * Get text for portfolio introduction page.
      */
-    public function getIntro()
+    public function getIntro(GetIntroAction $getIntroAction)
     {
-        return $this->getData('portfolio-intro-details', 'getIntroDetails');
+        $data = Cache::get('portfolio-intro');
+
+        //if (!$data) {
+            $data = $getIntroAction->execute();
+            Cache::forever('portfolio-intro', $data);
+        //}
+
+        return response()->json(['data' => $data]);
     }
 
     /**
      * Get text and skills list for the portfolio about page.
      */
-    public function getAbout()
+    public function getAbout(GetAboutAction $getAboutAction)
     {
-        return $this->getData('portfolio-about', 'getAbout');
-    }
+        $data = Cache::get('portfolio-about');
 
-    /**
-     * Get projects for the portfolio projects page.
-     */
-    public function getProjects()
-    {
-        return $this->getData('portfolio-projects', 'getProjects');
-    }
-
-    protected function getData(string $cacheKey, string $function)
-    {
-        $data = Cache::get($cacheKey);
-
-        if (!$data) {
-            $data = $this->portfolioService->{$function}();
-            Cache::forever($cacheKey, $data);
-        }
+        // if (!$data) {
+            $data = $getAboutAction->execute();
+            Cache::forever('portfolio-about', $data);
+        //}
 
         return response()->json(['data' => $data]);
     }

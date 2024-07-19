@@ -64,20 +64,20 @@ return new class extends Migration
             $table->string('name');
         });
 
-        Schema::create('icons', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');
         });
 
-        Schema::create('icon_files', function (Blueprint $table) {
+        Schema::create('site_files', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('icon_id');
+            $table->unsignedBigInteger('site_id');
             $table->unsignedBigInteger('file_id');
 
             $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('icon_id')->references('id')->on('icons');
+            $table->foreign('site_id')->references('id')->on('sites');
             $table->foreign('file_id')->references('id')->on('files');
         });
     }
@@ -96,8 +96,8 @@ return new class extends Migration
         Schema::dropIfExists('project_technologies');
         Schema::dropIfExists('project_files');
         Schema::dropIfExists('types');
-        Schema::dropIfExists('icons');
-        Schema::dropIfExists('icon_files');
+        Schema::dropIfExists('sites');
+        Schema::dropIfExists('site_files');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

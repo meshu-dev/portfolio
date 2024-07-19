@@ -11,8 +11,6 @@ class WorkExperience extends Model
 
     protected $fillable = ['title', 'location', 'date', 'description', 'responsibilities'];
 
-    protected $hidden = ['id'];
-
     protected $casts = ['responsibilities' => 'array'];
 
     public $timestamps = false;

@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Icon;
+use App\Models\Site;
 
-class IconRepository
+class SiteRepository
 {
     public function getAll()
     {
-        return Icon::get();
+        return Site::get();
     }
 }

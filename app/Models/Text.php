@@ -10,7 +10,5 @@ class Text extends Model
 
     protected $fillable = ['name', 'value'];
 
-    protected $hidden = ['id'];
-
     public $timestamps = false;
 }
