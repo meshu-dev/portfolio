@@ -2,6 +2,7 @@
 
 namespace App\Actions\Cv;
 
+use App\Enums\TypeEnum;
 use App\Http\Resources\{
     SkillResource,
     SiteResource,
@@ -27,7 +28,7 @@ class GetCvAction
     public function execute(): array
     {
         $details         = $this->textRepository->getByNames(["fullname", "intro", "location"]);
-        $sites           = $this->siteRepository->getAll();
+        $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
         $skills          = $this->skillRepository->getByNames(["Backend", "Frontend", "Frameworks", "Misc"]);
         $workExperiences = $this->workExperienceRepository->getAll();
 
