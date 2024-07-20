@@ -27,9 +27,9 @@ class GetCvAction
 
     public function execute(): array
     {
-        $details         = $this->textRepository->getByNames(["fullname", "intro", "location"]);
+        $details         = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
         $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
-        $skills          = $this->skillRepository->getByNames(["Backend", "Frontend", "Frameworks", "Misc"]);
+        $skills          = $this->skillRepository->getByNames(['Backend', 'Frontend', 'Frameworks', 'Misc']);
         $workExperiences = $this->workExperienceRepository->getAll();
 
         return [

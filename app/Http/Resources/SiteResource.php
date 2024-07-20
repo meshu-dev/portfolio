@@ -14,10 +14,12 @@ class SiteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $file = FileResource::collection($this->files)->first();
+
         return [
             'name'   => $this->name,
             'url'    => $this->url,
-            'image' => FileResource::collection($this->files)->first()['url']
+            'image'  => $file['url'] ?? null
         ];
     }
 }
