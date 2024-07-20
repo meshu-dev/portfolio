@@ -19,14 +19,14 @@ class GetIntroAction
     public function execute(): array
     {
         $introTexts = $this->textRepository
-                           ->getByNames(["portfolio_intro_1", "portfolio_intro_2"])
+                           ->getByNames(['portfolio_intro_1', 'portfolio_intro_2'])
                            ->toArray();
         $sites = $this->siteRepository->getByNames(TypeEnum::PORTFOLIO, ['GitHub', 'LinkedIn']);
 
         return [
             'line1' => $introTexts['portfolio_intro_1'],
             'line2' => $introTexts['portfolio_intro_2'],
-            'sites'  => SiteResource::collection($sites)
+            'sites' => SiteResource::collection($sites)
         ];
     }
 }

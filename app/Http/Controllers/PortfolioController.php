@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CacheEnum;
 use App\Actions\Portfolio\{
     GetIntroAction,
     GetAboutAction,
@@ -16,13 +17,12 @@ class PortfolioController extends Controller
      */
     public function getIntro(GetIntroAction $getIntroAction)
     {
-        $data = Cache::get('portfolio-intro');
+        $data = Cache::get(CacheEnum::PortfolioIntro->value);
 
-        //if (!$data) {
+        if (!$data) {
             $data = $getIntroAction->execute();
-            Cache::forever('portfolio-intro', $data);
-        //}
-
+            Cache::forever(CacheEnum::PortfolioIntro->value, $data);
+        }
         return response()->json(['data' => $data]);
     }
 
@@ -31,13 +31,12 @@ class PortfolioController extends Controller
      */
     public function getAbout(GetAboutAction $getAboutAction)
     {
-        $data = Cache::get('portfolio-about');
+        $data = Cache::get(CacheEnum::PortfolioAbout->value);
 
-        // if (!$data) {
+        if (!$data) {
             $data = $getAboutAction->execute();
-            Cache::forever('portfolio-about', $data);
-        //}
-
+            Cache::forever(CacheEnum::PortfolioAbout->value, $data);
+        }
         return response()->json(['data' => $data]);
     }
 
@@ -46,13 +45,12 @@ class PortfolioController extends Controller
      */
     public function getProjects(GetProjectsAction $getProjectsAction)
     {
-        $data = Cache::get('portfolio-projects');
+        $data = Cache::get(CacheEnum::PortfolioProjects->value);
 
-        // if (!$data) {
+        if (!$data) {
             $data = $getProjectsAction->execute();
-            Cache::forever('portfolio-projects', $data);
-        //}
-
+            Cache::forever(CacheEnum::PortfolioProjects->value, $data);
+        }
         return response()->json(['data' => $data]);
     }
 }

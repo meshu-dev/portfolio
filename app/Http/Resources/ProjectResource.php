@@ -14,13 +14,15 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $technologies = TechnologyResource::collection($this->technologies);
+        $technologies = $technologies->pluck('name');
+
         return [
             'name'         => $this->name,
             'description'  => $this->description,
             'url'          => $this->url,
-            'order'        => $this->order,
             'repositories' => RepositoryResource::collection($this->repositories),
-            'technologies' => TechnologyResource::collection($this->technologies)
+            'technologies' => $technologies
         ];
     }
 }
