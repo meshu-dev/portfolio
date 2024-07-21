@@ -86,11 +86,11 @@ class PortfolioSeeder extends Seeder
 
     protected function addAboutText()
     {
-        $aboutMe = "I'm a full stack developer with web development experience in PHP / Javascript, " .
+        $aboutMe = "<p>I'm a full stack developer with web development experience in PHP / Javascript, " .
             "Amazon AWS linux server related setup / maintenance work and mobile development implementing " .
-            "native / web apps for both Android and iOS devices.\n\n" .
-            "For a long time I've been interested in software development and continue to spend time researching " .
-            "and improving upon my skills and experience in new and popular technologies.";
+            "native / web apps for both Android and iOS devices.</p>" .
+            "<p>For a long time I've been interested in software development and continue to spend time researching " .
+            "and improving upon my skills and experience in new and popular technologies.</p>";
 
         Text::insert([
             'name'  => 'about',

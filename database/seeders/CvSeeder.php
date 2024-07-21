@@ -42,25 +42,6 @@ class CvSeeder extends Seeder
                 'value' => 'West Midlands, UK'
             ]
         ]);
-
-        /*
-        Icon::insert([
-            [
-                'name'      => 'GitHub',
-                'url'       => 'https://github.com/meshu-dev',
-                'image_url' => 'https://cv.meshu.app/images/github-icon.png'
-            ],
-            [
-                'name'      => 'LinkedIn',
-                'url'       => 'https://www.linkedin.com/in/harmeshuppal',
-                'image_url' => 'https://cv.meshu.app/images/linkedin-icon.png'
-            ],
-            [
-                'name'      => 'Portfolio',
-                'url'       => 'https://meshu.net',
-                'image_url' => 'https://cv.meshu.app/images/site-icon.png'
-            ]
-        ]); */
     }
 
     protected function addSkills()

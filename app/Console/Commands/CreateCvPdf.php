@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\CvService;
+use App\Actions\Cv\GetCvAction;
 use Illuminate\Console\Command;
 use Spatie\LaravelPdf\Enums\Format;
 use Spatie\LaravelPdf\Facades\Pdf;
@@ -23,7 +23,7 @@ class CreateCvPdf extends Command
      */
     protected $description = 'Creates a CV document in PDF format';
 
-    public function __construct(protected CvService $cvService)
+    public function __construct(protected GetCvAction $getCvAction)
     {
         parent::__construct();
     }
@@ -33,7 +33,7 @@ class CreateCvPdf extends Command
      */
     public function handle()
     {
-        $viewParams  = [...$this->cvService->get()];
+        $viewParams  = [...$this->getCvAction->execute()];
         $cvFilePath  = storage_path('app/files') . '/cv.pdf';
         $pageMarginX = 30;
         $pageMarginY = 25;

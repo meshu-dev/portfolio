@@ -15,7 +15,6 @@ use App\Repositories\{
     WorkExperienceRepository,
     FileRepository
 };
-use App\Services\CvService;
 
 class GetCvAction
 {

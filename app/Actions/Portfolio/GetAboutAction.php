@@ -7,7 +7,6 @@ use App\Repositories\{
     TextRepository,
     SkillRepository
 };
-use App\Services\CvService;
 
 class GetAboutAction
 {
