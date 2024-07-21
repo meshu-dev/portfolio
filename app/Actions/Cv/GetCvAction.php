@@ -12,7 +12,8 @@ use App\Repositories\{
     TextRepository,
     SiteRepository,
     SkillRepository,
-    WorkExperienceRepository
+    WorkExperienceRepository,
+    FileRepository
 };
 use App\Services\CvService;
 
@@ -22,7 +23,8 @@ class GetCvAction
         protected TextRepository $textRepository,
         protected SiteRepository $siteRepository,
         protected SkillRepository $skillRepository,
-        protected WorkExperienceRepository $workExperienceRepository
+        protected WorkExperienceRepository $workExperienceRepository,
+        protected FileRepository $fileRepository
     ) { }
 
     public function execute(): array
@@ -31,6 +33,7 @@ class GetCvAction
         $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
         $skills          = $this->skillRepository->getByNames(['Backend', 'Frontend', 'Frameworks', 'Misc']);
         $workExperiences = $this->workExperienceRepository->getAll();
+        $pdfFile         = $this->fileRepository->getByName('cv.pdf');
 
         return [
             'profile' => [
@@ -38,7 +41,8 @@ class GetCvAction
                 'sites'   => SiteResource::collection($sites)
             ],
             'skill_groups'     => SkillResource::collection($skills),
-            'work_experiences' => WorkExperienceResource::collection($workExperiences)
+            'work_experiences' => WorkExperienceResource::collection($workExperiences),
+            'pdf'              => $pdfFile->url
         ];
     }
 }
