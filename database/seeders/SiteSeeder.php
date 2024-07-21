@@ -18,11 +18,11 @@ class SiteSeeder extends Seeder
         $linkedInIcon  = Site::create(['name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
         $portfolioIcon = Site::create(['name' => 'Portfolio', 'url'  => 'https://meshpro.io/projects']);
 
-        $this->addIconFile(TypeEnum::CV, $githubIcon, 'github-cv.png');
-        $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'linkedin-cv.png');
-        $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'portfolio-icon.png');
-        $this->addIconFile(TypeEnum::PORTFOLIO, $githubIcon, 'github-portfolio.png');
-        $this->addIconFile(TypeEnum::PORTFOLIO, $linkedInIcon, 'linkedin-portfolio.png');
+        $this->addIconFile(TypeEnum::CV, $githubIcon, 'site/github-cv.png');
+        $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'site/linkedin-cv.png');
+        $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'site/portfolio-icon.png');
+        $this->addIconFile(TypeEnum::PORTFOLIO, $githubIcon, 'site/github-portfolio.svg');
+        $this->addIconFile(TypeEnum::PORTFOLIO, $linkedInIcon, 'site/linkedin-portfolio.svg');
     }
 
     protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
@@ -31,7 +31,7 @@ class SiteSeeder extends Seeder
 
         if ($projectFileUrl) {
             $file = File::create([
-                'name' => $filename,
+                'name' => basename($filename),
                 'url'  => $projectFileUrl
             ]);
 
