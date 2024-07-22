@@ -4,21 +4,22 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @vite('resources/css/app.css')
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     </head>
     <body>
         <div>
             @isset ($profile)
                 <div class="mb-5">
-                    <h1 class="text-3xl font-bold">{{ $profile['details']['name'] }}</h1>
+                    <h1 class="text-3xl font-bold">{{ $profile['details']['fullname'] }}</h1>
                     <p class="mt-3">{{ $profile['details']['intro'] }}</p>
                     <div class="mt-3">
                         <span class="font-bold">Location:</span>
                         <span>{{ $profile['details']['location'] }}</span>
                     </div>
-                    @foreach ($profile['links'] as $profileLink)
+                    @foreach ($profile['sites'] as $profileSite)
                         <div class="mt-2">
-                            <span class="font-bold">{{ $profileLink['name'] }}:</span>
-                            <span>{{ $profileLink['url'] }}</span>
+                            <span class="font-bold">{{ $profileSite['name'] }}:</span>
+                            <span>{{ $profileSite['url'] }}</span>
                         </div>
                     @endforeach
                 </div>

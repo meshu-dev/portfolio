@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendContactEmailJob;
+use App\Actions\Contact\SendMessageAction;
 use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
@@ -10,11 +10,11 @@ class ContactController extends Controller
     /**
      * Use contact form details to send e-mail.
      */
-    public function sendMessage(ContactRequest $contactRequest)
+    public function sendMessage(ContactRequest $contactRequest, SendMessageAction $sendMessageAction)
     {
         $params = $contactRequest->all();
-        SendContactEmailJob::dispatch($params);
+        $result = $sendMessageAction->execute($params);
 
-        return response()->json([]);
+        return response()->json(['success' => $result]);
     }
 }
