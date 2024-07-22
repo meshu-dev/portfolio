@@ -28,7 +28,7 @@ class SendMessageAction
         throw_unless(
             $response['success'],
             GoogleTokenException::class,
-            $this->getErrorMessage($response)
+            $this->getErrorCode($response)
         );
 
         SendContactEmailJob::dispatch($params);
@@ -36,13 +36,13 @@ class SendMessageAction
         return true;
     }
 
-    public function getErrorMessage(array $response): string
+    public function getErrorCode(array $response): string
     {
         if ($response['error-codes']) {
-            $message = $response['error-codes'][0];
+            $code = $response['error-codes'][0];
         } else {
-            $message = 'Bing!';
+            $code = 'default';
         }
-        return $message;
+        return $code;
     }
 }
