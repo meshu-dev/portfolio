@@ -41,7 +41,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('company');
             $table->string('location');
-            $table->string('date');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             $table->string('description');
             $table->json('responsibilities');
         });

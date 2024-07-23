@@ -48,7 +48,7 @@
                         <div class="mb-10">
                             <div class="flex justify-between font-bold mb-3">
                                 <span>{{ $workExperience['title'] }} - {{ $workExperience['company'] }}</span>
-                                <span>{{ $workExperience['date'] }}</span>
+                                <span>{{ date('M y', strtotime($workExperience['start_date'])) }} - {{ $workExperience['end_date'] ? date('M y', strtotime($workExperience['end_date'])) : 'Present' }}</span>
                             </div>
                             <div class="mb-3">{{ $workExperience['description'] }}</div>
                             <ul class="list-disc ml-10">

@@ -71,7 +71,8 @@ class CvSeeder extends Seeder
                 'title'       => 'Software Developer',
                 'company'     => 'Tucasi',
                 'location'    => 'Eastleigh',
-                'date'        => 'Nov 20 – Present',
+                'start_date'  => '2020-11-01',
+                'end_date'    => null,
                 'description' => 'Currently working on school payment apps, previously worked on a seat planner app',
                 'responsibilities' => json_encode([
                     'Majority of work has been on the seat planner app built in a custom PHP framework',
@@ -85,7 +86,8 @@ class CvSeeder extends Seeder
                 'title'       => 'PHP Developer',
                 'company'     => 'MRI Software',
                 'location'    => 'Sutton Coldfield',
-                'date'        => 'Jul 19 – Oct 20',
+                'start_date'  => '2019-07-01',
+                'end_date'    => '2020-10-01',
                 'description' => 'Worked in the housing repair services team for MRI software',
                 'responsibilities' => json_encode([
                     'Worked on the House repairs PHP system which provides services to multiple clients',
@@ -97,7 +99,8 @@ class CvSeeder extends Seeder
                 'title'       => 'Senior Developer',
                 'company'     => 'MoreNiche',
                 'location'    => 'Nottingham',
-                'date'        => 'Jan 18 – Jul 19',
+                'start_date'  => '2018-01-01',
+                'end_date'    => '2019-07-01',
                 'description' => 'MoreNiche is an affiliate network that specialise in fitness products',
                 'responsibilities' => json_encode([
                     'Developed a Laravel API to manage data, also included API testing',
@@ -110,7 +113,8 @@ class CvSeeder extends Seeder
                 'title'       => 'Web Developer',
                 'company'     => 'FPS Distribution',
                 'location'    => 'Stratford-upon-Avon',
-                'date'        => 'Jun 16 – Jan 18',
+                'start_date'  => '2016-06-01',
+                'end_date'    => '2018-01-01',
                 'description' => 'FPS distribution is a b2b company providing car parts to their clients',
                 'responsibilities' => json_encode([
                     'Built and migrated features to a new Laravel API to replace the previous one built in NodeJS and Express',
@@ -121,7 +125,8 @@ class CvSeeder extends Seeder
                 'title'       => 'Software Developer',
                 'company'     => 'Carphone Warehouse',
                 'location'    => 'Loughborough',
-                'date'        => 'Jun 15 – Apr 16',
+                'start_date'  => '2015-06-01',
+                'end_date'    => '2016-04-01',
                 'description' => 'This carphone Warehouse branch involved work with TalkTalk, E2Save and Mobiles',
                 'responsibilities' => json_encode([
                     'Worked on PHP e-commerce and backend management systems',
@@ -132,7 +137,8 @@ class CvSeeder extends Seeder
                 'title'       => 'Web Developer',
                 'company'     => 'Twist Digital',
                 'location'    => 'Nottingham',
-                'date'        => 'Apr 13 – Jun 15',
+                'start_date'  => '2013-04-01',
+                'end_date'    => '2015-06-01',
                 'description' => 'Twist Digital was an affiliate network that provided health, beauty, fitness and adult products',
                 'responsibilities' => json_encode([
                     'Worked on the company’s dashboard and tracking apps built with Zend, Silex and MongoDB',

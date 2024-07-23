@@ -9,7 +9,7 @@ class WorkExperience extends Model
 {
     protected $table = 'work_experiences';
 
-    protected $fillable = ['title', 'location', 'date', 'description', 'responsibilities'];
+    protected $fillable = ['title', 'location', 'start_date', 'end_date', 'description', 'responsibilities'];
 
     protected $casts = ['responsibilities' => 'array'];
 
