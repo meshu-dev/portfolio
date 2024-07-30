@@ -37,36 +37,24 @@ class PortfolioSeeder extends Seeder
                 'url'  => 'https://github.com/meshu-dev/cv'
             ]),
             Repository::create([
-                'name' => 'Mailer',
-                'url'  => 'https://github.com/meshu-dev/mailer'
+                'name' => 'MeshPro API',
+                'url'  => 'https://github.com/meshu-dev/meshpro-api'
             ]),
             Repository::create([
-                'name' => 'Sites',
-                'url'  => 'https://github.com/meshu-dev/sites'
-            ]),
-            Repository::create([
-                'name' => 'Crypto',
-                'url'  => 'https://github.com/meshu-dev/crypto'
-            ]),
-            Repository::create([
-                'name' => 'Crypto API',
-                'url'  => 'https://github.com/meshu-dev/crypto-api'
-            ]),
-            Repository::create([
-                'name' => 'Backlog',
-                'url'  => 'https://github.com/meshu-dev/backlog'
-            ]),
-            Repository::create([
-                'name' => 'Backlog API',
-                'url'  => 'https://github.com/meshu-dev/backlog-api'
-            ]),
-            Repository::create([
-                'name' => 'Admin',
-                'url'  => 'https://github.com/meshu-dev/admin'
-            ]),
-            Repository::create([
-                'name' => 'RequireDev',
+                'name' => 'Dev Nudge',
                 'url'  => 'https://github.com/meshu-dev/requiredev'
+            ]),
+            Repository::create([
+                'name' => 'Dev Push',
+                'url'  => 'https://github.com/meshu-dev/devpush'
+            ]),
+            Repository::create([
+                'name' => 'Dev Push WP',
+                'url'  => 'https://github.com/meshu-dev/devpush-wp'
+            ]),
+            Repository::create([
+                'name' => 'Dev Push API',
+                'url'  => 'https://github.com/meshu-dev/devpush-api'
             ])
         ];
     }
@@ -128,94 +116,48 @@ class PortfolioSeeder extends Seeder
     {
         [
             $cvRepo,
-            $mailerRepo,
-            $siteRepo,
-            $cryptoRepo,
-            $cryptoApiRepo,
-            $backlogRepo,
-            $backlogApiRepo,
-            $adminRepo,
-            $requireDevRepo
+            $meshProApiRepo,
+            $devNudgeRepo,
+            $devPushRepo,
+            $devPushWpRepo,
+            $devPushApiRepo
         ] = $repositories;
-
-        $backlogProject = Project::create([
-            'name'        => 'Backlog',
-            'description' => 'Backlog manager for movies and TV shows',
-            'url'         => 'https://backlog.meshu.app'
-        ]);
-
-        $backlogProject->repositories()->save($backlogApiRepo);
-        $backlogProject->repositories()->save($backlogRepo);
-
-        $this->addProjectTechnologies($backlogProject, ['Laravel', 'MySQL', 'Vue.js']);
-        $this->addProjectFile('site/backlog.jpg');
-
-        $adminProject = Project::create([
-            'name'        => 'Admin',
-            'description' => 'Admin panel to manage data',
-            'url'         => 'https://admin.meshu.app'
-        ]);
-
-        $adminProject->repositories()->save($adminRepo);
-
-        $this->addProjectTechnologies($adminProject, ['Laravel', 'MySQL', 'React']);
-        $this->addProjectFile('site/admin.jpg');
-
-        $requireDevProject = Project::create([
-            'name'        => 'RequireDev',
-            'description' => 'PHP / Javasript tutorial blog',
-            'url'         => 'https://www.requiredev.com'
-        ]);
-
-        $requireDevProject->repositories()->save($requireDevRepo);
-
-        $this->addProjectTechnologies($requireDevProject, ['Wordpress', 'React', 'Next.js', 'GraphQL']);
-        $this->addProjectFile('site/requiredev.jpg');
 
         $cvProject = Project::create([
             'name'        => 'CV',
-            'description' => 'Digital version of my CV',
-            'url'         => 'https://cv.meshu.app'
+            'description' => 'Digital CV',
+            'url'         => 'https://cv.meshupro.io'
         ]);
 
         $cvProject->repositories()->save($cvRepo);
+        $cvProject->repositories()->save($meshProApiRepo);
 
-        $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'MongoDB']);
+        $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
         $this->addProjectFile('site/cv.jpg');
 
-        $mailerProject = Project::create([
-            'name'        => 'Mailer',
-            'description' => 'E-mail sender service',
-            'url'         => 'https://mailer.meshu.app'
+        $devNudgeProject = Project::create([
+            'name'        => 'Dev Nudge',
+            'description' => 'Developer blog',
+            'url'         => 'https://devnudge.io'
         ]);
 
-        $mailerProject->repositories()->save($mailerRepo);
+        $devNudgeProject->repositories()->save($devNudgeRepo);
 
-        $this->addProjectTechnologies($mailerProject, ['React', 'Next.js']);
-        $this->addProjectFile('site/mailer.jpg');
+        $this->addProjectTechnologies($devNudgeProject, ['Astro']);
+        $this->addProjectFile('site/devnudge.jpg');
 
-        $sitesProject = Project::create([
-            'name'        => 'Sites',
-            'description' => 'Tool to manage websites',
-            'url'         => 'https://sites.meshu.app'
+        $devPushProject = Project::create([
+            'name'        => 'Dev Push',
+            'description' => 'Beginner developer blog',
+            'url'         => 'https://devpush.io'
         ]);
 
-        $sitesProject->repositories()->save($siteRepo);
+        $devPushProject->repositories()->save($devPushRepo);
+        $devPushProject->repositories()->save($devPushWpRepo);
+        $devPushProject->repositories()->save($devPushApiRepo);
 
-        $this->addProjectTechnologies($sitesProject, ['React', 'Next.js', 'PostgreSQL']);
-        $this->addProjectFile('site/sites.jpg');
-
-        $cryptoProject = Project::create([
-            'name'        => 'Crypto',
-            'description' => 'Realtime cryptocurrency price list',
-            'url'         => 'https://crypto.meshu.app'
-        ]);
-
-        $cryptoProject->repositories()->save($cryptoApiRepo);
-        $cryptoProject->repositories()->save($cryptoRepo);
-
-        $this->addProjectTechnologies($cryptoProject, ['React', 'Next.js', 'MongoDB']);
-        $this->addProjectFile('site/crypto.jpg');
+        $this->addProjectTechnologies($devPushProject, ['Wordpress', 'React', 'Next.js', 'Laravel']);
+        $this->addProjectFile('site/devpush.jpg');
     }
 
     protected function addProjectFile($filename): void

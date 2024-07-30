@@ -39,7 +39,8 @@ class TechnologySeeder extends Seeder
             ['name' => 'Nuxt.js'],
             ['name' => 'GraphQL'],
             ['name' => 'Linux'],
-            ['name' => 'TailwindCSS']
+            ['name' => 'TailwindCSS'],
+            ['name' => 'Astro']
         ]);
     }
 }
