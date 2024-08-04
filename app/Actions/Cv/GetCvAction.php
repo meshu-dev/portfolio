@@ -24,7 +24,8 @@ class GetCvAction
         protected SkillRepository $skillRepository,
         protected WorkExperienceRepository $workExperienceRepository,
         protected FileRepository $fileRepository
-    ) { }
+    ) {
+    }
 
     public function execute(): array
     {
