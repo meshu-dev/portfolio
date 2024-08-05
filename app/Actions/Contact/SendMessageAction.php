@@ -4,7 +4,6 @@ namespace App\Actions\Contact;
 
 use App\Exceptions\GoogleTokenException;
 use App\Jobs\SendContactEmailJob;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class SendMessageAction
