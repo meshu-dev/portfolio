@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\DynamicValueEnum;
 use App\Models\{
     File,
     Project,
@@ -68,7 +69,7 @@ class PortfolioSeeder extends Seeder
 
         Text::insert([
             'name'  => 'portfolio_intro_2',
-            'value' => "I'm a Software Developer with 13 years experience"
+            'value' => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience"
         ]);
     }
 
