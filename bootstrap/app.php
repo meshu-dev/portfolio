@@ -13,9 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up'
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->use([
-            \Illuminate\Http\Middleware\HandleCors::class
-        ]);
+        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Exception $exception, Request $request) {
