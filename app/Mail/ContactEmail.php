@@ -29,7 +29,7 @@ class ContactEmail extends Mailable
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), config('mail.from.name')),
-            subject: 'You received a message from meshu.net',
+            subject: 'You received a message from ' . config('app.name'),
         );
     }
 
