@@ -5,6 +5,7 @@ namespace App\Actions\Contact;
 use App\Exceptions\GoogleTokenException;
 use App\Jobs\SendContactEmailJob;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SendMessageAction
 {
@@ -22,6 +23,8 @@ class SendMessageAction
             ]
         );
 
+        Log::error($response->body());
+
         $response = json_decode($response->body(), true);
 
         throw_unless(
@@ -37,7 +40,7 @@ class SendMessageAction
 
     public function getErrorCode(array $response): string
     {
-        if ($response['error-codes']) {
+        if (!empty($response['error-codes'])) {
             $code = $response['error-codes'][0];
         } else {
             $code = 'default';
