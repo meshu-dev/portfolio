@@ -18,11 +18,13 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Exception $exception, Request $request) {
             if ($request->is('*')) {
+                $code = (int) $exception->getCode();
+                
                 return response()->json(
                     [
                         'message' => $exception->getMessage()
                     ],
-                    $exception->getCode() >= 400 ? (int) $exception->getCode() : 406
+                    $code >= 400 ? $code : 500
                 );
             }
         });
