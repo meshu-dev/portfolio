@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Exception $exception, Request $request) {
-            if ($request->is('api/*')) {
+            if ($request->is('*')) {
                 return response()->json(
                     [
                         'message' => $exception->getMessage()
