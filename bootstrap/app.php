@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     [
                         'message' => $exception->getMessage()
                     ],
-                    $exception->getCode() >= 400 ? $exception->getCode() : 406
+                    $exception->getCode() >= 400 ? (int) $exception->getCode() : 406
                 );
             }
         });
