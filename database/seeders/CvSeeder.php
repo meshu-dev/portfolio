@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\DynamicValueEnum;
 use App\Models\{
     File,
     Text,
@@ -35,7 +36,7 @@ class CvSeeder extends Seeder
             ],
             [
                 'name'  => 'intro',
-                'value' => 'Full-stack developer with over 12 years experience in PHP and JavaScript'
+                'value' => "Full-stack developer with over " . DynamicValueEnum::YEARS_WORKED->value . " years experience in PHP and JavaScript"
             ],
             [
                 'name'  => 'location',
