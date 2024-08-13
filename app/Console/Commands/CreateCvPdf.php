@@ -40,6 +40,7 @@ class CreateCvPdf extends Command
 
         Pdf::view('pdf-view', $viewParams)
             ->withBrowsershot(fn ($browsershot) => $browsershot->noSandbox())
+            ->setChromePath('/snap/bin/chromium')
             ->margins($pageMarginY, $pageMarginX, $pageMarginY, $pageMarginX)
             ->format(Format::A4)
             ->save($cvFilePath);

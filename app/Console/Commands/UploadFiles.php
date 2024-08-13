@@ -31,7 +31,9 @@ class UploadFiles extends Command
 
         foreach ($files as $localFile) {
             $filename = basename($localFile);
-            if (str_contains($localFile, '.DS_Store') || str_contains($localFile, '.gitignore')) continue;
+            if (str_contains($localFile, '.DS_Store') || str_contains($localFile, '.gitignore')) {
+                continue;
+            }
 
             $file   = new File(storage_path('app/files') . '/' . $filename);
             $result = Storage::disk('s3')->putFileAs('', $file, "site/$filename", 'public');
