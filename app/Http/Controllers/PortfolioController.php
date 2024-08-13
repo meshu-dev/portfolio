@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CacheEnum;
 use App\Actions\Portfolio\{
     GetIntroAction,
     GetAboutAction,
     GetProjectsAction
 };
-use Illuminate\Support\Facades\Cache;
 
 class PortfolioController extends Controller
 {
@@ -17,12 +15,7 @@ class PortfolioController extends Controller
      */
     public function getIntro(GetIntroAction $getIntroAction)
     {
-        $data = Cache::get(CacheEnum::PortfolioIntro->value);
-
-        if (!$data) {
-            $data = $getIntroAction->execute();
-            Cache::forever(CacheEnum::PortfolioIntro->value, $data);
-        }
+        $data = $getIntroAction->execute();
         return response()->json(['data' => $data]);
     }
 
@@ -31,12 +24,7 @@ class PortfolioController extends Controller
      */
     public function getAbout(GetAboutAction $getAboutAction)
     {
-        $data = Cache::get(CacheEnum::PortfolioAbout->value);
-
-        if (!$data) {
-            $data = $getAboutAction->execute();
-            Cache::forever(CacheEnum::PortfolioAbout->value, $data);
-        }
+        $data = $getAboutAction->execute();
         return response()->json(['data' => $data]);
     }
 
@@ -45,12 +33,7 @@ class PortfolioController extends Controller
      */
     public function getProjects(GetProjectsAction $getProjectsAction)
     {
-        $data = Cache::get(CacheEnum::PortfolioProjects->value);
-
-        if (!$data) {
-            $data = $getProjectsAction->execute();
-            Cache::forever(CacheEnum::PortfolioProjects->value, $data);
-        }
+        $data = $getProjectsAction->execute();
         return response()->json(['data' => $data]);
     }
 }

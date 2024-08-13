@@ -2,7 +2,7 @@
 
 namespace App\Actions\Cv;
 
-use App\Enums\TypeEnum;
+use App\Enums\{DynamicValueEnum, TypeEnum};
 use App\Http\Resources\{
     SkillResource,
     SiteResource,
@@ -15,10 +15,12 @@ use App\Repositories\{
     WorkExperienceRepository,
     FileRepository
 };
+use App\Services\ProfileService;
 
 class GetCvAction
 {
     public function __construct(
+        protected ProfileService $profileService,
         protected TextRepository $textRepository,
         protected SiteRepository $siteRepository,
         protected SkillRepository $skillRepository,
@@ -34,6 +36,12 @@ class GetCvAction
         $skills          = $this->skillRepository->getByNames(['Backend', 'Frontend', 'Frameworks', 'Misc']);
         $workExperiences = $this->workExperienceRepository->getAll();
         $pdfFile         = $this->fileRepository->getByName('cv.pdf');
+
+        $details['intro'] = str_replace(
+            DynamicValueEnum::YEARS_WORKED->value,
+            $this->profileService->getYearsWorked(),
+            $details['intro']
+        );
 
         return [
             'profile' => [

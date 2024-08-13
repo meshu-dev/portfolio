@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CvResource;
 use App\Actions\Cv\GetCvAction;
-use Illuminate\Support\Facades\Cache;
 
 class CvController extends Controller
 {
@@ -13,13 +11,7 @@ class CvController extends Controller
      */
     public function get(GetCvAction $getCvAction)
     {
-        $data = Cache::get('cv');
-
-        if (!$data) {
-            $data = $getCvAction->execute();
-            Cache::forever('cv', $data);
-        }
-
+        $data = $getCvAction->execute();
         return response()->json(['data' => $data]);
     }
 }
