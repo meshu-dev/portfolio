@@ -45,5 +45,9 @@ return [
                 'default' => 'Verification for token has failed'
             ]
         ]
+    ],
+
+    'browsershot' => [
+        'chrome_path' => env('BROWSERSHOT_CHROME_PATH')
     ]
 ];
