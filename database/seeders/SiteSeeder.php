@@ -16,7 +16,7 @@ class SiteSeeder extends Seeder
     {
         $githubIcon    = Site::create(['name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
         $linkedInIcon  = Site::create(['name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
-        $portfolioIcon = Site::create(['name' => 'Portfolio', 'url'  => 'https://meshpro.io/projects']);
+        $portfolioIcon = Site::create(['name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
 
         $this->addIconFile(TypeEnum::CV, $githubIcon, 'site/github-cv.png');
         $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'site/linkedin-cv.png');
