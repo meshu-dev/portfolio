@@ -42,8 +42,8 @@ class CreateCvPdf extends Command
 
         $browsershotFtn = function ($browsershot) use ($browsershotChromePath, $browsershotTempPath) {
             return $browsershot->noSandbox()
-                               ->setChromePath($browsershotChromePath)
-                               ->setCustomTempPath($browsershotTempPath);
+                               ->setChromePath($browsershotChromePath);
+                               //->setCustomTempPath($browsershotTempPath);
         };
 
         Pdf::view('pdf-view', $viewParams)
