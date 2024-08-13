@@ -48,6 +48,7 @@ return [
     ],
 
     'browsershot' => [
-        'chrome_path' => env('BROWSERSHOT_CHROME_PATH')
+        'chrome_path' => env('BROWSERSHOT_CHROME_PATH'),
+        'temp_path' => env('BROWSERSHOT_TEMP_PATH')
     ]
 ];
