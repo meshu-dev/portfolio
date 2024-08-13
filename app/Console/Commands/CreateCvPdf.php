@@ -39,8 +39,14 @@ class CreateCvPdf extends Command
         $pageMarginY = 25;
         $browsershotChromePath = config('services.browsershot.chrome_path');
 
+        $browsershotFtn = function ($browsershot) use ($browsershotChromePath) {
+            return $browsershot->noSandbox()
+                               ->setChromePath($browsershotChromePath)
+                               ->setCustomTempPath('/tmp');
+        };
+
         Pdf::view('pdf-view', $viewParams)
-            ->withBrowsershot(fn ($browsershot) => $browsershot->noSandbox()->setChromePath($browsershotChromePath))
+            ->withBrowsershot($browsershotFtn)
             ->margins($pageMarginY, $pageMarginX, $pageMarginY, $pageMarginX)
             ->format(Format::A4)
             ->save($cvFilePath);
