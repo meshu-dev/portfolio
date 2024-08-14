@@ -153,7 +153,7 @@ class CvSeeder extends Seeder
 
     protected function addPdf()
     {
-        $cvFileUrl = Storage::disk('s3')->url('cv.pdf');
+        $cvFileUrl = Storage::disk('s3')->url('site/cv.pdf');
 
         if ($cvFileUrl) {
             File::insert([

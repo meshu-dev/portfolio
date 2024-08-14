@@ -13,7 +13,8 @@ class GetAboutAction
     public function __construct(
         protected TextRepository $textRepository,
         protected SkillRepository $skillRepository
-    ) { }
+    ) {
+    }
 
     public function execute(): array
     {

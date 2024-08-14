@@ -22,7 +22,7 @@ class PortfolioSeeder extends Seeder
     public function run(): void
     {
         $this->addIntroText();
-        $this->addAboutText();
+        $this->addAboutData();
         $this->addSkills();
 
         $repositories = $this->addRepositories();
@@ -73,7 +73,7 @@ class PortfolioSeeder extends Seeder
         ]);
     }
 
-    protected function addAboutText()
+    protected function addAboutData()
     {
         $aboutMe = "<p>I'm a full stack developer with web development experience in PHP / Javascript, " .
             "Amazon AWS linux server related setup / maintenance work and mobile development implementing " .
@@ -85,6 +85,15 @@ class PortfolioSeeder extends Seeder
             'name'  => 'about',
             'value' => $aboutMe
         ]);
+
+        $aboutImgUrl = Storage::disk('s3')->url('site/about.png');
+
+        if ($aboutImgUrl) {
+            File::insert([
+                'name' => 'about.png',
+                'url'  => $aboutImgUrl
+            ]);
+        }
     }
 
     protected function addSkills()
