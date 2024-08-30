@@ -1,36 +1,85 @@
 <!doctype html>
     <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @vite('resources/css/app.css')
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                margin: 0 50px;
+            }
+            .section {
+                margin-bottom: 5px;
+            }
+            .profile-row {
+                margin-bottom: 3px;
+            }
+            .profile-row-label {
+                font-weight: bold;
+            }
+            .workexp-row {
+                display: flex;
+                flex-direction: row;
+            }
+            .skill-groups {
+                padding-top: 20px;
+                margin-bottom: -40px;
+            }
+            .skill-group {
+                display: inline-block;
+                width: 250px;
+            }
+            .skill-group-label {
+                font-weight: bold;
+            }
+            .skill-list li {
+                margin-bottom: 3px;
+            }
+            .workexp-row {
+                margin-bottom: 40px;
+            }
+            .workexp-header {
+                overflow: hidden;
+                font-weight: bold;
+                min-height: 20px;
+                margin-bottom: 20px;
+            }
+            .workexp-header-title {
+                float: left;
+            }
+            .workexp-header-date {
+                float: right;
+            }
+            .workexp-list li {
+                margin-bottom: 3px;
+            }
+        </style>
     </head>
     <body>
         <div>
             @isset ($profile)
-                <div class="mb-5">
-                    <h1 class="text-3xl font-bold">{{ $profile['details']['fullname'] }}</h1>
-                    <p class="mt-3">{{ $profile['details']['intro'] }}</p>
-                    <div class="mt-3">
-                        <span class="font-bold">Location:</span>
+                <div class="section">
+                    <h1>{{ $profile['details']['fullname'] }}</h1>
+                    <p>{{ $profile['details']['intro'] }}</p>
+                    <div class="profile-row">
+                        <span class="profile-row-label">Location:</span>
                         <span>{{ $profile['details']['location'] }}</span>
                     </div>
                     @foreach ($profile['sites'] as $profileSite)
-                        <div class="mt-2">
-                            <span class="font-bold">{{ $profileSite['name'] }}:</span>
+                        <div class="profile-row">
+                            <span class="profile-row-label">{{ $profileSite['name'] }}:</span>
                             <span>{{ $profileSite['url'] }}</span>
                         </div>
                     @endforeach
                 </div>
             @endisset
             @isset ($skill_groups)
-                <div class="mb-5">
-                    <h2 class="text-xl font-bold mb-2">Skills</h2>
-                    <div class="grid grid-cols-2">
+                <div class="section">
+                    <h2>Skills</h2>
+                    <div class="skill-groups">
                         @foreach ($skill_groups as $skillGroup)
-                            <div class="max-w-200 mb-5">
-                                <div class="font-bold">{{ $skillGroup['name'] }}</div>
-                                <ul class="list-disc ml-10">
+                            <div class="skill-group">
+                                <div class="skill-group-label">{{ $skillGroup['name'] }}</div>
+                                <ul class="skill-list">
                                     @foreach ($skillGroup['technologies'] as $technology)
                                         <li>{{ $technology['name'] }}</li>
                                     @endforeach
@@ -41,16 +90,16 @@
                 </div>
             @endisset
             @isset ($work_experiences)
-                <div class="mb-5">
-                    <h2 class="text-xl font-bold mb-2">Work Experience</h2>
+                <div class="section">
+                    <h2>Work Experience</h2>
                     @foreach ($work_experiences as $workExperience)
-                        <div class="mb-10">
-                            <div class="flex justify-between font-bold mb-3">
-                                <span>{{ $workExperience['title'] }} - {{ $workExperience['company'] }}</span>
-                                <span>{{ date('M y', strtotime($workExperience['start_date'])) }} - {{ $workExperience['end_date'] ? date('M y', strtotime($workExperience['end_date'])) : 'Present' }}</span>
+                        <div class="workexp-row">
+                            <div class="workexp-header">
+                                <span class="workexp-header-title">{{ $workExperience['title'] }} - {{ $workExperience['company'] }}</span>
+                                <span class="workexp-header-date">{{ $workExperience['location'] }} | {{ date('M y', strtotime($workExperience['start_date'])) }} - {{ $workExperience['end_date'] ? date('M y', strtotime($workExperience['end_date'])) : 'Present' }}</span>
                             </div>
-                            <div class="mb-3">{{ $workExperience['description'] }}</div>
-                            <ul class="list-disc ml-10">
+                            <div>{{ $workExperience['description'] }}</div>
+                            <ul class="workexp-list">
                                 @foreach ($workExperience['responsibilities'] as $responsibility)
                                     <li>{{ $responsibility }}</li>
                                 @endforeach

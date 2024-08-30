@@ -4,8 +4,7 @@ namespace App\Console\Commands;
 
 use App\Actions\Cv\GetCvAction;
 use Illuminate\Console\Command;
-use Spatie\LaravelPdf\Enums\Format;
-use Spatie\LaravelPdf\Facades\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CreateCvPdf extends Command
 {
@@ -35,21 +34,9 @@ class CreateCvPdf extends Command
     {
         $viewParams  = [...$this->getCvAction->execute()];
         $cvFilePath  = storage_path('app/files') . '/cv.pdf';
-        $pageMarginX = 30;
-        $pageMarginY = 25;
-        $browsershotChromePath = config('services.browsershot.chrome_path');
-        $browsershotTempPath = config('services.browsershot.chrome_path');
 
-        $browsershotFtn = function ($browsershot) use ($browsershotChromePath, $browsershotTempPath) {
-            return $browsershot->noSandbox()
-                               ->setChromePath($browsershotChromePath);
-                               //->setCustomTempPath($browsershotTempPath);
-        };
-
-        Pdf::view('pdf-view', $viewParams)
-            ->withBrowsershot($browsershotFtn)
-            ->margins($pageMarginY, $pageMarginX, $pageMarginY, $pageMarginX)
-            ->format(Format::A4)
-            ->save($cvFilePath);
+        $pdf = Pdf::loadView('pdf-view', $viewParams);
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->save($cvFilePath);
     }
 }
