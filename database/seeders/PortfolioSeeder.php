@@ -136,14 +136,14 @@ class PortfolioSeeder extends Seeder
         $cvProject = Project::create([
             'name'        => 'CV',
             'description' => 'Digital CV',
-            'url'         => 'https://cv.meshupro.io'
+            'url'         => 'https://cv.meshpro.io'
         ]);
 
         $cvProject->repositories()->save($cvRepo);
         $cvProject->repositories()->save($meshProApiRepo);
 
         $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
-        $this->addProjectFile('site/cv.jpg');
+        $this->addProjectFile('site/cv.png');
 
         $devNudgeProject = Project::create([
             'name'        => 'Dev Nudge',
@@ -153,21 +153,8 @@ class PortfolioSeeder extends Seeder
 
         $devNudgeProject->repositories()->save($devNudgeRepo);
 
-        $this->addProjectTechnologies($devNudgeProject, ['Astro']);
-        $this->addProjectFile('site/devnudge.jpg');
-
-        $devPushProject = Project::create([
-            'name'        => 'Dev Push',
-            'description' => 'Beginner developer blog',
-            'url'         => 'https://devpush.io'
-        ]);
-
-        $devPushProject->repositories()->save($devPushRepo);
-        $devPushProject->repositories()->save($devPushWpRepo);
-        $devPushProject->repositories()->save($devPushApiRepo);
-
-        $this->addProjectTechnologies($devPushProject, ['Wordpress', 'React', 'Next.js', 'Laravel']);
-        $this->addProjectFile('site/devpush.jpg');
+        $this->addProjectTechnologies($devNudgeProject, ['Astro', 'Laravel']);
+        $this->addProjectFile('site/devnudge.png');
     }
 
     protected function addProjectFile($filename): void
