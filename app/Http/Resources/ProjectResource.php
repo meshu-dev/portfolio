@@ -17,11 +17,13 @@ class ProjectResource extends JsonResource
         $technologies = TechnologyResource::collection($this->technologies);
         $technologies = $technologies->pluck('name');
 
+        $imageUrl = isset($this->files[0]) ? $this->files[0]->url : null;
+
         return [
             'name'         => $this->name,
             'description'  => $this->description,
             'url'          => $this->url,
-            'image'        => $this->files,
+            'image'        => $imageUrl,
             'repositories' => RepositoryResource::collection($this->repositories),
             'technologies' => $technologies
         ];
