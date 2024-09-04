@@ -8,6 +8,6 @@ class WorkExperienceRepository
 {
     public function getAll()
     {
-        return WorkExperience::get();
+        return WorkExperience::where('active', true)->get();
     }
 }

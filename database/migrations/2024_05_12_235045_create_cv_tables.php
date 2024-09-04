@@ -45,6 +45,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->string('description');
             $table->json('responsibilities');
+            $table->boolean('active');
         });
     }
 

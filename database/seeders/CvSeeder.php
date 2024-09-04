@@ -70,19 +70,35 @@ class CvSeeder extends Seeder
     {
         WorkExperience::insert([
             [
+                'title'       => 'Full Stack Developer',
+                'company'     => 'Clark UK',
+                'location'    => 'Bristol',
+                'start_date'  => '2023-05-01',
+                'end_date'    => null,
+                'description' => 'Currently working on the insurance backend system',
+                'responsibilities' => json_encode([
+                    'Main resposibility is working on a system used by advisors to sell insurance to customers',
+                    'All backend work is done on Laravel and for frontend Vue.js / Typescipt is used',
+                    'Worked on projects such as adding medical insurance, Vue 3 upgrade and Brevo integration',
+                    'Work is conducted in weekly sprints using Jira'
+                ]),
+                'active' => true,
+            ],
+            [
                 'title'       => 'Software Developer',
                 'company'     => 'Tucasi',
                 'location'    => 'Eastleigh',
                 'start_date'  => '2020-11-01',
-                'end_date'    => null,
-                'description' => 'Currently working on school payment apps, previously worked on a seat planner app',
+                'end_date'    => '2023-04-28',
+                'description' => 'Worked on school payment apps and on a seat planner',
                 'responsibilities' => json_encode([
                     'Majority of work has been on the seat planner app built in a custom PHP framework',
                     'Worked on a laravel REST API to centralise school data',
                     'Developed Angular frontend school apps which interact with API',
                     'Built an Android / iOS homework web app using Ionic framework',
                     'Recently switched to Java as school payment apps are built with it'
-                ])
+                ]),
+                'active' => true,
             ],
             [
                 'title'       => 'PHP Developer',
@@ -95,7 +111,8 @@ class CvSeeder extends Seeder
                     'Worked on the House repairs PHP system which provides services to multiple clients',
                     'Developed a REST API in PHP using Laravel to modernise and migrate functionality off of the legacy system',
                     'Trained in and worked with C# and Angular to support other apps'
-                ])
+                ]),
+                'active' => true,
             ],
             [
                 'title'       => 'Senior Developer',
@@ -109,7 +126,8 @@ class CvSeeder extends Seeder
                     'Worked on a high traffic tracking server built with the Silex PHP framework',
                     'Worked with both Scrum and Kanban',
                     'Been on-call outside of work hours to maintain uptime of servers'
-                ])
+                ]),
+                'active' => true,
             ],
             [
                 'title'       => 'Web Developer',
@@ -121,7 +139,8 @@ class CvSeeder extends Seeder
                 'responsibilities' => json_encode([
                     'Built and migrated features to a new Laravel API to replace the previous one built in NodeJS and Express',
                     'Worked on Drupal PHP modules for the company\'s ticketing system and company portal'
-                ])
+                ]),
+                'active' => true,
             ],
             [
                 'title'       => 'Software Developer',
@@ -133,7 +152,8 @@ class CvSeeder extends Seeder
                 'responsibilities' => json_encode([
                     'Worked on PHP e-commerce and backend management systems',
                     'Also worked on an in-store BackboneJS SPA app providing phone deals'
-                ])
+                ]),
+                'active' => true,
             ],
             [
                 'title'       => 'Web Developer',
@@ -146,7 +166,8 @@ class CvSeeder extends Seeder
                     'Worked on the company’s dashboard and tracking apps built with Zend, Silex and MongoDB',
                     'Maintained uptime of live servers',
                     'Supported and mentored junior web developers'
-                ])
+                ]),
+                'active' => false,
             ]
         ]);
     }
