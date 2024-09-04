@@ -9,7 +9,8 @@ class GetProjectsAction
 {
     public function __construct(
         protected ProjectRepository $projectRepository
-    ) { }
+    ) {
+    }
 
     public function execute(): array
     {

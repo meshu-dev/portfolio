@@ -21,6 +21,7 @@ class ProjectResource extends JsonResource
             'name'         => $this->name,
             'description'  => $this->description,
             'url'          => $this->url,
+            'image'        => $this->files,
             'repositories' => RepositoryResource::collection($this->repositories),
             'technologies' => $technologies
         ];

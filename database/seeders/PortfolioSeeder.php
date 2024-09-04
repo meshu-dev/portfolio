@@ -143,7 +143,11 @@ class PortfolioSeeder extends Seeder
         $cvProject->repositories()->save($meshProApiRepo);
 
         $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
-        $this->addProjectFile('site/cv.png');
+        $file = $this->addProjectFile('site/cv.png');
+
+        if ($file) {
+            $cvProject->files()->save($file);
+        }
 
         $devNudgeProject = Project::create([
             'name'        => 'Dev Nudge',
@@ -154,19 +158,24 @@ class PortfolioSeeder extends Seeder
         $devNudgeProject->repositories()->save($devNudgeRepo);
 
         $this->addProjectTechnologies($devNudgeProject, ['Astro', 'Laravel']);
-        $this->addProjectFile('site/devnudge.png');
+        $file = $this->addProjectFile('site/devnudge.png');
+
+        if ($file) {
+            $devNudgeProject->files()->save($file);
+        }
     }
 
-    protected function addProjectFile($filename): void
+    protected function addProjectFile($filename): File|null
     {
         $projectFileUrl = Storage::disk('s3')->url($filename);
 
         if ($projectFileUrl) {
-            File::insert([
+            return File::create([
                 'name' => basename($filename),
                 'url'  => $projectFileUrl
             ]);
         }
+        return null;
     }
 
     protected function addProjectTechnologies(Project $project, array $technologies): void

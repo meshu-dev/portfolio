@@ -77,7 +77,7 @@ class CvSeeder extends Seeder
                 'end_date'    => null,
                 'description' => 'Currently working on the insurance backend system',
                 'responsibilities' => json_encode([
-                    'Main resposibility is working on a system used by advisors to sell insurance to customers',
+                    'Main responsibility is working on a system used by advisors to sell insurance to customers',
                     'All backend work is done on Laravel and for frontend Vue.js / Typescipt is used',
                     'Worked on projects such as adding medical insurance, Vue 3 upgrade and Brevo integration',
                     'Work is conducted in weekly sprints using Jira'
