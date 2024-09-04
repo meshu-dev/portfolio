@@ -34,7 +34,7 @@ class GetCvAction
         $details         = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
         $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
         $skills          = $this->skillRepository->getByNames(['Backend', 'Frontend', 'Frameworks', 'Misc']);
-        $workExperiences = $this->workExperienceRepository->getAll();
+        $workExperiences = $this->workExperienceRepository->getAllActive();
         $pdfFile         = $this->fileRepository->getByName('cv.pdf');
 
         $details['intro'] = str_replace(

@@ -6,7 +6,7 @@ use App\Models\WorkExperience;
 
 class WorkExperienceRepository
 {
-    public function getAll()
+    public function getAllActive()
     {
         return WorkExperience::where('active', true)->get();
     }
