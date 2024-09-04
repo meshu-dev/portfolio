@@ -167,12 +167,12 @@ class PortfolioSeeder extends Seeder
 
     protected function addProjectFile($filename): File|null
     {
-        $projectFileUrl = Storage::disk('s3')->url($filename);
+        $hasFile = Storage::disk('s3')->exists($filename);
 
-        if ($projectFileUrl) {
+        if ($hasFile) {
             return File::create([
                 'name' => basename($filename),
-                'url'  => $projectFileUrl
+                'url'  => Storage::disk('s3')->url($filename)
             ]);
         }
         return null;
