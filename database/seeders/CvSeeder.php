@@ -56,7 +56,7 @@ class CvSeeder extends Seeder
         $this->addSkillTechnologies($backendSkill, ['PHP', 'MySQL', 'Node.js', 'Java']);
         $this->addSkillTechnologies($frontendSkill, ['Vue.js', 'React', 'Angular', 'TailwindCSS']);
         $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Express.js', 'Symfony']);
-        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']);
+        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit / Pest']);
     }
 
     protected function addSkillTechnologies(Skill $skill, array $technologies)
@@ -80,7 +80,8 @@ class CvSeeder extends Seeder
                     'Main responsibility is working on a system used by advisors to sell insurance to customers',
                     'All backend work is done on Laravel and for frontend Vue.js / Typescipt is used',
                     'Worked on projects such as adding medical insurance, Vue 3 upgrade and Brevo integration',
-                    'Work is conducted in weekly sprints using Jira'
+                    'Working with the rest of the team in weekly sprints using Jira',
+                    'Writing unit tests with Pest to keep up with our minimum target of 80% code coverage'
                 ]),
                 'active' => true,
             ],
