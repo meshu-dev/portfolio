@@ -15,4 +15,6 @@ Route::prefix('portfolio')->group(function () {
     Route::get('/projects', [App\Http\Controllers\PortfolioController::class, 'getProjects']);
 });
 
+Route::get('/github/profile', [App\Http\Controllers\GitHubController::class, 'getProfile']);
+
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'sendMessage']);

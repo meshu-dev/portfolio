@@ -35,7 +35,7 @@ class CreateCvPdf extends Command
         $viewParams  = [...$this->getCvAction->execute()];
         $cvFilePath  = storage_path('app/files') . '/cv.pdf';
 
-        $pdf = Pdf::loadView('pdf-view', $viewParams);
+        $pdf = Pdf::loadView('cv-pdf', $viewParams);
         $pdf->setPaper('A4', 'portrait');
         $pdf->save($cvFilePath);
     }

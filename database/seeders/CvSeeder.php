@@ -56,7 +56,7 @@ class CvSeeder extends Seeder
         $this->addSkillTechnologies($backendSkill, ['PHP', 'MySQL', 'Node.js', 'Java']);
         $this->addSkillTechnologies($frontendSkill, ['Vue.js', 'React', 'Angular', 'TailwindCSS']);
         $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Express.js', 'Symfony']);
-        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit / Pest']);
+        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']);
     }
 
     protected function addSkillTechnologies(Skill $skill, array $technologies)
@@ -175,13 +175,15 @@ class CvSeeder extends Seeder
 
     protected function addPdf()
     {
-        $cvFileUrl = Storage::disk('s3')->url('site/cv.pdf');
+        if (config('filesystems.default') === 's3') {
+            $cvFileUrl = Storage::url('site/cv.pdf');
 
-        if ($cvFileUrl) {
-            File::insert([
-                'name' => 'cv.pdf',
-                'url'  => $cvFileUrl
-            ]);
+            if ($cvFileUrl) {
+                File::insert([
+                    'name' => 'cv.pdf',
+                    'url'  => $cvFileUrl
+                ]);
+            }
         }
     }
 }
