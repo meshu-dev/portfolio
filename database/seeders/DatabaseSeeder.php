@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             SiteSeeder::class,
             TechnologySeeder::class,
             CvSeeder::class,
-            PortfolioSeeder::class
+            PortfolioSeeder::class,
         ]);
     }
 }

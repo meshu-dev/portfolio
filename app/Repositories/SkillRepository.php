@@ -13,8 +13,8 @@ class SkillRepository
 
     public function getByNames(array $names)
     {
-        return Skill::with("technologies")
-            ->whereIn("name", $names)
+        return Skill::with(['technologies', 'technologies.badge'])
+            ->whereIn('name', $names)
             ->get();
     }
 }

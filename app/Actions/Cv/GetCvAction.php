@@ -11,7 +11,6 @@ use App\Http\Resources\{
 use App\Repositories\{
     TextRepository,
     SiteRepository,
-    SkillRepository,
     WorkExperienceRepository,
     FileRepository
 };
@@ -23,7 +22,6 @@ class GetCvAction
         protected ProfileService $profileService,
         protected TextRepository $textRepository,
         protected SiteRepository $siteRepository,
-        protected SkillRepository $skillRepository,
         protected WorkExperienceRepository $workExperienceRepository,
         protected FileRepository $fileRepository
     ) {
@@ -33,7 +31,7 @@ class GetCvAction
     {
         $details         = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
         $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
-        $skills          = $this->skillRepository->getByNames(['Backend', 'Frontend', 'Frameworks', 'Misc']);
+        $skills          = $this->profileService->getSkills();
         $workExperiences = $this->workExperienceRepository->getAllActive();
         $pdfFile         = $this->fileRepository->getByName('cv.pdf');
 
