@@ -48,7 +48,7 @@ class GetCvAction
             ],
             'skill_groups'     => SkillResource::collection($skills),
             'work_experiences' => WorkExperienceResource::collection($workExperiences),
-            'pdf'              => $pdfFile->url
+            'pdf'              => $pdfFile?->url ?? null
         ];
     }
 }
