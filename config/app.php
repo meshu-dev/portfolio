@@ -123,4 +123,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'add_seeder_files' => env('APP_ADD_SEEDER_FILES', true),
 ];

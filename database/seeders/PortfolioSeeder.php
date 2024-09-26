@@ -167,7 +167,7 @@ class PortfolioSeeder extends Seeder
 
     protected function addProjectFile($filename): File|null
     {
-        if (config('filesystems.default') === 's3') {
+        if (config('app.add_seeder_files')) {
             $hasFile = Storage::disk('s3')->exists($filename);
 
             if ($hasFile) {
