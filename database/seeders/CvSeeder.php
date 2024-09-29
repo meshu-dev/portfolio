@@ -55,7 +55,7 @@ class CvSeeder extends Seeder
 
         $this->addSkillTechnologies($backendSkill, ['PHP', 'MySQL', 'Node.js', 'Java']);
         $this->addSkillTechnologies($frontendSkill, ['Vue.js', 'React', 'Angular', 'TailwindCSS']);
-        $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Express.js', 'Symfony']);
+        $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Next.js', 'Nuxt']);
         $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']);
     }
 
@@ -75,13 +75,13 @@ class CvSeeder extends Seeder
                 'location'    => 'Bristol',
                 'start_date'  => '2023-05-01',
                 'end_date'    => null,
-                'description' => 'Currently working on the insurance backend system',
+                'description' => 'Currently working on the admin system used by advisors to sell insurance to customers',
                 'responsibilities' => json_encode([
-                    'Main responsibility is working on a system used by advisors to sell insurance to customers',
-                    'All backend work is done on Laravel and for frontend Vue.js / Typescipt is used',
+                    'The Insurance system is built with Laravel, Vue.js and Typescipt',
+                    'Projects that I was involved in included adding Medical Insurance, Vue 3 upgrade and Brevo integration',
                     'Worked on projects such as adding medical insurance, Vue 3 upgrade and Brevo integration',
-                    'Working with the rest of the team in weekly sprints using Jira',
-                    'Writing unit tests with Pest to keep up with our minimum target of 80% code coverage'
+                    'Work is done in weekly sprints using Jira with the rest of the team',
+                    'Unit tests are written with Pest to keep up with our minimum target of 80% code coverage'
                 ]),
                 'active' => true,
             ],
@@ -97,7 +97,8 @@ class CvSeeder extends Seeder
                     'Worked on a laravel REST API to centralise school data',
                     'Developed Angular frontend school apps which interact with API',
                     'Built an Android / iOS homework web app using Ionic framework',
-                    'Recently switched to Java as school payment apps are built with it'
+                    'For half a year I switched over to programming with Java as school payment apps was
+built with it'
                 ]),
                 'active' => true,
             ],

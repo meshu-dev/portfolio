@@ -197,7 +197,7 @@ class TechnologySeeder extends Seeder
                 ],
             ],
             [
-                'name'  => 'Nuxt.js',
+                'name'  => 'Nuxt',
                 'badge' => [
                     'icon'        => 'Nuxt',
                     'icon_colour' => '002E3B',
