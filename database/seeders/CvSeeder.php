@@ -177,7 +177,7 @@ built with it'
     protected function addPdf()
     {
         if (config('app.add_seeder_files')) {
-            $cvFileUrl = Storage::url('site/cv.pdf');
+            $cvFileUrl = Storage::disk('s3')->url('site/cv.pdf');
 
             if ($cvFileUrl) {
                 File::insert([
