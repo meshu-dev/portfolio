@@ -78,7 +78,6 @@ class CvSeeder extends Seeder
                 'description' => 'Currently working on the admin system used by advisors to sell insurance to customers',
                 'responsibilities' => json_encode([
                     'The Insurance system is built with Laravel, Vue.js and Typescipt',
-                    'Projects that I was involved in included adding Medical Insurance, Vue 3 upgrade and Brevo integration',
                     'Worked on projects such as adding medical insurance, upgrading to Vue 3 and integrating the Brevo CMS',
                     'Work is conducted in weekly sprints using Jira with the rest of the team',
                     'Unit tests are written with Pest to keep up with our minimum target of 80% code coverage'
