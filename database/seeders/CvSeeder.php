@@ -90,11 +90,11 @@ class CvSeeder extends Seeder
                 'location'    => 'Eastleigh',
                 'start_date'  => '2020-11-01',
                 'end_date'    => '2023-04-28',
-                'description' => 'Worked on school payment apps and on a seat planner',
+                'description' => 'Worked on school payment apps and classroom seat planner',
                 'responsibilities' => json_encode([
                     'Majority of work has been on the seat planner app built in a custom PHP framework',
                     'Worked on a laravel REST API to centralise school data',
-                    'Developed Angular frontend school apps which interact with API',
+                    'Developed Angular frontend school apps which interact with the API',
                     'Built an Android / iOS homework web app using Ionic framework',
                     'For half a year I switched over to programming with Java as school payment apps was
 built with it'
