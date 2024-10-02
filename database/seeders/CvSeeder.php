@@ -154,7 +154,7 @@ built with it'
                     'Worked on PHP e-commerce and backend management systems',
                     'Also worked on an in-store BackboneJS SPA app providing phone deals'
                 ]),
-                'active' => true,
+                'active' => false,
             ],
             [
                 'title'       => 'Web Developer',
