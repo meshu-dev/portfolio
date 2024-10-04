@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         api: __DIR__ . '/../routes/api.php',
-        apiPrefix: '',
         commands: __DIR__ . '/../routes/console.php',
         health: '/'
     )
@@ -19,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (Exception $exception, Request $request) {
             if ($request->is('*')) {
                 $code = (int) $exception->getCode();
-                
+
                 return response()->json(
                     [
                         'message' => $exception->getMessage()

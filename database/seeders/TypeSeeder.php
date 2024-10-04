@@ -16,11 +16,11 @@ class TypeSeeder extends Seeder
         Type::insert([
             [
                 'id'   => TypeEnum::CV->value,
-                'name' => 'CV'
+                'name' => 'CV',
             ],
             [
                 'id'   => TypeEnum::PORTFOLIO->value,
-                'name' => 'Portfolio'
+                'name' => 'Portfolio',
             ]
         ]);
     }
