@@ -2,7 +2,7 @@
 
 describe('API - CV', function () {
     it('returns CV data', function () {
-        $response = $this->get('/cv');
+        $response = $this->get(route('cv'));
 
         expect($response->status())
             ->toEqual(200);

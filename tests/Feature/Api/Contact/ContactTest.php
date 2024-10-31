@@ -11,7 +11,7 @@ describe('API - Contact', function () {
             'message' => 'This is a test message',
             'token'   => 'uipoV9loh9ohJ!o0mepae@b2ooL5pooviu@Jah6aid3qua0euv'
         ];
-        $response = $this->post('/contact', $params);
+        $response = $this->post(route('contact'), $params);
 
         expect($response->status())
             ->toEqual(200)
@@ -32,7 +32,7 @@ describe('API - Contact', function () {
             'message' => 'This is a test message',
             'token'   => 'uipoV9loh9ohJ!o0mepae@b2ooL5pooviu@Jah6aid3qua0euv'
         ];
-        $response = $this->post('/contact', $params);
+        $response = $this->post(route('contact'), $params);
 
         expect($response->status())
             ->toEqual(500)
