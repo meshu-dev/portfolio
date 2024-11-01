@@ -7,13 +7,14 @@ use App\Actions\Portfolio\{
     GetAboutAction,
     GetProjectsAction
 };
+use Illuminate\Http\JsonResponse;
 
 class PortfolioController extends Controller
 {
     /**
      * Get text for portfolio introduction page.
      */
-    public function getIntro(GetIntroAction $getIntroAction)
+    public function getIntro(GetIntroAction $getIntroAction): JsonResponse
     {
         $data = $getIntroAction->execute();
         return response()->json(['data' => $data]);
@@ -22,7 +23,7 @@ class PortfolioController extends Controller
     /**
      * Get text and skills list for the portfolio about page.
      */
-    public function getAbout(GetAboutAction $getAboutAction)
+    public function getAbout(GetAboutAction $getAboutAction): JsonResponse
     {
         $data = $getAboutAction->execute();
         return response()->json(['data' => $data]);
@@ -31,7 +32,7 @@ class PortfolioController extends Controller
     /**
      * Get projects for the portfolio projects page.
      */
-    public function getProjects(GetProjectsAction $getProjectsAction)
+    public function getProjects(GetProjectsAction $getProjectsAction): JsonResponse
     {
         $data = $getProjectsAction->execute();
         return response()->json(['data' => $data]);
