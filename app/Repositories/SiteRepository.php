@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Enums\TypeEnum;
 use App\Models\Site;
-use Illuminate\Database\Eloquent\Builder;
 
 class SiteRepository
 {

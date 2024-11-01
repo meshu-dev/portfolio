@@ -15,6 +15,6 @@ class TextRepository
     {
         return Text::whereIn("name", $names)
             ->get()
-            ->mapWithKeys(fn($item) => [$item->name => $item->value]);
+            ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
     }
 }
