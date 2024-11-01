@@ -19,7 +19,7 @@ class GetTechStatsAction
                 $svg            = $response->body();
                 $cacheInSeconds = config('github.tech_stats.cache_in_seconds');
 
-                Cache::put('tech_stats', $cacheInSeconds, $svg);
+                Cache::put('tech_stats', $svg, $cacheInSeconds);
 
                 return $svg;
             }

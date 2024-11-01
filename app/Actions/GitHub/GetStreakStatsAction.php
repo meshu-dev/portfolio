@@ -19,7 +19,7 @@ class GetStreakStatsAction
                 $svg            = $response->body();
                 $cacheInSeconds = config('github.streak_stats.cache_in_seconds');
 
-                Cache::put('streak_stats', $cacheInSeconds, $svg);
+                Cache::put('streak_stats', $svg, $cacheInSeconds);
 
                 return $svg;
             }

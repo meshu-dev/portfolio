@@ -18,7 +18,7 @@ class ProfileService
         $workStartDate = Carbon::parse(ProfileEnum::WORK_START_DATE->value);
 
         $yearsWorked = $workStartDate->diffInYears(Carbon::now());
-        return floor($yearsWorked);
+        return (int) floor($yearsWorked);
     }
 
     public function getSkills()

@@ -29,7 +29,7 @@ class GetIntroAction
         $line1 = $introTexts['portfolio_intro_1'];
         $line2 = str_replace(
             DynamicValueEnum::YEARS_WORKED->value,
-            $this->profileService->getYearsWorked(),
+            (string) $this->profileService->getYearsWorked(),
             $introTexts['portfolio_intro_2']
         );
 

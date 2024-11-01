@@ -37,7 +37,7 @@ class GetCvAction
 
         $details['intro'] = str_replace(
             DynamicValueEnum::YEARS_WORKED->value,
-            $this->profileService->getYearsWorked(),
+            (string) $this->profileService->getYearsWorked(),
             $details['intro']
         );
 

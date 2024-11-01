@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Site extends Model
 {
@@ -12,7 +13,7 @@ class Site extends Model
 
     public $timestamps = false;
 
-    public function files()
+    public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'site_files', 'site_id', 'file_id');
     }
