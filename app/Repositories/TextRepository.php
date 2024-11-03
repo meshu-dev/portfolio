@@ -16,7 +16,8 @@ class TextRepository
     }
 
     /**
-     * @return Collection<int, mixed>
+     * @param array<int, string> $names
+     * @return Collection<string, string>
      */
     public function getByNames(array $names): Collection
     {

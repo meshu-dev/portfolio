@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 class EmailService
 {
     /**
-     * @param array<int, mixed> $params
+     * @param array<string, mixed> $params
      */
     public function sendContactEmail(array $params): void
     {

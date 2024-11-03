@@ -18,6 +18,8 @@ class SendContactEmailJob implements ShouldQueue
 
     /**
      * Create a new job instance.
+     *
+     * @param array<string, mixed> $params
      */
     public function __construct(
         public array $params

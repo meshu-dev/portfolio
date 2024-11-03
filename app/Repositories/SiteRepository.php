@@ -17,6 +17,7 @@ class SiteRepository
     }
 
     /**
+     * @param array<int, string> $names
      * @return Collection<int, Site>
      */
     public function getByNames(TypeEnum $type, array $names = []): Collection

@@ -16,6 +16,8 @@ class ContactEmail extends Mailable
 
     /**
      * Create a new message instance.
+     *
+     * @param array<string, mixed> $params
      */
     public function __construct(
         protected array $params
