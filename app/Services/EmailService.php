@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailService
 {
-    public function sendContactEmail(array $params)
+    /**
+     * @param array<int, mixed> $params
+     */
+    public function sendContactEmail(array $params): void
     {
         Mail::to(config('mail.to.address'))->send(
             new ContactEmail($params)

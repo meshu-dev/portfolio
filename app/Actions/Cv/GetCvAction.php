@@ -27,6 +27,9 @@ class GetCvAction
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(): array
     {
         $details         = $this->textRepository->getByNames(['fullname', 'intro', 'location']);

@@ -4,6 +4,8 @@ namespace App\Actions\Portfolio;
 
 use App\Http\Resources\ProjectResource;
 use App\Repositories\ProjectRepository;
+use App\Models\Project;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class GetProjectsAction
 {
@@ -12,6 +14,9 @@ class GetProjectsAction
     ) {
     }
 
+    /**
+     * @return array<string, AnonymousResourceCollection<int, Project>>
+     */
     public function execute(): array
     {
         return [

@@ -18,6 +18,9 @@ class GetAboutAction
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(): array
     {
         $aboutFile       = $this->fileRepository->getByName('about.png');

@@ -19,6 +19,9 @@ class GetIntroAction
     ) {
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function execute(): array
     {
         $introTexts = $this->textRepository

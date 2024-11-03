@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Log;
 
 class SendMessageAction
 {
+    /**
+     * @param array<string, mixed> $params
+     */
     public function execute(array $params): bool
     {
         $token           = $params['token'];
@@ -38,6 +41,9 @@ class SendMessageAction
         return true;
     }
 
+    /**
+     * @param array<string, mixed> $response
+     */
     public function getErrorCode(array $response): string
     {
         if (!empty($response['error-codes'])) {

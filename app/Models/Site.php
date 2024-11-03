@@ -13,6 +13,9 @@ class Site extends Model
 
     public $timestamps = false;
 
+    /**
+     * @return BelongsToMany<File>
+     */
     public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'site_files', 'site_id', 'file_id');

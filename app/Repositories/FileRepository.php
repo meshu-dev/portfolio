@@ -7,6 +7,9 @@ use Illuminate\Support\Collection;
 
 class FileRepository
 {
+    /**
+     * @return Collection<int, File>
+     */
     public function getAll(): Collection
     {
         return File::get();

@@ -15,6 +15,9 @@ class Skill extends Model
 
     public $timestamps = false;
 
+    /**
+     * @return BelongsToMany<Technology>
+     */
     public function technologies(): BelongsToMany
     {
         return $this->belongsToMany(Technology::class, 'skill_technologies', 'skill_id', 'technology_id');

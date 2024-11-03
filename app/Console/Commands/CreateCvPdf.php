@@ -30,7 +30,7 @@ class CreateCvPdf extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $viewParams  = [...$this->getCvAction->execute()];
         $cvFilePath  = storage_path('app/files') . '/cv.pdf';

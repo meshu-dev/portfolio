@@ -8,11 +8,17 @@ use Illuminate\Support\Collection;
 
 class SiteRepository
 {
+    /**
+     * @return Collection<int, Site>
+     */
     public function getAll(): Collection
     {
         return Site::get();
     }
 
+    /**
+     * @return Collection<int, Site>
+     */
     public function getByNames(TypeEnum $type, array $names = []): Collection
     {
         $query = Site::with(['files' => function ($query) use ($type) {

@@ -25,7 +25,7 @@ class UploadFiles extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $files = Storage::files('files');
 

@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Enums\{SkillEnum, ProfileEnum};
 use App\Repositories\SkillRepository;
+use App\Models\Skill;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class ProfileService
 {
@@ -21,7 +23,10 @@ class ProfileService
         return (int) floor($yearsWorked);
     }
 
-    public function getSkills()
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
     {
         $profileSkills = [
             SkillEnum::BACKEND->value,

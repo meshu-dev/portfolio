@@ -11,7 +11,7 @@ class GoogleTokenException extends Exception
         parent::__construct($this->getMessageFromCode($code));
     }
 
-    protected function getMessageFromCode(string $code)
+    protected function getMessageFromCode(string $code): string
     {
         $errorMessages = config('services.google.recaptcha.error_messages');
 

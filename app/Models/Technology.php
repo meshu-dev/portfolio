@@ -18,6 +18,8 @@ class Technology extends Model
 
     /**
      * The skills that belong to the skill type.
+     *
+     * @return HasOne<TechnologyBadge>
      */
     public function badge(): HasOne
     {
