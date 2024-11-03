@@ -3,6 +3,7 @@
 namespace App\Actions\Cv;
 
 use App\Enums\{DynamicValueEnum, TypeEnum};
+use App\Exceptions\IntroIsNullException;
 use App\Http\Resources\{
     SkillResource,
     SiteResource,
@@ -37,6 +38,8 @@ class GetCvAction
         $skills          = $this->profileService->getSkills();
         $workExperiences = $this->workExperienceRepository->getAllActive();
         $pdfFile         = $this->fileRepository->getByName('cv.pdf');
+
+        throw_unless($details['intro'], IntroIsNullException::class, 'CV intro is required');
 
         $details['intro'] = str_replace(
             DynamicValueEnum::YEARS_WORKED->value,
