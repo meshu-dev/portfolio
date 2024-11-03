@@ -5,4 +5,4 @@ parameters:
         - Illuminate\Http\Resources\Json\JsonResource
     paths:
         - app/
-    level: 5
+    level: 6
