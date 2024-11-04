@@ -7,7 +7,7 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
   PHP_VERSION: 8.3
-  NODE_VERSION: '20'
+  NODE_VERSION: 20.x
 
 jobs:
   phpstan:
@@ -21,7 +21,7 @@ jobs:
       
       - uses: actions/checkout@v3
         with:
-          php-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
         run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
@@ -40,7 +40,7 @@ jobs:
       
       - uses: actions/checkout@v3
         with:
-          php-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Dependencies
         run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
