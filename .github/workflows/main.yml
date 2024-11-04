@@ -8,8 +8,8 @@ env:
   PHP_VERSION: 8.3
 
 jobs:
-  pint:
-    name: Run Laravel Pint to check code standards
+  phpstan:
+    name: Run PHPStan
     runs-on: ubuntu-latest
     steps:
       - name: Setup PHP
@@ -20,7 +20,24 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
 
       - name: Run pint
-        run: ./vendor/bin/pint --test
+        run: composer run phpstan
+
+  pint:
+    name: Run Laravel Pint - PSR12
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+      
+      - uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
+
+      - name: Run pint
+        run: composer run pint

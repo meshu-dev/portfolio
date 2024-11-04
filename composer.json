@@ -59,7 +59,7 @@
         ],
         "phpstan": "./vendor/bin/phpstan analyse",
         "pint": "./vendor/bin/pint --test",
-        "pint-apply": "./vendor/bin/pint"
+        "pint-fix": "./vendor/bin/pint"
     },
     "extra": {
         "laravel": {
