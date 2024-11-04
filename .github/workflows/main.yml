@@ -5,6 +5,7 @@ on:
     branches: 
       - "github-workflows"
 env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
   PHP_VERSION: 8.3
 
 jobs:
