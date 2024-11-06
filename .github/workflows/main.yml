@@ -2,13 +2,45 @@ name: Push to Main Pipeline
 
 on:
   push:
-    branches: 
+    branches:
       - "github-workflows"
 env:
   PHP_VERSION: 8.3
-  NODE_VERSION: 20.x
 
 jobs:
+  phpunit:
+    name: Run PHP Unit and Feature tests
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: meshpro_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DB_USERNAME: root
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: meshpro_test
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+      
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Run Artisan Test
+        run: php -d memory_limit=-1 artisan test
+
   phpstan:
     name: Run PHPStan
     runs-on: ubuntu-latest
