@@ -128,9 +128,6 @@ class PortfolioSeeder extends Seeder
             $cvRepo,
             $meshProApiRepo,
             $devNudgeRepo,
-            $devPushRepo,
-            $devPushWpRepo,
-            $devPushApiRepo
         ] = $repositories;
 
         $cvProject = Project::create([
@@ -162,6 +159,9 @@ class PortfolioSeeder extends Seeder
 
         if ($file) {
             $devNudgeProject->files()->save($file);
+
+            $devNudgeProject->addMediaFromDisk($file->url, 's3')
+                            ->toMediaCollection();
         }
     }
 
