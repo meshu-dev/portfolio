@@ -20,10 +20,12 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+  
     env:
       DB_USERNAME: root
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       DB_DATABASE: meshpro_test
+
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
