@@ -88,12 +88,10 @@ class PortfolioSeeder extends Seeder
 
         $imageUrl = config('app.add_seeder_files') ? Storage::disk('s3')->url('site/about.png') : fake()->imageUrl();
 
-        if ($aboutImgUrl) {
-            File::insert([
-                'name' => 'about.png',
-                'url'  => $imageUrl
-            ]);
-        }
+        File::insert([
+            'name' => 'about.png',
+            'url'  => $imageUrl
+        ]);
     }
 
     protected function addSkills()
