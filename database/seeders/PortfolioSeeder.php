@@ -86,12 +86,12 @@ class PortfolioSeeder extends Seeder
             'value' => $aboutMe
         ]);
 
-        $aboutImgUrl = Storage::disk('s3')->url('site/about.png');
+        $imageUrl = config('app.add_seeder_files') ? Storage::disk('s3')->url('site/about.png') : fake()->imageUrl();
 
         if ($aboutImgUrl) {
             File::insert([
                 'name' => 'about.png',
-                'url'  => $aboutImgUrl
+                'url'  => $imageUrl
             ]);
         }
     }
@@ -167,17 +167,12 @@ class PortfolioSeeder extends Seeder
 
     protected function addProjectFile($filename): File|null
     {
-        if (config('app.add_seeder_files')) {
-            $hasFile = Storage::disk('s3')->exists($filename);
+        $imageUrl = config('app.add_seeder_files') ? Storage::disk('s3')->url($filename) : fake()->imageUrl();
 
-            if ($hasFile) {
-                return File::create([
-                    'name' => basename($filename),
-                    'url'  => Storage::disk('s3')->url($filename)
-                ]);
-            }
-        }
-        return null;
+        return File::create([
+            'name' => basename($filename),
+            'url'  => $imageUrl
+        ]);
     }
 
     protected function addProjectTechnologies(Project $project, array $technologies): void

@@ -175,15 +175,11 @@ built with it'
 
     protected function addPdf()
     {
-        if (config('app.add_seeder_files')) {
-            $cvFileUrl = Storage::disk('s3')->url('site/cv.pdf');
+        $imageUrl = config('app.add_seeder_files') ? Storage::disk('s3')->url('site/cv.pdf') : fake()->imageUrl();
 
-            if ($cvFileUrl) {
-                File::insert([
-                    'name' => 'cv.pdf',
-                    'url'  => $cvFileUrl
-                ]);
-            }
-        }
+        File::insert([
+            'name' => 'cv.pdf',
+            'url'  => $imageUrl
+        ]);
     }
 }

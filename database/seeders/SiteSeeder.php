@@ -27,15 +27,13 @@ class SiteSeeder extends Seeder
 
     protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
     {
-        $projectFileUrl = Storage::disk('s3')->url($filename);
+        $imageUrl = config('app.add_seeder_files') ? Storage::disk('s3')->url($filename) : fake()->imageUrl();
 
-        if ($projectFileUrl) {
-            $file = File::create([
-                'name' => basename($filename),
-                'url'  => $projectFileUrl
-            ]);
+        $file = File::create([
+            'name' => basename($filename),
+            'url'  => $projectFileUrl
+        ]);
 
-            $site->files()->attach($file->id, ['type_id' => $type->value]);
-        }
+        $site->files()->attach($file->id, ['type_id' => $type->value]);
     }
 }
