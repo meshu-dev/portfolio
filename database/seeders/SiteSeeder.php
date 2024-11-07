@@ -31,7 +31,7 @@ class SiteSeeder extends Seeder
 
         $file = File::create([
             'name' => basename($filename),
-            'url'  => $projectFileUrl
+            'url'  => $imageUrl
         ]);
 
         $site->files()->attach($file->id, ['type_id' => $type->value]);
