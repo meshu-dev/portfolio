@@ -124,4 +124,6 @@ return [
     ],
 
     'add_seeder_files' => env('APP_ADD_SEEDER_FILES', true),
+
+    'meshpro_buildhook' => env('NETLIFY_MESHPRO_BUILDHOOK', true),
 ];
