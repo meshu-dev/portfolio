@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Cv\GetCvAction;
+use App\Actions\Cv\CreateCvPdfAction;
 use Illuminate\Console\Command;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class CreateCvPdf extends Command
 {
@@ -22,7 +21,7 @@ class CreateCvPdf extends Command
      */
     protected $description = 'Creates a CV document in PDF format';
 
-    public function __construct(protected GetCvAction $getCvAction)
+    public function __construct(protected CreateCvPdfAction $createCvPdfAction)
     {
         parent::__construct();
     }
@@ -32,11 +31,6 @@ class CreateCvPdf extends Command
      */
     public function handle(): void
     {
-        $viewParams  = [...$this->getCvAction->execute()];
-        $cvFilePath  = storage_path('app/files') . '/cv.pdf';
-
-        $pdf = Pdf::loadView('cv-pdf', $viewParams);
-        $pdf->setPaper('A4', 'portrait');
-        $pdf->save($cvFilePath);
+        $this->createCvPdfAction->execute();
     }
 }
