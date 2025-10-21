@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\UploadFileAction;
+use App\Actions\File\CreateFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Models\{
     File,
@@ -87,14 +87,7 @@ class PortfolioSeeder extends Seeder
             'value' => $aboutMe
         ]);
 
-        $aboutImgUrl = resolve(UploadFileAction::class)->execute('about.png');
-
-        if ($aboutImgUrl) {
-            File::insert([
-                'name' => 'about.png',
-                'url'  => $aboutImgUrl
-            ]);
-        }
+        resolve(CreateFileAction::class)->execute('about.png');
     }
 
     protected function addSkills()
@@ -165,15 +158,7 @@ class PortfolioSeeder extends Seeder
 
     protected function addProjectFile($filename): File|null
     {
-        $fileUrl = resolve(UploadFileAction::class)->execute($filename);
-
-        if ($fileUrl) {
-            return File::create([
-                'name' => $filename,
-                'url'  => $fileUrl
-            ]);
-        }
-        return null;
+        return resolve(CreateFileAction::class)->execute($filename);
     }
 
     protected function addProjectTechnologies(Project $project, array $technologies): void
