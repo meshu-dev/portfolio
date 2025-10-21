@@ -21,16 +21,11 @@ class CreateCvPdf extends Command
      */
     protected $description = 'Creates a CV document in PDF format';
 
-    public function __construct(protected CreateCvPdfAction $createCvPdfAction)
-    {
-        parent::__construct();
-    }
-
     /**
      * Execute the console command.
      */
     public function handle(): void
     {
-        $this->createCvPdfAction->execute();
+        resolve(CreateCvPdfAction::class)->execute();
     }
 }

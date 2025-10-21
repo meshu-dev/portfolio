@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Actions\File\UploadFileAction;
 use App\Enums\TypeEnum;
 use App\Models\{File, Site};
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class SiteSeeder extends Seeder
 {
@@ -18,21 +18,19 @@ class SiteSeeder extends Seeder
         $linkedInIcon  = Site::create(['name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
         $portfolioIcon = Site::create(['name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
 
-        $this->addIconFile(TypeEnum::CV, $githubIcon, 'site/github-cv.png');
-        $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'site/linkedin-cv.png');
-        $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'site/portfolio-icon.png');
-        $this->addIconFile(TypeEnum::PORTFOLIO, $githubIcon, 'site/github-portfolio.svg');
-        $this->addIconFile(TypeEnum::PORTFOLIO, $linkedInIcon, 'site/linkedin-portfolio.svg');
+        $this->addIconFile(TypeEnum::CV, $githubIcon, 'github-cv.png');
+        $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'linkedin-cv.png');
+        $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'portfolio-icon.png');
     }
 
     protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
     {
-        $projectFileUrl = Storage::disk('s3')->url($filename);
+        $fileUrl = resolve(UploadFileAction::class)->execute($filename);
 
-        if ($projectFileUrl) {
+        if ($fileUrl) {
             $file = File::create([
-                'name' => basename($filename),
-                'url'  => $projectFileUrl
+                'name' => $filename,
+                'url'  => $fileUrl
             ]);
 
             $site->files()->attach($file->id, ['type_id' => $type->value]);

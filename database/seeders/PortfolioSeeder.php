@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Models\{
     File,
@@ -86,7 +87,7 @@ class PortfolioSeeder extends Seeder
             'value' => $aboutMe
         ]);
 
-        $aboutImgUrl = Storage::disk('s3')->url('site/about.png');
+        $aboutImgUrl = resolve(UploadFileAction::class)->execute('about.png');
 
         if ($aboutImgUrl) {
             File::insert([
@@ -128,9 +129,6 @@ class PortfolioSeeder extends Seeder
             $cvRepo,
             $meshProApiRepo,
             $devNudgeRepo,
-            $devPushRepo,
-            $devPushWpRepo,
-            $devPushApiRepo
         ] = $repositories;
 
         $cvProject = Project::create([
@@ -143,7 +141,7 @@ class PortfolioSeeder extends Seeder
         $cvProject->repositories()->save($meshProApiRepo);
 
         $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
-        $file = $this->addProjectFile('site/cv.png');
+        $file = $this->addProjectFile('cv.png');
 
         if ($file) {
             $cvProject->files()->save($file);
@@ -158,7 +156,7 @@ class PortfolioSeeder extends Seeder
         $devNudgeProject->repositories()->save($devNudgeRepo);
 
         $this->addProjectTechnologies($devNudgeProject, ['Astro', 'Laravel']);
-        $file = $this->addProjectFile('site/devnudge.png');
+        $file = $this->addProjectFile('devnudge.png');
 
         if ($file) {
             $devNudgeProject->files()->save($file);
@@ -167,15 +165,13 @@ class PortfolioSeeder extends Seeder
 
     protected function addProjectFile($filename): File|null
     {
-        if (config('app.add_seeder_files')) {
-            $hasFile = Storage::disk('s3')->exists($filename);
+        $fileUrl = resolve(UploadFileAction::class)->execute($filename);
 
-            if ($hasFile) {
-                return File::create([
-                    'name' => basename($filename),
-                    'url'  => Storage::disk('s3')->url($filename)
-                ]);
-            }
+        if ($fileUrl) {
+            return File::create([
+                'name' => $filename,
+                'url'  => $fileUrl
+            ]);
         }
         return null;
     }

@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Models\{
-    File,
     Text,
     Skill,
     Technology,
     WorkExperience
 };
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class CvSeeder extends Seeder
 {
@@ -175,15 +174,6 @@ built with it'
 
     protected function addPdf()
     {
-        if (config('app.add_seeder_files')) {
-            $cvFileUrl = Storage::disk('s3')->url('site/cv.pdf');
-
-            if ($cvFileUrl) {
-                File::insert([
-                    'name' => 'cv.pdf',
-                    'url'  => $cvFileUrl
-                ]);
-            }
-        }
+        resolve(UploadFileAction::class)->execute('cv.pdf');
     }
 }
