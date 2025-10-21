@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Actions\File\GetFileUrlAction;
 use App\Models\Technology;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ProjectResource extends JsonResource
         $technologies = TechnologyResource::collection($this->technologies);
         $technologies = $technologies->pluck('name');
 
-        $imageUrl = isset($this->files[0]) ? $this->files[0]->url : null;
+        $imageUrl = resolve(GetFileUrlAction::class, ['name' => $this?->files[0]->name])->execute();
 
         return [
             'name'         => $this->name,
