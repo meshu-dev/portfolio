@@ -13,9 +13,9 @@ class CreateFileAction
     {
         $fileUrl = resolve(UploadFileAction::class)->execute($filename);
 
-        return File::create([
-            'name' => $filename,
-            'url'  => $fileUrl
-        ]);
+        return File::firstOrCreate(
+            ['name' => $filename],
+            ['name' => $filename, 'url' => $fileUrl]
+        );
     }
 }

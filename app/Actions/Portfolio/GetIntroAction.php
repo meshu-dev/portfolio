@@ -2,18 +2,17 @@
 
 namespace App\Actions\Portfolio;
 
+use App\Actions\Profile\GetYearsWorkedAction;
 use App\Enums\{DynamicValueEnum, TypeEnum};
 use App\Http\Resources\SiteResource;
 use App\Repositories\{
     TextRepository,
     SiteRepository
 };
-use App\Services\ProfileService;
 
 class GetIntroAction
 {
     public function __construct(
-        protected ProfileService $profileService,
         protected TextRepository $textRepository,
         protected SiteRepository $siteRepository
     ) {
@@ -32,7 +31,7 @@ class GetIntroAction
         $line1 = $introTexts['portfolio_intro_1'];
         $line2 = str_replace(
             DynamicValueEnum::YEARS_WORKED->value,
-            (string) $this->profileService->getYearsWorked(),
+            (string) resolve(GetYearsWorkedAction::class)->execute(),
             $introTexts['portfolio_intro_2']
         );
 

@@ -1,32 +1,22 @@
 <?php
 
-namespace App\Services;
+namespace App\Actions\Profile;
 
-use App\Enums\{SkillEnum, ProfileEnum};
+use App\Enums\SkillEnum;
 use App\Repositories\SkillRepository;
-use App\Models\Skill;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
-class ProfileService
+class GetSkillsAction
 {
     public function __construct(
         protected SkillRepository $skillRepository
     ) {
     }
 
-    public function getYearsWorked(): int
-    {
-        $workStartDate = Carbon::parse(ProfileEnum::WORK_START_DATE->value);
-
-        $yearsWorked = $workStartDate->diffInYears(Carbon::now());
-        return (int) floor($yearsWorked);
-    }
-
     /**
      * @return Collection<int, Skill>
      */
-    public function getSkills(): Collection
+    public function execute(): Collection
     {
         $profileSkills = [
             SkillEnum::BACKEND->value,
