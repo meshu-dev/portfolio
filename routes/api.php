@@ -1,23 +1,28 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\{
+    AuthController,
+    ContactController,
+    GitHubController,
+    PortfolioController,
+};
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::post('auth/login', [AuthController::class, 'login']);
 
-Route::get('/cv', [App\Http\Controllers\CvController::class, 'get'])->name('cv');
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/cv', [App\Http\Controllers\CvController::class, 'get'])->name('cv');
 
-Route::prefix('portfolio')->group(function () {
-    Route::get('/intro', [App\Http\Controllers\PortfolioController::class, 'getIntro'])->name('portfolio.intro');
-    Route::get('/about', [App\Http\Controllers\PortfolioController::class, 'getAbout'])->name('portfolio.about');
-    Route::get('/projects', [App\Http\Controllers\PortfolioController::class, 'getProjects'])->name('portfolio.projects');
+    Route::prefix('portfolio')->group(function () {
+        Route::get('/intro', [PortfolioController::class, 'getIntro'])->name('portfolio.intro');
+        Route::get('/about', [PortfolioController::class, 'getAbout'])->name('portfolio.about');
+        Route::get('/projects', [PortfolioController::class, 'getProjects'])->name('portfolio.projects');
+    });
+
+    Route::prefix('github')->group(function () {
+        Route::get('/streak-stats', [GitHubController::class, 'getStreakStats'])->name('github.streak-stats');
+        Route::get('/tech-stats', [GitHubController::class, 'getTechStats'])->name('github.tech-stats');
+    });
 });
 
-Route::prefix('github')->group(function () {
-    Route::get('/streak-stats', [App\Http\Controllers\GitHubController::class, 'getStreakStats'])->name('github.streak-stats');
-    Route::get('/tech-stats', [App\Http\Controllers\GitHubController::class, 'getTechStats'])->name('github.tech-stats');
-});
-
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'sendMessage'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendMessage'])->name('contact');
