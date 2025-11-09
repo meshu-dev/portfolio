@@ -16,7 +16,7 @@ class FileResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'url'  => $this->url
+            'url'  => $this->url,
         ];
     }
 }
