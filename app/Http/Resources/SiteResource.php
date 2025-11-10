@@ -19,12 +19,12 @@ class SiteResource extends JsonResource
     public function toArray(Request $request): array
     {
         $file    = FileResource::collection($this->files)->first();
-        $fileUrl = resolve(GetFileUrlAction::class, ['name' => $file->name])->execute();
+        $fileUrl = $file?->name ? resolve(GetFileUrlAction::class, ['name' => $file->name])->execute() : null;
 
         return [
             'name'   => $this->name,
             'url'    => $this->url,
-            'image'  => $fileUrl ?? null
+            'image'  => $fileUrl,
         ];
     }
 }

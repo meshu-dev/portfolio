@@ -21,6 +21,9 @@ class SiteSeeder extends Seeder
         $this->addIconFile(TypeEnum::CV, $githubIcon, 'github-cv.png');
         $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'linkedin-cv.png');
         $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'portfolio-icon.png');
+
+        $this->addIconFile(TypeEnum::PORTFOLIO, $githubIcon, 'github-cv.png');
+        $this->addIconFile(TypeEnum::PORTFOLIO, $linkedInIcon, 'linkedin-cv.png');
     }
 
     protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
