@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\CreateFileAction;
+use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
+use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     File,
     Project,
@@ -86,7 +87,7 @@ class PortfolioSeeder extends Seeder
             'value' => $aboutMe
         ]);
 
-        resolve(CreateFileAction::class)->execute('about.png');
+        $this->addFile('about.png');
     }
 
     protected function addSkills()
@@ -133,7 +134,7 @@ class PortfolioSeeder extends Seeder
         $cvProject->repositories()->save($meshProApiRepo);
 
         $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
-        $file = $this->addProjectFile('cv.png');
+        $file = $this->addFile('cv.png');
 
         if ($file) {
             $cvProject->files()->save($file);
@@ -148,16 +149,25 @@ class PortfolioSeeder extends Seeder
         $devNudgeProject->repositories()->save($devNudgeRepo);
 
         $this->addProjectTechnologies($devNudgeProject, ['Astro', 'Laravel']);
-        $file = $this->addProjectFile('devnudge.png');
+        $file = $this->addFile('devnudge.png');
 
         if ($file) {
             $devNudgeProject->files()->save($file);
         }
     }
 
-    protected function addProjectFile($filename): File|null
+    protected function addFile($filename): File|null
     {
-        return resolve(CreateFileAction::class)->execute($filename);
+        try {
+            $fileUrl = resolve(UploadFileAction::class)->execute($filename);
+        } catch (FileNotUploadedException) {
+            $fileUrl = fake()->imageUrl(512, 512);
+        }
+        
+        return File::create([
+            'name' => $filename,
+            'url'  => $fileUrl,
+        ]);
     }
 
     protected function addProjectTechnologies(Project $project, array $technologies): void

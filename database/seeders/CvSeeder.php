@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
+use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     Text,
     Skill,
@@ -174,6 +175,9 @@ built with it'
 
     protected function addPdf()
     {
-        resolve(UploadFileAction::class)->execute('cv.pdf');
+        try {
+            resolve(UploadFileAction::class)->execute('cv.pdf');
+        } catch (FileNotUploadedException) {
+        }
     }
 }
