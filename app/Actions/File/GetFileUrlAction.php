@@ -18,6 +18,6 @@ class GetFileUrlAction
     {
         $file = File::where('name', $this->name)->firstOrFail();
 
-        return Storage::disk('s3')->url($file->url);
+        return Storage::url($file->url);
     }
 }
