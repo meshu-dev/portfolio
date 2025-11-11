@@ -21,17 +21,18 @@ class UploadFileAction
 
         $file = new File(storage_path('app/files') . '/' . $filename);
 
-        $fileUrl = Storage::disk('s3')->putFileAs(
-            '',
+        $fileDriver = config('filesystems.default');
+        $fileUrl    = Storage::disk($fileDriver)->putFileAs(
+            'site',
             $file,
-            "site/$filename",
+            $filename,
             'public'
         );
 
         throw_unless(
             $fileUrl,
             FileNotUploadedException::class,
-            'File could not be uploaded to S3'
+            'File could not be uploaded to ' . $fileDriver
         );
 
         return $fileUrl;
