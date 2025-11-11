@@ -13,7 +13,6 @@ use App\Models\{
     Text
 };
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class PortfolioSeeder extends Seeder
 {

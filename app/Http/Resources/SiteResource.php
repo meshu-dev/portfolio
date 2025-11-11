@@ -3,8 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Actions\File\GetFileUrlAction;
-use App\Models\File;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
