@@ -46,7 +46,25 @@ jobs:
         run: php artisan key:generate
         
       - name: Run tests
-        run: php -d memory_limit=-1 artisan test
+        run: composer run test
+
+  phpstan:
+    name: Run PHPStan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+      
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
+
+      - name: Run pint
+        run: composer run phpstan
 
   pint:
     name: Run Laravel Pint - PSR12
