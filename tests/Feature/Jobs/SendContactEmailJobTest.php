@@ -21,7 +21,6 @@ describe('Job - Send Contact Email', function () {
         $job = resolve(SendContactEmailJob::class, ['params' => $params]);
         $job->handle($emailService);
 
-
         $contactEmail = new ContactEmail($params);
         $contactEmail->assertFrom(new Address(config('mail.from.address'), config('mail.from.name')));
 
