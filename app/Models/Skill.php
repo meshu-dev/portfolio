@@ -16,7 +16,7 @@ class Skill extends Model
     public $timestamps = false;
 
     /**
-     * @return BelongsToMany<Technology>
+     * @return BelongsToMany<Technology, $this>
      */
     public function technologies(): BelongsToMany
     {

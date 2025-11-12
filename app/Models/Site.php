@@ -14,7 +14,7 @@ class Site extends Model
     public $timestamps = false;
 
     /**
-     * @return BelongsToMany<File>
+     * @return BelongsToMany<File, $this>
      */
     public function files(): BelongsToMany
     {

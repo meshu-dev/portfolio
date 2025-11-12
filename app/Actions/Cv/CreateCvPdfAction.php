@@ -16,7 +16,7 @@ class CreateCvPdfAction
     }
 
     /**
-     * @return array<string, mixed>
+     * @return void
      */
     public function execute(): void
     {

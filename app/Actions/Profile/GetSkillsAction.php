@@ -3,6 +3,7 @@
 namespace App\Actions\Profile;
 
 use App\Enums\SkillEnum;
+use App\Models\Skill;
 use App\Repositories\SkillRepository;
 use Illuminate\Support\Collection;
 

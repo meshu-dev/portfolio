@@ -12,7 +12,7 @@ class GetFileUrlAction
     }
 
     /**
-     * @return File
+     * @return string
      */
     public function execute(): string
     {

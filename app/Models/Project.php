@@ -14,7 +14,7 @@ class Project extends Model
     public $timestamps = false;
 
     /**
-     * @return BelongsToMany<Repository>
+     * @return BelongsToMany<Repository, $this>
      */
     public function repositories(): BelongsToMany
     {
@@ -22,7 +22,7 @@ class Project extends Model
     }
 
     /**
-     * @return BelongsToMany<Technology>
+     * @return BelongsToMany<Technology, $this>
      */
     public function technologies(): BelongsToMany
     {
@@ -30,7 +30,7 @@ class Project extends Model
     }
 
     /**
-     * @return BelongsToMany<File>
+     * @return BelongsToMany<File, $this>
      */
     public function files(): BelongsToMany
     {

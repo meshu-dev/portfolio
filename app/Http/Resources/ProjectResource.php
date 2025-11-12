@@ -21,7 +21,7 @@ class ProjectResource extends JsonResource
         $technologies = TechnologyResource::collection($this->technologies);
         $technologies = $technologies->pluck('name');
 
-        $imageUrl = resolve(GetFileUrlAction::class, ['name' => $this?->files[0]->name])->execute();
+        $imageUrl = resolve(GetFileUrlAction::class, ['name' => $this->files[0]->name])->execute();
 
         return [
             'name'         => $this->name,
