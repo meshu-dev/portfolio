@@ -11,7 +11,7 @@ env:
 
 jobs:
   phpunit:
-    name: Run PHP Unit and Feature tests
+    name: Run PHP unit and feature tests
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -67,7 +67,7 @@ jobs:
         run: composer run phpstan
 
   pint:
-    name: Run Laravel Pint - PSR12
+    name: Run Laravel Pint - PSR-12
     runs-on: ubuntu-latest
 
     steps:
