@@ -163,7 +163,7 @@ class PortfolioSeeder extends Seeder
         } catch (FileNotUploadedException) {
             $fileUrl = fake()->imageUrl(512, 512);
         }
-        
+
         return File::create([
             'name' => $filename,
             'url'  => $fileUrl,
