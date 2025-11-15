@@ -36,7 +36,7 @@ describe('Command - Create CV PDF', function () {
         $this->app->bind(UploadFileAction::class, fn () => $uploadFileAction);
 
         $this->artisan('app:create-cv-pdf')->assertExitCode(0);
-        
+
         $this->assertDatabaseHas('files', [
             'name' => $filename,
             'url' => $fileUrl,

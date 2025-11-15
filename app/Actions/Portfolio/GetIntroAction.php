@@ -2,8 +2,7 @@
 
 namespace App\Actions\Portfolio;
 
-use App\Actions\Profile\GetYearsWorkedAction;
-use App\Enums\{DynamicValueEnum, TypeEnum};
+use App\Enums\{TypeEnum};
 use App\Http\Resources\SiteResource;
 use App\Repositories\{
     TextRepository,

@@ -3,7 +3,6 @@
 use App\Actions\Contact\SendEmailAction;
 use App\Jobs\SendContactEmailJob;
 use App\Mail\ContactEmail;
-use App\Services\EmailService;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailables\Address;
 
