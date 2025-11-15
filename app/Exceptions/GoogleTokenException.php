@@ -15,9 +15,6 @@ class GoogleTokenException extends Exception
     {
         $errorMessages = config('services.google.recaptcha.error_messages');
 
-        if ($errorMessages[$code]) {
-            return $errorMessages[$code];
-        }
-        return $errorMessages['default'];
+        return $errorMessages[$code] ?: $errorMessages['default'];
     }
 }

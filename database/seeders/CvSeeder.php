@@ -6,6 +6,7 @@ use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
+    File,
     Text,
     Skill,
     Technology,
@@ -175,9 +176,17 @@ built with it'
 
     protected function addPdf()
     {
+        $filename = 'cv.pdf';
+
         try {
-            resolve(UploadFileAction::class)->execute('cv.pdf');
+            $fileUrl = resolve(UploadFileAction::class)->execute($filename);
         } catch (FileNotUploadedException) {
+            $fileUrl = fake()->imageUrl(512, 512);
         }
+
+        File::create([
+            'name' => $filename,
+            'url'  => $fileUrl,
+        ]);
     }
 }

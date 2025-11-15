@@ -9,14 +9,6 @@ use Illuminate\Support\Collection;
 class SiteRepository
 {
     /**
-     * @return Collection<int, Site>
-     */
-    public function getAll(): Collection
-    {
-        return Site::get();
-    }
-
-    /**
      * @param array<int, string> $names
      * @return Collection<int, Site>
      */

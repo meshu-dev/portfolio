@@ -29,11 +29,7 @@ class GetIntroAction
         $sites = $this->siteRepository->getByNames(TypeEnum::PORTFOLIO, ['GitHub', 'LinkedIn']);
 
         $line1 = $introTexts['portfolio_intro_1'];
-        $line2 = str_replace(
-            DynamicValueEnum::YEARS_WORKED->value,
-            (string) resolve(GetYearsWorkedAction::class)->execute(),
-            $introTexts['portfolio_intro_2']
-        );
+        $line2 = resolve(GetDynamicTextAction::class)->execute($introTexts['portfolio_intro_2']);
 
         return [
             'line1' => $line1,

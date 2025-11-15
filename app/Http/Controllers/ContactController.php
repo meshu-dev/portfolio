@@ -19,18 +19,14 @@ class ContactController extends Controller
             $params  = $contactRequest->all();
             $result  = $sendMessageAction->execute($params);
             $message = 'Message sent, expect a response shortly';
-            $code    = 200;
         } catch (Exception $e) {
             Log::error($e->getMessage());
             throw $e;
         }
 
-        return response()->json(
-            [
-                'success' => $result,
-                'message' => $message
-            ],
-            $code
-        );
+        return response()->json([
+            'success' => $result,
+            'message' => $message
+        ]);
     }
 }

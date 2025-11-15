@@ -3,12 +3,12 @@
 namespace App\Actions\Cv;
 
 use App\Actions\File\GetFileUrlAction;
+use App\Actions\Portfolio\GetDynamicTextAction;
 use App\Actions\Profile\{
     GetSkillsAction,
     GetYearsWorkedAction
 };
-use App\Enums\{DynamicValueEnum, TypeEnum};
-use App\Exceptions\IntroIsNullException;
+use App\Enums\TypeEnum;
 use App\Http\Resources\{
     SkillResource,
     SiteResource,
@@ -17,8 +17,7 @@ use App\Http\Resources\{
 use App\Repositories\{
     TextRepository,
     SiteRepository,
-    WorkExperienceRepository,
-    FileRepository
+    WorkExperienceRepository
 };
 
 class GetCvAction
@@ -28,8 +27,7 @@ class GetCvAction
         protected GetYearsWorkedAction $getYearsWorkedAction,
         protected TextRepository $textRepository,
         protected SiteRepository $siteRepository,
-        protected WorkExperienceRepository $workExperienceRepository,
-        protected FileRepository $fileRepository
+        protected WorkExperienceRepository $workExperienceRepository
     ) {
     }
 
@@ -42,19 +40,9 @@ class GetCvAction
         $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
         $skills          = $this->getSkillsAction->execute();
         $workExperiences = $this->workExperienceRepository->getAllActive();
-        $pdfFile         = $this->fileRepository->getByName('cv.pdf');
 
-        throw_unless($details['intro'], IntroIsNullException::class, 'CV intro is required');
-
-        $details['intro'] = str_replace(
-            DynamicValueEnum::YEARS_WORKED->value,
-            (string) $this->getYearsWorkedAction->execute(),
-            $details['intro']
-        );
-
-        if ($pdfFile?->url) {
-            $pdfUrl = resolve(GetFileUrlAction::class, ['name' => $pdfFile->name])->execute();
-        }
+        $details['intro'] = resolve(GetDynamicTextAction::class)->execute($details['intro']);
+        $pdfUrl = resolve(GetFileUrlAction::class, ['name' => 'cv.pdf'])->execute();
 
         return [
             'profile' => [
@@ -63,7 +51,7 @@ class GetCvAction
             ],
             'skill_groups'     => SkillResource::collection($skills),
             'work_experiences' => WorkExperienceResource::collection($workExperiences),
-            'pdf'              => $pdfUrl ?? null
+            'pdf'              => $pdfUrl,
         ];
     }
 }

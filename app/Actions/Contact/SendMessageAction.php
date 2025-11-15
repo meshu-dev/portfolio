@@ -4,6 +4,7 @@ namespace App\Actions\Contact;
 
 use App\Exceptions\GoogleTokenException;
 use App\Jobs\SendContactEmailJob;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -14,7 +15,19 @@ class SendMessageAction
      */
     public function execute(array $params): bool
     {
-        $token           = $params['token'];
+        Log::info('Contact form request', ['params' => $params]);
+
+        if (!App::environment('local')) {
+            $this->authenticateToken($params['token']);
+        }
+
+        SendContactEmailJob::dispatch($params);
+
+        return true;
+    }
+
+    protected function authenticateToken(string $token): void
+    {
         $googleVerifyUrl = config('services.google.recaptcha.verify_url');
         $googleSecretKey = config('services.google.recaptcha.secret_key');
 
@@ -26,8 +39,6 @@ class SendMessageAction
             ]
         );
 
-        Log::error($response->body());
-
         $response = json_decode($response->body(), true);
 
         throw_unless(
@@ -35,10 +46,6 @@ class SendMessageAction
             GoogleTokenException::class,
             $this->getErrorCode($response)
         );
-
-        SendContactEmailJob::dispatch($params);
-
-        return true;
     }
 
     /**

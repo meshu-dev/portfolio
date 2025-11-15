@@ -8,14 +8,6 @@ use Illuminate\Support\Collection;
 class TextRepository
 {
     /**
-     * @return Collection<int, Text>
-     */
-    public function getAll(): Collection
-    {
-        return Text::get();
-    }
-
-    /**
      * @param array<int, string> $names
      * @return Collection<string, string>
      */

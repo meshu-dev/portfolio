@@ -20,10 +20,15 @@ describe('API - Contact', function () {
             ->message->toBe('Message sent, expect a response shortly');
     });
 
-    it('checks bad token', function () {
+    it('checks bad token', function ($message, $errorCode) {
         Queue::fake();
 
-        $params = json_encode(['success' => false, 'error-codes' => ['invalid-input-response']]);
+        $params = [
+            'success' => false,
+            'error-codes' => $errorCode != 'no-code' ? [$errorCode] : null
+        ];
+        $params = json_encode($params);
+
         Http::fake(fn () => Http::response($params, 200, ['Headers']));
 
         $params = [
@@ -37,6 +42,24 @@ describe('API - Contact', function () {
         expect($response->status())
             ->toEqual(500)
             ->and($response->json())
-            ->message->toBe('Submitted token is invalid');
-    });
+            ->message
+            ->toBe($message);
+    })->with([
+        'invalid input' => [
+            'Submitted token is invalid',
+            'invalid-input-response',
+        ],
+        'not verified' => [
+            'Could not connect to the verify site',
+            'browser-error',
+        ],
+        'failed' => [
+            'Verification for token has failed',
+            'default',
+        ],
+        'no code' => [
+            'Verification for token has failed',
+            'no-code',
+        ],
+    ]);
 });

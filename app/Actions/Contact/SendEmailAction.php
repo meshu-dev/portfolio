@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services;
+namespace App\Actions\Contact;
 
 use App\Mail\ContactEmail;
 use Illuminate\Support\Facades\Mail;
 
-class EmailService
+class SendEmailAction
 {
     /**
      * @param array<string, mixed> $params
      */
-    public function sendContactEmail(array $params): void
+    public function execute(array $params): void
     {
         Mail::to(config('mail.to.address'))->send(
             new ContactEmail($params)

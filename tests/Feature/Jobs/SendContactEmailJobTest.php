@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Contact\SendEmailAction;
 use App\Jobs\SendContactEmailJob;
 use App\Mail\ContactEmail;
 use App\Services\EmailService;
@@ -16,10 +17,9 @@ describe('Job - Send Contact Email', function () {
             'message' => 'This is a test message'
         ];
 
-        $emailService = resolve(EmailService::class);
+        $sendEmailAction = resolve(SendEmailAction::class);
 
-        $job = resolve(SendContactEmailJob::class, ['params' => $params]);
-        $job->handle($emailService);
+        resolve(SendContactEmailJob::class, ['params' => $params])->handle($sendEmailAction);
 
         $contactEmail = new ContactEmail($params);
         $contactEmail->assertFrom(new Address(config('mail.from.address'), config('mail.from.name')));
