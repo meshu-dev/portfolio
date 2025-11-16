@@ -21,7 +21,7 @@ describe('API - Login', function () {
             ->toHaveKey('token')
             ->and($response->json()['data']['token'])
             ->toBeString();
-    })->skip();
+    });
 
     it('fails with incorrect login details', function () {
         $response = $this->post(
