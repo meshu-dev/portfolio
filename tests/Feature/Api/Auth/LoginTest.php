@@ -12,6 +12,8 @@ describe('API - Login', function () {
             ]
         );
 
+        dump($response->body());
+
         expect($response->status())
             ->toEqual(200)
             ->and($response->json())
