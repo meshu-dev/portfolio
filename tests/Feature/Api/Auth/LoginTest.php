@@ -1,7 +1,5 @@
 <?php
 
-use App\Actions\Auth\LoginAction;
-
 describe('API - Login', function () {
     it('authenticates login details and returns a valid token', function () {
         $response = $this->post(
