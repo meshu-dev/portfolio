@@ -12,9 +12,6 @@ describe('API - Login', function () {
             ]
         );
 
-        throw new Exception($response->content());
-
-        /*
         expect($response->status())
             ->toEqual(200)
             ->and($response->json())
@@ -23,7 +20,7 @@ describe('API - Login', function () {
             ->and($response->json()['data'])
             ->toHaveKey('token')
             ->and($response->json()['data']['token'])
-            ->toBeString();*/
+            ->toBeString();
     });
 
     it('fails with incorrect login details', function () {
@@ -42,15 +39,5 @@ describe('API - Login', function () {
             ->toHaveKey('error')
             ->and($response->json()['error'])
             ->toEqual('Login details are invalid');
-    });
-
-
-    it('login2', function () {
-        $token = resolve(LoginAction::class)->execute(
-            config('user.email'),
-            config('user.password'),
-        );
-
-        expect($token)->toBeString();
     });
 });
