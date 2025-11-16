@@ -12,8 +12,9 @@ describe('API - Login', function () {
             ]
         );
 
-        dump($response->content());
+        throw new Exception($response->content());
 
+        /*
         expect($response->status())
             ->toEqual(200)
             ->and($response->json())
@@ -22,7 +23,7 @@ describe('API - Login', function () {
             ->and($response->json()['data'])
             ->toHaveKey('token')
             ->and($response->json()['data']['token'])
-            ->toBeString();
+            ->toBeString();*/
     });
 
     it('fails with incorrect login details', function () {
