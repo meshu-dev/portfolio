@@ -1,5 +1,7 @@
 <?php
 
+use App\Actions\Auth\LoginAction;
+
 describe('API - Login', function () {
     it('authenticates login details and returns a valid token', function () {
         $response = $this->post(
@@ -37,5 +39,15 @@ describe('API - Login', function () {
             ->toHaveKey('error')
             ->and($response->json()['error'])
             ->toEqual('Login details are invalid');
+    });
+
+
+    it('login2', function () {
+        $token = resolve(LoginAction::class)->execute(
+            config('user.email'),
+            config('user.password'),
+        );
+
+        expect($token)->toBeString();
     });
 });
