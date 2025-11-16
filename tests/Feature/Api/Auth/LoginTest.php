@@ -12,7 +12,7 @@ describe('API - Login', function () {
             ]
         );
 
-        dump($response->body());
+        dump($response->content());
 
         expect($response->status())
             ->toEqual(200)
