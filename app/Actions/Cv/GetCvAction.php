@@ -3,30 +3,23 @@
 namespace App\Actions\Cv;
 
 use App\Actions\File\GetFileUrlAction;
-use App\Actions\Portfolio\GetDynamicTextAction;
 use App\Actions\Profile\{
+    GetDataAction,
     GetSkillsAction,
     GetYearsWorkedAction
 };
-use App\Enums\TypeEnum;
 use App\Http\Resources\{
     SkillResource,
-    SiteResource,
     WorkExperienceResource
 };
-use App\Repositories\{
-    TextRepository,
-    SiteRepository,
-    WorkExperienceRepository
-};
+use App\Repositories\WorkExperienceRepository;
 
 class GetCvAction
 {
     public function __construct(
+        protected GetDataAction $getDataAction,
         protected GetSkillsAction $getSkillsAction,
         protected GetYearsWorkedAction $getYearsWorkedAction,
-        protected TextRepository $textRepository,
-        protected SiteRepository $siteRepository,
         protected WorkExperienceRepository $workExperienceRepository
     ) {
     }
@@ -36,19 +29,14 @@ class GetCvAction
      */
     public function execute(): array
     {
-        $details         = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
-        $sites           = $this->siteRepository->getByNames(TypeEnum::CV);
+        $data            = $this->getDataAction->execute();
         $skills          = $this->getSkillsAction->execute();
         $workExperiences = $this->workExperienceRepository->getAllActive();
 
-        $details['intro'] = resolve(GetDynamicTextAction::class)->execute($details['intro']);
         $pdfUrl = resolve(GetFileUrlAction::class, ['name' => 'cv.pdf'])->execute();
 
         return [
-            'profile' => [
-                'details' => $details,
-                'sites'   => SiteResource::collection($sites)
-            ],
+            'profile'          => $data,
             'skill_groups'     => SkillResource::collection($skills),
             'work_experiences' => WorkExperienceResource::collection($workExperiences),
             'pdf'              => $pdfUrl,

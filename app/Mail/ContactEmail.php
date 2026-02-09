@@ -41,7 +41,7 @@ class ContactEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'contact-email',
+            view: 'mail/contact',
             with: [
                 'name'  => $this->params['name'],
                 'email' => $this->params['email'],

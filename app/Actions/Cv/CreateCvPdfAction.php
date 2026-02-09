@@ -26,7 +26,7 @@ class CreateCvPdfAction
         // Generate PDF
         $cvFilePath  = storage_path('app/files') . '/' . self::FILENAME;
 
-        $pdf = Pdf::loadView('cv-pdf', $viewParams);
+        $pdf = Pdf::loadView('pdf/cv', $viewParams);
         $pdf->setPaper('A4', 'portrait');
         $pdf->save($cvFilePath);
 
