@@ -17,4 +17,9 @@ class TextRepository
             ->get()
             ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
     }
+
+    public function updateByName(string $name, mixed $value): bool
+    {
+        return Text::where('name', $name)->update(['value' => $value]);
+    }
 }

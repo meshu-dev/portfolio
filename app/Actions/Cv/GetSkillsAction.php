@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Profile;
+namespace App\Actions\Cv;
 
 use App\Enums\SkillEnum;
 use App\Models\Skill;

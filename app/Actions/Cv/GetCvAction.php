@@ -3,11 +3,6 @@
 namespace App\Actions\Cv;
 
 use App\Actions\File\GetFileUrlAction;
-use App\Actions\Profile\{
-    GetDataAction,
-    GetSkillsAction,
-    GetYearsWorkedAction
-};
 use App\Http\Resources\{
     SkillResource,
     WorkExperienceResource
@@ -17,7 +12,7 @@ use App\Repositories\WorkExperienceRepository;
 class GetCvAction
 {
     public function __construct(
-        protected GetDataAction $getDataAction,
+        protected GetProfileAction $getDataAction,
         protected GetSkillsAction $getSkillsAction,
         protected GetYearsWorkedAction $getYearsWorkedAction,
         protected WorkExperienceRepository $workExperienceRepository

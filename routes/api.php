@@ -7,7 +7,7 @@ use App\Http\Controllers\{
 };
 use Illuminate\Support\Facades\Route;
 
-Route::post('auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('auth/login', [AuthController::class, 'login'])->name('api.login');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cv', [App\Http\Controllers\CvController::class, 'get'])->name('cv');

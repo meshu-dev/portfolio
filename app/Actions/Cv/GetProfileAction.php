@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Profile;
+namespace App\Actions\Cv;
 
 use App\Actions\Portfolio\GetDynamicTextAction;
 use App\Enums\TypeEnum;
@@ -10,7 +10,7 @@ use App\Repositories\{
     SiteRepository
 };
 
-class GetDataAction
+class GetProfileAction
 {
     public function __construct(
         protected TextRepository $textRepository,

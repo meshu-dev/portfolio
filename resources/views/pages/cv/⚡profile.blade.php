@@ -1,0 +1,43 @@
+<?php
+
+use App\Actions\Cv\{GetProfileV2Action, UpdateProfileAction};
+use App\View\Components\BaseComponent;
+use Livewire\Attributes\Validate;
+
+new class extends BaseComponent
+{
+    #[Validate('required|string')]
+    public $intro;
+ 
+    #[Validate('required|string')]
+    public $location;
+
+    public function save()
+    {
+        $this->validate();
+
+        resolve(UpdateProfileAction::class)->execute($this->intro, $this->location);
+
+        $this->success('Profile has been updated');
+    }
+
+    public function mount()
+    {
+        $data = resolve(GetProfileV2Action::class)->execute();
+
+        $this->intro    = $data['intro'];
+        $this->location = $data['location'];
+    }
+};
+?>
+
+<div>
+    <h1>Profile</h1>
+    <x-form wire:submit="save">
+        <x-input label="Intro" wire:model="intro" />
+        <x-input label="Location" wire:model="location" />
+        <x-slot:actions>
+            <x-button label="Save" class="btn-primary" type="submit" spinner="save" />
+        </x-slot:actions>
+    </x-form>
+</div>

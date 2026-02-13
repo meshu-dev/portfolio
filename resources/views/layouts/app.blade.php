@@ -7,6 +7,8 @@
     <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 <body class="min-h-screen font-sans antialiased bg-base-200">
 
@@ -47,6 +49,8 @@
                 @endif
 
                 <x-menu-item title="Hello" icon="o-sparkles" link="/" />
+                <x-menu-item title="Profile" icon="o-sparkles" link="/profile" />
+                <x-menu-item title="Skills" icon="o-sparkles" link="/skills" />
                 
                 <x-menu-sub title="Settings" icon="o-cog-6-tooth">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />
@@ -63,5 +67,7 @@
 
     {{--  TOAST area --}}
     <x-toast />
+
+    @livewireScripts
 </body>
 </html>

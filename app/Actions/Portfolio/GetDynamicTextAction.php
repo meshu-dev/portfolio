@@ -2,7 +2,7 @@
 
 namespace App\Actions\Portfolio;
 
-use App\Actions\Profile\GetYearsWorkedAction;
+use App\Actions\Cv\GetYearsWorkedAction;
 use App\Enums\DynamicValueEnum;
 
 class GetDynamicTextAction
