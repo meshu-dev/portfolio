@@ -1,17 +1,25 @@
 <?php
 
 use App\Actions\Technology\{
+    CreateTechnologyAction,
     DeleteTechnologyAction,
     GetAllTechnologiesAction,
     SearchTechnologiesAction
 };
 use App\View\Components\BaseComponent;
-use Livewire\Attributes\Validate;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Validate;
 
 new class extends BaseComponent
 {
+    #[Locked]
     public string $search = '';
+
+    #[Locked]
+    public bool $modal = false;
+
+    #[Validate('required|unique:App\Models\Technology,name')]
+    public string $technologyName = '';
 
     #[Locked]
     public Collection $technologies;
@@ -21,9 +29,26 @@ new class extends BaseComponent
         $this->technologies = resolve(SearchTechnologiesAction::class)->execute($value);
     }
 
+    public function addTechnology()
+    {
+        $this->validate();
+
+        resolve(CreateTechnologyAction::class)->execute($this->newTechnology);
+
+        $this->search = '';
+        $this->newTechnology = '';
+        $this->modal = false;
+
+        $this->technologies = resolve(GetAllTechnologiesAction::class)->execute();
+
+        $this->success('New technology has been added');
+    }
+
     public function deleteTechnology(int $id)
     {
         resolve(DeleteTechnologyAction::class)->execute($id);
+
+        $this->success('Technology has been deleted');
     }
 
     public function mount()
@@ -35,11 +60,21 @@ new class extends BaseComponent
 
 <div>
     <livewire:header title="Technologies" />
-    <x-input
-        placeholder="Search..."
-        wire:model.live.debounce.300ms="search"
-        clearable
-        icon="o-magnifying-glass" />
+    <div class="flex gap-4">
+        <x-button
+            label="Add"
+            wire:click="modal = true"
+            spinner
+            class="flex-none btn-primary" />
+        <div class="flex-1">
+            <x-input
+                placeholder="Search..."
+                wire:model.live.debounce.300ms="search"
+                clearable
+                icon="o-magnifying-glass"
+                 />
+        </div>
+    </div>
     <x-table
         :headers="[['key' => 'name', 'label' => 'Technology']]"
         :rows="$technologies"
@@ -54,4 +89,13 @@ new class extends BaseComponent
                 class="btn-sm" />
         @endscope
     </x-table>
+    <x-modal title="Add Technology" wire:model="modal">
+        <x-form wire:submit="addTechnology" no-separator>
+            <x-input label="Name" wire:model="technologyName" />
+            <x-slot:actions>
+                <x-button label="Cancel" @click="$wire.modal = false" />
+                <x-button label="Submit" class="btn-primary" type="submit" />
+            </x-slot:actions>
+        </x-form>
+    </x-modal>
 </div>
