@@ -1,0 +1,106 @@
+<?php
+
+use App\Actions\Cv\GetWorkExperienceAction;
+use App\View\Components\BaseComponent;
+use Livewire\Component;
+
+new class extends BaseComponent
+{
+    #[Validate('required|string')]
+    public $title;
+
+    #[Validate('required|string')]
+    public $company;
+
+    #[Validate('required|string')]
+    public $location;
+
+    #[Validate('required')]
+    public $isCurrent;
+
+    #[Validate('required')]
+    public $startDate;
+
+    #[Validate('required')]
+    public $endDate;
+
+    #[Validate('required')]
+    public $description;
+
+    #[Validate('required')]
+    public $responsibilities;
+
+    #[Validate('required')]
+    public $active;
+
+    private $maxResponsibilities = 5;
+
+    public function addResponsibility()
+    {
+        $this->responsibilities[] = '';
+    }
+
+    public function removeResponsibility(int $index)
+    {
+        unset($this->responsibilities[$index]);
+    }
+
+    public function mount(int $id)
+    {
+        $workExperience = resolve(GetWorkExperienceAction::class)->execute($id);
+
+        $this->title            = $workExperience->title;
+        $this->company          = $workExperience->company;
+        $this->location         = $workExperience->location;
+        $this->isCurrent        = $workExperience->is_current;
+        $this->startDate        = $workExperience->start_date;
+        $this->endDate          = $workExperience->end_date;
+        $this->description      = $workExperience->description;
+        $this->responsibilities = $workExperience->responsibilities;
+        $this->active           = $workExperience->active;
+    }
+};
+?>
+
+<div>
+    <h1>Work Experience</h1>
+    <x-form wire:submit="save">
+        <x-input label="Title" wire:model="title" />
+        <x-input label="Company" wire:model="company" />
+        <x-input label="Location" wire:model="location" />
+        <x-toggle label="Current Employment" wire:model.live="isCurrent" right />
+        <x-datepicker
+            label="Start Date"
+            wire:model="startDate"
+            icon="o-calendar"
+            :config="['altFormat' => 'Y-m-d']" />
+        @if ($isCurrent)
+            <x-datepicker
+                label="End Date"
+                wire:model.live="endDate"
+                icon="o-calendar"
+                :config="['altFormat' => 'Y-m-d']" />
+        @endif
+        <x-input label="Description" wire:model="description" />
+        <label class="text-xs">Responsibilities</label>
+        <x-button
+            label="Add"
+            class="btn-primary w-20"
+            wire:click="addResponsibility"
+            :disabled="count($responsibilities) >= $this->maxResponsibilities ? true : false" />
+        @foreach ($responsibilities as $index => $responsibility)
+            <x-input wire:model="responsibilities.{{ $index }}">
+                <x-slot:append>
+                    <x-button
+                        icon="o-trash"
+                        class="btn-sm"
+                        wire:click="removeResponsibility({{ $index }})" />
+                </x-slot:append>
+            </x-input>
+        @endforeach
+        <x-toggle label="Active" wire:model.live="isCurrent" right />
+        <x-slot:actions>
+            <x-button label="Save" class="btn-primary" type="submit" spinner="save" />
+        </x-slot:actions>
+    </x-form>
+</div>

@@ -14,4 +14,12 @@ class WorkExperienceRepository
     {
         return WorkExperience::where('active', true)->get();
     }
+
+    /**
+     * @return Collection<int, WorkExperience>
+     */
+    public function getAll(): Collection
+    {
+        return WorkExperience::select('id', 'title', 'company', 'location')->get();
+    }
 }

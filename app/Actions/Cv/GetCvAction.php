@@ -7,15 +7,14 @@ use App\Http\Resources\{
     SkillResource,
     WorkExperienceResource
 };
-use App\Repositories\WorkExperienceRepository;
 
 class GetCvAction
 {
     public function __construct(
         protected GetProfileAction $getDataAction,
         protected GetSkillsAction $getSkillsAction,
+        protected GetWorkExperiencesAction $getWorkExperiencesAction,
         protected GetYearsWorkedAction $getYearsWorkedAction,
-        protected WorkExperienceRepository $workExperienceRepository
     ) {
     }
 
@@ -26,7 +25,7 @@ class GetCvAction
     {
         $data            = $this->getDataAction->execute();
         $skills          = $this->getSkillsAction->execute();
-        $workExperiences = $this->workExperienceRepository->getAllActive();
+        $workExperiences = $this->getWorkExperiencesAction->execute(true);
 
         $pdfUrl = resolve(GetFileUrlAction::class, ['name' => 'cv.pdf'])->execute();
 

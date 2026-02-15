@@ -23,10 +23,10 @@ new class extends BaseComponent
 
     public function mount()
     {
-        $data = resolve(GetProfileV2Action::class)->execute();
+        $profile = resolve(GetProfileV2Action::class)->execute();
 
-        $this->intro    = $data['intro'];
-        $this->location = $data['location'];
+        $this->intro    = $profile['intro'];
+        $this->location = $profile['location'];
     }
 };
 ?>
