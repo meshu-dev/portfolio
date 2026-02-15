@@ -8,6 +8,7 @@ use App\Actions\Technology\{
 };
 use App\View\Components\BaseComponent;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 
 new class extends BaseComponent
@@ -17,6 +18,15 @@ new class extends BaseComponent
 
     #[Locked]
     public bool $modal = false;
+
+    #[Locked]
+    public int $deleteId = 0;
+
+    #[Locked]
+    public string $deleteItemName = '';
+
+    #[Locked]
+    public bool $deleteModal = false;
 
     #[Validate('required|unique:App\Models\Technology,name')]
     public string $technologyName = '';
@@ -44,10 +54,17 @@ new class extends BaseComponent
         $this->success('New technology has been added');
     }
 
-    public function deleteTechnology(int $id)
+    public function showDeleteModal(int $id, string $itemName)
+    {
+        $this->deleteId = $id;
+        $this->deleteItemName = $itemName;
+        $this->deleteModal = true;
+    }
+
+    #[On('confirm-delete')]
+    public function onConfirmDelete(int $id)
     {
         resolve(DeleteTechnologyAction::class)->execute($id);
-
         $this->success('Technology has been deleted');
     }
 
@@ -84,8 +101,7 @@ new class extends BaseComponent
         @scope('actions', $technology)
             <x-button
                 icon="o-trash"
-                wire:click="deleteTechnology({{ $technology->id }})"
-                spinner
+                wire:click="showDeleteModal({{ $technology->id }}, '{{ $technology->name }}')"
                 class="btn-sm" />
         @endscope
     </x-table>
@@ -93,9 +109,13 @@ new class extends BaseComponent
         <x-form wire:submit="addTechnology" no-separator>
             <x-input label="Name" wire:model="technologyName" />
             <x-slot:actions>
-                <x-button label="Cancel" @click="$wire.modal = false" />
+                <x-button label="Cancel" wire:click="deleteModal = true" />
                 <x-button label="Submit" class="btn-primary" type="submit" />
             </x-slot:actions>
         </x-form>
     </x-modal>
+    <livewire:delete-modal
+        :id="$deleteId"
+        :itemName="$deleteItemName"
+        wire:model="deleteModal" />
 </div>

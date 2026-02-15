@@ -1,10 +1,10 @@
 <?php
 
-use Livewire\Component;
+use App\View\Components\BaseComponent;
 
-new class extends Component
+new class extends BaseComponent
 {
-    public $title;
+    public string $title;
 };
 ?>
 

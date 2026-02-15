@@ -51,11 +51,12 @@
                 <x-menu-item title="Technologies" link="/technologies" />
                 <x-menu-item title="Skills" link="/skills" />
                 <x-menu-item title="Work Experiences" link="/work-experiences" />
+                <!-- 
                 <x-menu-item title="Hello" link="/hello" />
                 <x-menu-sub title="Settings">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />
                     <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
+                </x-menu-sub> -->
             </x-menu>
         </x-slot:sidebar>
 
