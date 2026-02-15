@@ -12,6 +12,6 @@ class GetAllTechnologiesAction
      */
     public function execute(): Collection
     {
-        return Technology::all();
+        return Technology::orderBy('name')->get();
     }
 }

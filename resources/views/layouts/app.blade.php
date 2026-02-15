@@ -47,11 +47,12 @@
 
                     <x-menu-separator />
                 @endif
-                <x-menu-item title="Profile" icon="o-sparkles" link="/" />
-                <x-menu-item title="Skills" icon="o-sparkles" link="/skills" />
-                <x-menu-item title="Work Experiences" icon="o-sparkles" link="/work-experiences" />
-                <x-menu-item title="Hello" icon="o-sparkles" link="/hello" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
+                <x-menu-item title="Profile" link="/" />
+                <x-menu-item title="Technologies" link="/technologies" />
+                <x-menu-item title="Skills" link="/skills" />
+                <x-menu-item title="Work Experiences" link="/work-experiences" />
+                <x-menu-item title="Hello" link="/hello" />
+                <x-menu-sub title="Settings">
                     <x-menu-item title="Wifi" icon="o-wifi" link="####" />
                     <x-menu-item title="Archives" icon="o-archive-box" link="####" />
                 </x-menu-sub>
