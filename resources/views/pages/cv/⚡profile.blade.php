@@ -32,7 +32,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <h1>Profile</h1>
+    <x-header title="Profile" separator />
     <x-form wire:submit="save">
         <x-input label="Intro" wire:model="intro" />
         <x-input label="Location" wire:model="location" />

@@ -93,7 +93,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <h1>Work Experience</h1>
+    <x-header title="Work Experience" separator />
     <x-form wire:submit="save">
         <x-input label="Title" wire:model="title" />
         <x-input label="Company" wire:model="company" />
