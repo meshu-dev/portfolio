@@ -23,7 +23,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <x-header title="Technologies" separator />
+    <livewire:header title="Technologies" />
     <x-table
         :headers="[['key' => 'name', 'label' => 'Technology']]"
         :rows="$technologies"

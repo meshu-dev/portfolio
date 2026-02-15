@@ -32,7 +32,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <x-header title="Profile" separator />
+    <livewire:header title="Profile" />
     <x-form wire:submit="save">
         <x-input label="Intro" wire:model="intro" />
         <x-input label="Location" wire:model="location" />

@@ -42,7 +42,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <x-header title="Skills" separator />
+    <livewire:header title="Skills" />
     <x-form wire:submit="save">
         @foreach ($skills as $skill)
             <x-choices-offline

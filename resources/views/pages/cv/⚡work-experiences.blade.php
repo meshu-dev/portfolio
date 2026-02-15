@@ -17,7 +17,7 @@ new class extends BaseComponent
 ?>
 
 <div>
-    <x-header title="Work Experience List" separator />
+    <livewire:header title="Work Experience List" />
     @foreach($workExperiences as $workExperience)
         <x-list-item
             :item="$workExperience"
