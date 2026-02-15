@@ -68,7 +68,10 @@ new class extends BaseComponent
             ]
         );
 
-        $this->success('Work experience have been updated');
+        $this->successWithRedirect(
+            'Work experience have been updated',
+            '/work-experiences'
+        );
     }
 
     public function mount(int $id)
