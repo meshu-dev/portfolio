@@ -1,11 +1,15 @@
 <?php
 
 use App\Actions\Cv\GetWorkExperienceAction;
+use App\Actions\Cv\UpdateWorkExperienceAction;
 use App\View\Components\BaseComponent;
-use Livewire\Component;
+use Livewire\Attributes\Validate;
 
 new class extends BaseComponent
 {
+    #[Url]
+    public int $id;
+
     #[Validate('required|string')]
     public $title;
 
@@ -21,7 +25,7 @@ new class extends BaseComponent
     #[Validate('required')]
     public $startDate;
 
-    #[Validate('required')]
+    #[Validate('required_if:is_current,false')]
     public $endDate;
 
     #[Validate('required')]
@@ -45,10 +49,33 @@ new class extends BaseComponent
         unset($this->responsibilities[$index]);
     }
 
+    public function save()
+    {
+        $this->validate();
+
+        resolve(UpdateWorkExperienceAction::class)->execute(
+            $this->id,
+            [
+                'title'            => $this->title,
+                'company'          => $this->company,
+                'location'         => $this->location,
+                'is_current'       => $this->isCurrent,
+                'start_date'       => $this->startDate,
+                'end_date'         => $this->endDate,
+                'description'      => $this->description,
+                'responsibilities' => $this->responsibilities,
+                'active'           => $this->active,
+            ]
+        );
+
+        $this->success('Work experience have been updated');
+    }
+
     public function mount(int $id)
     {
         $workExperience = resolve(GetWorkExperienceAction::class)->execute($id);
 
+        $this->id               = $id;
         $this->title            = $workExperience->title;
         $this->company          = $workExperience->company;
         $this->location         = $workExperience->location;
@@ -74,7 +101,7 @@ new class extends BaseComponent
             wire:model="startDate"
             icon="o-calendar"
             :config="['altFormat' => 'Y-m-d']" />
-        @if ($isCurrent)
+        @if (!$isCurrent)
             <x-datepicker
                 label="End Date"
                 wire:model.live="endDate"
@@ -98,7 +125,7 @@ new class extends BaseComponent
                 </x-slot:append>
             </x-input>
         @endforeach
-        <x-toggle label="Active" wire:model.live="isCurrent" right />
+        <x-toggle label="Active" wire:model="active" right />
         <x-slot:actions>
             <x-button label="Save" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>

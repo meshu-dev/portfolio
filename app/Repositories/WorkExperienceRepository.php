@@ -22,4 +22,14 @@ class WorkExperienceRepository
     {
         return WorkExperience::select('id', 'title', 'company', 'location')->get();
     }
+
+    /**
+     * @param int $id
+     * @param array<string, mixed> $params
+     * @return WorkExperience
+     */
+    public function update(int $id, array $params): bool
+    {
+        return WorkExperience::where('id', $id)->update($params);
+    }
 }
