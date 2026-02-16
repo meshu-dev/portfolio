@@ -12,6 +12,8 @@ class GetWorkExperienceAction
      */
     public function execute(int $id): WorkExperience
     {
-        return WorkExperience::where('user_id', Auth::id())->where('id', $id);
+        return WorkExperience::where('user_id', Auth::id())
+                             ->where('id', $id)
+                             ->first();
     }
 }

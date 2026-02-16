@@ -43,10 +43,10 @@ new class extends BaseComponent
     {
         $this->validate();
 
-        resolve(CreateTechnologyAction::class)->execute($this->newTechnology);
+        resolve(CreateTechnologyAction::class)->execute($this->technologyName);
 
         $this->search = '';
-        $this->newTechnology = '';
+        $this->technologyName = '';
         $this->modal = false;
 
         $this->technologies = resolve(GetAllTechnologiesAction::class)->execute();

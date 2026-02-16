@@ -4,17 +4,17 @@ namespace App\Actions\Technology;
 
 use App\Models\Technology;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class SearchTechnologiesAction
 {
     /**
-     * @param int $userId
      * @param string $search
      * @return Collection<int, Technology>
      */
-    public function execute(int $userId, string $search): Collection
+    public function execute(string $search): Collection
     {
-        return Technology::where('user_id', $userId)
+        return Technology::where('user_id', Auth::id())
                          ->orderBy('name')
                          ->whereLike('name', "$search%")
                          ->get();

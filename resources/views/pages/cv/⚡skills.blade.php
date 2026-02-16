@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Cv\{GetSkillsAction, UpdateSkillTechnologiesAction};
+use App\Actions\Cv\Skill\{GetSkillsAction, UpdateSkillTechnologiesAction};
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\View\Components\BaseComponent;
 use Livewire\Attributes\Validate;

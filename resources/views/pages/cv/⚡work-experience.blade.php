@@ -1,7 +1,6 @@
 <?php
 
-use App\Actions\Cv\GetWorkExperienceAction;
-use App\Actions\Cv\UpdateWorkExperienceAction;
+use App\Actions\Cv\WorkExperience\{GetWorkExperienceAction, UpdateWorkExperienceAction};
 use App\View\Components\BaseComponent;
 use Livewire\Attributes\Validate;
 

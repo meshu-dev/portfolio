@@ -3,15 +3,15 @@
 namespace App\Actions\Technology;
 
 use App\Models\Technology;
+use Illuminate\Support\Facades\Auth;
 
 class CreateTechnologyAction
 {
     /**
-     * @param int $userId
      * @param string $name
      */
-    public function execute(int $userId, string $name): void
+    public function execute(string $name): void
     {
-        Technology::create(['user_id' => $userId, 'name' => $name]);
+        Technology::create(['user_id' => Auth::id(), 'name' => $name]);
     }
 }

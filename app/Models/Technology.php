@@ -14,7 +14,7 @@ class Technology extends Model
 
     protected $table = 'technologies';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id', 'name'];
 
     public $timestamps = false;
 

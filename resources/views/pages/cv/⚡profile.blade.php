@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Cv\{GetProfileV2Action, UpdateProfileAction};
+use App\Actions\Cv\Profile\{GetProfileV2Action, UpdateProfileAction};
 use App\View\Components\BaseComponent;
 use Livewire\Attributes\Validate;
 
