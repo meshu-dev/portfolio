@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Cv\WorkExperience\GetWorkExperiencesAction;
+use App\Actions\Cv\WorkExperience\{GetWorkExperiencesAction, DeleteWorkExperienceAction};
 use App\View\Components\BaseComponent;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -29,7 +29,7 @@ new class extends BaseComponent
     #[On('confirm-delete')]
     public function onConfirmDelete(int $id)
     {
-        resolve(DeleteTechnologyAction::class)->execute($id);
+        resolve(DeleteWorkExperienceAction::class)->execute($id);
         $this->success('Technology has been deleted');
     }
 
