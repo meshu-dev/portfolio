@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Profile;
 
 use App\Actions\Portfolio\GetDynamicTextAction;
 use App\Repositories\TextRepository;
+use Illuminate\Support\Facades\Auth;
 
 class GetProfileV2Action
 {
@@ -17,7 +18,7 @@ class GetProfileV2Action
      */
     public function execute()
     {
-        $details = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
+        $details = $this->textRepository->getByNames(Auth::id(), ['fullname', 'intro', 'location']);
         $details['intro'] = resolve(GetDynamicTextAction::class)->execute($details['intro']);
 
         return $details;

@@ -8,10 +8,13 @@ use Illuminate\Support\Collection;
 class GetAllTechnologiesAction
 {
     /**
+     * @param int $userId
      * @return Collection<int, Technology>
      */
-    public function execute(): Collection
+    public function execute(int $userId): Collection
     {
-        return Technology::orderBy('name')->get();
+        return Technology::where('user_id', $userId)
+                         ->orderBy('name')
+                         ->get();
     }
 }

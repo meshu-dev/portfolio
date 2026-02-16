@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\WorkExperience;
 
 use App\Repositories\WorkExperienceRepository;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateWorkExperienceAction
 {
@@ -24,6 +25,6 @@ class UpdateWorkExperienceAction
             unset($params['is_current']);
         }
 
-        $this->workExperienceRepository->update($id, $params);
+        $this->workExperienceRepository->update(Auth::id(), $id, $params);
     }
 }

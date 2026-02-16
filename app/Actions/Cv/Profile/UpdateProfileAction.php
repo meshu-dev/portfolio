@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Profile;
 
 use App\Enums\ProfileNameEnum;
 use App\Repositories\TextRepository;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateProfileAction
 {
@@ -18,7 +19,7 @@ class UpdateProfileAction
      */
     public function execute(string $intro, string $location): void
     {
-        $this->textRepository->updateByName(ProfileNameEnum::INTRO->value, $intro);
-        $this->textRepository->updateByName(ProfileNameEnum::LOCATION->value, $location);
+        $this->textRepository->updateByName(Auth::id(), ProfileNameEnum::INTRO->value, $intro);
+        $this->textRepository->updateByName(Auth::id(), ProfileNameEnum::LOCATION->value, $location);
     }
 }

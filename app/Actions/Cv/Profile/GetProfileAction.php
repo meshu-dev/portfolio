@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Profile;
 
 use App\Actions\Portfolio\GetDynamicTextAction;
 use App\Enums\TypeEnum;
@@ -9,6 +9,7 @@ use App\Repositories\{
     TextRepository,
     SiteRepository
 };
+use Illuminate\Support\Facades\Auth;
 
 class GetProfileAction
 {
@@ -23,7 +24,7 @@ class GetProfileAction
      */
     public function execute(): array
     {
-        $details = $this->textRepository->getByNames(['fullname', 'intro', 'location']);
+        $details = $this->textRepository->getByNames(Auth::id(), ['fullname', 'intro', 'location']);
         $sites   = $this->siteRepository->getByNames(TypeEnum::CV);
 
         $details['intro'] = resolve(GetDynamicTextAction::class)->execute($details['intro']);

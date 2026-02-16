@@ -7,10 +7,14 @@ use App\Models\Technology;
 class DeleteTechnologyAction
 {
     /**
+     * @param int $userId
      * @param int $id
+     * @return bool
      */
-    public function execute(int $id): bool
+    public function execute(int $userId, int $id): bool
     {
-        return Technology::destroy($id);
+        return Technology::where('user_id', $userId)
+                         ->where('id', $id)
+                         ->delete();
     }
 }

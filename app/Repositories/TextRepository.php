@@ -8,18 +8,31 @@ use Illuminate\Support\Collection;
 class TextRepository
 {
     /**
+     * @param int $userId
      * @param array<int, string> $names
      * @return Collection<string, string>
      */
-    public function getByNames(array $names): Collection
+    public function getByNames(int $userId, array $names): Collection
     {
-        return Text::whereIn("name", $names)
-            ->get()
-            ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
+        return Text::where('user_id', $userId)
+                   ->whereIn("name", $names)
+                   ->get()
+                   ->mapWithKeys(fn ($item) => [$item->name => $item->value]);
     }
 
-    public function updateByName(string $name, mixed $value): bool
-    {
-        return Text::where('name', $name)->update(['value' => $value]);
+    /**
+     * @param int $userId
+     * @param string $name
+     * @param mixed $value
+     * @return Collection<string, string>
+     */
+    public function updateByName(
+        int $userId,
+        string $name,
+        mixed $value
+    ): bool {
+        return Text::where('user_id', $userId)
+                   ->where('name', $name)
+                   ->update(['value' => $value]);
     }
 }

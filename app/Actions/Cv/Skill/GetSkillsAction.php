@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Skill;
 
 use App\Enums\SkillEnum;
 use App\Models\Skill;
 use App\Repositories\SkillRepository;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class GetSkillsAction
 {
@@ -26,6 +27,6 @@ class GetSkillsAction
             SkillEnum::MISC->value,
         ];
 
-        return $this->skillRepository->getByNames($profileSkills);
+        return $this->skillRepository->getByNames(Auth::id(), $profileSkills);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\WorkExperience;
 
 use App\Models\WorkExperience;
+use Illuminate\Support\Facades\Auth;
 
 class GetWorkExperienceAction
 {
@@ -11,6 +12,6 @@ class GetWorkExperienceAction
      */
     public function execute(int $id): WorkExperience
     {
-        return WorkExperience::find($id);
+        return WorkExperience::where('user_id', Auth::id())->where('id', $id);
     }
 }

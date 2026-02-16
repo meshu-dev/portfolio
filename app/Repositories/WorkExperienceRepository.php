@@ -8,19 +8,24 @@ use Illuminate\Support\Collection;
 class WorkExperienceRepository
 {
     /**
+     * @param int $userId
      * @return Collection<int, WorkExperience>
      */
-    public function getAllActive(): Collection
+    public function getAllActive(int $userId): Collection
     {
-        return WorkExperience::where('active', true)->get();
+        return WorkExperience::where('user_id', $userId)
+                             ->where('active', true)
+                             ->get();
     }
 
     /**
      * @return Collection<int, WorkExperience>
      */
-    public function getAll(): Collection
+    public function getAll(int $userId): Collection
     {
-        return WorkExperience::select('id', 'title', 'company', 'location')->get();
+        return WorkExperience::select('id', 'title', 'company', 'location')
+                             ->where('user_id', $userId)
+                             ->get();
     }
 
     /**
@@ -28,8 +33,10 @@ class WorkExperienceRepository
      * @param array<string, mixed> $params
      * @return WorkExperience
      */
-    public function update(int $id, array $params): bool
+    public function update(int $userId, int $id, array $params): bool
     {
-        return WorkExperience::where('id', $id)->update($params);
+        return WorkExperience::where('user_id', $userId)
+                             ->where('id', $id)
+                             ->update($params);
     }
 }

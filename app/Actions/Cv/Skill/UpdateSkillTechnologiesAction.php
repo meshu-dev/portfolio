@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Skill;
 
 use App\Models\Skill;
 use Illuminate\Support\Collection;
