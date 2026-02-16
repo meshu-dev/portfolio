@@ -2,17 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\{Technology, TechnologyBadge};
+use App\Models\{Technology, TechnologyBadge, User};
 use Illuminate\Database\Seeder;
 
 class TechnologySeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        $technologies = [
+        $users        = User::all();
+        $technologies = $this->getTechnologyData();
+
+        foreach ($users as $user) {
+            foreach ($technologies as $technology) {
+                $this->addTechnology($user, $technology);
+            }
+        }
+    }
+
+    private function addTechnology(User $user, array $params): void
+    {
+        $technology  = Technology::create(['user_id' => $user->id, 'name' => $params['name']]);
+        $badgeParams = $params['badge'] ?? null;
+
+        if ($badgeParams) {
+            $badgeParams['technology_id'] = $technology->id;
+            TechnologyBadge::insert($badgeParams);
+        }
+    }
+
+    private function getTechnologyData(): array
+    {
+        return [
             [
                 'name'  => 'PHP',
                 'badge' => [
@@ -239,20 +259,5 @@ class TechnologySeeder extends Seeder
                 ],
             ]
         ];
-
-        foreach ($technologies as $technology) {
-            $this->addTechnology($technology);
-        }
-    }
-
-    protected function addTechnology(array $params)
-    {
-        $technology  = Technology::create(['name' => $params['name']]);
-        $badgeParams = $params['badge'] ?? null;
-
-        if ($badgeParams) {
-            $badgeParams['technology_id'] = $technology->id;
-            TechnologyBadge::insert($badgeParams);
-        }
     }
 }

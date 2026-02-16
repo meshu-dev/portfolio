@@ -10,8 +10,10 @@ use App\Models\{
     Text,
     Skill,
     Technology,
+    User,
     WorkExperience
 };
+use Exception;
 use Illuminate\Database\Seeder;
 
 class CvSeeder extends Seeder
@@ -29,7 +31,20 @@ class CvSeeder extends Seeder
 
     protected function addProfileData()
     {
-        Text::insert([
+        $users = User::all();
+        $texts = $this->getTexts();
+
+        foreach ($users as $user) {
+            foreach ($texts as $text) {
+                $text['user_id'] = $user->id;
+                Text::insert($text);
+            }
+        }
+    }
+
+    private function getTexts(): array
+    {
+        return [
             [
                 'name'  => 'fullname',
                 'value' => 'Harmesh Uppal'
@@ -44,20 +59,44 @@ class CvSeeder extends Seeder
                 'name'  => 'location',
                 'value' => 'West Midlands, UK'
             ]
-        ]);
+        ];
     }
 
     protected function addSkills()
     {
-        $backendSkill   = Skill::create(['name' => 'Backend']);
-        $frontendSkill  = Skill::create(['name' => 'Frontend']);
-        $frameworkSkill = Skill::create(['name' => 'Frameworks']);
-        $miscSkill      = Skill::create(['name' => 'Misc']);
+        $users  = User::all();
+        $skills = $this->getSkills();
 
-        $this->addSkillTechnologies($backendSkill, ['PHP', 'MySQL', 'Node.js', 'Java']);
-        $this->addSkillTechnologies($frontendSkill, ['Vue.js', 'React', 'Angular', 'TailwindCSS']);
-        $this->addSkillTechnologies($frameworkSkill, ['Laravel', 'Wordpress', 'Next.js', 'Nuxt']);
-        $this->addSkillTechnologies($miscSkill, ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']);
+        foreach ($users as $user) {
+            foreach ($skills as $skill) {
+                $skill['skill']['user_id'] = $user->id;
+                $skillModel = Skill::create($skill['skill']);
+
+                $this->addSkillTechnologies($skillModel, $skill['technologies']);
+            }
+        }
+    }
+
+    private function getSkills()
+    {
+        return [
+            [
+                'skill'        => ['name' => 'Backend'],
+                'technologies' => ['PHP', 'MySQL', 'Node.js', 'Java']
+            ],
+            [
+                'skill'        => ['name' => 'Frontend'],
+                'technologies' => ['Vue.js', 'React', 'Angular', 'TailwindCSS']
+            ],
+            [
+                'skill'        => ['name' => 'Frameworks'],
+                'technologies' => ['Laravel', 'Wordpress', 'Next.js', 'Nuxt']
+            ],
+            [
+                'skill'        => ['name' => 'Misc'],
+                'technologies' => ['Amazon AWS', 'Docker', 'Linux', 'PHPUnit']
+            ]
+        ];
     }
 
     protected function addSkillTechnologies(Skill $skill, array $technologies)
@@ -69,7 +108,20 @@ class CvSeeder extends Seeder
 
     protected function addWorkExperiences()
     {
-        WorkExperience::insert([
+        $users           = User::all();
+        $workExperiences = $this->getWorkExperiences();
+
+        foreach ($users as $user) {
+            foreach ($workExperiences as $workExperience) {
+                $workExperience['user_id'] = $user->id;
+                WorkExperience::insert($workExperience);
+            }
+        }
+    }
+
+    private function getWorkExperiences(): array
+    {
+        return [
             [
                 'title'       => 'Full Stack Developer',
                 'company'     => 'Clark UK',
@@ -171,7 +223,7 @@ built with it'
                 ]),
                 'active' => false,
             ]
-        ]);
+        ];
     }
 
     protected function addPdf()
@@ -180,7 +232,7 @@ built with it'
 
         try {
             $fileUrl = resolve(UploadFileAction::class)->execute($filename);
-        } catch (FileNotUploadedException) {
+        } catch (FileNotUploadedException $e) {
             $fileUrl = fake()->imageUrl(512, 512);
         }
 

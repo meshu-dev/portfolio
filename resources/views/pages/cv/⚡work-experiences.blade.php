@@ -2,12 +2,36 @@
 
 use App\Actions\Cv\GetWorkExperiencesAction;
 use App\View\Components\BaseComponent;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 
 new class extends BaseComponent
 {
     #[Locked]
     public $workExperiences;
+
+    #[Locked]
+    public bool $modal = false;
+
+    #[Locked]
+    public int $deleteId = 0;
+
+    #[Locked]
+    public string $deleteItemName = '';
+
+    public function showDeleteModal(int $id, string $itemName)
+    {
+        $this->deleteId       = $id;
+        $this->deleteItemName = $itemName;
+        $this->modal          = true;
+    }
+
+    #[On('confirm-delete')]
+    public function onConfirmDelete(int $id)
+    {
+        resolve(DeleteTechnologyAction::class)->execute($id);
+        $this->success('Technology has been deleted');
+    }
 
     public function mount()
     {
@@ -25,8 +49,15 @@ new class extends BaseComponent
             sub-value="company"
             link="/work-experiences/{{ $workExperience->id }}">
             <x-slot:actions>
-                <x-button icon="o-trash" class="btn-sm" wire:click="delete(1)" spinner />
+                <x-button
+                    icon="o-trash"
+                    class="btn-sm"
+                    wire:click="showDeleteModal({{ $workExperience->id }}, '{{ $workExperience->title }}')" />
             </x-slot:actions>
         </x-list-item>
     @endforeach
+    <livewire:delete-modal
+        :id="$deleteId"
+        :itemName="$deleteItemName"
+        wire:model="modal" />
 </div>

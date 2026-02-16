@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Actions\File\UploadFileAction;
 use App\Enums\DynamicValueEnum;
+use App\Enums\UserEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     File,
@@ -64,13 +65,15 @@ class PortfolioSeeder extends Seeder
     protected function addIntroText()
     {
         Text::insert([
-            'name'  => 'portfolio_intro_1',
-            'value' => "Hello, I'm Mesh"
+            'user_id' => UserEnum::ADMIN,
+            'name'    => 'portfolio_intro_1',
+            'value'   => "Hello, I'm Mesh"
         ]);
 
         Text::insert([
-            'name'  => 'portfolio_intro_2',
-            'value' => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience"
+            'user_id' => UserEnum::ADMIN,
+            'name'    => 'portfolio_intro_2',
+            'value'   => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience"
         ]);
     }
 
@@ -83,8 +86,9 @@ class PortfolioSeeder extends Seeder
             "and improving upon my skills and experience in new and popular technologies.</p>";
 
         Text::insert([
-            'name'  => 'about',
-            'value' => $aboutMe
+            'user_id' => UserEnum::ADMIN,
+            'name'    => 'about',
+            'value'   => $aboutMe
         ]);
 
         $this->addFile('about.png');
@@ -92,7 +96,7 @@ class PortfolioSeeder extends Seeder
 
     protected function addSkills()
     {
-        $portfolioSkill = Skill::create(['name' => 'Portfolio']);
+        $portfolioSkill = Skill::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio']);
 
         $this->addSkillTechnologies(
             $portfolioSkill,
