@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function view(): Response
     {
         $user = Auth::user();
-        return Inertia::render('Profile', ['user' => new ProfileResource($user)]);
+        return Inertia::render('Profile', ['user' => $user]);
     }
 
     public function edit(ProfileRequest $request): RedirectResponse

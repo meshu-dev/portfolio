@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Jobs;
+
+use App\Actions\Contact\SendEmailAction;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+
+class SendContactEmailJob implements ShouldQueue
+{
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    /**
+     * Create a new job instance.
+     *
+     * @param array<string, mixed> $params
+     */
+    public function __construct(
+        public array $params
+    ) {
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(SendEmailAction $sendEmailAction): void
+    {
+        $sendEmailAction->execute($this->params);
+    }
+}

@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function index(): Response|RedirectResponse
     {
         if (Auth::check()) {
-            return to_route('job.list');
+            return to_route('profile.view');
         }
         return Inertia::render('Login');
     }
