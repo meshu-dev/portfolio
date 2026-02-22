@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Cv\WorkExperience\DeleteWorkExperienceAction;
+use App\Actions\Cv\WorkExperience\GetWorkExperienceAction;
+use App\Actions\Cv\WorkExperience\GetWorkExperiencesAction;
+use App\Actions\Cv\WorkExperience\UpsertWorkExperienceAction;
 use App\Actions\Profile\EditProfileAction;
 use App\Enums\FlashTypeEnum;
-use App\Http\Requests\ProfileRequest;
-use App\Http\Resources\ProfileResource;
+use App\Http\Requests\WorkExperienceRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -13,20 +16,37 @@ use Inertia\{Inertia, Response};
 
 class WorkExperienceController extends Controller
 {
-    public function view(): Response
+    public function list(): Response
     {
-        $user = Auth::user();
-        return Inertia::render('Profile', ['user' => new ProfileResource($user)]);
+        $workExperiences = resolve(GetWorkExperiencesAction::class)->execute();
+        return Inertia::render('WorkExperiences', ['workExperiences' => $workExperiences]);
     }
 
-    public function edit(ProfileRequest $request): RedirectResponse
+    public function view(string $id): Response
     {
-        Log::info('Bing!');
+        $workExperience = resolve(GetWorkExperienceAction::class)->execute($id);
+        return Inertia::render('WorkExperience', ['workExperience' => $workExperience]);
+    }
 
-        resolve(EditProfileAction::class)->execute($request->all());
+    public function edit(string $id, WorkExperienceRequest $request): RedirectResponse
+    {
+        $params = $request->all();
+        $params['id'] = $id;
+
+        resolve(UpsertWorkExperienceAction::class)->execute($params);
 
         return Inertia::flash([
-            'message' => 'Profile has been updated',
+            'message' => 'Work experience has been updated',
+            'type'    => FlashTypeEnum::SUCCESS,
+        ])->back();
+    }
+
+    public function delete(string $id): RedirectResponse
+    {
+        resolve(DeleteWorkExperienceAction::class)->execute($id);
+
+        return Inertia::flash([
+            'message' => 'Work experience has been deleted',
             'type'    => FlashTypeEnum::SUCCESS,
         ])->back();
     }

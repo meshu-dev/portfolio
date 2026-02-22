@@ -117,8 +117,14 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
+  .form-row {
+    @apply flex flex-col mb-4;
+  }
+  .form-label {
+    @apply mb-4;
+  }
 }

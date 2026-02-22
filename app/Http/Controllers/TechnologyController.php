@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Profile\EditProfileAction;
+use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\ProfileRequest;
-use App\Http\Resources\ProfileResource;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Inertia\{Inertia, Response};
 
@@ -15,8 +14,8 @@ class TechnologyController extends Controller
 {
     public function view(): Response
     {
-        $user = Auth::user();
-        return Inertia::render('Profile', ['user' => new ProfileResource($user)]);
+        $technologies = resolve(GetAllTechnologiesAction::class)->execute();
+        return Inertia::render('Technologies', ['technologies' => $technologies]);
     }
 
     public function edit(ProfileRequest $request): RedirectResponse

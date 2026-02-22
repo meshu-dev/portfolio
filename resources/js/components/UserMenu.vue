@@ -29,7 +29,7 @@ import { Link } from '@inertiajs/vue3'
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink as-child :class="navigationMenuTriggerStyle()">
-          <Link href="/technologies">Technologies</Link>
+          <Link href="/work-experiences">Work Experiences</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
