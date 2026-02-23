@@ -9,20 +9,21 @@ import Button from '@/components/ui/button/Button.vue'
 import DatePicker from '@/components/DatePicker.vue'
 import { toRaw } from 'vue'
 import { WorkExperience } from '@/types/portfolio'
+import { dateToCalendarDate } from '@/lib/utils'
 
 const props = defineProps({ workExperience: Object })
-const workExperience: WorkExperience = props.workExperience as WorkExperience
+const workExperience: WorkExperience|null = props.workExperience ? props.workExperience as WorkExperience : null
 const responsibilityLimit: number = 5
 const form = useForm({
-  title:            workExperience.title,
-  company:          workExperience.company,
-  location:         workExperience.location,
-  is_current:       !workExperience.end_date,
-  start_date:       workExperience.start_date,
-  end_date:         workExperience.end_date,
-  description:      workExperience.description,
-  responsibilities: workExperience.responsibilities, //JSON.parse(workExperience.responsibilities),
-  active:           workExperience.active,
+  title:            workExperience?.title || '',
+  company:          workExperience?.company || '',
+  location:         workExperience?.location || '',
+  is_current:       !workExperience?.end_date || false,
+  start_date:       dateToCalendarDate(workExperience?.start_date || new Date().toDateString()),
+  end_date:         dateToCalendarDate(workExperience?.end_date || new Date().toDateString()),
+  description:      workExperience?.description || '',
+  responsibilities: workExperience?.responsibilities || [], //JSON.parse(workExperience.responsibilities),
+  active:           workExperience?.active || false,
 })
 
 const addResponsibility = () => {
@@ -34,7 +35,17 @@ const removeResponsibility = (index: number) => {
 }
 
 const submitForm = () => {
-  form.post(`/work-experiences/${workExperience.id}`)
+  const transformParams = (data: any) => {
+    data.start_date = form.start_date.toString()
+    data.end_date   = form.end_date ? form.end_date.toString() : null
+    return data
+  }
+
+  if (workExperience?.id) {
+    form.transform(transformParams).put(`/work-experiences/${workExperience.id}`)
+  } else {
+    form.transform(transformParams).post(`/work-experiences`)
+  }
   console.log('submitForm')
 }
 </script>
@@ -60,11 +71,11 @@ const submitForm = () => {
     </div>
     <div class="form-row">
       <Label for="current" class="form-label">Start Date</Label>
-      <DatePicker :date="form.start_date" />
+      <DatePicker v-model="form.start_date" />
     </div>
     <div v-if="!form.is_current" class="form-row">
       <Label for="current" class="form-label">End Date</Label>
-      <DatePicker :date="form.end_date || ''" />
+      <DatePicker v-model="form.end_date" />
     </div>
     <div class="form-row">
       <Label for="description" class="form-label">Description</Label>

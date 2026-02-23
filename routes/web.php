@@ -14,15 +14,25 @@ Route::post('/login',      [AuthController::class, 'userLogin']);
 Route::post('/login/demo', [AuthController::class, 'demoLogin']);
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/',                         [ProfileController::class, 'view'])->name('admin.index');
-    Route::get('/skills',                   [SkillController::class, 'view']);
-    Route::get('/technologies',             [TechnologyController::class, 'view']);
+    Route::get('/', [ProfileController::class, 'view'])->name('admin.index');
+    Route::put('/profile', [ProfileController::class, 'edit']);
+
+    Route::prefix('skills')->group(function () {
+        Route::get('/', [SkillController::class, 'view']);
+        Route::put('/', [SkillController::class, 'edit']);
+    });
+
+    Route::prefix('technologies')->group(function () {
+        Route::get('/',        [TechnologyController::class, 'view']);
+        Route::delete('/{id}', [TechnologyController::class, 'delete']);
+    });
 
     Route::prefix('work-experiences')->group(function () {
-        Route::get('/',        [WorkExperienceController::class, 'list']);
-        Route::get('/new',     [WorkExperienceController::class, 'add']);
+        Route::get('/',        [WorkExperienceController::class, 'list'])->name('work-experiences.list');
+        Route::get('/new',     [WorkExperienceController::class, 'new']);
         Route::get('/{id}',    [WorkExperienceController::class, 'view']);
-        Route::post('/{id}',   [WorkExperienceController::class, 'edit']);
+        Route::post('/',   [WorkExperienceController::class, 'add']);
+        Route::put('/{id}',    [WorkExperienceController::class, 'edit']);
         Route::delete('/{id}', [WorkExperienceController::class, 'delete']);
     });
 

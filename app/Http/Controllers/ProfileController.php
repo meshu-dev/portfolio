@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Cv\Profile\GetProfileAction;
-use App\Actions\Profile\EditProfileAction;
+use App\Actions\Cv\Profile\UpdateProfileAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\ProfileRequest;
-use App\Http\Resources\ProfileResource;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Inertia\{Inertia, Response};
 
 class ProfileController extends Controller
@@ -24,9 +21,10 @@ class ProfileController extends Controller
 
     public function edit(ProfileRequest $request): RedirectResponse
     {
-        Log::info('Bing!');
-
-        resolve(EditProfileAction::class)->execute($request->all());
+        resolve(UpdateProfileAction::class)->execute(
+            $request->input('intro'),
+            $request->input('location')
+        );
 
         return Inertia::flash([
             'message' => 'Profile has been updated',

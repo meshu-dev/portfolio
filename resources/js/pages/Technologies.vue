@@ -24,14 +24,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Link } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { toRaw } from 'vue'
 
 const props = defineProps({ technologies: Object })
-console.log('BBB', toRaw(props.technologies)) 
+
+const deleteTechnology = (id: string) => {
+  router.delete(`/technologies/${id}`)
+}
 </script>
 
 <template>
@@ -50,7 +53,9 @@ console.log('BBB', toRaw(props.technologies))
           <TableRow v-for="technology in technologies">
             <TableCell>{{ technology.name }}</TableCell>
             <TableCell>
-              <Button class="btn-primary cursor-pointer">
+              <Button
+                class="btn-primary cursor-pointer"
+                @click="deleteTechnology(technology.id)">
                 Delete
               </Button>
             </TableCell>

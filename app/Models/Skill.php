@@ -14,8 +14,6 @@ class Skill extends Model
 
     protected $fillable = ['name'];
 
-    protected $hidden = ['id'];
-
     public $timestamps = false;
 
     /**

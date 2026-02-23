@@ -13,9 +13,19 @@ import {
 } from '@/components/ui/popover'
 import { ref, Ref } from 'vue'
 
+/*
 const defaultPlaceholder = today(getLocalTimeZone())
 const props = defineProps({ date: String })
 const date: CalendarDate = dateToCalendarDate(props.date || (new Date()).toDateString())
+const df = new DateFormatter('en-US', {
+  dateStyle: 'long',
+}) */
+
+//const defaultPlaceholder = today(getLocalTimeZone())
+//const props = defineProps({ date: String })
+//const date: CalendarDate = dateToCalendarDate(props.date || (new Date()).toDateString())
+
+const date = defineModel()
 const df = new DateFormatter('en-US', {
   dateStyle: 'long',
 })

@@ -8,12 +8,12 @@ use Illuminate\Support\Collection;
 class UpdateSkillTechnologiesAction
 {
     /**
-     * @param Collection<int, array> $skillTechnologies
+     * @param array $skillTechnologies
      */
-    public function execute(Collection $skillTechnologies): void
+    public function execute(array $skillTechnologies): void
     {
-        foreach ($skillTechnologies as $skillId => $technologies) {
-            Skill::findOrFail($skillId)->technologies()->sync($technologies);
+        foreach ($skillTechnologies as $skillData) {
+            Skill::findOrFail($skillData['id'])->technologies()->sync($skillData['technologies']);
         }
     }
 }

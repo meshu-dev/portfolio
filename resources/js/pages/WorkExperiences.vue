@@ -16,12 +16,13 @@ const props = defineProps({ workExperiences: Object })
 const deleteWorkExperience = (id: string) => {
   router.delete(`/work-experiences/${id}`)
 }
-
 </script>
 
 <template>
   <h1>Work Experiences</h1>
-  <Button class="btn-primary cursor-pointer">Add</Button>
+  <Link href="/work-experiences/new">
+    <Button class="btn-primary cursor-pointer">Add</Button>
+  </Link>
   <template v-if="workExperiences">
     <div class="min-h-[650px]">
       <Table class="table-fixed">
@@ -35,13 +36,15 @@ const deleteWorkExperience = (id: string) => {
         <TableBody>
           <TableRow v-for="workExperience in workExperiences">
             <TableCell>
-              <Link :href="'/work-experiences/' + workExperience.id">
+              <Link :href="`/work-experiences/${workExperience.id}`">
                 {{ workExperience.title }}
               </Link>
             </TableCell>
             <TableCell>{{ workExperience.company }}</TableCell>
             <TableCell>
-              <Button class="btn-primary cursor-pointer" @click="deleteWorkExperience(workExperience.id)">
+              <Button
+                class="btn-primary cursor-pointer"
+                @click="deleteWorkExperience(workExperience.id)">
                 Delete
               </Button>
             </TableCell>

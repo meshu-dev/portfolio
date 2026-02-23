@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Profile\EditProfileAction;
+use App\Actions\Technology\DeleteTechnologyAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\ProfileRequest;
@@ -26,6 +27,16 @@ class TechnologyController extends Controller
 
         return Inertia::flash([
             'message' => 'Profile has been updated',
+            'type'    => FlashTypeEnum::SUCCESS,
+        ])->back();
+    }
+
+    public function delete(string $id): RedirectResponse
+    {
+        resolve(DeleteTechnologyAction::class)->execute($id);
+
+        return Inertia::flash([
+            'message' => 'Technology has been deleted',
             'type'    => FlashTypeEnum::SUCCESS,
         ])->back();
     }

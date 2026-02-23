@@ -1,3 +1,5 @@
+import { CalendarDate } from '@internationalized/date'
+
 export type Skill = {
     id: string,
     name: string;
@@ -14,8 +16,8 @@ export type WorkExperience = {
     company: string;
     location: string;
     isCurrent: boolean;
-    start_date: string;
-    end_date: string|null;
+    start_date: CalendarDate;
+    end_date: CalendarDate|null;
     description: string;
     responsibilities: string,
     active: boolean
