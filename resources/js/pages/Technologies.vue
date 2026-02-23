@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import {
   Table,
   TableBody,
@@ -20,55 +19,74 @@ import { router } from '@inertiajs/vue3'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
+import DeleteDialog from '@/components/DeleteDialog.vue'
 import { toRaw } from 'vue'
+import { Technology } from '@/types/portfolio'
 
-const props = defineProps({ technologies: Object })
+const props = defineProps({ technologies: Array<Technology> })
 
 const technologyName: Ref<string> = ref('')
-const deleteDialogOpen: Ref<boolean> = ref(false)
+const addDialogOpen: Ref<boolean> = ref(false)
 
-const addTechnology = (name: string) => {
+const deleteDialogOpen: Ref<boolean> = ref(false)
+const deleteDialogTitle: Ref<string> = ref('')
+const deleteDialogMessage: Ref<string> = ref('')
+const deleteId: Ref<string> = ref('')
+
+const addTechnology = () => {
   router.post(`/technologies`, { name: technologyName.value })
 }
 
-const deleteTechnology = (id: string) => {
-  router.delete(`/technologies/${id}`)
+const deleteTechnologyDialog = (id: string) => {
+  if (!props.technologies) return
+
+  const filteredTechnologies: Technology[] = props.technologies.filter((technology: Technology) => technology.id == id)
+  const deleteTechnology: Technology = filteredTechnologies[0]
+
+  deleteDialogTitle.value = `Delete ${deleteTechnology.name}`
+  deleteDialogMessage.value = `Are you sure you want to delete ${deleteTechnology.name}?`
+  deleteDialogOpen.value = true
+
+  deleteId.value = id
+}
+
+const deleteTechnology = () => {
+  deleteDialogOpen.value = false
+  router.delete(`/technologies/${deleteId.value}`)
 }
 </script>
 
 <template>
   <h1>Technologies</h1>
-  <Button class="btn-primary cursor-pointer" @click="deleteDialogOpen = true">Add</Button>
-  <template v-if="technologies.length > 0">
-    <div class="min-h-[650px]">
-      <Table class="table-fixed">
-        <TableHeader>
-          <TableRow class="text-xl font-extrabold">
-            <TableHead class="w-lg">Name</TableHead>
-            <TableHead>Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow v-for="technology in technologies">
-            <TableCell>{{ technology.name }}</TableCell>
-            <TableCell>
-              <Button
-                class="btn-primary cursor-pointer"
-                @click="deleteTechnology(technology.id)">
-                Delete
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
-  </template>
-  <Dialog v-model:open="deleteDialogOpen">
+  <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
+  <div v-if="technologies && technologies.length > 0" class="min-h-[650px]">
+    <Table class="table-fixed">
+      <TableHeader>
+        <TableRow class="text-xl font-extrabold">
+          <TableHead class="w-lg">Name</TableHead>
+          <TableHead>Action</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow v-for="technology in technologies">
+          <TableCell>{{ technology.name }}</TableCell>
+          <TableCell>
+            <Button
+              class="btn-primary cursor-pointer"
+              @click="deleteTechnologyDialog(technology.id)">
+              Delete
+            </Button>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </div>
+  <Dialog v-model:open="addDialogOpen">
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Add Technology</DialogTitle>
       </DialogHeader>
-      <Form action="/technologies" method="post" class="grid gap-4" @success="deleteDialogOpen = false">
+      <Form action="/technologies" method="post" class="grid gap-4" @success="addDialogOpen = false">
         <div class="grid gap-3">
           <Label for="newTechnology">Name</Label>
           <Input id="newTechnology" name="name" />
@@ -81,4 +99,9 @@ const deleteTechnology = (id: string) => {
       </Form>
     </DialogContent>
   </Dialog>
+  <DeleteDialog
+    :title="deleteDialogTitle"
+    :message="deleteDialogMessage"
+    v-model="deleteDialogOpen"
+    @confirm-delete="deleteTechnology" />
 </template>
