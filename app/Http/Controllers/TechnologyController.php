@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Profile\EditProfileAction;
+use App\Actions\Technology\CreateTechnologyAction;
 use App\Actions\Technology\DeleteTechnologyAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\TechnologyRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Inertia\{Inertia, Response};
 
 class TechnologyController extends Controller
@@ -19,14 +18,12 @@ class TechnologyController extends Controller
         return Inertia::render('Technologies', ['technologies' => $technologies]);
     }
 
-    public function edit(ProfileRequest $request): RedirectResponse
+    public function add(TechnologyRequest $request): RedirectResponse
     {
-        Log::info('Bing!');
-
-        resolve(EditProfileAction::class)->execute($request->all());
+        resolve(CreateTechnologyAction::class)->execute($request->input('name'));
 
         return Inertia::flash([
-            'message' => 'Profile has been updated',
+            'message' => 'Technology has been added',
             'type'    => FlashTypeEnum::SUCCESS,
         ])->back();
     }

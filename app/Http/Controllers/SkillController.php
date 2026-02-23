@@ -7,7 +7,6 @@ use App\Actions\Cv\Skill\UpdateSkillTechnologiesAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\SkillRequest;
-use App\Http\Resources\SkillResource;
 use Illuminate\Http\RedirectResponse;
 use Inertia\{Inertia, Response};
 

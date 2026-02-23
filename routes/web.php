@@ -24,6 +24,7 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::prefix('technologies')->group(function () {
         Route::get('/',        [TechnologyController::class, 'view']);
+        Route::post('/',       [TechnologyController::class, 'add']);
         Route::delete('/{id}', [TechnologyController::class, 'delete']);
     });
 
