@@ -13,6 +13,7 @@ import { Link } from '@inertiajs/vue3'
 import Button from '@/components/ui/button/Button.vue'
 import { WorkExperience } from '@/types/portfolio'
 import DeleteDialog from '@/components/DeleteDialog.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 const props = defineProps({ workExperiences: Object })
 
@@ -41,7 +42,7 @@ const deleteWorkExperience = () => {
 </script>
 
 <template>
-  <h1>Work Experiences</h1>
+  <PageHeader value="Work Experiences" />
   <Link href="/work-experiences/new">
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>

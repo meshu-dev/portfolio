@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select'
 import Button from '@/components/ui/button/Button.vue'
 import { Technology } from '@/types/portfolio'
+import PageHeader from '@/components/PageHeader.vue'
 
 const props = defineProps({ skills: Object, technologies: Object })
 
@@ -36,7 +37,7 @@ const transformData = (data) => {
 </script>
 
 <template>
-  <h1>Skills</h1>
+  <PageHeader value="Skills" />
   <Form action="/skills" method="put" :transform="data => transformData(data)">
     <div v-for="skill in skills" class="mb-5">
       <Label :for="skill.name" class="mb-3">{{ skill.name }}</Label>

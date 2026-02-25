@@ -22,6 +22,7 @@ import Button from '@/components/ui/button/Button.vue'
 import DeleteDialog from '@/components/DeleteDialog.vue'
 import { toRaw } from 'vue'
 import { Technology } from '@/types/portfolio'
+import PageHeader from '@/components/PageHeader.vue'
 
 const props = defineProps({ technologies: Array<Technology> })
 
@@ -57,7 +58,7 @@ const deleteTechnology = () => {
 </script>
 
 <template>
-  <h1>Technologies</h1>
+  <PageHeader value="Technologies" />
   <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
   <div v-if="technologies && technologies.length > 0" class="min-h-[650px]">
     <Table class="table-fixed">

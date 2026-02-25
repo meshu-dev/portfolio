@@ -5,6 +5,7 @@ import { Field } from '@/components/ui/field'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 const props = defineProps({ intro: String, location: String })
 
@@ -15,7 +16,7 @@ const form = useForm({
 </script>
 
 <template>
-  <h1>Profile</h1>
+  <PageHeader value="Profile" />
   <Form action="/profile" method="put">
     <Field class="mb-4">
       <Label for="intro">Intro</Label>

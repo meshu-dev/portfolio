@@ -10,6 +10,7 @@ import DatePicker from '@/components/DatePicker.vue'
 import { toRaw } from 'vue'
 import { WorkExperience } from '@/types/portfolio'
 import { dateToCalendarDate } from '@/lib/utils'
+import PageHeader from '@/components/PageHeader.vue'
 
 const props = defineProps({ workExperience: Object })
 const workExperience: WorkExperience|null = props.workExperience ? props.workExperience as WorkExperience : null
@@ -51,7 +52,7 @@ const submitForm = () => {
 </script>
 
 <template>
-  <h1>Work Experience</h1>
+  <PageHeader value="Work Experience" />
   <form class="flex flex-col gap-3" @submit.prevent>
     <div class="form-row">
       <Label for="title" class="form-label">Title</Label>
