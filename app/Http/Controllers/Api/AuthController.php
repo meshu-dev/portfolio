@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Auth\LoginAction;
+use App\Actions\Auth\ApiLoginAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\JsonResponse;
@@ -13,7 +13,7 @@ class AuthController extends Controller
     /**
      * Login the user
      */
-    public function login(LoginRequest $request, LoginAction $loginAction): JsonResponse
+    public function login(LoginRequest $request, ApiLoginAction $loginAction): JsonResponse
     {
         $token = $loginAction->execute($request->email, $request->password);
 
