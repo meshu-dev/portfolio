@@ -5,7 +5,6 @@ namespace App\Actions\Cv\WorkExperience;
 use App\Models\WorkExperience;
 use App\Repositories\WorkExperienceRepository;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class GetWorkExperiencesAction
 {
@@ -17,11 +16,11 @@ class GetWorkExperiencesAction
     /**
      * @return Collection<int, WorkExperience>
      */
-    public function execute(bool $activeOnly = false): Collection
+    public function execute(int $userId, bool $activeOnly = false): Collection
     {
         if ($activeOnly) {
-            return $this->workExperienceRepository->getAllActive(Auth::id());
+            return $this->workExperienceRepository->getAllActive($userId);
         }
-        return $this->workExperienceRepository->getAll(Auth::id());
+        return $this->workExperienceRepository->getAll($userId);
     }
 }

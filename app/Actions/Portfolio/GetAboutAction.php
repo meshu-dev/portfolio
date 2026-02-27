@@ -20,11 +20,11 @@ class GetAboutAction
     /**
      * @return array<string, mixed>
      */
-    public function execute(): array
+    public function execute(int $userId): array
     {
         $aboutImgUrl     = resolve(GetFileUrlAction::class, ['name' => 'about.png'])->execute();
-        $textList        = $this->textRepository->getByNames(["about"])->toArray();
-        $portfolioSkills = $this->skillRepository->getByNames(["Portfolio"]);
+        $textList        = $this->textRepository->getByNames($userId, ["about"])->toArray();
+        $portfolioSkills = $this->skillRepository->getByNames($userId, ["Portfolio"]);
 
         return [
             'image'  => $aboutImgUrl,

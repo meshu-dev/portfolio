@@ -20,10 +20,10 @@ class GetIntroAction
     /**
      * @return array<string, mixed>
      */
-    public function execute(): array
+    public function execute(int $userId): array
     {
         $introTexts = $this->textRepository
-                           ->getByNames(['portfolio_intro_1', 'portfolio_intro_2'])
+                           ->getByNames($userId, ['portfolio_intro_1', 'portfolio_intro_2'])
                            ->toArray();
         $sites = $this->siteRepository->getByNames(TypeEnum::PORTFOLIO, ['GitHub', 'LinkedIn']);
 

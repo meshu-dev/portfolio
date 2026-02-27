@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Actions\Cv\CreateCvPdfAction;
+use App\Enums\UserEnum;
 use Illuminate\Console\Command;
 
 class CreateCvPdf extends Command
@@ -26,6 +27,6 @@ class CreateCvPdf extends Command
      */
     public function handle(): void
     {
-        resolve(CreateCvPdfAction::class)->execute();
+        resolve(CreateCvPdfAction::class)->execute(UserEnum::ADMIN->value);
     }
 }

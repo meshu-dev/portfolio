@@ -9,6 +9,7 @@ use App\Actions\Portfolio\{
 };
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class PortfolioController extends Controller
 {
@@ -17,7 +18,7 @@ class PortfolioController extends Controller
      */
     public function getIntro(GetIntroAction $getIntroAction): JsonResponse
     {
-        $data = $getIntroAction->execute();
+        $data = $getIntroAction->execute(Auth::id());
         return response()->json(['data' => $data]);
     }
 
@@ -26,7 +27,7 @@ class PortfolioController extends Controller
      */
     public function getAbout(GetAboutAction $getAboutAction): JsonResponse
     {
-        $data = $getAboutAction->execute();
+        $data = $getAboutAction->execute(Auth::id());
         return response()->json(['data' => $data]);
     }
 

@@ -7,13 +7,14 @@ use App\Actions\Cv\Profile\UpdateProfileAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 
 class ProfileController extends Controller
 {
     public function view(): Response
     {
-        $profile = resolve(GetProfileAction::class)->execute();
+        $profile = resolve(GetProfileAction::class)->execute(Auth::id());
         $params  = ['intro' => $profile->get('intro'), 'location' => $profile->get('location')];
 
         return Inertia::render('Profile', $params);

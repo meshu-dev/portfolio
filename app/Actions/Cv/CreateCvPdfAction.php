@@ -18,10 +18,10 @@ class CreateCvPdfAction
     /**
      * @return void
      */
-    public function execute(): void
+    public function execute(int $userId): void
     {
         // Get CV Data
-        $viewParams  = [...$this->getCvAction->execute()];
+        $viewParams  = [...$this->getCvAction->execute($userId)];
 
         // Generate PDF
         $cvFilePath  = storage_path('app/files') . '/' . self::FILENAME;

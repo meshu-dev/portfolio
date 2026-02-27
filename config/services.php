@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'google' => [
+        'recaptcha' => [
+            'verify_url' => env('GOOGLE_RECAPTCHA_VERIFY_URL'),
+            'secret_key' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+            'error_messages' => [
+                'invalid-input-response' => 'Submitted token is invalid',
+                'browser-error' => 'Could not connect to the verify site',
+                'default' => 'Verification for token has failed'
+            ]
+        ]
+    ],
 ];

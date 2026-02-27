@@ -18,9 +18,9 @@ class GetProfileAction
     /**
      * @return Collection<int, Text>
      */
-    public function execute(): Collection
+    public function execute(int $userId): Collection
     {
-        $details = $this->textRepository->getByNames(Auth::id(), ['fullname', 'intro', 'location']);
+        $details = $this->textRepository->getByNames($userId, ['fullname', 'intro', 'location']);
         $details['intro'] = resolve(GetDynamicTextAction::class)->execute($details['intro']);
 
         return $details;

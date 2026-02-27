@@ -6,7 +6,6 @@ use App\Enums\SkillEnum;
 use App\Models\Skill;
 use App\Repositories\SkillRepository;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class GetSkillsAction
 {
@@ -18,7 +17,7 @@ class GetSkillsAction
     /**
      * @return Collection<int, Skill>
      */
-    public function execute(): Collection
+    public function execute(int $userId): Collection
     {
         $profileSkills = [
             SkillEnum::BACKEND->value,
@@ -27,6 +26,6 @@ class GetSkillsAction
             SkillEnum::MISC->value,
         ];
 
-        return $this->skillRepository->getByNames(Auth::id(), $profileSkills);
+        return $this->skillRepository->getByNames($userId, $profileSkills);
     }
 }
