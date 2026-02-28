@@ -4,7 +4,7 @@ describe('API - Login', function () {
     beforeEach(function () {
         $this->headers = [
             'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
+            'Accept'       => 'application/json',
         ];
     });
 
