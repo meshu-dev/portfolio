@@ -20,10 +20,6 @@ return new class extends Migration
             $table->dropForeign(['technology_id']);
         });
 
-        Schema::table('technology_badges', function (Blueprint $table) {
-            $table->dropForeign(['technology_id']);
-        });
-
         Schema::table('skills',           fn (Blueprint $table) => $table->uuid('id')->change());
         Schema::table('technologies',     fn (Blueprint $table) => $table->uuid('id')->change());
         Schema::table('texts',            fn (Blueprint $table) => $table->uuid('id')->change());
@@ -38,11 +34,6 @@ return new class extends Migration
         });
 
         Schema::table('project_technologies', function (Blueprint $table) {
-            $table->uuid('technology_id')->change();
-            $table->foreign('technology_id')->references('id')->on('technologies');
-        });
-
-        Schema::table('technology_badges', function (Blueprint $table) {
             $table->uuid('technology_id')->change();
             $table->foreign('technology_id')->references('id')->on('technologies');
         });
@@ -62,10 +53,6 @@ return new class extends Migration
             $table->dropForeign(['technology_id']);
         });
 
-        Schema::table('technology_badges', function (Blueprint $table) {
-            $table->dropForeign(['technology_id']);
-        });
-
         Schema::table('skills',           fn (Blueprint $table) => $table->id('id')->change());
         Schema::table('technologies',     fn (Blueprint $table) => $table->id('id')->change());
         Schema::table('texts',            fn (Blueprint $table) => $table->id('id')->change());
@@ -80,11 +67,6 @@ return new class extends Migration
         });
 
         Schema::table('project_technologies', function (Blueprint $table) {
-            $table->id('technology_id')->change();
-            $table->foreign('technology_id')->references('id')->on('technologies');
-        });
-
-        Schema::table('technology_badges', function (Blueprint $table) {
             $table->id('technology_id')->change();
             $table->foreign('technology_id')->references('id')->on('technologies');
         });

@@ -14,7 +14,7 @@ class LoginAction
     {
         if (Auth::attempt($request->all())) {
             $request->session()->regenerate();
-            return to_route('admin.index');
+            return to_route('profile.view');
         }
 
         return Inertia::flash([

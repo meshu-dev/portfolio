@@ -1,6 +1,6 @@
 <?php
 
-describe('API - Login', function () {
+describe('Api\AuthController tests', function () {
     beforeEach(function () {
         $this->headers = [
             'Content-Type' => 'application/json',

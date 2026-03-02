@@ -2,7 +2,7 @@
 
 use App\Exceptions\GoogleTokenException;
 
-describe('API - Contact', function () {
+describe('Api\ContactController tests', function () {
     beforeEach(function () {
         $this->contactParams = [
             'name'    => 'Mesh',
