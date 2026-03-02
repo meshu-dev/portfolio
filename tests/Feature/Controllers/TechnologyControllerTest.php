@@ -44,7 +44,7 @@ describe('TechnologyController tests', function () {
 
     it('deletes an existing technology', function () {
         // Arrange
-        $params = ['id' => Technology::first()->id];
+        $params = ['id' => Technology::where('name', 'Objective-C')->first()->id];
 
         // Act
         $response = $this->delete(route('technologies.delete', $params));

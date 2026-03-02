@@ -14,7 +14,7 @@ class SkillRepository
      */
     public function getByNames(int $userId, array $names): Collection
     {
-        return Skill::with(['technologies', 'technologies.badge'])
+        return Skill::with(['technologies'])
             ->where('user_id', $userId)
             ->whereIn('name', $names)
             ->get();
