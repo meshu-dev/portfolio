@@ -13,7 +13,7 @@ class UpsertWorkExperienceAction
     }
 
     /**
-     * @param array params
+     * @param array<string, mixed> params
      */
     public function execute(array $params): void
     {

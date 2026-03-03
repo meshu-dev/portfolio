@@ -7,15 +7,15 @@ use App\Actions\Cv\Skill\UpdateSkillTechnologiesAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\SkillRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SkillController extends Controller
 {
     public function view(): Response
     {
-        $skills = resolve(GetSkillsAction::class)->execute(Auth::id());
+        $skills = resolve(GetSkillsAction::class)->execute((int) Auth::id());
         $technologies = resolve(GetAllTechnologiesAction::class)->execute();
 
         return Inertia::render(

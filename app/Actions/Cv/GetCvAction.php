@@ -25,6 +25,7 @@ class GetCvAction
     }
 
     /**
+     * @param int $userId
      * @return array<string, mixed>
      */
     public function execute(int $userId): array
@@ -32,7 +33,7 @@ class GetCvAction
         $profile         = $this->getProfileAction->execute($userId);
         $sites           = $this->getSitesAction->execute();
         $skills          = $this->getSkillsAction->execute($userId);
-        $workExperiences = $this->getWorkExperiencesAction->execute(true);
+        $workExperiences = $this->getWorkExperiencesAction->execute($userId, true);
         $pdfUrl          = resolve(GetFileUrlAction::class, ['name' => 'cv.pdf'])->execute();
 
         return [

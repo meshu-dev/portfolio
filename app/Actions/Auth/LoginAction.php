@@ -3,10 +3,10 @@
 namespace App\Actions\Auth;
 
 use App\Enums\FlashTypeEnum;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginAction
 {

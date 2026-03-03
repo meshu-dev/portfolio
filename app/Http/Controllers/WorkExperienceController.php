@@ -10,15 +10,15 @@ use App\Actions\Cv\WorkExperience\{
 };
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\WorkExperienceRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class WorkExperienceController extends Controller
 {
     public function list(): Response
     {
-        $workExperiences = resolve(GetWorkExperiencesAction::class)->execute(Auth::id());
+        $workExperiences = resolve(GetWorkExperiencesAction::class)->execute((int) Auth::id());
         return Inertia::render('WorkExperiences', ['workExperiences' => $workExperiences]);
     }
 

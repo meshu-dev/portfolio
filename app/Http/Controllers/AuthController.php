@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Actions\Auth\LoginAction;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\{RedirectResponse, Request};
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -18,12 +19,12 @@ class AuthController extends Controller
         return Inertia::render('Login');
     }
 
-    public function userLogin(LoginRequest $request)
+    public function userLogin(LoginRequest $request): RedirectResponse
     {
         return resolve(LoginAction::class)->execute($request);
     }
 
-    public function demoLogin(Request $request)
+    public function demoLogin(Request $request): RedirectResponse
     {
         $request->merge([
             'email'    => config('users.demo.email'),

@@ -18,7 +18,7 @@ class PortfolioController extends Controller
      */
     public function getIntro(GetIntroAction $getIntroAction): JsonResponse
     {
-        $data = $getIntroAction->execute(Auth::id());
+        $data = $getIntroAction->execute((int) Auth::id());
         return response()->json(['data' => $data]);
     }
 
@@ -27,7 +27,7 @@ class PortfolioController extends Controller
      */
     public function getAbout(GetAboutAction $getAboutAction): JsonResponse
     {
-        $data = $getAboutAction->execute(Auth::id());
+        $data = $getAboutAction->execute((int) Auth::id());
         return response()->json(['data' => $data]);
     }
 

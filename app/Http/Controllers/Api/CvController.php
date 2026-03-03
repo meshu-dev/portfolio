@@ -14,7 +14,7 @@ class CvController extends Controller
      */
     public function get(GetCvAction $getCvAction): JsonResponse
     {
-        $data = $getCvAction->execute(Auth::id());
+        $data = $getCvAction->execute((int) Auth::id());
         return response()->json(['data' => $data]);
     }
 }

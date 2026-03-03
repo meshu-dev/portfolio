@@ -19,7 +19,7 @@ class UpdateProfileAction
      */
     public function execute(string $intro, string $location): void
     {
-        $this->textRepository->updateByName(Auth::id(), ProfileNameEnum::INTRO->value, $intro);
-        $this->textRepository->updateByName(Auth::id(), ProfileNameEnum::LOCATION->value, $location);
+        $this->textRepository->updateByName((int) Auth::id(), ProfileNameEnum::INTRO->value, $intro);
+        $this->textRepository->updateByName((int) Auth::id(), ProfileNameEnum::LOCATION->value, $location);
     }
 }

@@ -24,13 +24,13 @@ class TextRepository
      * @param int $userId
      * @param string $name
      * @param mixed $value
-     * @return Collection<string, string>
+     * @return int
      */
     public function updateByName(
         int $userId,
         string $name,
         mixed $value
-    ): bool {
+    ): int {
         return Text::where('user_id', $userId)
                    ->where('name', $name)
                    ->update(['value' => $value]);

@@ -28,6 +28,8 @@ class WorkExperience extends Model
 
     /**
      * Check if the work experience instance is current one.
+     * 
+     * @return Attribute
      */
     protected function isCurrent(): Attribute
     {

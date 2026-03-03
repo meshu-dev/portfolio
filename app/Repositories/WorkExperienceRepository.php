@@ -43,9 +43,9 @@ class WorkExperienceRepository
      * @param int $userId
      * @param string $id
      * @param array<string, mixed> $params
-     * @return WorkExperience
+     * @return int
      */
-    public function update(int $userId, string $id, array $params): bool
+    public function update(int $userId, string $id, array $params): int
     {
         return WorkExperience::where('user_id', $userId)
                              ->where('id', $id)

@@ -7,8 +7,8 @@ use App\Actions\Technology\DeleteTechnologyAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\TechnologyRequest;
-use Illuminate\Http\RedirectResponse;
 use Inertia\{Inertia, Response};
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TechnologyController extends Controller
 {

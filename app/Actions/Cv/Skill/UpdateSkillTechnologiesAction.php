@@ -3,12 +3,11 @@
 namespace App\Actions\Cv\Skill;
 
 use App\Models\Skill;
-use Illuminate\Support\Collection;
 
 class UpdateSkillTechnologiesAction
 {
     /**
-     * @param array $skillTechnologies
+     * @param array<string, mixed> $skillTechnologies
      */
     public function execute(array $skillTechnologies): void
     {

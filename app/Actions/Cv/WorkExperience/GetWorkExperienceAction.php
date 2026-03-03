@@ -14,6 +14,6 @@ class GetWorkExperienceAction
     {
         return WorkExperience::where('user_id', Auth::id())
                              ->where('id', $id)
-                             ->first();
+                             ->firstOrFail();
     }
 }
