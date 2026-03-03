@@ -26,20 +26,20 @@ class WorkExperience extends Model
 
     protected $casts = ['responsibilities' => 'array'];
 
+    public $timestamps = false;
+
     /**
-     * Check if the work experience instance is current one.
+     * Check if the work experience entry is current employment
      * 
-     * @return Attribute
+     * @return Attribute<string, never>
      */
     protected function isCurrent(): Attribute
     {
         return Attribute::make(
             get: function (mixed $value, array $attributes): bool {
                 $workExpierence = WorkExperience::select('id')->orderByDesc('start_date')->first();
-                return $workExpierence->id === $attributes['id'];
+                return $workExpierence?->id === $attributes['id'];
             },
         );
     }
-
-    public $timestamps = false;
 }
