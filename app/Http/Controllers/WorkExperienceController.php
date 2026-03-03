@@ -64,9 +64,11 @@ class WorkExperienceController extends Controller
     {
         resolve(DeleteWorkExperienceAction::class)->execute($id);
 
-        return Inertia::flash([
+        Inertia::flash([
             'message' => 'Work experience has been deleted',
             'type'    => FlashTypeEnum::SUCCESS,
-        ])->back();
+        ]);
+
+        return to_route('work-experiences.list');
     }
 }
