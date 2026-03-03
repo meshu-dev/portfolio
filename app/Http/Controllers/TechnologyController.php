@@ -22,19 +22,23 @@ class TechnologyController extends Controller
     {
         resolve(CreateTechnologyAction::class)->execute($request->input('name'));
 
-        return Inertia::flash([
+        Inertia::flash([
             'message' => 'Technology has been added',
             'type'    => FlashTypeEnum::SUCCESS,
-        ])->back();
+        ]);
+
+        return to_route('technologies.view');
     }
 
     public function delete(string $id): RedirectResponse
     {
         resolve(DeleteTechnologyAction::class)->execute($id);
 
-        return Inertia::flash([
+        Inertia::flash([
             'message' => 'Technology has been deleted',
             'type'    => FlashTypeEnum::SUCCESS,
         ])->back();
+
+        return to_route('technologies.view');
     }
 }

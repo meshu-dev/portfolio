@@ -9,25 +9,21 @@ describe('TechnologyController tests', function () {
         $this->actingAs(User::find(UserEnum::ADMIN));
     });
 
-    it('loads skills page', function () {
-        /*
+    it('loads technologies page', function () {
         // Arrange
-        $textData = Text::where('user_id', UserEnum::ADMIN)->get();
-        $textData = $textData->keyBy('name');
-
-        $intro    = str_replace('##years_worked##', 15, $textData->get('intro')['value']);
-        $location = $textData->get('location')['value'];
+        $technologies = Technology::where('user_id', UserEnum::ADMIN)
+                            ->orderBy('name')
+                            ->get();
 
         // Act
-        $response = $this->get(route('profile.view'));
+        $response = $this->get(route('technologies.view'));
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('Skills')
-                                    ->where('skills', $intro)
-                                    ->where('technologies', $location)
-        ); */
-    })->skip();
+            fn (Assert $page) => $page->component('Technologies')
+                                      ->where('technologies', $technologies)
+        );
+    });
 
     it('adds a new technology', function () {
         // Arrange
@@ -37,7 +33,7 @@ describe('TechnologyController tests', function () {
         $response = $this->post(route('technologies.add', $params));
 
         // Assert
-        $response->assertRedirect('/')
+        $response->assertRedirect(route('technologies.view'))
                 ->assertInertiaFlash('message', 'Technology has been added')
                 ->assertInertiaFlash('type', FlashTypeEnum::SUCCESS);
     });
@@ -50,7 +46,7 @@ describe('TechnologyController tests', function () {
         $response = $this->delete(route('technologies.delete', $params));
 
         // Assert
-        $response->assertRedirect('/')
+        $response->assertRedirect(route('technologies.view'))
                 ->assertInertiaFlash('message', 'Technology has been deleted')
                 ->assertInertiaFlash('type', FlashTypeEnum::SUCCESS);
     });

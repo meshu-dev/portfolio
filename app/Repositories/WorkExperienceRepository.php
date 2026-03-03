@@ -40,7 +40,8 @@ class WorkExperienceRepository
     }
 
     /**
-     * @param int $id
+     * @param int $userId
+     * @param string $id
      * @param array<string, mixed> $params
      * @return WorkExperience
      */
