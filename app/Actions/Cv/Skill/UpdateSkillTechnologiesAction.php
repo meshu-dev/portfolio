@@ -12,7 +12,10 @@ class UpdateSkillTechnologiesAction
     public function execute(array $skillTechnologies): void
     {
         foreach ($skillTechnologies as $skillData) {
-            Skill::findOrFail($skillData['id'])->technologies()->sync($skillData['technologies']);
+            $skill = Skill::findOrFail($skillData['id']);
+
+            /** @var Skill $skill */
+            $skill->technologies()->sync($skillData['technologies']);
         }
     }
 }

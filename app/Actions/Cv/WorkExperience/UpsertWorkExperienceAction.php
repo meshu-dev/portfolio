@@ -13,7 +13,7 @@ class UpsertWorkExperienceAction
     }
 
     /**
-     * @param array<string, mixed> params
+     * @param array<string, mixed> $params
      */
     public function execute(array $params): void
     {
@@ -28,7 +28,7 @@ class UpsertWorkExperienceAction
             $id = $params['id'];
             unset($params['id']);
 
-            $this->workExperienceRepository->update(Auth::id(), $id, $params);
+            $this->workExperienceRepository->update((int) Auth::id(), $id, $params);
         } else {
             $params['user_id'] = Auth::id();
             $this->workExperienceRepository->create($params);
