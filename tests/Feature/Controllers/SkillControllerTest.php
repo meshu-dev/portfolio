@@ -41,7 +41,7 @@ describe('SkillController tests', function () {
         $response = $this->put(route('skills.edit', $params));
 
         // Assert
-        $response->assertRedirect('/')
+        $response->assertRedirect(route('skills.view'))
                 ->assertInertiaFlash('message', 'Skills have been updated')
                 ->assertInertiaFlash('type', FlashTypeEnum::SUCCESS);
     });

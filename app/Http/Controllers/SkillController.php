@@ -31,9 +31,11 @@ class SkillController extends Controller
     {
         resolve(UpdateSkillTechnologiesAction::class)->execute($request->input('skills'));
 
-        return Inertia::flash([
+        Inertia::flash([
             'message' => 'Skills have been updated',
             'type'    => FlashTypeEnum::SUCCESS,
-        ])->back();
+        ]);
+
+        return to_route('skills.view');
     }
 }

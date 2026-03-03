@@ -27,9 +27,11 @@ class ProfileController extends Controller
             $request->input('location')
         );
 
-        return Inertia::flash([
+        Inertia::flash([
             'message' => 'Profile has been updated',
             'type'    => FlashTypeEnum::SUCCESS,
-        ])->back();
+        ]);
+
+        return to_route('profile.view');
     }
 }
