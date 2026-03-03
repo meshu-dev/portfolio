@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\{FlashTypeEnum, UserEnum};
+use App\Enums\{FlashTypeEnum, SkillEnum, UserEnum};
 use App\Models\{Skill, Technology, Text, User};
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -10,24 +10,31 @@ describe('SkillController tests', function () {
     });
 
     it('loads skills page', function () {
-        /*
         // Arrange
-        $textData = Text::where('user_id', UserEnum::ADMIN)->get();
-        $textData = $textData->keyBy('name');
+        $technologies = Technology::where('user_id', UserEnum::ADMIN)
+                            ->orderBy('name')
+                            ->get();
 
-        $intro    = str_replace('##years_worked##', 15, $textData->get('intro')['value']);
-        $location = $textData->get('location')['value'];
+        $skills = Skill::with(['technologies'])
+            ->where('user_id', UserEnum::ADMIN)
+            ->whereIn('name', [
+                SkillEnum::BACKEND->value,
+                SkillEnum::FRONTEND->value,
+                SkillEnum::FRAMEWORKS->value,
+                SkillEnum::MISC->value,
+            ])
+            ->get();
 
         // Act
-        $response = $this->get(route('profile.view'));
+        $response = $this->get(route('skills.view'));
 
         // Assert
         $response->assertInertia(
             fn (Assert $page) => $page->component('Skills')
-                                    ->where('skills', $intro)
-                                    ->where('technologies', $location)
-        ); */
-    })->skip();
+                                    ->where('skills', $skills)
+                                    ->where('technologies', $technologies)
+        );
+    });
 
     it('edits skills', function () {
         // Arrange

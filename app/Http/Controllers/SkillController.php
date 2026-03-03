@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Cv\Skill\GetSkillsAction;
-use App\Actions\Cv\Skill\UpdateSkillTechnologiesAction;
+use App\Actions\Cv\Skill\{GetSkillsAction, UpdateSkillTechnologiesAction};
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\SkillRequest;
