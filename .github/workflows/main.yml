@@ -34,6 +34,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PHP_VERSION }}
+          coverage: xdebug
 
       - uses: actions/checkout@v4
         
@@ -52,8 +53,8 @@ jobs:
       - name: Build node modules
         run: npm run build
         
-      - name: Run tests
-        run: composer run test
+      - name: Run tests with code coverage (Minimum 80%)
+        run: composer run test --coverage --min=80
 
   phpstan:
     name: Run PHPStan
