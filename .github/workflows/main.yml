@@ -45,6 +45,9 @@ jobs:
 
       - name: Generate key
         run: php artisan key:generate
+
+      - name: Build Assets
+        run: npm run build
         
       - name: Run tests
         run: composer run test
@@ -83,4 +86,4 @@ jobs:
         run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
 
       - name: Run pint
-        run: composer run pint
+        run: composer run test:lint

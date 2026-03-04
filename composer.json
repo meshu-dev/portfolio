@@ -86,9 +86,7 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
-        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=1G",
-        "pint": "./vendor/bin/pint --test",
-        "pint-fix": "./vendor/bin/pint"
+        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=1G"
     },
     "extra": {
         "laravel": {
