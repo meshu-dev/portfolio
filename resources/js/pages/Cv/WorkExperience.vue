@@ -23,7 +23,7 @@ const form = useForm({
   start_date:       dateToCalendarDate(workExperience?.start_date || new Date().toDateString()),
   end_date:         dateToCalendarDate(workExperience?.end_date || new Date().toDateString()),
   description:      workExperience?.description || '',
-  responsibilities: workExperience?.responsibilities || [], //JSON.parse(workExperience.responsibilities),
+  responsibilities: workExperience?.responsibilities,//JSON.parse(workExperience?.responsibilities),
   active:           workExperience?.active || false,
 })
 

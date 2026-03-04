@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Portfolio;
+namespace App\Actions\Portfolio\Project;
 
 use App\Http\Resources\ProjectResource;
 use App\Repositories\ProjectRepository;

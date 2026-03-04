@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\{
     AuthController,
-    ProfileController,
-    SkillController,
     TechnologyController,
-    WorkExperienceController
 };
+use App\Http\Controllers\Cv\{ProfileController, SkillController, WorkExperienceController};
+use App\Http\Controllers\Portfolio\{AboutController, IntroController, ProjectController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -35,6 +34,21 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('/', [WorkExperienceController::class, 'add'])->name('work-experiences.add');
         Route::put('/{id}', [WorkExperienceController::class, 'edit'])->name('work-experiences.edit');
         Route::delete('/{id}', [WorkExperienceController::class, 'delete'])->name('work-experiences.delete');
+    });
+
+    Route::prefix('intro')->group(function () {
+        Route::get('/', [IntroController::class, 'view'])->name('intro.view');
+        Route::put('/', [IntroController::class, 'edit'])->name('intro.edit');
+    });
+
+    Route::prefix('about')->group(function () {
+        Route::get('/', [AboutController::class, 'view'])->name('about.view');
+        Route::put('/', [AboutController::class, 'edit'])->name('about.edit');
+    });
+
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [ProjectController::class, 'list'])->name('projects.list');
+        //Route::put('/', [SkillController::class, 'edit'])->name('skills.edit');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

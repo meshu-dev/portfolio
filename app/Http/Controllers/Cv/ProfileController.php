@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cv;
 
 use App\Actions\Cv\Profile\{GetProfileAction, UpdateProfileAction};
 use App\Enums\FlashTypeEnum;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Cv\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +17,7 @@ class ProfileController extends Controller
         $profile = resolve(GetProfileAction::class)->execute((int) Auth::id());
         $params  = ['intro' => $profile->get('intro'), 'location' => $profile->get('location')];
 
-        return Inertia::render('Profile', $params);
+        return Inertia::render('Cv/Profile', $params);
     }
 
     public function edit(ProfileRequest $request): RedirectResponse

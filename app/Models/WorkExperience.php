@@ -24,7 +24,7 @@ class WorkExperience extends Model
         'active'
     ];
 
-    protected $casts = ['responsibilities' => 'array'];
+    //protected $casts = ['responsibilities' => 'array'];
 
     public $timestamps = false;
 
@@ -41,5 +41,15 @@ class WorkExperience extends Model
                 return $workExpierence?->id === $attributes['id'];
             },
         );
+    }
+
+    public function getResponsibilitiesAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    public function setResponsibilitiesAttribute($value)
+    {
+        $this->attributes['responsibilities'] = json_encode($value, JSON_UNESCAPED_SLASHES);
     }
 }

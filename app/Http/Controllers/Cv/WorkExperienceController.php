@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cv;
 
 use App\Actions\Cv\WorkExperience\{
     DeleteWorkExperienceAction,
@@ -9,7 +9,8 @@ use App\Actions\Cv\WorkExperience\{
     UpsertWorkExperienceAction,
 };
 use App\Enums\FlashTypeEnum;
-use App\Http\Requests\WorkExperienceRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Cv\WorkExperienceRequest;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,18 +20,18 @@ class WorkExperienceController extends Controller
     public function list(): Response
     {
         $workExperiences = resolve(GetWorkExperiencesAction::class)->execute((int) Auth::id());
-        return Inertia::render('WorkExperiences', ['workExperiences' => $workExperiences]);
+        return Inertia::render('Cv/WorkExperiences', ['workExperiences' => $workExperiences]);
     }
 
     public function new(): Response
     {
-        return Inertia::render('WorkExperience');
+        return Inertia::render('Cv/WorkExperience');
     }
 
     public function view(string $id): Response
     {
         $workExperience = resolve(GetWorkExperienceAction::class)->execute($id);
-        return Inertia::render('WorkExperience', ['workExperience' => $workExperience]);
+        return Inertia::render('Cv/WorkExperience', ['workExperience' => $workExperience]);
     }
 
     public function add(WorkExperienceRequest $request): RedirectResponse

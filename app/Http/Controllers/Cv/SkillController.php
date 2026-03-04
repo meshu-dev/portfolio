@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cv;
 
 use App\Actions\Cv\Skill\{GetSkillsAction, UpdateSkillTechnologiesAction};
 use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\FlashTypeEnum;
-use App\Http\Requests\SkillRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Cv\SkillRequest;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,7 +19,7 @@ class SkillController extends Controller
         $technologies = resolve(GetAllTechnologiesAction::class)->execute();
 
         return Inertia::render(
-            'Skills',
+            'Cv/Skills',
             [
                 'skills'       => $skills,
                 'technologies' => $technologies

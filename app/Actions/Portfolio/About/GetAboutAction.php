@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Portfolio;
+namespace App\Actions\Portfolio\About;
 
 use App\Actions\File\GetFileUrlAction;
 use App\Http\Resources\SkillResource;

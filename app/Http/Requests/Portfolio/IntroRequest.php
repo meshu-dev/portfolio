@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Portfolio;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SkillRequest extends FormRequest
+class IntroRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class SkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'skills'                => 'required|array',
-            'skills.*.id'           => 'required|exists:App\Models\Skill,id',
-            'skills.*.technologies' => 'required|array|distinct',
+            'line1'  => 'required|string',
+            'line2'  => 'required|string',
         ];
     }
 }

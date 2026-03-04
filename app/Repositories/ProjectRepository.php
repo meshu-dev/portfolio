@@ -14,4 +14,12 @@ class ProjectRepository
     {
         return Project::with(['repositories', 'technologies', 'files'])->get();
     }
+
+    /**
+     * @return Project
+     */
+    public function get(int $userId, string $projectId): Project
+    {
+        return Project::where('user_id', $userId)->where('id', $projectId)->first();
+    }
 }
