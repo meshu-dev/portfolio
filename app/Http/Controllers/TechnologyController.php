@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Technology\CreateTechnologyAction;
-use App\Actions\Technology\DeleteTechnologyAction;
-use App\Actions\Technology\GetAllTechnologiesAction;
+use App\Actions\Technology\{CreateTechnologyAction, DeleteTechnologyAction, GetAllTechnologiesAction};
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\TechnologyRequest;
 use Inertia\{Inertia, Response};
@@ -37,7 +35,7 @@ class TechnologyController extends Controller
         Inertia::flash([
             'message' => 'Technology has been deleted',
             'type'    => FlashTypeEnum::SUCCESS,
-        ])->back();
+        ]);
 
         return to_route('technologies.view');
     }

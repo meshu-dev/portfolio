@@ -20,6 +20,7 @@ class WorkExperienceRepository
     }
 
     /**
+     * @param int $userId
      * @return Collection<int, WorkExperience>
      */
     public function getAll(int $userId): Collection

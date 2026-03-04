@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Cv\Profile\GetProfileAction;
-use App\Actions\Cv\Profile\UpdateProfileAction;
+use App\Actions\Cv\Profile\{GetProfileAction, UpdateProfileAction};
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;

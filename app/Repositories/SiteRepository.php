@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 class SiteRepository
 {
     /**
+     * @param TypeEnum $type
      * @param array<int, string> $names
      * @return Collection<int, Site>
      */
