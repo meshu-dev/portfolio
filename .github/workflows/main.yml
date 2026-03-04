@@ -64,7 +64,7 @@ jobs:
       - name: Install Dependencies
         run: composer install --prefer-dist -q --no-interaction --no-scripts --no-ansi --no-progress 
 
-      - name: Run pint
+      - name: Run PHPStan
         run: composer run phpstan
 
   pint:
