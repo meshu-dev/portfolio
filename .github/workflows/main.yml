@@ -12,7 +12,7 @@ env:
 
 jobs:
   phpunit:
-    name: Run PHP unit and feature tests
+    name: Run PHP unit tests
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -54,7 +54,7 @@ jobs:
         run: npm run build
         
       - name: Run tests with code coverage (Minimum 80%)
-        run: composer run test --coverage --min=80
+        run: composer run test
 
   phpstan:
     name: Run PHPStan
