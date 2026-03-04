@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Enums\SkillEnum;
-use App\Models\Skill;
+use App\Models\{Skill, Technology};
 use Illuminate\Support\Collection;
 
 class TechnologyRepository

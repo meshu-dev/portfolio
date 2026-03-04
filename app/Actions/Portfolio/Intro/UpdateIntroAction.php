@@ -12,9 +12,11 @@ class UpdateIntroAction
     }
 
     /**
-     * @param string $userId
+     * @param int $userId
+     * @param string $line1
+     * @param string $line2
      */
-    public function execute(string $userId, string $line1, string $line2): void
+    public function execute(int $userId, string $line1, string $line2): void
     {
         $introTexts = $this->textRepository
                            ->getByNames($userId, ['portfolio_intro_1', 'portfolio_intro_2'])

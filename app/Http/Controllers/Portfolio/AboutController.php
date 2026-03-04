@@ -30,11 +30,12 @@ class AboutController extends Controller
 
     public function edit(AboutRequest $request): RedirectResponse
     {
+        /*
         resolve(UpdateAboutAction::class)->execute(
             (int) Auth::id(),
             $request->input('text'),
             $request->input('skills')
-        );
+        ); */
 
         Inertia::flash([
             'message' => 'About has been updated',

@@ -20,6 +20,6 @@ class ProjectRepository
      */
     public function get(int $userId, string $projectId): Project
     {
-        return Project::where('user_id', $userId)->where('id', $projectId)->first();
+        return Project::where('user_id', $userId)->where('id', $projectId)->firstOrFail();
     }
 }
