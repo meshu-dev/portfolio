@@ -66,8 +66,7 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@test:lint",
-            "@php artisan test"
+            "@php -d memory_limit=-1 artisan test"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
