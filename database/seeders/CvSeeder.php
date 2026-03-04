@@ -13,7 +13,6 @@ use App\Models\{
     User,
     WorkExperience
 };
-use Exception;
 use Illuminate\Database\Seeder;
 
 class CvSeeder extends Seeder

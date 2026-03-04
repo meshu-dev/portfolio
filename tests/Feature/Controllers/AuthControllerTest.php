@@ -7,7 +7,7 @@ describe('AuthController tests', function () {
     it('loads login page', function () {
         $this->get(route('login'))
              ->assertInertia(
-                fn (Assert $page) => $page->component('Login')
+                 fn (Assert $page) => $page->component('Login')
              );
     });
 

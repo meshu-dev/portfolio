@@ -22,7 +22,7 @@ class SkillController extends Controller
             [
                 'skills'       => $skills,
                 'technologies' => $technologies
-            ]    
+            ]
         );
     }
 

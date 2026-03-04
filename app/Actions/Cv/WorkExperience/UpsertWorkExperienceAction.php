@@ -23,7 +23,7 @@ class UpsertWorkExperienceAction
             }
             unset($params['is_current']);
         }
-        
+
         if (!empty($params['id'])) {
             $id = $params['id'];
             unset($params['id']);

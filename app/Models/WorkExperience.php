@@ -30,7 +30,7 @@ class WorkExperience extends Model
 
     /**
      * Check if the work experience entry is current employment
-     * 
+     *
      * @return Attribute<string, never>
      */
     protected function isCurrent(): Attribute

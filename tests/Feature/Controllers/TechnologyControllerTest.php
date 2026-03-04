@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\{FlashTypeEnum, UserEnum};
-use App\Models\{Skill, Technology, Text, User};
+use App\Models\{Technology, User};
 use Inertia\Testing\AssertableInertia as Assert;
 
 describe('TechnologyController tests', function () {
