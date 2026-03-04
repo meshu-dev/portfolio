@@ -23,10 +23,10 @@ import { Link } from '@inertiajs/vue3'
                 <Link href="/">Profile</Link>
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
-                <Link href="/skills">Skills</Link>
+                <Link href="/cv/skills">Skills</Link>
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
-                <Link href="/work-experiences">Work Experiences</Link>
+                <Link href="/cv/work-experiences">Work Experiences</Link>
               </NavigationMenuLink>
             </li>
           </ul>
@@ -38,13 +38,13 @@ import { Link } from '@inertiajs/vue3'
           <ul class="grid w-[200px] gap-4">
             <li>
               <NavigationMenuLink as-child>
-                <Link href="/intro">Intro</Link>
+                <Link href="/portfolio/intro">Intro</Link>
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
-                <Link href="/about">About</Link>
+                <Link href="/portfolio/about">About</Link>
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
-                <Link href="/projects">Projects</Link>
+                <Link href="/portfolio/projects">Projects</Link>
               </NavigationMenuLink>
             </li>
           </ul>

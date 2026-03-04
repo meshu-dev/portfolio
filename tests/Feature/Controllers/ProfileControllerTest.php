@@ -22,7 +22,7 @@ describe('ProfileController tests', function () {
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('Profile')
+            fn (Assert $page) => $page->component('Cv/Profile')
                                     ->where('intro', $intro)
                                     ->where('location', $location)
         );

@@ -15,7 +15,6 @@ import PageHeader from '@/components/PageHeader.vue'
 const props = defineProps({ skills: Object, technologies: Object })
 
 const formProps: {[key: string]: string} = {}
-console.log('props.skills', props.skills)
 
 for (const skill of props.skills) {
   formProps[skill.id] = skill.technologies.map((technology: Technology) => technology.id);
@@ -24,7 +23,6 @@ for (const skill of props.skills) {
 const form = useForm(formProps)
 
 const transformData = (data) => {
-  //const params: { skills: any[] } = { skills: [] }
   let params: { id: string, technologies: string[] }[] = []
 
   for (const skillId of Object.keys(formProps)) {

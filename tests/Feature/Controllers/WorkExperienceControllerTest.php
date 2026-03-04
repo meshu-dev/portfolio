@@ -21,7 +21,7 @@ describe('WorkExperienceController tests', function () {
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('WorkExperiences')
+            fn (Assert $page) => $page->component('Cv/WorkExperiences')
                                       ->where('workExperiences', $workExperiences)
         );
     });
@@ -32,7 +32,7 @@ describe('WorkExperienceController tests', function () {
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('WorkExperience')
+            fn (Assert $page) => $page->component('Cv/WorkExperience')
         );
     });
 
@@ -45,7 +45,7 @@ describe('WorkExperienceController tests', function () {
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('WorkExperience')
+            fn (Assert $page) => $page->component('Cv/WorkExperience')
         );
     });
 

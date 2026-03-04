@@ -6,18 +6,48 @@ import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
 import PageHeader from '@/components/PageHeader.vue'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Technology } from '@/types/portfolio'
 
-/*
-const props = defineProps({ line1: String, line2: String })
+const props = defineProps({ text: String, skillTechnologies: Object, technologies: Object })
 
 const form = useForm({
-  line1: props.line1,
-  line2: props.line2,
-}) */
+  text: props.text,
+  skillTechnologies: props.skillTechnologies.map((technology: Technology) => technology.id)
+})
 </script>
 
 <template>
   <PageHeader value="About" />
   <Form action="/about" method="put">
+    <Field class="mb-4">
+      <Label for="text">Text</Label>
+      <Textarea name="text" v-model="form.text" autoComplete="off" placeholder="Type about text here" class="min-h-[200px]" />
+    </Field>
+    <Field class="mb-4">
+      <Label for="skills">Skills</Label>
+      <Select name="skills" multiple v-model:modelValue="form.skillTechnologies">
+        <SelectTrigger class="w-xl">
+          <SelectValue placeholder="Select technology" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem  v-for="technology in technologies" :value="technology.id" selected>
+            {{ technology.name }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    </Field>
+    <Button
+      class="cursor-pointer"
+      type="submit">
+      Save
+    </Button>
   </Form>
 </template>

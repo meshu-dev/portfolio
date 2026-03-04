@@ -30,7 +30,7 @@ describe('SkillController tests', function () {
 
         // Assert
         $response->assertInertia(
-            fn (Assert $page) => $page->component('Skills')
+            fn (Assert $page) => $page->component('Cv/Skills')
                                     ->where('skills', $skills)
                                     ->where('technologies', $technologies)
         );

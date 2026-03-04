@@ -8,4 +8,5 @@ enum SkillEnum: string
     case FRONTEND = 'Frontend';
     case FRAMEWORKS = 'Frameworks';
     case MISC = 'Misc';
+    case PORTFOLIO = 'Portfolio';
 }
