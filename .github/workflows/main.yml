@@ -53,7 +53,7 @@ jobs:
       - name: Build node modules
         run: npm run build
         
-      - name: Run tests with code coverage (Minimum 80%)
+      - name: Run tests with code coverage
         run: composer run test
 
   phpstan:
