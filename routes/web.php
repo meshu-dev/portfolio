@@ -15,8 +15,7 @@ Route::post('/login/demo', [AuthController::class, 'demoLogin']);
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/', [ProfileController::class, 'view'])->name('profile.view'); 
 
-    Route::prefix('cv')->group(function () {       
-        //Route::get('/profile', [ProfileController::class, 'view'])->name('profile.view'); 
+    Route::prefix('cv')->group(function () {
         Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
         Route::prefix('skills')->group(function () {
@@ -52,9 +51,12 @@ Route::middleware(['auth:web'])->group(function () {
         });
 
         Route::prefix('projects')->group(function () {
-            Route::get('/',     [ProjectController::class, 'list'])->name('projects.list');
-            Route::get('/{id}', [ProjectController::class, 'view'])->name('projects.view');
-            //Route::put('/', [SkillController::class, 'edit'])->name('skills.edit');
+            Route::get('/',        [ProjectController::class, 'list'])->name('projects.list');
+            Route::get('/new',     [ProjectController::class, 'new'])->name('projects.new');
+            Route::get('/{id}',    [ProjectController::class, 'view'])->name('projects.view');
+            Route::post('/',       [ProjectController::class, 'add'])->name('projects.add');
+            Route::put('/{id}',    [ProjectController::class, 'edit'])->name('projects.edit');
+            Route::delete('/{id}', [ProjectController::class, 'delete'])->name('projects.delete');
         });
     });
 

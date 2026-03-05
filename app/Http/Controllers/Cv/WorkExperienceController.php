@@ -23,15 +23,15 @@ class WorkExperienceController extends Controller
         return Inertia::render('Cv/WorkExperiences', ['workExperiences' => $workExperiences]);
     }
 
-    public function new(): Response
-    {
-        return Inertia::render('Cv/WorkExperience');
-    }
-
     public function view(string $id): Response
     {
         $workExperience = resolve(GetWorkExperienceAction::class)->execute($id);
         return Inertia::render('Cv/WorkExperience', ['workExperience' => $workExperience]);
+    }
+
+    public function new(): Response
+    {
+        return Inertia::render('Cv/WorkExperience');
     }
 
     public function add(WorkExperienceRequest $request): RedirectResponse

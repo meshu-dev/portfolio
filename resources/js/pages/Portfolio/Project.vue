@@ -10,7 +10,7 @@ import Button from '@/components/ui/button/Button.vue'
 const props = defineProps({ project: Object })
 
 const form = useForm({
-  title: props.project?.name || '',
+  name: props.project?.name || '',
   description: props.project?.description || '',
   url: props.project?.url || ''
 })
@@ -18,18 +18,23 @@ const form = useForm({
 
 <template>
   <PageHeader value="Project" />
-  <Form v-if="project" :action="`/projects/${project.id}`" method="put">
+  <Form v-if="project" :action="`/portfolio/projects/${project.id}`" method="put">
     <Field class="mb-4">
-      <Label for="intro">Title</Label>
-      <Input type="text" name="intro" v-model="form.title" autoComplete="off" />
+      <Label for="name">Name</Label>
+      <Input type="text" name="name" v-model="form.name" autoComplete="off" />
     </Field>
     <Field class="mb-4">
-      <Label for="intro">Description</Label>
+      <Label for="description">Description</Label>
       <Input type="text" name="description" v-model="form.description" autoComplete="off" />
     </Field>
     <Field class="mb-4">
-      <Label for="intro">Url</Label>
+      <Label for="url">Url</Label>
       <Input type="text" name="url" v-model="form.url" autoComplete="off" />
     </Field>
+    <Button
+      class="cursor-pointer"
+      type="submit">
+      Save
+    </Button>
   </Form>
 </template>
