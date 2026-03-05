@@ -36,26 +36,32 @@ class PortfolioSeeder extends Seeder
     {
         return [
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'CV',
                 'url'  => 'https://github.com/meshu-dev/cv'
             ]),
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'MeshPro API',
                 'url'  => 'https://github.com/meshu-dev/meshpro-api'
             ]),
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'Dev Nudge',
                 'url'  => 'https://github.com/meshu-dev/requiredev'
             ]),
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'Dev Push',
                 'url'  => 'https://github.com/meshu-dev/devpush'
             ]),
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'Dev Push WP',
                 'url'  => 'https://github.com/meshu-dev/devpush-wp'
             ]),
             Repository::create([
+                'user_id' => UserEnum::ADMIN,
                 'name' => 'Dev Push API',
                 'url'  => 'https://github.com/meshu-dev/devpush-api'
             ])
@@ -129,6 +135,7 @@ class PortfolioSeeder extends Seeder
         ] = $repositories;
 
         $cvProject = Project::create([
+            'user_id'     => UserEnum::ADMIN,
             'name'        => 'CV',
             'description' => 'Digital CV',
             'url'         => 'https://cv.meshpro.io'
@@ -145,6 +152,7 @@ class PortfolioSeeder extends Seeder
         }
 
         $devNudgeProject = Project::create([
+            'user_id'     => UserEnum::ADMIN,
             'name'        => 'Dev Nudge',
             'description' => 'Developer blog',
             'url'         => 'https://devnudge.io'

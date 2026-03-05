@@ -18,43 +18,49 @@ return new class () extends Migration {
         });
 
         Schema::create('repositories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('url');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('description');
             $table->string('url');
             $table->smallInteger('order')->default(0);
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('project_repositories', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('repository_id');
+            $table->id()->primary();
+            $table->foreignUuid('project_id');
+            $table->foreignUuid('repository_id');
 
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('repository_id')->references('id')->on('repositories');
+            //$table->foreignUuid('project_id')->references('id')->on('projects');
+            //$table->foreignUuid('repository_id')->references('id')->on('repositories');
         });
 
         Schema::create('project_technologies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('technology_id');
+            $table->foreignUuid('project_id');
+            $table->foreignUuid('technology_id');
 
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('technology_id')->references('id')->on('technologies');
+            //$table->foreignUuid('project_id')->references('id')->on('projects');
+            //$table->foreignUuid('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('project_files', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('project_id');
+            $table->id()->primary();
+            $table->foreignUuid('project_id');
             $table->unsignedBigInteger('file_id');
 
-            $table->foreign('project_id')->references('id')->on('projects');
+            //$table->foreignUuid('project_id')->references('id')->on('projects');
             $table->foreign('file_id')->references('id')->on('files');
         });
 

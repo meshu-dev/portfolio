@@ -16,7 +16,7 @@ import { Link } from '@inertiajs/vue3'
     <NavigationMenuList>
       <NavigationMenuItem>
         <NavigationMenuTrigger>CV</NavigationMenuTrigger>
-        <NavigationMenuContent>
+        <NavigationMenuContent class="z-1">
           <ul class="grid w-[200px] gap-4">
             <li>
               <NavigationMenuLink as-child>
@@ -34,7 +34,7 @@ import { Link } from '@inertiajs/vue3'
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuTrigger>Portfolio</NavigationMenuTrigger>
-        <NavigationMenuContent>
+        <NavigationMenuContent class="z-1">
           <ul class="grid w-[200px] gap-4">
             <li>
               <NavigationMenuLink as-child>
@@ -42,6 +42,9 @@ import { Link } from '@inertiajs/vue3'
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
                 <Link href="/portfolio/about">About</Link>
+              </NavigationMenuLink>
+              <NavigationMenuLink as-child>
+                <Link href="/portfolio/repositories">Repositories</Link>
               </NavigationMenuLink>
               <NavigationMenuLink as-child>
                 <Link href="/portfolio/projects">Projects</Link>

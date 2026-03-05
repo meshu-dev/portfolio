@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
+    use HasUuids;
+
     protected $table = 'projects';
 
-    protected $fillable = ['name', 'description', 'url'];
+    protected $fillable = ['user_id', 'name', 'description', 'url'];
 
     public $timestamps = false;
 

@@ -11,7 +11,7 @@ class Text extends Model
 
     protected $table = 'texts';
 
-    protected $fillable = ['name', 'value'];
+    protected $fillable = ['user_id', 'name', 'value'];
 
     public $timestamps = false;
 }

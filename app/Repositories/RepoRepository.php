@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Project;
+use App\Models\Repository;
 use Illuminate\Support\Collection;
 
-class ProjectRepository
+class RepoRepository
 {
     /**
      * @return Collection<int, Project>
@@ -13,7 +14,7 @@ class ProjectRepository
     public function getAll(int $userId): Collection
     {
         //return Project::with(['repositories', 'technologies', 'files'])->where('user_id', $userId)->get();
-        return Project::with(['repositories', 'technologies', 'files'])->get();
+        return Repository::with(['repositories', 'technologies', 'files'])->get();
     }
 
     /**

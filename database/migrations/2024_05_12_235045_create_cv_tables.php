@@ -11,32 +11,42 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('texts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->text('value');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('technologies', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('skills', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('skill_technologies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('skill_id');
-            $table->unsignedBigInteger('technology_id');
+            $table->foreignUuid('skill_id');
+            $table->foreignUuid('technology_id');
 
-            $table->foreign('skill_id')->references('id')->on('skills');
-            $table->foreign('technology_id')->references('id')->on('technologies');
+            //$table->foreign('skill_id')->references('id')->on('skills');
+            //$table->foreign('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('work_experiences', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('company');
             $table->string('location');
@@ -45,6 +55,8 @@ return new class () extends Migration {
             $table->string('description');
             $table->json('responsibilities');
             $table->boolean('active');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

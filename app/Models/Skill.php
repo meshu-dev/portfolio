@@ -12,7 +12,7 @@ class Skill extends Model
 
     protected $table = 'skills';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id', 'name'];
 
     public $timestamps = false;
 

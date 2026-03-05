@@ -14,8 +14,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cv', [CvController::class, 'get'])->name('cv');
 
     Route::prefix('portfolio')->group(function () {
-        Route::get('/intro', [PortfolioController::class, 'getIntro'])->name('portfolio.intro');
-        Route::get('/about', [PortfolioController::class, 'getAbout'])->name('portfolio.about');
+        Route::get('/intro',    [PortfolioController::class, 'getIntro'])->name('portfolio.intro');
+        Route::get('/about',    [PortfolioController::class, 'getAbout'])->name('portfolio.about');
         Route::get('/projects', [PortfolioController::class, 'getProjects'])->name('portfolio.projects');
     });
 });

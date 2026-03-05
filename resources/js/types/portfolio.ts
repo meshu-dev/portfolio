@@ -1,5 +1,22 @@
 import { CalendarDate } from '@internationalized/date'
 
+export type ProjectListItem = {
+    id: string,
+    name: string;
+    url: string;
+}
+
+export type Project = ProjectListItem & {
+  description: string
+  order: number
+}
+
+export type Repository = {
+    id: string,
+    name: string;
+    url: string;
+}
+
 export type Skill = {
     id: string,
     name: string;
