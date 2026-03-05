@@ -30,7 +30,7 @@ class RepositoryController extends Controller
             'type'    => FlashTypeEnum::SUCCESS,
         ]);
 
-        return to_route('repositories.view');
+        return to_route('repositories.list');
     }
 
     public function delete(string $id): RedirectResponse
@@ -42,6 +42,6 @@ class RepositoryController extends Controller
             'type'    => FlashTypeEnum::SUCCESS,
         ]);
 
-        return to_route('repositories.view');
+        return to_route('repositories.list');
     }
 }

@@ -32,7 +32,7 @@ const deleteRepositoryDialog = (id: string, name: string) => {
 
 const deleteRepository = () => {
   deleteDialogOpen.value = false
-  router.delete(`/repositories/${deleteId.value}`)
+  router.delete(`/portfolio/repositories/${deleteId.value}`)
 }
 </script>
 
