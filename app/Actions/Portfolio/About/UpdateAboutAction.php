@@ -12,7 +12,7 @@ class UpdateAboutAction
 {
     /**
      * @param string $text
-     * @param array<string, int> $technologyIds
+     * @param array<int, string> $technologyIds
      */
     public function execute(string $text, array $technologyIds): void
     {

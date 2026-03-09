@@ -14,7 +14,7 @@ class RepositoryController extends Controller
 {
     public function list(): Response
     {
-        $repositories = resolve(GetRepositoriesAction::class)->execute((int) Auth::id());
+        $repositories = resolve(GetRepositoriesAction::class)->execute();
         return Inertia::render('Portfolio/Repositories', ['repositories' => $repositories]);
     }
 

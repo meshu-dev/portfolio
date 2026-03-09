@@ -12,7 +12,7 @@ class ProjectRepository
      */
     public function getAll(int $userId): Collection
     {
-        return Project::with(['repositories', 'technologies', 'files'])->where('user_id', $userId)->get();
+        return Project::where('user_id', $userId)->get();
     }
 
     /**
@@ -20,6 +20,9 @@ class ProjectRepository
      */
     public function get(int $userId, string $projectId): Project
     {
-        return Project::where('user_id', $userId)->where('id', $projectId)->firstOrFail();
+        return Project::with(['repositories', 'technologies', 'files'])
+                      ->where('user_id', $userId)
+                      ->where('id', $projectId)
+                      ->firstOrFail();
     }
 }

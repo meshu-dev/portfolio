@@ -7,7 +7,7 @@ use App\Models\Skill;
 class UpdateSkillTechnologiesAction
 {
     /**
-     * @param array<string, mixed> $skillTechnologies
+     * @param array<int, array<string, array<int, string>|string>> $skillTechnologies
      */
     public function execute(array $skillTechnologies): void
     {

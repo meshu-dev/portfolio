@@ -18,12 +18,21 @@ class UpsertProjectAction
             $id = $params['id'];
             unset($params['id']);
 
-            Project::where('user_id', $userId)
-                   ->where('id', $id)
-                   ->update($params);
+            $project = Project::where('user_id', $userId)
+                              ->where('id', $id)
+                              ->firstOrFail();
+
+            $project->update([
+                'name'        => $params['name'],
+                'description' => $params['description'],
+                'url'         => $params['url'],
+            ]);
+
         } else {
             $params['user_id'] = $userId;
-            Project::create($params);
+            $project = Project::create($params);
         }
+        $project->repositories()->sync($params['repositories']);
+        $project->technologies()->sync($params['technologies']);
     }
 }

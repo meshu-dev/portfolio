@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { FormDataConvertible } from '@inertiajs/core'
 import { useForm } from '@inertiajs/vue3'
 import { Form } from '@inertiajs/vue3'
 import { Field } from '@/components/ui/field'
@@ -23,7 +24,7 @@ const form = useForm({
   skillTechnologies: props.skillTechnologies.map((technology: Technology) => technology.id)
 })
 
-const transformData = (data) => {
+const transformData = (data: Record<string, FormDataConvertible>) => {
   data.technologies = form.skillTechnologies
   return { ...data }
 }
