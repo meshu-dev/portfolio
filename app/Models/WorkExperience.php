@@ -24,8 +24,6 @@ class WorkExperience extends Model
         'active'
     ];
 
-    //protected $casts = ['responsibilities' => 'array'];
-
     public $timestamps = false;
 
     /**
