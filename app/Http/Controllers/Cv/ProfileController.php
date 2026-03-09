@@ -15,7 +15,7 @@ class ProfileController extends Controller
     public function view(): Response
     {
         $profile = resolve(GetProfileAction::class)->execute((int) Auth::id());
-        $params  = ['intro' => $profile->get('intro'), 'location' => $profile->get('location')];
+        $params  = ['intro' => $profile->intro, 'location' => $profile->location];
 
         return Inertia::render('Cv/Profile', $params);
     }
