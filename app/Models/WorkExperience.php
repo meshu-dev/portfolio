@@ -44,13 +44,18 @@ class WorkExperience extends Model
     }
 
     /**
+     * @param string $value
      * @return array<int, string>
      */
-    public function getResponsibilitiesAttribute($value): array
+    public function getResponsibilitiesAttribute(string $value): array
     {
         return json_decode($value, true);
     }
 
+    /**
+     * @param string $value
+     * @return void
+     */
     public function setResponsibilitiesAttribute($value): void
     {
         $this->attributes['responsibilities'] = json_encode($value, JSON_UNESCAPED_SLASHES);
