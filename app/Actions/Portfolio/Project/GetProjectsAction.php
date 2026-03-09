@@ -17,10 +17,10 @@ class GetProjectsAction
     /**
      * @return array<string, AnonymousResourceCollection<int, Project>>
      */
-    public function execute(): array
+    public function execute(int $userId): array
     {
         return [
-            'projects' => ProjectResource::collection($this->projectRepository->getAll())
+            'projects' => ProjectResource::collection($this->projectRepository->getAll($userId))
         ];
     }
 }

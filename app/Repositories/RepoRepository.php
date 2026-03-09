@@ -9,19 +9,18 @@ use Illuminate\Support\Collection;
 class RepoRepository
 {
     /**
-     * @return Collection<int, Project>
+     * @return Collection<int, Repository>
      */
     public function getAll(int $userId): Collection
     {
-        //return Project::with(['repositories', 'technologies', 'files'])->where('user_id', $userId)->get();
-        return Repository::with(['repositories', 'technologies', 'files'])->get();
+        return Repository::where('user_id', $userId)->get();
     }
 
     /**
-     * @return Project
+     * @return Repository
      */
-    public function get(int $userId, string $projectId): Project
+    public function get(int $userId, string $repoId): Repository
     {
-        return Project::where('user_id', $userId)->where('id', $projectId)->firstOrFail();
+        return Repository::where('user_id', $userId)->where('id', $repoId)->firstOrFail();
     }
 }
