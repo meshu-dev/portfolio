@@ -2,34 +2,15 @@
 
 namespace App\Actions\Portfolio\About;
 
-use App\Actions\File\GetFileUrlAction;
-use App\Http\Resources\SkillResource;
-use App\Repositories\{
-    TextRepository,
-    SkillRepository
-};
+use App\Models\About;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateAboutAction
 {
-    public function __construct(
-        protected TextRepository $textRepository,
-        protected SkillRepository $skillRepository
-    ) {
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function execute(int $userId): array
+    public function execute(string $text): void
     {
-        $aboutImgUrl     = resolve(GetFileUrlAction::class, ['name' => 'about.png'])->execute();
-        $textList        = $this->textRepository->getByNames($userId, ["about"])->toArray();
-        $portfolioSkills = $this->skillRepository->getByNames($userId, ["Portfolio"]);
+        $userId = (int) Auth::id();
 
-        return [
-            'image'  => $aboutImgUrl,
-            'text'   => $textList['about'],
-            'skills' => SkillResource::collection($portfolioSkills)
-        ];
+        About::where('user_id', $userId)->update(['text' => $text]);
     }
 }

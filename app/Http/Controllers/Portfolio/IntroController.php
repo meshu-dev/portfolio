@@ -23,7 +23,6 @@ class IntroController extends Controller
     public function edit(IntroRequest $request): RedirectResponse
     {
         resolve(UpdateIntroAction::class)->execute(
-            (int) Auth::id(),
             $request->input('line1'),
             $request->input('line2')
         );

@@ -17,6 +17,23 @@ return new class () extends Migration {
             $table->text('url');
         });
 
+        Schema::create('intros', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('line1');
+            $table->string('line2');
+
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::create('abouts', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('text');
+
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
         Schema::create('repositories', function (Blueprint $table) {
             $table->uuid('id');
             $table->unsignedBigInteger('user_id');

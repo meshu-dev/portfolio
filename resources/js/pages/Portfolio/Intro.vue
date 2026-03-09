@@ -17,7 +17,7 @@ const form = useForm({
 
 <template>
   <PageHeader value="Intro" />
-  <Form action="/intro" method="put">
+  <Form action="/portfolio/intro" method="put">
     <Field class="mb-4">
       <Label for="line1">Line 1</Label>
       <Input type="text" name="line1" v-model="form.line1" autoComplete="off" placeholder="Line 1" />

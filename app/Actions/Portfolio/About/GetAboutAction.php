@@ -3,17 +3,13 @@
 namespace App\Actions\Portfolio\About;
 
 use App\Actions\File\GetFileUrlAction;
-use App\Actions\Technology\GetAllTechnologiesAction;
 use App\Enums\SkillEnum;
-use App\Repositories\{
-    TextRepository,
-    TechnologyRepository
-};
+use App\Models\About;
+use App\Repositories\TechnologyRepository;
 
 class GetAboutAction
 {
     public function __construct(
-        protected TextRepository $textRepository,
         protected TechnologyRepository $technologyRepository
     ) {
     }
@@ -24,13 +20,12 @@ class GetAboutAction
     public function execute(int $userId): array
     {
         $aboutImgUrl       = resolve(GetFileUrlAction::class, ['name' => 'about.png'])->execute();
-        $textList          = $this->textRepository->getByNames($userId, ["about"])->toArray();
+        $about             = About::where('user_id', $userId)->firstOrFail();
         $skillTechnologies = $this->technologyRepository->getBySkill($userId, SkillEnum::PORTFOLIO);
-        $technologies      = resolve(GetAllTechnologiesAction::class)->execute();
 
         return [
             'image'             => $aboutImgUrl,
-            'text'              => $textList['about'],
+            'text'              => $about->text,
             'skillTechnologies' => $skillTechnologies,
         ];
     }

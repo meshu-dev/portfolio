@@ -7,12 +7,14 @@ use App\Enums\DynamicValueEnum;
 use App\Enums\UserEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
+    About,
     File,
+    Intro,
     Project,
     Repository,
     Skill,
     Technology,
-    Text
+    User
 };
 use Illuminate\Database\Seeder;
 
@@ -70,17 +72,15 @@ class PortfolioSeeder extends Seeder
 
     protected function addIntroText()
     {
-        Text::create([
-            'user_id' => UserEnum::ADMIN,
-            'name'    => 'portfolio_intro_1',
-            'value'   => "Hello, I'm Mesh"
-        ]);
+        $users = User::all();
 
-        Text::create([
-            'user_id' => UserEnum::ADMIN,
-            'name'    => 'portfolio_intro_2',
-            'value'   => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience"
-        ]);
+        foreach ($users as $user) {
+            Intro::create([
+                'user_id' => $user->id,
+                'line1'   => "Hello, I'm Mesh",
+                'line2'   => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience",
+            ]);
+        }
     }
 
     protected function addAboutData()
@@ -91,11 +91,14 @@ class PortfolioSeeder extends Seeder
             "<p>For a long time I've been interested in software development and continue to spend time researching " .
             "and improving upon my skills and experience in new and popular technologies.</p>";
 
-        Text::create([
-            'user_id' => UserEnum::ADMIN,
-            'name'    => 'about',
-            'value'   => $aboutMe
-        ]);
+        $users = User::all();
+
+        foreach ($users as $user) {
+            About::create([
+                'user_id' => $user->id,
+                'text'    => $aboutMe,
+            ]);
+        }
 
         $this->addFile('about.png');
     }

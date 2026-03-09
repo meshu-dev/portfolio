@@ -2,29 +2,22 @@
 
 namespace App\Actions\Portfolio\Intro;
 
-use App\Repositories\TextRepository;
+use App\Models\Intro;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateIntroAction
 {
-    public function __construct(
-        protected TextRepository $textRepository
-    ) {
-    }
-
     /**
-     * @param int $userId
      * @param string $line1
      * @param string $line2
      */
-    public function execute(int $userId, string $line1, string $line2): void
+    public function execute(string $line1, string $line2): void
     {
-        $introTexts = $this->textRepository
-                           ->getByNames($userId, ['portfolio_intro_1', 'portfolio_intro_2'])
-                           ->toArray();
-
-        //$introTexts = $introTexts->keyBy('name');
-
-        //$line1Model = $introText->get('portfolio_intro_1');
+        Intro::where('user_id', (int) Auth::id())
+                ->update([
+                    'line1' => $line1,
+                    'line2' => $line2
+                ]);
         
         
     }

@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3'
-import { Form } from '@inertiajs/vue3'
-import { Field } from '@/components/ui/field'
-import Label from '@/components/ui/label/Label.vue'
-import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { ProjectListItem } from '@/types/portfolio'
@@ -44,6 +39,9 @@ const deleteProject = () => {
 
 <template>
   <PageHeader value="Projects" />
+  <Link href="/portfolio/projects/new">
+    <Button class="btn-primary cursor-pointer">Add</Button>
+  </Link>
   <div v-if="projects && projects.length > 0" class="min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>

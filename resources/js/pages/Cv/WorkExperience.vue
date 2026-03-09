@@ -15,6 +15,7 @@ import PageHeader from '@/components/PageHeader.vue'
 const props = defineProps({ workExperience: Object })
 const workExperience: WorkExperience|null = props.workExperience ? props.workExperience as WorkExperience : null
 const responsibilityLimit: number = 5
+
 const form = useForm({
   title:            workExperience?.title || '',
   company:          workExperience?.company || '',
@@ -27,15 +28,15 @@ const form = useForm({
   active:           workExperience?.active || false,
 })
 
-const addResponsibility = () => {
+const addResponsibility = (): void => {
   form.responsibilities.push('')
 }
 
-const removeResponsibility = (index: number) => {
+const removeResponsibility = (index: number): void => {
   form.responsibilities.splice(index, 1)
 }
 
-const submitForm = () => {
+const submitForm = (): void => {
   const transformParams = (data: any) => {
     data.start_date = form.start_date.toString()
     data.end_date   = form.end_date ? form.end_date.toString() : null

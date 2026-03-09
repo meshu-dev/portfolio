@@ -7,7 +7,7 @@ use App\Enums\DynamicValueEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     File,
-    Text,
+    Profile,
     Skill,
     Technology,
     User,
@@ -31,34 +31,16 @@ class CvSeeder extends Seeder
     protected function addProfileData()
     {
         $users = User::all();
-        $texts = $this->getTexts();
 
         foreach ($users as $user) {
-            foreach ($texts as $text) {
-                $text['user_id'] = $user->id;
-                Text::create($text);
-            }
+            Profile::create([
+                'user_id'   => $user->id,
+                'intro'     => "Full-stack developer with over " .
+                                DynamicValueEnum::YEARS_WORKED->value .
+                                " years experience in PHP and JavaScript",
+                'location'  => 'West Midlands, UK',
+            ]);
         }
-    }
-
-    private function getTexts(): array
-    {
-        return [
-            [
-                'name'  => 'fullname',
-                'value' => 'Harmesh Uppal'
-            ],
-            [
-                'name'  => 'intro',
-                'value' =>  "Full-stack developer with over " .
-                            DynamicValueEnum::YEARS_WORKED->value .
-                            " years experience in PHP and JavaScript"
-            ],
-            [
-                'name'  => 'location',
-                'value' => 'West Midlands, UK'
-            ]
-        ];
     }
 
     protected function addSkills()

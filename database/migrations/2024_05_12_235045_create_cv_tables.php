@@ -19,6 +19,15 @@ return new class () extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
         });
 
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('intro');
+            $table->string('location');
+
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
         Schema::create('technologies', function (Blueprint $table) {
             $table->uuid('id');
             $table->unsignedBigInteger('user_id');
