@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\{FlashTypeEnum, UserEnum};
-use App\Models\{Text, User};
+use App\Models\{Profile, User};
 use Inertia\Testing\AssertableInertia as Assert;
 
 describe('ProfileController tests', function () {
@@ -11,11 +11,7 @@ describe('ProfileController tests', function () {
 
     it('loads profile page', function () {
         // Arrange
-        $textData = Text::where('user_id', UserEnum::ADMIN)->get();
-        $textData = $textData->keyBy('name');
-
-        $intro    = str_replace('##years_worked##', 15, $textData->get('intro')['value']);
-        $location = $textData->get('location')['value'];
+        $profile = Profile::where('user_id', UserEnum::ADMIN)->first();
 
         // Act
         $response = $this->get(route('profile.view'));
@@ -23,8 +19,8 @@ describe('ProfileController tests', function () {
         // Assert
         $response->assertInertia(
             fn (Assert $page) => $page->component('Cv/Profile')
-                                    ->where('intro', $intro)
-                                    ->where('location', $location)
+                                    ->where('intro', $profile->intro)
+                                    ->where('location', $profile->location)
         );
     });
 
