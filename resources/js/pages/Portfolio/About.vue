@@ -22,18 +22,23 @@ const form = useForm({
   text: props.text,
   skillTechnologies: props.skillTechnologies.map((technology: Technology) => technology.id)
 })
+
+const transformData = (data) => {
+  data.technologies = form.skillTechnologies
+  return { ...data }
+}
 </script>
 
 <template>
   <PageHeader value="About" />
-  <Form action="/about" method="put">
+  <Form action="/portfolio/about" method="put" :transform="data => transformData(data)">
     <Field class="mb-4">
       <Label for="text">Text</Label>
       <Textarea name="text" v-model="form.text" autoComplete="off" placeholder="Type about text here" class="min-h-[200px]" />
     </Field>
     <Field class="mb-4">
       <Label for="skills">Skills</Label>
-      <Select name="skills" multiple v-model:modelValue="form.skillTechnologies">
+      <Select name="technologies" multiple v-model:modelValue="form.skillTechnologies">
         <SelectTrigger class="w-xl">
           <SelectValue placeholder="Select technology" />
         </SelectTrigger>

@@ -12,9 +12,9 @@ class UpdateAboutAction
 {
     /**
      * @param string $text
-     * @param array<string, int> $technologies
+     * @param array<string, int> $technologyIds
      */
-    public function execute(string $text, array $technologies): void
+    public function execute(string $text, array $technologyIds): void
     {
         $userId = (int) Auth::id();
 
@@ -24,7 +24,7 @@ class UpdateAboutAction
                       ->where('name', SkillEnum::PORTFOLIO->value)
                       ->firstOrFail();
 
-        $skillTechnologies = ['id' => $skill->id, 'technologies' => $technologies];
+        $skillTechnologies = [['id' => $skill->id, 'technologies' => $technologyIds]];
 
         resolve(UpdateSkillTechnologiesAction::class)->execute($skillTechnologies);
     }
