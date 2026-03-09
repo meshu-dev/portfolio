@@ -22,8 +22,8 @@ class AboutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text'   => 'required|string',
-            'skills' => 'required|string',
+            'text'         => 'required|string',
+            'technologies' => 'required|array|distinct',
         ];
     }
 }

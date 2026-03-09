@@ -36,7 +36,7 @@ class PortfolioController extends Controller
      */
     public function getProjects(GetProjectsAction $getProjectsAction): JsonResponse
     {
-        $data = $getProjectsAction->execute();
+        $data = $getProjectsAction->execute((int) Auth::id());
         return response()->json(['data' => $data]);
     }
 }

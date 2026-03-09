@@ -32,7 +32,7 @@ class AboutController extends Controller
     {
         resolve(UpdateAboutAction::class)->execute(
             $request->input('text'),
-            $request->input('skills')
+            $request->input('technologies')
         );
 
         Inertia::flash([
