@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\UploadFileAction;
+use App\Actions\File\MoveFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Enums\UserEnum;
 use App\Exceptions\FileNotUploadedException;
@@ -174,7 +174,7 @@ class PortfolioSeeder extends Seeder
     protected function addFile($filename): File|null
     {
         try {
-            $fileUrl = resolve(UploadFileAction::class)->execute($filename);
+            $fileUrl = resolve(MoveFileAction::class)->execute($filename);
         } catch (FileNotUploadedException) {
             $fileUrl = fake()->imageUrl(512, 512);
         }

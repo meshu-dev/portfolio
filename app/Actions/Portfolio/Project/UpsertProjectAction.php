@@ -2,6 +2,7 @@
 
 namespace App\Actions\Portfolio\Project;
 
+use App\Actions\File\UploadFileAction;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,5 +35,7 @@ class UpsertProjectAction
         }
         $project->repositories()->sync($params['repositories']);
         $project->technologies()->sync($params['technologies']);
+
+        $file = resolve(UploadFileAction::class)->execute($params['image']);
     }
 }

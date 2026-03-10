@@ -7,6 +7,7 @@ import { Field } from '@/components/ui/field'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
+import { Progress } from '@/components/ui/progress'
 import TechnologySelect from '@/components/Technology/TechnologySelect.vue'
 import RepositorySelect from '@/components/Repository/RepositorySelect.vue'
 
@@ -17,29 +18,31 @@ const form = useForm({
   name: project?.name || '',
   description: project?.description || '',
   url: project?.url || '',
-  repositories: project.repositories.map((repository: Repository) => repository.id),
-  technologies: project.technologies.map((technology: Technology) => technology.id),
+  repositories: project?.repositories.map((repository: Repository) => repository.id) || [],
+  technologies: project?.technologies.map((technology: Technology) => technology.id) || [],
+  image: '',
 })
 
 const submitForm = (): void => {
-  if (project?.id) {
-    form.put(`/projects/${project.id}`)
-  } else {
-    form.post(`/projects`)
+  const transformParams = (data: Record<string, FormDataConvertible>) => {
+    data.repositories = form.repositories
+    data.technologies = form.technologies
+    return data
   }
-  console.log('submitForm')
-}
 
-const transformData = (data: Record<string, FormDataConvertible>) => {
-  data.repositories = form.repositories
-  data.technologies = form.technologies
-  return { ...data }
+  if (project?.id) {
+    form.transform(transformParams).put(`/portfolio/projects/${project.id}`)
+  } else {
+    form.transform(transformParams).post(`/portfolio/projects`)
+  }
+
+  console.log('submitForm')
 }
 </script>
 
 <template>
   <PageHeader value="Project" />
-  <Form v-if="project" :action="`/portfolio/projects/${project.id}`" method="put" :transform="data => transformData(data)">
+  <form class="flex flex-col gap-3" @submit.prevent>
     <Field class="mb-4">
       <Label for="name">Name</Label>
       <Input type="text" name="name" v-model="form.name" autoComplete="off" />
@@ -64,10 +67,18 @@ const transformData = (data: Record<string, FormDataConvertible>) => {
         v-model="form.technologies"
         :technologies="$props.technologies" />
     </Field>
+    <Field class="mb-4">
+      <Label for="image">Image</Label>
+      <Input type="file" name="image" @input="form.image = $event.target.files[0]" autoComplete="off" />
+    </Field>
+    <Progress
+      v-if="form.progress"
+      :model-value="form.progress.percentage" />
     <Button
-      class="cursor-pointer"
-      type="submit">
+      size="lg"
+      class="w-20 cursor-pointer"
+      @click="submitForm">
       Save
     </Button>
-  </Form>
+  </form>
 </template>

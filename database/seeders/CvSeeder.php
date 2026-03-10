@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\UploadFileAction;
+use App\Actions\File\MoveFileAction;
 use App\Enums\DynamicValueEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
@@ -212,7 +212,7 @@ built with it'
         $filename = 'cv.pdf';
 
         try {
-            $fileUrl = resolve(UploadFileAction::class)->execute($filename);
+            $fileUrl = resolve(MoveFileAction::class)->execute($filename);
         } catch (FileNotUploadedException $e) {
             $fileUrl = fake()->imageUrl(512, 512);
         }

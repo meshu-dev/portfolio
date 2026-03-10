@@ -2,7 +2,7 @@
 
 namespace App\Actions\Cv;
 
-use App\Actions\File\UploadFileAction;
+use App\Actions\File\MoveFileAction;
 use App\Models\File;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -31,7 +31,7 @@ class CreateCvPdfAction
         $pdf->save($cvFilePath);
 
         // Transfer local CV.pdf to S3
-        $fileUrl = resolve(UploadFileAction::class)->execute(self::FILENAME);
+        $fileUrl = resolve(MoveFileAction::class)->execute(self::FILENAME);
 
         // Create file DB data
         File::updateOrCreate(

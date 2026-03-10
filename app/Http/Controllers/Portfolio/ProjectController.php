@@ -30,6 +30,18 @@ class ProjectController extends Controller
         return Inertia::render('Portfolio/Project');
     }
 
+    public function add(ProjectRequest $request): RedirectResponse
+    {
+        resolve(UpsertProjectAction::class)->execute($request->all());
+
+        Inertia::flash([
+            'message' => 'Project has been updated',
+            'type'    => FlashTypeEnum::SUCCESS,
+        ]);
+
+        return to_route('projects.list');
+    }
+
     public function edit(ProjectRequest $request, string $id): RedirectResponse
     {
         $request->merge(['id' => $id]);

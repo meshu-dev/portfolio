@@ -8,6 +8,8 @@ export type ProjectListItem = {
 
 export type Project = ProjectListItem & {
   description: string
+  repositories: Repository[]
+  technologies: Technology[]
   order: number
 }
 

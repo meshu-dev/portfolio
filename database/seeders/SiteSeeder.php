@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\UploadFileAction;
+use App\Actions\File\MoveFileAction;
 use App\Enums\TypeEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\File;
@@ -31,7 +31,7 @@ class SiteSeeder extends Seeder
     protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
     {
         try {
-            $fileUrl = resolve(UploadFileAction::class)->execute($filename);
+            $fileUrl = resolve(MoveFileAction::class)->execute($filename);
         } catch (FileNotUploadedException) {
             $fileUrl = fake()->imageUrl(32, 32, 'icon');
         }

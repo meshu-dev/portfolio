@@ -2,39 +2,25 @@
 
 namespace App\Actions\File;
 
-use App\Exceptions\FileNotUploadedException;
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
+use App\Models\File;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 class UploadFileAction
 {
     /**
-     * @return string
+     * @return FileModel
      */
-    public function execute(string $filename): string
+    public function execute(UploadedFile $file): File
     {
-        throw_unless(
-            Storage::disk('local')->exists("files/$filename"),
-            FileNotUploadedException::class,
-            'Local file does not exist'
-        );
+        $originalFilename = $file->getClientOriginalName();
+        $filename = Str::uuid() . '.' . $file->extension();
 
-        $file = new File(storage_path('app/files') . '/' . $filename);
+        $path = $file->storeAs('images', $filename);
 
-        $fileDriver = config('filesystems.default');
-        $fileUrl    = Storage::disk($fileDriver)->putFileAs(
-            'site',
-            $file,
-            $filename,
-            'public'
-        );
-
-        throw_unless(
-            $fileUrl,
-            FileNotUploadedException::class,
-            'File could not be uploaded to ' . $fileDriver
-        );
-
-        return $fileUrl;
+        return File::create([
+            'name' => $originalFilename,
+            'url'  => $path,
+        ]);
     }
 }
