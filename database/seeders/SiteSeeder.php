@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Actions\File\MoveFileAction;
 use App\Enums\TypeEnum;
+use App\Enums\UserEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\File;
 use App\Models\Site;
@@ -37,8 +38,9 @@ class SiteSeeder extends Seeder
         }
 
         $file = File::create([
-            'name' => $filename,
-            'url'  => $fileUrl,
+            'user_id' => UserEnum::ADMIN,
+            'name'    => $filename,
+            'url'     => $fileUrl,
         ]);
 
         $site->files()->attach(

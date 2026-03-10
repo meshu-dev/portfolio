@@ -180,8 +180,9 @@ class PortfolioSeeder extends Seeder
         }
 
         return File::create([
-            'name' => $filename,
-            'url'  => $fileUrl,
+            'user_id' => UserEnum::ADMIN,
+            'name'    => $filename,
+            'url'     => $fileUrl,
         ]);
     }
 

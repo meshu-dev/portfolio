@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Actions\File\MoveFileAction;
 use App\Enums\DynamicValueEnum;
+use App\Enums\UserEnum;
 use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     File,
@@ -218,8 +219,9 @@ built with it'
         }
 
         File::create([
-            'name' => $filename,
-            'url'  => $fileUrl,
+            'user_id' => UserEnum::ADMIN,
+            'name'    => $filename,
+            'url'     => $fileUrl,
         ]);
     }
 }

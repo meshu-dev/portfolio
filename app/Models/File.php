@@ -13,7 +13,7 @@ class File extends Model
 
     protected $table = 'files';
 
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['user_id', 'name', 'url'];
 
     public $timestamps = false;
 }
