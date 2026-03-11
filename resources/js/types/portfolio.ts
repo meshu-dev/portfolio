@@ -38,6 +38,12 @@ export type Technology = {
     name: string;
 }
 
+export type Site = {
+    id: string,
+    name: string;
+    url: string;
+}
+
 export type WorkExperience = {
     id: string;
     title: string;

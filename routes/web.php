@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{
     AuthController,
+    SiteController,
     TechnologyController,
 };
 use App\Http\Controllers\Cv\{ProfileController, SkillController, WorkExperienceController};
@@ -64,6 +65,13 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('/', [TechnologyController::class, 'view'])->name('technologies.view');
         Route::post('/', [TechnologyController::class, 'add'])->name('technologies.add');
         Route::delete('/{id}', [TechnologyController::class, 'delete'])->name('technologies.delete');
+    });
+
+    Route::prefix('sites')->group(function () {
+        Route::get('/', [SiteController::class, 'list'])->name('sites.list');
+        Route::get('/{id}', [SiteController::class, 'view'])->name('sites.view');
+        //Route::post('/', [TechnologyController::class, 'add'])->name('technologies.add');
+        //Route::delete('/{id}', [TechnologyController::class, 'delete'])->name('technologies.delete');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

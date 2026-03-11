@@ -17,7 +17,6 @@ import {
 import { About, Technology } from '@/types/portfolio'
 import ImageView from '@/components/Image/ImageView.vue'
 import ImageField from '@/components/Image/ImageField.vue'
-import { watch } from 'vue'
 import { getFormOptions } from '@/lib/utils'
 
 const props = defineProps({ about: Object, technologies: Object })

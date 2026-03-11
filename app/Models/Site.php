@@ -9,7 +9,7 @@ class Site extends Model
 {
     protected $table = 'sites';
 
-    protected $fillable = ['name', 'url'];
+    protected $fillable = ['user_id', 'name', 'url'];
 
     public $timestamps = false;
 

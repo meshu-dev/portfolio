@@ -59,6 +59,11 @@ import { Link } from '@inertiajs/vue3'
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
+        <NavigationMenuLink>
+          <Link href="/sites">Sites</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
         <NavigationMenuLink class="cursor-pointer">
           <Link href="/logout" method="post">Logout</Link>
         </NavigationMenuLink>

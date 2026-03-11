@@ -37,13 +37,13 @@ const deleteTechnologyDialog = (id: string) => {
 
 const deleteWorkExperience = () => {
   deleteDialogOpen.value = false
-  router.delete(`/work-experiences/${deleteId.value}`)
+  router.delete(`/cv/work-experiences/${deleteId.value}`)
 }
 </script>
 
 <template>
   <PageHeader value="Work Experiences" />
-  <Link href="/work-experiences/new">
+  <Link href="/cv/work-experiences/new">
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
   <div v-if="workExperiences" class="min-h-[650px]">
@@ -58,7 +58,7 @@ const deleteWorkExperience = () => {
       <TableBody>
         <TableRow v-for="workExperience in workExperiences">
           <TableCell>
-            <Link :href="`/work-experiences/${workExperience.id}`">
+            <Link :href="`/cv/work-experiences/${workExperience.id}`">
               {{ workExperience.title }}
             </Link>
           </TableCell>

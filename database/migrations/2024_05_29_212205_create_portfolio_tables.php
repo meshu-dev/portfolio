@@ -90,8 +90,11 @@ return new class () extends Migration {
 
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('url');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('site_files', function (Blueprint $table) {

@@ -3,11 +3,9 @@
 namespace Database\Seeders;
 
 use App\Actions\File\MoveFileAction;
-use App\Enums\TypeEnum;
-use App\Enums\UserEnum;
+use App\Enums\{TypeEnum, UserEnum};
 use App\Exceptions\FileNotUploadedException;
-use App\Models\File;
-use App\Models\Site;
+use App\Models\{File, Site};
 use Illuminate\Database\Seeder;
 
 class SiteSeeder extends Seeder
@@ -17,9 +15,9 @@ class SiteSeeder extends Seeder
      */
     public function run(): void
     {
-        $githubIcon    = Site::create(['name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
-        $linkedInIcon  = Site::create(['name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
-        $portfolioIcon = Site::create(['name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
+        $githubIcon    = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
+        $linkedInIcon  = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
+        $portfolioIcon = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
 
         $this->addIconFile(TypeEnum::CV, $githubIcon, 'github-cv.png');
         $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'linkedin-cv.png');
