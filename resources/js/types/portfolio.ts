@@ -10,6 +10,7 @@ export type Project = ProjectListItem & {
   description: string
   repositories: Repository[]
   technologies: Technology[]
+  image_url: string
   order: number
 }
 

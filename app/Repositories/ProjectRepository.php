@@ -20,7 +20,7 @@ class ProjectRepository
      */
     public function get(int $userId, string $projectId): Project
     {
-        return Project::with(['repositories', 'technologies', 'files'])
+        return Project::with(['repositories', 'technologies', 'image'])
                       ->where('user_id', $userId)
                       ->where('id', $projectId)
                       ->firstOrFail();

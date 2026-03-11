@@ -22,12 +22,13 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'         => 'required|string',
-            'description'  => 'required|string',
-            'url'          => 'required|string',
-            'repositories' => 'required|array',
-            'technologies' => 'required|array',
-            'image'        => 'sometimes|image'
+            'name'          => 'required|string',
+            'description'   => 'required|string',
+            'url'           => 'required|string',
+            'repositories'  => 'required|array',
+            'technologies'  => 'required|array',
+            'image'         => 'sometimes|image',
+            'remove_image'  => 'sometimes|boolean'
         ];
     }
 }

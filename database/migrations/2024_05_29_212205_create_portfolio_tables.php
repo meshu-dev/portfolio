@@ -30,6 +30,7 @@ return new class () extends Migration {
         Schema::create('abouts', function (Blueprint $table) {
             $table->uuid('id');
             $table->unsignedBigInteger('user_id');
+            $table->foreignUuid('file_id')->nullable();
             $table->text('text');
 
             $table->foreign('user_id')->references('id')->on('users');

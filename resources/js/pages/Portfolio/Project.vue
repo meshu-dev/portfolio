@@ -12,21 +12,27 @@ import TechnologySelect from '@/components/Technology/TechnologySelect.vue'
 import RepositorySelect from '@/components/Repository/RepositorySelect.vue'
 
 const props = defineProps({ project: Object, repositories: Object, technologies: Object })
-const project: Project|null = props.project ? props.project as Project : null
-
+const project: Project|null = props.project?.data ? props.project.data as Project : null
+console.log('project', project)
 const form = useForm({
   name: project?.name || '',
   description: project?.description || '',
   url: project?.url || '',
   repositories: project?.repositories.map((repository: Repository) => repository.id) || [],
   technologies: project?.technologies.map((technology: Technology) => technology.id) || [],
-  image: '',
+  image: null,
+  image_url: project?.image_url || '',
 })
+
+const removeImage = (): void => {
+  form.image_url = ''
+}
 
 const submitForm = (): void => {
   const transformParams = (data: Record<string, FormDataConvertible>) => {
     data.repositories = form.repositories
     data.technologies = form.technologies
+    data.remove_image = project?.image_url && !form.image_url ? true : false
     return data
   }
 
@@ -67,13 +73,24 @@ const submitForm = (): void => {
         v-model="form.technologies"
         :technologies="$props.technologies" />
     </Field>
-    <Field class="mb-4">
-      <Label for="image">Image</Label>
-      <Input type="file" name="image" @input="form.image = $event.target.files[0]" autoComplete="off" />
-    </Field>
-    <Progress
-      v-if="form.progress"
-      :model-value="form.progress.percentage" />
+    <template v-if="form.image_url">
+      <Field class="flex mb-4">
+        <Label for="image">Image</Label>
+        <div class="flex mt-4 gap-4">
+          <img :src="form.image_url" class="max-w-xs shadow-md" />
+          <Button size="sm" class="cursor-pointer"  @click="removeImage">Remove</Button>
+        </div>
+      </Field>
+    </template>
+    <template v-else>
+      <Field class="mb-4">
+        <Label for="image">Image</Label>
+        <Input type="file" name="image" @input="form.image = $event.target.files[0]" autoComplete="off" />
+      </Field>
+      <Progress
+        v-if="form.progress"
+        :model-value="form.progress.percentage" />
+    </template>
     <Button
       size="lg"
       class="w-20 cursor-pointer"
