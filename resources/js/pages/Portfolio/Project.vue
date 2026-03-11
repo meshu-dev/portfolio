@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import type { FormDataConvertible } from '@inertiajs/core'
-import { Form, useForm } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import { Project, Repository, Technology } from '@/types/portfolio'
 import PageHeader from '@/components/PageHeader.vue'
 import { Field } from '@/components/ui/field'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
-import { Progress } from '@/components/ui/progress'
 import TechnologySelect from '@/components/Technology/TechnologySelect.vue'
 import RepositorySelect from '@/components/Repository/RepositorySelect.vue'
+import ImageView from '@/components/Image/ImageView.vue'
+import ImageField from '@/components/Image/ImageField.vue'
 
 const props = defineProps({ project: Object, repositories: Object, technologies: Object })
 const project: Project|null = props.project?.data ? props.project.data as Project : null
@@ -23,10 +24,6 @@ const form = useForm({
   image: null,
   image_url: project?.image_url || '',
 })
-
-const removeImage = (): void => {
-  form.image_url = ''
-}
 
 const submitForm = (): void => {
   const transformParams = (data: Record<string, FormDataConvertible>) => {
@@ -76,20 +73,16 @@ const submitForm = (): void => {
     <template v-if="form.image_url">
       <Field class="flex mb-4">
         <Label for="image">Image</Label>
-        <div class="flex mt-4 gap-4">
-          <img :src="form.image_url" class="max-w-xs shadow-md" />
-          <Button size="sm" class="cursor-pointer"  @click="removeImage">Remove</Button>
-        </div>
+        <ImageView v-model="form.image_url" />
       </Field>
     </template>
     <template v-else>
       <Field class="mb-4">
         <Label for="image">Image</Label>
-        <Input type="file" name="image" @input="form.image = $event.target.files[0]" autoComplete="off" />
+        <ImageField
+          v-model:image="form.image"
+          v-model:progress="form.progress" />
       </Field>
-      <Progress
-        v-if="form.progress"
-        :model-value="form.progress.percentage" />
     </template>
     <Button
       size="lg"
