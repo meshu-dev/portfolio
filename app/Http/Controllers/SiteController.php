@@ -22,6 +22,11 @@ class SiteController extends Controller
         return Inertia::render('Site/Site', ['site' => $site]);
     }
 
+    public function new(): Response
+    {
+        return Inertia::render('Site/Site');
+    }
+
     public function add(SiteRequest $request): RedirectResponse
     {
         resolve(UpsertSiteAction::class)->execute($request->all());

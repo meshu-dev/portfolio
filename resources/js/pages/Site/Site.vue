@@ -13,7 +13,7 @@ const site: Site|null = props.site ? props.site as Site : null
 
 console.log('site', site, props)
 
-const formUrl: string = site ? `/sites/${site.id}` : '/sites/new'
+const formUrl: string = site ? `/sites/${site.id}` : '/sites'
 const formMethod: string = site ? 'put' : 'post'
 
 const form = useForm({

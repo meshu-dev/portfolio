@@ -69,9 +69,11 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::prefix('sites')->group(function () {
         Route::get('/', [SiteController::class, 'list'])->name('sites.list');
+        Route::get('/new', [SiteController::class, 'new'])->name('sites.new');
         Route::get('/{id}', [SiteController::class, 'view'])->name('sites.view');
-        //Route::post('/', [TechnologyController::class, 'add'])->name('technologies.add');
-        //Route::delete('/{id}', [TechnologyController::class, 'delete'])->name('technologies.delete');
+        Route::post('/', [SiteController::class, 'add'])->name('sites.add');
+        Route::put('/{id}', [SiteController::class, 'edit'])->name('sites.edit');
+        Route::delete('/{id}', [SiteController::class, 'delete'])->name('sites.delete');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -14,7 +14,7 @@ class UpsertSiteAction
     {
         $userId = Auth::id();
 
-        if ($params['id']) {
+        if (isset($params['id'])) {
             $id = $params['id'];
             unset($params['id']);
 

@@ -11,35 +11,33 @@ import {
 import { router } from '@inertiajs/vue3'
 import Button from '@/components/ui/button/Button.vue'
 import DeleteDialog from '@/components/DeleteDialog.vue'
-import { toRaw } from 'vue'
 import { Site } from '@/types/portfolio'
 import PageHeader from '@/components/PageHeader.vue'
-import AddTechnologyDialog from '@/components/Technology/AddTechnologyDialog.vue'
 import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({ sites: Array<Site> })
-
-const addDialogOpen: Ref<boolean> = ref(false)
 
 const deleteDialogOpen: Ref<boolean> = ref(false)
 const deleteName: Ref<string> = ref('')
 const deleteId: Ref<string> = ref('')
 
-const deleteTechnologyDialog = (id: string, name: string) => {
+const deleteSiteDialog = (id: string, name: string) => {
   deleteDialogOpen.value = true
   deleteId.value = id
   deleteName.value = name
 }
 
-const deleteTechnology = () => {
+const deleteSite = () => {
   deleteDialogOpen.value = false
-  router.delete(`/technologies/${deleteId.value}`)
+  router.delete(`/sites/${deleteId.value}`)
 }
 </script>
 
 <template>
   <PageHeader value="Sites" />
-  <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
+  <Link href="/sites/new">
+    <Button class="btn-primary cursor-pointer">Add</Button>
+  </Link>
   <div v-if="sites && sites.length > 0" class="min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>
@@ -58,7 +56,7 @@ const deleteTechnology = () => {
           <TableCell>
             <Button
               class="btn-primary cursor-pointer"
-              @click="deleteTechnologyDialog(site.id, site.name)">
+              @click="deleteSiteDialog(site.id, site.name)">
               Delete
             </Button>
           </TableCell>
@@ -66,10 +64,9 @@ const deleteTechnology = () => {
       </TableBody>
     </Table>
   </div>
-  <AddTechnologyDialog v-model="addDialogOpen" />
   <DeleteDialog
     :title="`Delete ${deleteName}`"
     :message="`Are you sure you want to delete ${deleteName}?`"
     v-model="deleteDialogOpen"
-    @confirm-delete="deleteTechnology" />
+    @confirm-delete="deleteSite" />
 </template>
