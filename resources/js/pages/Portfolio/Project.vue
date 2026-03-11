@@ -14,7 +14,9 @@ import ImageField from '@/components/Image/ImageField.vue'
 
 const props = defineProps({ project: Object, repositories: Object, technologies: Object })
 const project: Project|null = props.project?.data ? props.project.data as Project : null
+
 console.log('project', project)
+
 const form = useForm({
   name: project?.name || '',
   description: project?.description || '',
@@ -25,20 +27,19 @@ const form = useForm({
   image_url: project?.image_url || '',
 })
 
-const submitForm = (): void => {
-  const transformParams = (data: Record<string, FormDataConvertible>) => {
-    data.repositories = form.repositories
-    data.technologies = form.technologies
-    data.remove_image = project?.image_url && !form.image_url ? true : false
-    return data
-  }
+const transformParams = (data: Record<string, FormDataConvertible>) => {
+  data.repositories = form.repositories
+  data.technologies = form.technologies
+  data.remove_image = project?.image_url && !form.image_url ? true : false
+  return data
+}
 
+const submitForm = (): void => {
   if (project?.id) {
     form.transform(transformParams).put(`/portfolio/projects/${project.id}`)
   } else {
     form.transform(transformParams).post(`/portfolio/projects`)
   }
-
   console.log('submitForm')
 }
 </script>
@@ -70,20 +71,16 @@ const submitForm = (): void => {
         v-model="form.technologies"
         :technologies="$props.technologies" />
     </Field>
-    <template v-if="form.image_url">
-      <Field class="flex mb-4">
-        <Label for="image">Image</Label>
-        <ImageView v-model="form.image_url" />
-      </Field>
-    </template>
-    <template v-else>
-      <Field class="mb-4">
-        <Label for="image">Image</Label>
-        <ImageField
-          v-model:image="form.image"
-          v-model:progress="form.progress" />
-      </Field>
-    </template>
+    <Field class="flex mb-4">
+      <Label for="image">Image</Label>
+      <ImageView
+        v-if="form.image_url"
+        v-model="form.image_url" />
+      <ImageField
+         v-else
+        v-model:image="form.image"
+        v-model:progress="form.progress" />
+    </Field>
     <Button
       size="lg"
       class="w-20 cursor-pointer"

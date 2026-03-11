@@ -1,5 +1,13 @@
 import { CalendarDate } from '@internationalized/date'
 
+export type About = {
+    id: string,
+    text: string
+    technologies: Technology[]
+    image_url: string
+    remove_image: boolean
+}
+
 export type ProjectListItem = {
     id: string,
     name: string;
@@ -11,7 +19,7 @@ export type Project = ProjectListItem & {
   repositories: Repository[]
   technologies: Technology[]
   image_url: string
-  order: number
+  remove_image: boolean
 }
 
 export type Repository = {

@@ -15,3 +15,15 @@ export function dateToCalendarDate(date: string): CalendarDate {
         dateObject.getDate()
     )
 }
+
+export function getFormOptions() {
+    return {
+        preserveScroll: true,
+        preserveState: true,
+        preserveUrl: true,
+        replace: true,
+        only: ['users', 'flash'],
+        except: ['secret'],
+        reset: ['page'],
+    }
+}
