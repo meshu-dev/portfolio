@@ -91,6 +91,7 @@ return new class () extends Migration {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->foreignUuid('file_id')->nullable();
             $table->string('name');
             $table->string('url');
 

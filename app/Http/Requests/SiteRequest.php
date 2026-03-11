@@ -22,8 +22,10 @@ class SiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'url'  => 'required|string',
+            'name'          => 'required|string',
+            'url'           => 'required|string',
+            'image'         => 'sometimes|image',
+            'remove_image'  => 'sometimes|boolean'
         ];
     }
 }

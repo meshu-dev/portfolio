@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Site extends Model
 {
@@ -19,5 +20,10 @@ class Site extends Model
     public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'site_files', 'site_id', 'file_id');
+    }
+
+    public function image(): HasOne
+    {
+        return $this->hasOne(File::class, 'id', 'file_id');
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Actions\File\GetFileUrlAction;
-use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class SiteResource extends JsonResource
 {
@@ -18,16 +16,11 @@ class SiteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /** @var Collection<int, File> $files */
-        $files   = FileResource::collection($this->files);
-        $file    = $files->first();
-
-        $fileUrl = $file?->name ? resolve(GetFileUrlAction::class, ['name' => $file->name])->execute() : null;
-
         return [
-            'name'   => $this->name,
-            'url'    => $this->url,
-            'image'  => $fileUrl,
+            'id'        => $this->id,
+            'name'      => $this->name,
+            'url'       => $this->url,
+            'image_url' => $this->image ? Storage::temporaryUrl($this->image->url, now()->addMinutes(60)) : null,
         ];
     }
 }

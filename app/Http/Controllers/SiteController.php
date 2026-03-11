@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Site\{DeleteSiteAction, GetAllSitesAction, GetSiteAction, UpsertSiteAction};
 use App\Enums\FlashTypeEnum;
 use App\Http\Requests\SiteRequest;
+use App\Http\Resources\SiteResource;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -19,7 +20,7 @@ class SiteController extends Controller
     public function view(string $id): Response
     {
         $site = resolve(GetSiteAction::class)->execute($id);
-        return Inertia::render('Site/Site', ['site' => $site]);
+        return Inertia::render('Site/Site', ['site' => resolve(SiteResource::class, ['resource' => $site])]);
     }
 
     public function new(): Response
