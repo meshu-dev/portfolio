@@ -54,3 +54,9 @@ const form = useForm({
     </Button>
   </Form>
 </template>
+
+<style scoped>
+  >>> img {
+    max-width: 100px;
+  }
+</style>
