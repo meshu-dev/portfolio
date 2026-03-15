@@ -215,7 +215,7 @@ built with it'
         try {
             $fileUrl = resolve(MoveFileAction::class)->execute($filename);
         } catch (FileNotUploadedException $e) {
-            $fileUrl = fake()->imageUrl(512, 512);
+            $fileUrl = fake()->placeholderImageUrl(512, 512);
         }
 
         File::create([

@@ -15,24 +15,25 @@ class SiteSeeder extends Seeder
      */
     public function run(): void
     {
-        $githubIcon    = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
-        $linkedInIcon  = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
-        $portfolioIcon = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
+        $githubSite    = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
+        $linkedInSite  = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
+        $portfolioSite = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
 
-        $this->addIconFile(TypeEnum::CV, $githubIcon, 'github-cv.png');
-        $this->addIconFile(TypeEnum::CV, $linkedInIcon, 'linkedin-cv.png');
-        $this->addIconFile(TypeEnum::CV, $portfolioIcon, 'portfolio-icon.png');
+        $this->addIconFile($githubSite, 'github-cv.png');
+        $this->addIconFile($linkedInSite, 'linkedin-cv.png');
+        $this->addIconFile($portfolioSite, 'portfolio-icon.png');
 
-        $this->addIconFile(TypeEnum::PORTFOLIO, $githubIcon, 'github-cv.png');
-        $this->addIconFile(TypeEnum::PORTFOLIO, $linkedInIcon, 'linkedin-cv.png');
+        $githubSite->types()->attach([TypeEnum::CV->value, TypeEnum::PORTFOLIO->value]);
+        $linkedInSite->types()->attach([TypeEnum::CV->value, TypeEnum::PORTFOLIO->value]);
+        $portfolioSite->types()->attach([TypeEnum::CV->value]);
     }
 
-    protected function addIconFile(TypeEnum $type, Site $site, string $filename): void
+    protected function addIconFile(Site $site, string $filename): void
     {
         try {
             $fileUrl = resolve(MoveFileAction::class)->execute($filename);
         } catch (FileNotUploadedException) {
-            $fileUrl = fake()->imageUrl(32, 32, 'icon');
+            $fileUrl = fake()->placeholderImageUrl(64, 64);
         }
 
         $file = File::create([
@@ -41,9 +42,7 @@ class SiteSeeder extends Seeder
             'url'     => $fileUrl,
         ]);
 
-        $site->files()->attach(
-            $file->id,
-            ['type_id' => $type->value]
-        );
+        $site->file_id = $file->id;
+        $site->save();
     }
 }
