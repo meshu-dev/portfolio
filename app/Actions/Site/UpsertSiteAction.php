@@ -39,6 +39,7 @@ class UpsertSiteAction
                 $this->addImage($site, $params['image']);
             }
         }
+        $site->types()->sync($params['types']);
     }
 
     /**

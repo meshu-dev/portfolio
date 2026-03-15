@@ -3,21 +3,20 @@
 namespace App\Actions\File;
 
 use App\Models\File;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 
 class GetFileUrlAction
 {
-    public function __construct(protected string $name)
-    {
-    }
-
     /**
      * @return string
      */
-    public function execute(): string
+    public function execute(File $file): string
     {
-        $file = File::where('name', $this->name)->firstOrFail();
-
+        if (App::environment('local')) {
+            return $file->url;
+        }
+         //Storage::temporaryUrl($this->image->url, now()->addMinutes(60)) : null,
         return Storage::url($file->url);
     }
 }

@@ -26,4 +26,12 @@ class Site extends Model
     {
         return $this->hasOne(File::class, 'id', 'file_id');
     }
+
+    /**
+     * @return BelongsToMany<Type, $this>
+     */
+    public function types(): BelongsToMany
+    {
+        return $this->belongsToMany(Type::class, 'type_sites', 'site_id', 'type_id');
+    }
 }

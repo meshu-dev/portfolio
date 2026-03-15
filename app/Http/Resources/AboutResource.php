@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Actions\File\GetFileUrlAction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class AboutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'image_url'    => $this->image ? Storage::temporaryUrl($this->image->url, now()->addMinutes(60)) : null,
+            'image_url'    => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image): null,
             'text'         => $this->text,
             'technologies' => $this->skill->technologies
         ];

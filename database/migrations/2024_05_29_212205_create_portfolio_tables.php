@@ -98,15 +98,10 @@ return new class () extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
         });
 
-        Schema::create('site_files', function (Blueprint $table) {
+        Schema::create('type_sites', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('type_id');
-            $table->unsignedBigInteger('site_id');
-            $table->unsignedBigInteger('file_id');
-
-            $table->foreign('type_id')->references('id')->on('types');
-            $table->foreign('site_id')->references('id')->on('sites');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreignUuid('site_id');
         });
     }
 

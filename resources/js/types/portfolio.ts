@@ -1,7 +1,7 @@
 import { CalendarDate } from '@internationalized/date'
 
 export type About = {
-    id: string,
+    id: string
     text: string
     technologies: Technology[]
     image_url: string
@@ -9,9 +9,9 @@ export type About = {
 }
 
 export type ProjectListItem = {
-    id: string,
-    name: string;
-    url: string;
+    id: string
+    name: string
+    url: string
 }
 
 export type Project = ProjectListItem & {
@@ -23,36 +23,43 @@ export type Project = ProjectListItem & {
 }
 
 export type Repository = {
-    id: string,
-    name: string;
-    url: string;
+    id: string
+    name: string
+    url: string
 }
 
 export type Skill = {
-    id: string,
-    name: string;
+    id: string
+    name: string
 }
 
 export type Technology = {
-    id: string,
-    name: string;
+    id: string
+    name: string
+}
+
+export type Type = {
+    id: number
+    name: string
 }
 
 export type Site = {
-    id: string,
-    name: string;
-    url: string;
+    id: string
+    name: string
+    url: string
+    image_url: string
+    types: Type[]
 }
 
 export type WorkExperience = {
-    id: string;
-    title: string;
-    company: string;
-    location: string;
-    isCurrent: boolean;
-    start_date: CalendarDate;
-    end_date: CalendarDate|null;
-    description: string;
-    responsibilities: string,
+    id: string
+    title: string
+    company: string
+    location: string
+    isCurrent: boolean
+    start_date: CalendarDate
+    end_date: CalendarDate|null
+    description: string
+    responsibilities: string
     active: boolean
 }

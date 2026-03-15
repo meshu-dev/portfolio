@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Actions\Portfolio\Repository\GetRepositoriesAction;
 use App\Actions\Technology\GetAllTechnologiesAction;
+use App\Actions\Type\GetAllTypesAction;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -50,6 +51,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::shareOnce($request), [
             'technologies' => fn () => resolve(GetAllTechnologiesAction::class)->execute(),
+            'types'        => fn () => resolve(GetAllTypesAction::class)->execute(),
             'repositories' => fn () => resolve(GetRepositoriesAction::class)->execute(),
         ]);
     }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Actions\File\GetFileUrlAction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class SiteResource extends JsonResource
 {
@@ -20,7 +20,8 @@ class SiteResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'url'       => $this->url,
-            'image_url' => $this->image ? Storage::temporaryUrl($this->image->url, now()->addMinutes(60)) : null,
+            'image_url' => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image) : null,
+            'types'     => $this->types
         ];
     }
 }
