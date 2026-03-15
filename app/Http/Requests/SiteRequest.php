@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\Type\GetAllTypesAction;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SiteRequest extends FormRequest
 {
@@ -24,8 +26,10 @@ class SiteRequest extends FormRequest
         return [
             'name'          => 'required|string',
             'url'           => 'required|string',
+            'types'         => 'required|array|distinct',
+            'types.*'       => 'exists:types,id',
             'image'         => 'sometimes|image',
-            'remove_image'  => 'sometimes|boolean'
+            'remove_image'  => 'sometimes|boolean',
         ];
     }
 }
