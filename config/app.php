@@ -84,6 +84,8 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
+    'faker_placeholder_url' => env('APP_FAKER_PLACEHOLDER_URL', 'https://placehold.co'),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
