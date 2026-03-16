@@ -3,12 +3,13 @@
 namespace App\Actions\Site;
 
 use App\Models\Site;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class GetSiteAction
 {
     /**
-     * @return Collection<int, Site>
+     * @return Site
      */
     public function execute(string $id): Site
     {

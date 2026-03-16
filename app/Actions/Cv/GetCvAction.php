@@ -8,6 +8,7 @@ use App\Actions\Cv\{
     WorkExperience\GetWorkExperiencesAction,
 };
 use App\Actions\File\GetFileUrlAction;
+use App\Actions\File\GetPdfFileUrlAction;
 use App\Http\Resources\{
     SiteResource,
     SkillResource,
@@ -34,7 +35,7 @@ class GetCvAction
         $sites           = $this->getSitesAction->execute();
         $skills          = $this->getSkillsAction->execute($userId);
         $workExperiences = $this->getWorkExperiencesAction->execute($userId, true);
-        $pdfUrl          = resolve(GetFileUrlAction::class, ['name' => 'cv.pdf'])->execute();
+        $pdfUrl          = resolve(GetPdfFileUrlAction::class)->execute();
 
         return [
             'profile' => [

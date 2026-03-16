@@ -21,11 +21,17 @@ class About extends Model
 
     public $timestamps = false;
 
+    /**
+     * @return HasOne<File, $this>
+     */
     public function image(): HasOne
     {
         return $this->hasOne(File::class, 'id', 'file_id');
     }
 
+    /**
+     * @return HasOne<Skill, $this>
+     */
     public function skill(): HasOne
     {
         return $this->hasOne(Skill::class, 'user_id', 'user_id')->where('name', SkillEnum::PORTFOLIO);

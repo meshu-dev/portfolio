@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 class DeleteFileAction
 {
     /**
-     * @return FileModel
+     * @return bool|null
      */
-    public function execute(File $file): bool
+    public function execute(File $file): bool|null
     {
         Storage::delete($file->url);
 

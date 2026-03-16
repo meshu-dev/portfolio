@@ -41,6 +41,9 @@ class Project extends Model
         return $this->belongsToMany(File::class, 'project_files', 'project_id', 'file_id');
     }
 
+    /**
+     * @return HasOneThrough<File, $this>
+     */
     public function image(): HasOneThrough
     {
         return $this->hasOneThrough(File::class, ProjectFile::class, 'project_id', 'id', 'id', 'file_id');

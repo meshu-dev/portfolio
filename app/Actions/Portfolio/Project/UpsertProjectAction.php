@@ -43,7 +43,7 @@ class UpsertProjectAction
 
     /**
      * @param Project $project
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     private function upsertImage(Project $project, array $params): void
     {
@@ -66,9 +66,11 @@ class UpsertProjectAction
     private function removeImage(Project $project): void
     {
         $file = $project->image;
-        $project->files()->detach($file->id);
 
-        resolve(DeleteFileAction::class)->execute($file);
+        if ($file) {
+            $project->files()->detach($file->id);
+            resolve(DeleteFileAction::class)->execute($file);
+        }
     }
 
     /**

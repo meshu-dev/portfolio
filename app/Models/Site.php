@@ -22,6 +22,9 @@ class Site extends Model
         return $this->belongsToMany(File::class, 'site_files', 'site_id', 'file_id');
     }
 
+    /**
+     * @return HasOne<File, $this>
+     */
     public function image(): HasOne
     {
         return $this->hasOne(File::class, 'id', 'file_id');

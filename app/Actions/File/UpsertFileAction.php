@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class UpsertFileAction
 {
     /**
-     * @return FileModel
+     * @return File
      */
     public function execute(UploadedFile $file): File
     {
