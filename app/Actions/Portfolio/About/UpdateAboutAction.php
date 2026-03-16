@@ -21,16 +21,21 @@ class UpdateAboutAction
         $about = About::where('user_id', $userId)->firstOrFail();
         $about->update(['text' => $params['text']]);
 
-        $skillTechnologies = [['id' => $about->skill->id, 'technologies' => $params['technologies']]];
+        if ($about->skill?->id) {
+            $skillTechnologies = [[
+                'id' => $about->skill->id,
+                'technologies' => $params['technologies']
+            ]];
 
-        resolve(UpdateSkillTechnologiesAction::class)->execute($skillTechnologies);
+            resolve(UpdateSkillTechnologiesAction::class)->execute($skillTechnologies);
+        }
 
         $this->upsertImage($about, $params);
     }
 
     /**
      * @param About $about
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     private function upsertImage(About $about, array $params): void
     {
@@ -54,10 +59,12 @@ class UpdateAboutAction
     {
         $file = $about->image;
 
-        $about->file_id = null;
-        $about->save();
+        if ($file) {
+            $about->file_id = null;
+            $about->save();
 
-        resolve(DeleteFileAction::class)->execute($file);
+            resolve(DeleteFileAction::class)->execute($file);
+        }
     }
 
     /**
@@ -68,7 +75,9 @@ class UpdateAboutAction
     {
         $file = resolve(UploadFileAction::class)->execute($newFile);
 
-        $about->file_id = $file->id;
-        $about->save();
+        if ($file->id) {
+            $about->file_id = $file->id;
+            $about->save();
+        }
     }
 }

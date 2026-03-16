@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class UpsertSiteAction
 {
     /**
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     public function execute(array $params): void
     {
@@ -44,7 +44,7 @@ class UpsertSiteAction
 
     /**
      * @param Site $site
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     private function upsertImage(Site $site, array $params): void
     {
@@ -68,10 +68,12 @@ class UpsertSiteAction
     {
         $file = $site->image;
 
-        $site->file_id = null;
-        $site->save();
+        if ($file) {
+            $site->file_id = null;
+            $site->save();
 
-        resolve(DeleteFileAction::class)->execute($file);
+            resolve(DeleteFileAction::class)->execute($file);
+        }
     }
 
     /**
@@ -82,7 +84,9 @@ class UpsertSiteAction
     {
         $file = resolve(UploadFileAction::class)->execute($newFile);
 
-        $site->file_id = $file->id;
-        $site->save();
+        if ($file->id) {
+            $site->file_id = $file->id;
+            $site->save();
+        }
     }
 }

@@ -3,21 +3,17 @@
 namespace App\Models;
 
 use App\Enums\SkillEnum;
-use Database\Factories\AboutFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class About extends Model
 {
-    /** @use HasFactory<AboutFactory> */
-    use HasFactory;
     use HasUuids;
 
     protected $table = 'abouts';
 
-    protected $fillable = ['user_id', 'text'];
+    protected $fillable = ['user_id', 'file_id', 'text'];
 
     public $timestamps = false;
 

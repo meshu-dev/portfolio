@@ -42,7 +42,7 @@ class Project extends Model
     }
 
     /**
-     * @return HasOneThrough<File, $this>
+     * @return HasOneThrough<File, ProjectFile, $this>
      */
     public function image(): HasOneThrough
     {
