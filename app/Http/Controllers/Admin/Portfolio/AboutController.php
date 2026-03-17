@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Portfolio;
+namespace App\Http\Controllers\Admin\Portfolio;
 
 use App\Actions\Portfolio\About\{GetAboutAction, UpdateAboutAction};
 use App\Enums\FlashTypeEnum;

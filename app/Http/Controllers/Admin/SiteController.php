@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Site\{DeleteSiteAction, GetAllSitesAction, GetSiteAction, UpsertSiteAction};
 use App\Enums\FlashTypeEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SiteRequest;
 use App\Http\Resources\SiteResource;
 use Inertia\{Inertia, Response};

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Actions\Technology\{CreateTechnologyAction, DeleteTechnologyAction, GetAllTechnologiesAction};
 use App\Enums\FlashTypeEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TechnologyRequest;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;

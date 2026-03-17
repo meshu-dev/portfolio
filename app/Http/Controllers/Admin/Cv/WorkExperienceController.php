@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cv;
+namespace App\Http\Controllers\Admin\Cv;
 
 use App\Actions\Cv\WorkExperience\{
     DeleteWorkExperienceAction,

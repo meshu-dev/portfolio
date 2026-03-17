@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Portfolio;
+namespace App\Http\Controllers\Admin\Portfolio;
 
 use App\Actions\Portfolio\Repository\{CreateRepositoryAction, DeleteRepositoryAction, GetRepositoriesAction};
 use App\Enums\FlashTypeEnum;

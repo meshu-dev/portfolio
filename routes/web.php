@@ -1,12 +1,21 @@
 <?php
 
-use App\Http\Controllers\{
+use App\Http\Controllers\Admin\{
     AuthController,
     SiteController,
     TechnologyController,
 };
-use App\Http\Controllers\Cv\{ProfileController, SkillController, WorkExperienceController};
-use App\Http\Controllers\Portfolio\{AboutController, IntroController, ProjectController, RepositoryController};
+use App\Http\Controllers\Admin\Cv\{
+    ProfileController,
+    SkillController,
+    WorkExperienceController,
+};
+use App\Http\Controllers\Admin\Portfolio\{
+    AboutController,
+    IntroController,
+    ProjectController,
+    RepositoryController,
+};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');

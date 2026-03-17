@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class GetPdfFileUrlAction
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function execute(): string
+    public function execute(): string|null
     {
         $file = File::where('user_id', Auth::id())
                     ->where('name', FileEnum::PDF->value)
-                    ->firstOrFail();
+                    ->first();
 
-        return resolve(GetFileUrlAction::class)->execute($file);
+        return $file ? resolve(GetFileUrlAction::class)->execute($file) : null;
     }
 }
