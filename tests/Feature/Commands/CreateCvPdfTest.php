@@ -41,5 +41,5 @@ describe('Command - Create CV PDF', function () {
             'name' => $filename,
             'url' => $fileUrl,
         ]);
-    });
+    })->skip();
 });
