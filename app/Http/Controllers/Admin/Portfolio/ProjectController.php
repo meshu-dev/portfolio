@@ -36,7 +36,7 @@ class ProjectController extends Controller
         resolve(UpsertProjectAction::class)->execute($request->all());
 
         Inertia::flash([
-            'message' => 'Project has been updated',
+            'message' => 'Project has been added',
             'type'    => FlashTypeEnum::SUCCESS,
         ]);
 
