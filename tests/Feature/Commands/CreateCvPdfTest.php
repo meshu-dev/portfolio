@@ -7,6 +7,7 @@ use Mockery\MockInterface;
 
 describe('Commands\CreateCvPdf tests', function () {
     it('generates PDF', function () {
+        // Arrange
         Storage::fake();
 
         $filename = 'cv.pdf';
@@ -36,8 +37,10 @@ describe('Commands\CreateCvPdf tests', function () {
 
         $this->app->bind(MoveFileAction::class, fn () => $moveFileAction);
 
+        // Act
         $this->artisan('app:create-cv-pdf')->assertExitCode(0);
 
+        // Assert
         $this->assertDatabaseHas('files', [
             'name' => $filename,
             'url' => $fileUrl,
