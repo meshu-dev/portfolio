@@ -94,6 +94,7 @@ describe('ProjectController tests', function () {
             'repositories'  => [$repository->id],
             'technologies'  => [$technology->id],
             'image' => UploadedFile::fake(),
+            'remove_image' => true,
         ];
 
         // Act

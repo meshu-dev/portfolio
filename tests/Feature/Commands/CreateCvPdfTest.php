@@ -1,10 +1,11 @@
 <?php
 
+use App\Actions\File\MoveFileAction;
 use App\Actions\File\UploadFileAction;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Mockery\MockInterface;
 
-describe('Command - Create CV PDF', function () {
+describe('Commands\CreateCvPdf tests', function () {
     it('generates PDF', function () {
         Storage::fake();
 
@@ -26,14 +27,14 @@ describe('Command - Create CV PDF', function () {
 
         $fileUrl = 'http://s3bucket.amazon.com/cv.pdf';
 
-        $uploadFileAction = mock(UploadFileAction::class, function (MockInterface $mock) use ($fileUrl) {
+        $moveFileAction = mock(MoveFileAction::class, function (MockInterface $mock) use ($fileUrl) {
             $mock->shouldReceive('execute')
                 ->once()
                 ->with('cv.pdf')
                 ->andReturn($fileUrl);
         });
 
-        $this->app->bind(UploadFileAction::class, fn () => $uploadFileAction);
+        $this->app->bind(MoveFileAction::class, fn () => $moveFileAction);
 
         $this->artisan('app:create-cv-pdf')->assertExitCode(0);
 
@@ -41,5 +42,5 @@ describe('Command - Create CV PDF', function () {
             'name' => $filename,
             'url' => $fileUrl,
         ]);
-    })->skip();
+    });
 });
