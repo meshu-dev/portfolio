@@ -25,8 +25,27 @@ describe('ProjectController tests', function () {
     });
 
     it('loads view project page', function () {
+        // Arrange
+        $project = Project::where('user_id', UserEnum::ADMIN)->firstOrFail();
 
-    })->skip();
+        // Act
+        $response = $this->get(route('projects.view', ['id' => $project->id]));
+
+        // Assert
+        $response->assertInertia(
+            fn (Assert $page) => $page->component('Portfolio/Project')
+                                      ->where('project.data.id', $project->id)
+                                      ->where('project.data.name', $project->name)
+                                      ->where('project.data.description', $project->description)
+                                      ->where('project.data.url', $project->url)
+                                      ->where('project.data.image_url', '/storage/https://placehold.co/512x512')
+                                      ->where('project.data.repositories.0.id', $project->repositories->first()->id)
+                                      ->where('project.data.repositories.0.name', $project->repositories->first()->name)
+                                      ->where('project.data.repositories.0.url', $project->repositories->first()->url)
+                                      ->where('project.data.technologies.0.id', $project->technologies->first()->id)
+                                      ->where('project.data.technologies.0.name', $project->technologies->first()->name)
+        );
+    });
 
     it('loads new project page', function () {
         // Act

@@ -1,8 +1,9 @@
 <?php
 
+use App\Enums\UserEnum;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
-use Tests\Enums\UserEnum;
+
 
 describe('Api\PortfolioController tests', function () {
     beforeEach(function () {

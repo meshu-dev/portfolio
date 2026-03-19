@@ -29,14 +29,6 @@ describe('SiteController tests', function () {
     it('loads view site page', function () {
         // Arrange
         $site = Site::where('user_id', UserEnum::ADMIN)->firstOrFail();
-        $resource = [
-            'id'        => $site->id,
-            'name'      => $site->name,
-            'url'       => $site->url,
-            'image_url' => $site->image,
-            'types'     => $site->types->except('pivot')->toArray()
-        ];
-        //$resource = resolve(SiteResource::class, ['resource' => $site]);
 
         // Act
         $response = $this->get(route('sites.view', ['id' => $site->id]));
@@ -44,9 +36,14 @@ describe('SiteController tests', function () {
         // Assert
         $response->assertInertia(
             fn (Assert $page) => $page->component('Site/Site')
-                                      ->where('site', ['data' => $resource])
+                                      ->where('site.data.id', $site->id)
+                                      ->where('site.data.name', $site->name)
+                                      ->where('site.data.url', $site->url)
+                                      ->where('site.data.image_url', '/storage/https://placehold.co/64x64')
+                                      ->where('site.data.types.0.id', $site->types->first()->id)
+                                      ->where('site.data.types.0.name', $site->types->first()->name)
         );
-    })->skip();
+    });
 
     it('loads new site page', function () {
         // Act
