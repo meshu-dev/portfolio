@@ -84,7 +84,7 @@ class UpsertSiteAction
     {
         $file = resolve(UploadFileAction::class)->execute($newFile);
 
-        if ($file->id) {
+        if ($file->id > 0) {
             $site->file_id = $file->id;
             $site->save();
         }

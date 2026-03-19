@@ -75,7 +75,7 @@ class UpdateAboutAction
     {
         $file = resolve(UploadFileAction::class)->execute($newFile);
 
-        if ($file->id) {
+        if ($file->id > 0) {
             $about->file_id = $file->id;
             $about->save();
         }
