@@ -6,7 +6,7 @@ use App\Actions\Portfolio\About\{GetAboutAction, UpdateAboutAction};
 use App\Enums\FlashTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\AboutRequest;
-use App\Http\Resources\AboutResource;
+use App\Http\Resources\Admin\AboutResource;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;

@@ -6,7 +6,7 @@ use App\Actions\Portfolio\Project\{DeleteProjectAction, GetProjectAction, Upsert
 use App\Enums\FlashTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\ProjectRequest;
-use App\Http\Resources\ProjectResource;
+use App\Http\Resources\Admin\ProjectResource;
 use App\Repositories\ProjectRepository;
 use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};

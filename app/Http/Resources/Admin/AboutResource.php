@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Admin;
 
 use App\Actions\File\GetFileUrlAction;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class AboutResource extends JsonResource
         return [
             'image_url'    => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image): null,
             'text'         => $this->text,
-            'technologies' => $this->skill->technologies->pluck('name')
+            'technologies' => $this->skill->technologies
         ];
     }
 }

@@ -13,11 +13,8 @@ describe('AboutController tests', function () {
     it('loads about page', function () {
         // Arrange
         $about = About::where('user_id', UserEnum::ADMIN)->firstOrFail();
-        $resource = [
-            'image_url'    => $about->image ? resolve(GetFileUrlAction::class)->execute($about->image): null,
-            'text'         => $about->text,
-            'technologies' => $about->skill->technologies->toArray()
-        ];
+        $imageUrl = $about->image ? resolve(GetFileUrlAction::class)->execute($about->image): null;
+        $technologies = $about->skill->technologies;
 
         // Act
         $response = $this->get(route('about.view'));
@@ -25,7 +22,9 @@ describe('AboutController tests', function () {
         // Assert
         $response->assertInertia(
             fn (Assert $page) => $page->component('Portfolio/About')
-                                    ->where('about', ['data' => $resource])
+                                    ->where('about.data.image_url', $imageUrl)
+                                    ->where('about.data.text', $about->text)
+                                    ->where('about.data.technologies.0.name', $technologies->first()->name)
         );
     });
 

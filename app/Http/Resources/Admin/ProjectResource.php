@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Admin;
 
 use App\Actions\File\GetFileUrlAction;
 use Illuminate\Http\Request;
@@ -16,12 +16,13 @@ class ProjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'           => $this->id,
             'name'         => $this->name,
             'description'  => $this->description,
             'url'          => $this->url,
             'image_url'    => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image) : null,
-            'repositories' => RepositoryResource::collection($this->repositories),
-            'technologies' => $this->technologies->pluck('name')
+            'repositories' => $this->repositories,
+            'technologies' => $this->technologies
         ];
     }
 }

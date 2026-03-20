@@ -7,7 +7,7 @@ use App\Enums\TypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProfileResource extends JsonResource
+class IntroResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class ProfileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $sites = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::CV);
+        $sites = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::PORTFOLIO);
 
         return [
-            'intro'    => $this->formattedIntro,
-            'location' => $this->location,
+            'intro'    => $this->line1,
+            'location' => $this->formattedLine2,
             'sites'    => SiteResource::collection($sites)
         ];
     }

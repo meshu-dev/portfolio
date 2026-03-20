@@ -1,9 +1,7 @@
 <?php
 
-use App\Actions\Site\GetSitesByTypeAction;
-use App\Enums\{FlashTypeEnum, TypeEnum, UserEnum};
-use App\Http\Resources\SiteResource;
-use App\Models\{Intro, Profile, User};
+use App\Enums\{FlashTypeEnum, UserEnum};
+use App\Models\{Intro, User};
 use Inertia\Testing\AssertableInertia as Assert;
 
 describe('IntroController tests', function () {

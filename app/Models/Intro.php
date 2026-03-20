@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\Portfolio\GetDynamicTextAction;
 use Database\Factories\IntroFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,4 +19,9 @@ class Intro extends Model
     protected $fillable = ['user_id', 'line1', 'line2'];
 
     public $timestamps = false;
+
+    public function getFormattedLine2Attribute(): string
+    {
+        return resolve(GetDynamicTextAction::class)->execute($this->line2);
+    }
 }
