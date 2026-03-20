@@ -16,7 +16,7 @@ onUnmounted(
 </script>
 
 <template>
-  <Head title="DevJobs">
+  <Head title="Portfolio Admin">
     <meta name="description" content="Your page description">
   </Head>
   <main class="m-auto mt-15 mb-0 max-w-4xl">

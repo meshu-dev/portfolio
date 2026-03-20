@@ -11,6 +11,7 @@ use App\Actions\File\GetPdfFileUrlAction;
 use App\Actions\Site\GetSitesByTypeAction;
 use App\Enums\TypeEnum;
 use App\Http\Resources\{
+    ProfileResource,
     SiteResource,
     SkillResource,
     WorkExperienceResource
@@ -18,32 +19,22 @@ use App\Http\Resources\{
 
 class GetCvAction
 {
-    public function __construct(
-        protected GetProfileAction $getProfileAction,
-        protected GetSitesByTypeAction $getSitesAction,
-        protected GetSkillsAction $getSkillsAction,
-        protected GetWorkExperiencesAction $getWorkExperiencesAction,
-    ) {
-    }
-
     /**
      * @param int $userId
      * @return array<string, mixed>
      */
     public function execute(int $userId): array
     {
-        $profile         = $this->getProfileAction->execute($userId);
-        $sites           = $this->getSitesAction->execute(TypeEnum::CV);
-        $skills          = $this->getSkillsAction->execute($userId);
-        $workExperiences = $this->getWorkExperiencesAction->execute($userId, true);
+        $profile         = resolve(GetProfileAction::class)->execute($userId);
+        $sites           = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::CV);
+        $skills          = resolve(GetSkillsAction::class)->execute($userId);
+        $workExperiences = resolve(GetWorkExperiencesAction::class)->execute($userId, true);
         $pdfUrl          = resolve(GetPdfFileUrlAction::class)->execute();
 
         return [
-            'profile' => [
-                'details' => $profile,
-                'sites'   => SiteResource::collection($sites)
-            ],
-            'skill_groups'     => SkillResource::collection($skills),
+            'profile'          => resolve(ProfileResource::class, ['resource' => $profile]),
+            'sites'            => SiteResource::collection($sites),
+            'skills'           => SkillResource::collection($skills),
             'work_experiences' => WorkExperienceResource::collection($workExperiences),
             'pdf'              => $pdfUrl,
         ];

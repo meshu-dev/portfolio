@@ -15,7 +15,7 @@ import {
 <template>
   <Card class="w-full max-w-sm mx-auto mt-50">
     <CardHeader>
-      <CardTitle class="text-center">DevJobs</CardTitle>
+      <CardTitle class="text-center">Portfolio Admin</CardTitle>
     </CardHeader>
     <CardContent>
       <Form action="/login" method="post">

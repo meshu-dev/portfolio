@@ -6,7 +6,7 @@ use App\Actions\Site\{DeleteSiteAction, GetAllSitesAction, GetSiteAction, Upsert
 use App\Enums\FlashTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SiteRequest;
-use App\Http\Resources\SiteResource;
+use App\Http\Resources\Admin\SiteResource;
 use Inertia\{Inertia, Response};
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
