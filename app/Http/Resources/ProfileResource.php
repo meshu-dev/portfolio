@@ -19,6 +19,7 @@ class ProfileResource extends JsonResource
         $sites = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::CV);
 
         return [
+            'fullname' => $this->fullname,
             'intro'    => $this->formattedIntro,
             'location' => $this->location,
             'sites'    => SiteResource::collection($sites)

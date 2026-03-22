@@ -36,6 +36,7 @@ class CvSeeder extends Seeder
         foreach ($users as $user) {
             Profile::create([
                 'user_id'   => $user->id,
+                'fullname'  => 'Joe Blogss',
                 'intro'     => "Full-stack developer with over " .
                                 DynamicValueEnum::YEARS_WORKED->value .
                                 " years experience in PHP and JavaScript",

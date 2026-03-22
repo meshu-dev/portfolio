@@ -13,6 +13,7 @@ return new class () extends Migration {
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id');
             $table->unsignedBigInteger('user_id');
+            $table->string('fullname');
             $table->string('intro');
             $table->string('location');
 
