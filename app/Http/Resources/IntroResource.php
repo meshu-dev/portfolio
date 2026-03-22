@@ -19,9 +19,9 @@ class IntroResource extends JsonResource
         $sites = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::PORTFOLIO);
 
         return [
-            'intro'    => $this->line1,
-            'location' => $this->formattedLine2,
-            'sites'    => SiteResource::collection($sites)
+            'line1' => $this->line1,
+            'line2' => $this->formattedLine2,
+            'sites' => SiteResource::collection($sites)
         ];
     }
 }
