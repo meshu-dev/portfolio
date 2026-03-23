@@ -22,6 +22,8 @@ import { getFormOptions } from '@/lib/utils'
 const props = defineProps({ about: Object, technologies: Object })
 const about: About|null = props?.about.data ? props.about.data as About : null
 
+console.log('about', about)
+
 const formOptions = getFormOptions()
 formOptions['only'].push('about')
 
@@ -34,6 +36,7 @@ const form = useForm({
 
 const transformData = (data: Record<string, FormDataConvertible>)  => {
   data.technologies = form.skillTechnologies
+  data.remove_image = about?.image_url && !form.image_url ? true : false
   return { ...data }
 }
 

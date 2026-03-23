@@ -94,13 +94,18 @@ class PortfolioSeeder extends Seeder
         $users = User::all();
 
         foreach ($users as $user) {
-            About::create([
+            $about = About::create([
                 'user_id' => $user->id,
                 'text'    => $aboutMe,
             ]);
-        }
 
-        $this->addFile('about.png');
+            $file = $this->addFile('about.png');
+
+            if ($file) {
+                $about->file_id = $file->id;
+                $about->save();
+            }
+        }
     }
 
     protected function addSkills()

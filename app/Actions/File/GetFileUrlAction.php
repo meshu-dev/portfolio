@@ -3,8 +3,8 @@
 namespace App\Actions\File;
 
 use App\Models\File;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GetFileUrlAction
 {
@@ -13,10 +13,11 @@ class GetFileUrlAction
      */
     public function execute(File $file): string
     {
-        if (App::environment('local')) {
+        if (Str::isUrl($file->url, ['http', 'https'])) {
             return $file->url;
         }
-         //Storage::temporaryUrl($this->image->url, now()->addMinutes(60)) : null,
+        
+        //return Storage::temporaryUrl($file->url, now()->addMinutes(60));
         return Storage::url($file->url);
     }
 }
