@@ -10,7 +10,7 @@ describe('Commands\CreateCvPdf tests', function () {
         Storage::fake();
 
         $filename = 'cv.pdf';
-        $cvFilePath  = storage_path('app/files') . '/' . $filename;
+        $cvFilePath  = storage_path('app/private') . '/' . $filename;
 
         $pdfMock = Pdf::shouldReceive('loadView')
             ->once()

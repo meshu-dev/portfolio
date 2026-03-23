@@ -39,7 +39,7 @@ describe('SiteController tests', function () {
                                       ->where('site.data.id', $site->id)
                                       ->where('site.data.name', $site->name)
                                       ->where('site.data.url', $site->url)
-                                      ->where('site.data.image_url', '/storage/https://placehold.co/64x64')
+                                      ->where('site.data.image_url', 'https://placehold.co/64x64')
                                       ->where('site.data.types.0.id', $site->types->first()->id)
                                       ->where('site.data.types.0.name', $site->types->first()->name)
         );

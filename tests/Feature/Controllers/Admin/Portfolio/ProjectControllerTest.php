@@ -38,7 +38,7 @@ describe('ProjectController tests', function () {
                                       ->where('project.data.name', $project->name)
                                       ->where('project.data.description', $project->description)
                                       ->where('project.data.url', $project->url)
-                                      ->where('project.data.image_url', '/storage/https://placehold.co/512x512')
+                                      ->where('project.data.image_url', 'https://placehold.co/512x512')
                                       ->where('project.data.repositories.0.id', $project->repositories->first()->id)
                                       ->where('project.data.repositories.0.name', $project->repositories->first()->name)
                                       ->where('project.data.repositories.0.url', $project->repositories->first()->url)
