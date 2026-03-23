@@ -58,11 +58,11 @@
         <div>
             @isset ($profile)
                 <div class="section">
-                    <h1>{{ $profile['details']['fullname'] }}</h1>
-                    <p>{{ $profile['details']['intro'] }}</p>
+                    <h1>{{ $profile['fullname'] }}</h1>
+                    <p>{{ $profile['intro'] }}</p>
                     <div class="profile-row">
                         <span class="profile-row-label">Location:</span>
-                        <span>{{ $profile['details']['location'] }}</span>
+                        <span>{{ $profile['location'] }}</span>
                     </div>
                     @foreach ($profile['sites'] as $profileSite)
                         <div class="profile-row">
@@ -72,11 +72,11 @@
                     @endforeach
                 </div>
             @endisset
-            @isset ($skill_groups)
+            @isset ($skills)
                 <div class="section">
                     <h2>Skills</h2>
                     <div class="skill-groups">
-                        @foreach ($skill_groups as $skillGroup)
+                        @foreach ($skills as $skillGroup)
                             <div class="skill-group">
                                 <div class="skill-group-label">{{ $skillGroup['name'] }}</div>
                                 <ul class="skill-list">
@@ -89,10 +89,10 @@
                     </div>
                 </div>
             @endisset
-            @isset ($work_experiences)
+            @isset ($workExperiences)
                 <div class="section">
                     <h2>Work Experience</h2>
-                    @foreach ($work_experiences as $workExperience)
+                    @foreach ($workExperiences as $workExperience)
                         <div class="workexp-row">
                             <div class="workexp-header">
                                 <span class="workexp-header-title">{{ $workExperience['title'] }} - {{ $workExperience['company'] }}</span>

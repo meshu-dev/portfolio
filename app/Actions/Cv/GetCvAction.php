@@ -8,11 +8,6 @@ use App\Actions\Cv\{
     WorkExperience\GetWorkExperiencesAction,
 };
 use App\Actions\File\GetPdfFileUrlAction;
-use App\Http\Resources\{
-    ProfileResource,
-    SkillResource,
-    WorkExperienceResource
-};
 
 class GetCvAction
 {
@@ -28,10 +23,10 @@ class GetCvAction
         $pdfUrl          = resolve(GetPdfFileUrlAction::class)->execute();
 
         return [
-            'profile'          => resolve(ProfileResource::class, ['resource' => $profile]),
-            'skills'           => SkillResource::collection($skills),
-            'work_experiences' => WorkExperienceResource::collection($workExperiences),
-            'pdf'              => $pdfUrl,
+            'profile'         => $profile,
+            'skills'          => $skills,
+            'workExperiences' => $workExperiences,
+            'pdfUrl'          => $pdfUrl,
         ];
     }
 }

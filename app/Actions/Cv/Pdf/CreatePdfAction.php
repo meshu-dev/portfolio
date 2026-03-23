@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Actions\Cv;
+namespace App\Actions\Cv\Pdf;
 
 use App\Actions\File\MoveFileAction;
 use App\Models\File;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class CreateCvPdfAction
+class CreatePdfAction
 {
     protected const string FILENAME = 'cv.pdf';
 
     public function __construct(
-        protected GetCvAction $getCvAction
+        protected GetPdfAction $getCvPdfAction
     ) {
     }
 
@@ -21,10 +21,10 @@ class CreateCvPdfAction
     public function execute(int $userId): void
     {
         // Get CV Data
-        $viewParams  = [...$this->getCvAction->execute($userId)];
+        $viewParams  = [...$this->getCvPdfAction->execute($userId)];
 
         // Generate PDF
-        $cvFilePath  = storage_path('app/files') . '/' . self::FILENAME;
+        $cvFilePath  = storage_path('app/private') . '/' . self::FILENAME;
 
         $pdf = Pdf::loadView('pdf/cv', $viewParams);
         $pdf->setPaper('A4', 'portrait');

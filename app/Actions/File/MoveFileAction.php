@@ -14,12 +14,12 @@ class MoveFileAction
     public function execute(string $filename): string
     {
         throw_unless(
-            Storage::disk('local')->exists("files/$filename"),
+            Storage::disk('local')->exists($filename),
             FileNotUploadedException::class,
             'Local file does not exist'
         );
 
-        $file = new File(storage_path('app/files') . '/' . $filename);
+        $file = new File(storage_path('app/private') . '/' . $filename);
 
         $fileDriver = config('filesystems.default');
         $fileUrl    = Storage::disk($fileDriver)->putFileAs(

@@ -6,6 +6,7 @@ use App\Actions\Site\GetSitesByTypeAction;
 use App\Enums\TypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class IntroResource extends JsonResource
 {
@@ -16,7 +17,7 @@ class IntroResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $sites = resolve(GetSitesByTypeAction::class)->execute(TypeEnum::PORTFOLIO);
+        $sites = resolve(GetSitesByTypeAction::class)->execute((int) Auth::id(), TypeEnum::PORTFOLIO);
 
         return [
             'line1' => $this->line1,
