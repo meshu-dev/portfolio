@@ -37,7 +37,6 @@ return new class () extends Migration {
         });
 
         Schema::create('skill_technologies', function (Blueprint $table) {
-            $table->id();
             $table->foreignUuid('skill_id')->references('id')->on('skills');
             $table->foreignUuid('technology_id')->references('id')->on('technologies');
         });
