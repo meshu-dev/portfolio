@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('profiles', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('fullname');
             $table->string('intro');
@@ -21,7 +21,7 @@ return new class () extends Migration {
         });
 
         Schema::create('technologies', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
 
@@ -29,7 +29,7 @@ return new class () extends Migration {
         });
 
         Schema::create('skills', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
 
@@ -38,15 +38,12 @@ return new class () extends Migration {
 
         Schema::create('skill_technologies', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('skill_id');
-            $table->foreignUuid('technology_id');
-
-            //$table->foreign('skill_id')->references('id')->on('skills');
-            //$table->foreign('technology_id')->references('id')->on('technologies');
+            $table->foreignUuid('skill_id')->references('id')->on('skills');
+            $table->foreignUuid('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('work_experiences', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('company');

@@ -19,7 +19,7 @@ return new class () extends Migration {
         });
 
         Schema::create('intros', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('line1');
             $table->string('line2');
@@ -28,9 +28,9 @@ return new class () extends Migration {
         });
 
         Schema::create('abouts', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('file_id')->nullable();
+            $table->foreignId('file_id')->nullable();
             $table->text('text');
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -38,7 +38,7 @@ return new class () extends Migration {
         });
 
         Schema::create('repositories', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('url');
@@ -47,7 +47,7 @@ return new class () extends Migration {
         });
 
         Schema::create('projects', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('description');
@@ -59,28 +59,21 @@ return new class () extends Migration {
 
         Schema::create('project_repositories', function (Blueprint $table) {
             $table->id()->primary();
-            $table->foreignUuid('project_id');
-            $table->foreignUuid('repository_id');
-
-            //$table->foreignUuid('project_id')->references('id')->on('projects');
-            //$table->foreignUuid('repository_id')->references('id')->on('repositories');
+            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('repository_id')->references('id')->on('repositories');
         });
 
         Schema::create('project_technologies', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('project_id');
-            $table->foreignUuid('technology_id');
-
-            //$table->foreignUuid('project_id')->references('id')->on('projects');
-            //$table->foreignUuid('technology_id')->references('id')->on('technologies');
+            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('project_files', function (Blueprint $table) {
             $table->id()->primary();
-            $table->foreignUuid('project_id');
+            $table->foreignUuid('project_id')->references('id')->on('projects');
             $table->unsignedBigInteger('file_id');
 
-            //$table->foreignUuid('project_id')->references('id')->on('projects');
             $table->foreign('file_id')->references('id')->on('files');
         });
 
@@ -92,11 +85,12 @@ return new class () extends Migration {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreignUuid('file_id')->nullable();
+            $table->foreignId('file_id')->nullable();
             $table->string('name');
             $table->string('url');
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('file_id')->references('id')->on('files');
         });
 
         Schema::create('type_sites', function (Blueprint $table) {
@@ -111,7 +105,7 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::disableForeignKeyConstraints();
 
         Schema::dropIfExists('files');
         Schema::dropIfExists('repositories');
@@ -123,6 +117,6 @@ return new class () extends Migration {
         Schema::dropIfExists('sites');
         Schema::dropIfExists('site_files');
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::enableForeignKeyConstraints();
     }
 };
