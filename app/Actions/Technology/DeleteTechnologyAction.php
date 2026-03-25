@@ -10,9 +10,9 @@ class DeleteTechnologyAction
 {
     /**
      * @param string $id
-     * @return bool
+     * @return bool|null
      */
-    public function execute(string $id): bool
+    public function execute(string $id): bool|null
     {
         $technology = Technology::where('user_id', Auth::id())
                                 ->where('id', $id)

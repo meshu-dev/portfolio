@@ -10,9 +10,9 @@ class DeleteRepositoryAction
 {
     /**
      * @param string $id
-     * @return bool
+     * @return bool|null
      */
-    public function execute(string $id): bool
+    public function execute(string $id): bool|null
     {
         $repository = Repository::where('user_id', Auth::id())
                                 ->where('id', $id)
