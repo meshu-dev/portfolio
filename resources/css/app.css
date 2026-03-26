@@ -127,4 +127,10 @@
   .form-label {
     @apply mb-4;
   }
+  .error-field {
+    @apply !border-red-600 !border-1;
+  }
+  .error-message {
+    @apply flex gap-1 text-red-600 mb-2;
+  }
 }

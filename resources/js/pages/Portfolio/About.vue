@@ -18,11 +18,10 @@ import { About, Technology } from '@/types/portfolio'
 import ImageView from '@/components/Image/ImageView.vue'
 import ImageField from '@/components/Image/ImageField.vue'
 import { getFormOptions } from '@/lib/utils'
+import ErrorMessage from '@/components/ErrorMessage.vue'
 
-const props = defineProps({ about: Object, technologies: Object })
+const props = defineProps({ about: Object, technologies: Object, errors: Object })
 const about: About|null = props?.about.data ? props.about.data as About : null
-
-console.log('about', about)
 
 const formOptions = getFormOptions()
 formOptions['only'].push('about')
@@ -57,7 +56,14 @@ const handleSuccess = (payload: RequestPayload): void => {
     @success="handleSuccess">
     <Field class="mb-4">
       <Label for="text">Text</Label>
-      <Textarea name="text" v-model="form.text" autoComplete="off" placeholder="Type about text here" class="min-h-[200px]" />
+      <Textarea
+        name="text"
+        :class="errors?.text ? `error-field` : ``"
+        v-model="form.text"
+        autoComplete="off"
+        placeholder="Type about text here"
+        class="min-h-[200px]" />
+      <ErrorMessage v-if="errors?.text" :value="errors?.text" />
     </Field>
     <Field class="mb-4">
       <Label for="skills">Skills</Label>
@@ -71,6 +77,7 @@ const handleSuccess = (payload: RequestPayload): void => {
           </SelectItem>
         </SelectContent>
       </Select>
+      <ErrorMessage v-if="errors?.technologies" :value="errors?.technologies" />
     </Field>
     <Field class="flex mb-4">
       <Label for="image">Image</Label>

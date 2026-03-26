@@ -11,8 +11,9 @@ import type { Site, Type } from '@/types/portfolio'
 import ImageView from '@/components/Image/ImageView.vue'
 import ImageField from '@/components/Image/ImageField.vue'
 import { Checkbox } from '@/components/ui/checkbox'
+import ErrorMessage from '@/components/ErrorMessage.vue'
 
-const props = defineProps({ site: Object, types: Array<Type> })
+const props = defineProps({ site: Object, types: Array<Type>, errors: Object })
 const site: Site|null = props?.site?.data ? props.site.data as Site : null
 
 const formUrl: string = site ? `/sites/${site.id}` : '/sites'
@@ -57,11 +58,13 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
   <Form :action="formUrl" :method="formMethod" :transform="transformData">
     <Field class="mb-4">
       <Label for="name">Name</Label>
-      <Input type="text" name="name" v-model="form.name" autoComplete="off" />
+      <Input type="text" name="name" :class="errors?.name ? `error-field` : ``" v-model="form.name" autoComplete="off" />
+      <ErrorMessage v-if="errors?.name" :value="errors?.name" />
     </Field>
     <Field class="mb-4">
       <Label for="url">Url</Label>
-      <Input type="text" name="url" v-model="form.url" autoComplete="off" />
+      <Input type="text" name="url" :class="errors?.url ? `error-field` : ``" v-model="form.url" autoComplete="off" />
+      <ErrorMessage v-if="errors?.url" :value="errors?.url" />
     </Field>
     <Field class="flex mb-4">
       <Label for="image">Type</Label>
@@ -69,6 +72,7 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
         <Checkbox :id="`type-${type.id}`" v-model:modelValue="form.types[type.id]" class="cursor-pointer" />
         <Label :for="`type-${type.id}`" class="cursor-pointer">{{ type.name }}</Label>
       </div>
+      <ErrorMessage v-if="errors?.types" :value="errors?.types" />
     </Field>
     <Field class="flex mb-4">
       <Label>Image</Label>
@@ -79,6 +83,7 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
          v-else
         v-model:image="form.image"
         v-model:progress="form.progress" />
+      <ErrorMessage v-if="errors?.image" :value="errors?.image" />
     </Field>
     <Button
       class="cursor-pointer"

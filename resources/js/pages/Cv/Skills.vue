@@ -11,8 +11,9 @@ import {
 import Button from '@/components/ui/button/Button.vue'
 import { Technology } from '@/types/portfolio'
 import PageHeader from '@/components/PageHeader.vue'
+import ErrorMessage from '@/components/ErrorMessage.vue'
 
-const props = defineProps({ skills: Object, technologies: Object })
+const props = defineProps({ skills: Object, technologies: Object, errors: Object })
 
 const formProps: {[key: string]: string} = {}
 
@@ -36,8 +37,8 @@ const transformData = (data) => {
 
 <template>
   <PageHeader value="Skills" />
-  <Form action="/skills" method="put" :transform="data => transformData(data)">
-    <div v-for="skill in skills" class="mb-5">
+  <Form action="/cv/skills" method="put" :transform="data => transformData(data)">
+    <div v-for="(skill, index) in skills" class="mb-5">
       <Label :for="skill.name" class="mb-3">{{ skill.name }}</Label>
       <Select name="bing" multiple v-model:modelValue="form[skill.id]">
         <SelectTrigger class="w-xl">
@@ -49,6 +50,7 @@ const transformData = (data) => {
           </SelectItem>
         </SelectContent>
       </Select>
+      <ErrorMessage v-if="errors && errors[`skills.${index}.technologies`]" :value="errors[`skills.${index}.technologies`]" />
     </div>
     <Button
       class="cursor-pointer"
