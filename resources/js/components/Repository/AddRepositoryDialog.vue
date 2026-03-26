@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
+import { onUnmounted, ref, type Ref } from 'vue'
 import type { Errors } from '@inertiajs/core'
 import {
   Dialog,
@@ -26,9 +26,11 @@ const create = () => {
   )
 }
 
-router.on('error', (event) => {
-  errors.value = event.detail.errors
-})
+onUnmounted(
+  router.on('error', (event) => {
+    errors.value = event.detail.errors
+  })
+)
 </script>
 
 <template>

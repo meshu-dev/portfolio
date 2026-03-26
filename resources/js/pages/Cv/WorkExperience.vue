@@ -12,7 +12,7 @@ import { WorkExperience } from '@/types/portfolio'
 import { dateToCalendarDate } from '@/lib/utils'
 import PageHeader from '@/components/PageHeader.vue'
 
-const props = defineProps({ workExperience: Object })
+const props = defineProps({ workExperience: Object, errors: Object })
 const workExperience: WorkExperience|null = props.workExperience ? props.workExperience as WorkExperience : null
 const responsibilityLimit: number = 5
 
@@ -57,31 +57,62 @@ const submitForm = (): void => {
   <form class="flex flex-col gap-3" @submit.prevent>
     <div class="form-row">
       <Label for="title" class="form-label">Title</Label>
-      <Input type="text" id="title" name="title" v-model="form.title" autoComplete="off" />
+      <Input
+        type="text"
+        id="title"
+        name="title"
+        v-model="form.title"
+        :class="errors?.name ? `error-field` : ``"
+        autoComplete="off" />
+      <ErrorMessage v-if="errors?.name" :value="errors?.name" />
     </div>
     <div class="form-row">
       <Label for="company" class="form-label">Company</Label>
-      <Input type="text" id="company" name="company" v-model="form.company" autoComplete="off" />
+      <Input
+        type="text"
+        id="company"
+        name="company"
+        v-model="form.company"
+        :class="errors?.company ? `error-field` : ``"
+        autoComplete="off" />
+      <ErrorMessage v-if="errors?.company" :value="errors?.company" />
     </div>
     <div class="form-row">
       <Label for="company" class="form-label">Location</Label>
-      <Input type="text" id="location" name="location" v-model="form.location" autoComplete="off" />
+      <Input
+        type="text"
+        id="location"
+        name="location"
+        v-model="form.location"
+        :class="errors?.location ? `error-field` : ``"
+        autoComplete="off" />
+      <ErrorMessage v-if="errors?.location" :value="errors?.location" />
     </div>
     <div class="form-row">
       <Label for="current" class="form-label">Current Employer</Label>
-      <Switch id="current" v-model="form.is_current" />
+      <Switch id="current" v-model="form.is_current" :class="errors?.is_current ? `error-field` : ``" />
+      <ErrorMessage v-if="errors?.is_current" :value="errors?.is_current" />
     </div>
     <div class="form-row">
       <Label for="current" class="form-label">Start Date</Label>
       <DatePicker v-model="form.start_date" />
+      <ErrorMessage v-if="errors?.start_date" :value="errors?.start_date" />
     </div>
     <div v-if="!form.is_current" class="form-row">
       <Label for="current" class="form-label">End Date</Label>
       <DatePicker v-model="form.end_date" />
+      <ErrorMessage v-if="errors?.end_date" :value="errors?.end_date" />
     </div>
     <div class="form-row">
       <Label for="description" class="form-label">Description</Label>
-      <Input type="text" id="description" name="description" v-model="form.description" autoComplete="off" />
+      <Input
+        type="text"
+        id="description"
+        name="description"
+        v-model="form.description"
+        :class="errors?.description ? `error-field` : ``"
+        autoComplete="off" />
+      <ErrorMessage v-if="errors?.description" :value="errors?.description" />
     </div>
     <div class="form-row">
       <Label for="description" class="form-label">Responsibilities</Label>
@@ -100,15 +131,18 @@ const submitForm = (): void => {
           id="location"
           name="location"
           v-model="form.responsibilities[index]"
+          :class="errors && errors[`responsibilities${index}`] ? `error-field` : ``"
           autoComplete="off" />
         <Button class="w-20 cursor-pointer" @click="removeResponsibility(index)">
           Remove
         </Button>
       </div>
+      <ErrorMessage v-if="errors?.responsibilities" :value="errors?.responsibilities" />
     </div>
     <div class="form-row">
       <Label for="active" class="form-label">Active</Label>
-      <Switch id="active" v-model="form.active" />
+      <Switch id="active" v-model="form.active" :class="errors?.active ? `error-field` : ``" />
+      <ErrorMessage v-if="errors?.active" :value="errors?.active" />
     </div>
     <div class="form-row">
       <Button
