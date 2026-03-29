@@ -38,7 +38,7 @@ describe('RepositoryController tests', function () {
 
     it('deletes an existing repository', function () {
         // Arrange
-        $params = ['id' => Repository::where('name', 'CV')->first()->id];
+        $params = ['id' => Repository::where('name', 'Dev Push WP')->first()->id];
 
         // Act
         $response = $this->delete(route('repositories.delete', $params));

@@ -13,8 +13,12 @@ class DeleteProjectAction
      */
     public function execute(string $id): bool
     {
-        return Project::where('user_id', Auth::id())
-                      ->where('id', $id)
-                      ->delete();
+        $project = Project::where('user_id', Auth::id())
+                          ->where('id', $id)
+                          ->firstOrFail();
+
+        $project->image->delete();
+
+        return $project->delete();
     }
 }

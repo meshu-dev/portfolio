@@ -99,7 +99,7 @@ describe('SiteController tests', function () {
 
     it('deletes an existing site', function () {
         // Arrange
-        $params = ['id' => Site::where('user_id', UserEnum::ADMIN)->firstOrFail()->id];
+        $params = ['id' => Site::where('user_id', UserEnum::ADMIN)->where('name', 'Portfolio')->firstOrFail()->id];
 
         // Act
         $response = $this->delete(route('sites.delete', $params));

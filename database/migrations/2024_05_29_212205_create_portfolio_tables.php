@@ -60,17 +60,17 @@ return new class () extends Migration {
         });
 
         Schema::create('project_repositories', function (Blueprint $table) {
-            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreignUuid('repository_id')->references('id')->on('repositories');
         });
 
         Schema::create('project_technologies', function (Blueprint $table) {
-            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreignUuid('technology_id')->references('id')->on('technologies');
         });
 
         Schema::create('project_files', function (Blueprint $table) {
-            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->unsignedBigInteger('file_id');
 
             $table->foreign('file_id')->references('id')->on('files');
@@ -94,7 +94,7 @@ return new class () extends Migration {
 
         Schema::create('type_sites', function (Blueprint $table) {
             $table->unsignedBigInteger('type_id');
-            $table->foreignUuid('site_id')->references('id')->on('sites');
+            $table->foreignUuid('site_id')->references('id')->on('sites')->onDelete('cascade');
         });
     }
 
