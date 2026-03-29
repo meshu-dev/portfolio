@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
-import { Form } from '@inertiajs/vue3'
-import { Field } from '@/components/ui/field'
 import Label from '@/components/ui/label/Label.vue'
 import Input from '@/components/ui/input/Input.vue'
 import { Switch } from '@/components/ui/switch'
 import Button from '@/components/ui/button/Button.vue'
 import DatePicker from '@/components/DatePicker.vue'
-import { toRaw } from 'vue'
 import { WorkExperience } from '@/types/portfolio'
 import { dateToCalendarDate } from '@/lib/utils'
 import PageHeader from '@/components/PageHeader.vue'
