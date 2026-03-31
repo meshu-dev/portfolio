@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     TechnologyController,
 };
 use App\Http\Controllers\Admin\Cv\{
+    PdfController,
     ProfileController,
     SkillController,
     WorkExperienceController,
@@ -40,6 +41,11 @@ Route::middleware(['auth:web'])->group(function () {
             Route::post('/', [WorkExperienceController::class, 'add'])->name('work-experiences.add');
             Route::put('/{id}', [WorkExperienceController::class, 'edit'])->name('work-experiences.edit');
             Route::delete('/{id}', [WorkExperienceController::class, 'delete'])->name('work-experiences.delete');
+        });
+
+        Route::prefix('pdf')->group(function () {
+            Route::get('/',  [PdfController::class, 'view'])->name('pdf.view');
+            Route::post('/', [PdfController::class, 'generate'])->name('pdf.generate');
         });
     });
 
