@@ -6,8 +6,8 @@ use App\Actions\Cv\{
     Profile\GetProfileAction,
     Skill\GetSkillsAction,
     WorkExperience\GetWorkExperiencesAction,
+    Pdf\GetPdfFileUrlAction,
 };
-use App\Actions\File\GetPdfFileUrlAction;
 
 class GetCvAction
 {

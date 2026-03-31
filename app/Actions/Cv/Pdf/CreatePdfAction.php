@@ -11,7 +11,7 @@ class CreatePdfAction
     protected const string FILENAME = 'cv.pdf';
 
     public function __construct(
-        protected GetPdfAction $getCvPdfAction
+        protected GetCvDataForPdfAction $getCvPdfAction
     ) {
     }
 

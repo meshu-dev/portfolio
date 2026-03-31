@@ -26,7 +26,9 @@ class CvSeeder extends Seeder
         $this->addProfileData();
         $this->addSkills();
         $this->addWorkExperiences();
-        $this->addPdf();
+        
+        // Stop PDF being added to test data
+        //$this->addPdf();
     }
 
     protected function addProfileData()

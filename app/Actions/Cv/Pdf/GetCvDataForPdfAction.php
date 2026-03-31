@@ -4,7 +4,7 @@ namespace App\Actions\Cv\Pdf;
 
 use App\Actions\Cv\GetCvAction;
 
-class GetPdfAction
+class GetCvDataForPdfAction
 {
     /**
      * @param int $userId

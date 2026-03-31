@@ -28,6 +28,9 @@ import { Link } from '@inertiajs/vue3'
               <NavigationMenuLink as-child>
                 <Link href="/cv/work-experiences">Work Experiences</Link>
               </NavigationMenuLink>
+              <NavigationMenuLink as-child>
+                <Link href="/cv/pdf">PDF</Link>
+              </NavigationMenuLink>
             </li>
           </ul>
         </NavigationMenuContent>
