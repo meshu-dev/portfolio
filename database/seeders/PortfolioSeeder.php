@@ -17,184 +17,98 @@ use App\Models\{
     User
 };
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 
 class PortfolioSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    protected array $data;
+
+    public function run(Collection $users): void
     {
-        $this->addIntroText();
-        $this->addAboutData();
-        $this->addSkills();
-
-        $repositories = $this->addRepositories();
-
-        $this->addProjects($repositories);
-    }
-
-    protected function addRepositories(): array
-    {
-        return [
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'CV',
-                'url'  => 'https://github.com/meshu-dev/cv'
-            ]),
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'MeshPro API',
-                'url'  => 'https://github.com/meshu-dev/meshpro-api'
-            ]),
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'Dev Nudge',
-                'url'  => 'https://github.com/meshu-dev/requiredev'
-            ]),
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'Dev Push',
-                'url'  => 'https://github.com/meshu-dev/devpush'
-            ]),
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'Dev Push WP',
-                'url'  => 'https://github.com/meshu-dev/devpush-wp'
-            ]),
-            Repository::create([
-                'user_id' => UserEnum::ADMIN,
-                'name' => 'Dev Push API',
-                'url'  => 'https://github.com/meshu-dev/devpush-api'
-            ])
-        ];
-    }
-
-    protected function addIntroText()
-    {
-        $users = User::all();
+        $this->data = require('data/user_data.php');
+        $this->data = $this->data['portfolio'];
 
         foreach ($users as $user) {
-            Intro::create([
-                'user_id' => $user->id,
-                'line1'   => "Hello, I'm Mesh",
-                'line2'   => "I'm a Software Developer with " . DynamicValueEnum::YEARS_WORKED->value . " years experience",
-            ]);
+            $this->addIntro($user->id);
+            $this->addAbout($user->id);
+            $this->addRepositories($user->id);
+            $this->addProjects($user->id);
         }
     }
 
-    protected function addAboutData()
+    protected function addIntro(int $userId): void
     {
-        $aboutMe = "<p>I'm a full stack developer with web development experience in PHP / Javascript, " .
-            "Amazon AWS linux server related setup / maintenance work and mobile development implementing " .
-            "native / web apps for both Android and iOS devices.</p>" .
-            "<p>For a long time I've been interested in software development and continue to spend time researching " .
-            "and improving upon my skills and experience in new and popular technologies.</p>";
+        $params = $this->data['intro'];
+        $params['user_id'] = $userId;
 
-        $users = User::all();
-
-        foreach ($users as $user) {
-            $about = About::create([
-                'user_id' => $user->id,
-                'text'    => $aboutMe,
-            ]);
-
-            $file = $this->addFile('about.png');
-
-            if ($file) {
-                $about->file_id = $file->id;
-                $about->save();
-            }
-        }
+        Intro::create($params);
     }
 
-    protected function addSkills()
+    protected function addAbout(int $userId): void
     {
-        $portfolioSkill = Skill::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio']);
+        $data = $this->data['about'];
+        $params = ['user_id' => $userId, 'text' => $data['text']];
 
-        $this->addSkillTechnologies(
-            $portfolioSkill,
-            [
-                'PHP',
-                'Laravel',
-                'Node.js',
-                'MySQL',
-                'MongoDB',
-                'Vue.js',
-                'React',
-                'Angular'
-            ]
-        );
-    }
+        About::create($params);
 
-    protected function addSkillTechnologies(Skill $skill, array $technologies)
-    {
+        $params = ['user_id' => $userId, 'name' => $data['skills']['name']];
+        $skill  = Skill::create($params);
+
+        $technologies = $data['skills']['technologies'];
+
         foreach ($technologies as $technology) {
             $skill->technologies()->save(Technology::where('name', $technology)->first());
         }
     }
 
-    protected function addProjects(array $repositories): void
+    protected function addRepositories(int $userId): void
     {
-        [
-            $cvRepo,
-            $meshProApiRepo,
-            $devNudgeRepo,
-        ] = $repositories;
+        $repositories = $this->data['repositories'];
 
-        $cvProject = Project::create([
-            'user_id'     => UserEnum::ADMIN,
-            'name'        => 'CV',
-            'description' => 'Digital CV',
-            'url'         => 'https://cv.meshpro.io'
-        ]);
+        foreach ($repositories as $repository) {
+            $repository['user_id'] = $userId;
 
-        $cvProject->repositories()->save($cvRepo);
-        $cvProject->repositories()->save($meshProApiRepo);
-
-        $this->addProjectTechnologies($cvProject, ['React', 'Next.js', 'Laravel']);
-        $file = $this->addFile('cv.png');
-
-        if ($file) {
-            $cvProject->files()->save($file);
-        }
-
-        $devNudgeProject = Project::create([
-            'user_id'     => UserEnum::ADMIN,
-            'name'        => 'Dev Nudge',
-            'description' => 'Developer blog',
-            'url'         => 'https://devnudge.io'
-        ]);
-
-        $devNudgeProject->repositories()->save($devNudgeRepo);
-
-        $this->addProjectTechnologies($devNudgeProject, ['Astro', 'Laravel']);
-        $file = $this->addFile('devnudge.png');
-
-        if ($file) {
-            $devNudgeProject->files()->save($file);
+            Repository::create($repository);
         }
     }
 
-    protected function addFile($filename): File|null
+    protected function addProjects(int $userId): void
     {
-        try {
-            $fileUrl = resolve(MoveFileAction::class)->execute($filename);
-        } catch (FileNotUploadedException) {
-            $fileUrl = fake()->placeholderImageUrl(512, 512);
-        }
+        $projects = $this->data['projects'];
 
-        return File::create([
-            'user_id' => UserEnum::ADMIN,
-            'name'    => $filename,
-            'url'     => $fileUrl,
-        ]);
-    }
+        foreach ($projects as $project) {
+            $params = [
+                'user_id'     => $userId,
+                'name'        => $project['name'],
+                'description' => $project['description'],
+                'url'         => $project['url'],
+            ];
 
-    protected function addProjectTechnologies(Project $project, array $technologies): void
-    {
-        foreach ($technologies as $technology) {
-            $project->technologies()->save(Technology::where('name', $technology)->first());
+            $projectModel = Project::create($params);
+
+            foreach ($project['repositories'] as $repository) {
+                $repositoryModel = Repository::where('user_id', $userId)
+                                             ->where('name', $repository)
+                                             ->first();
+
+                $projectModel->repositories()->save($repositoryModel);
+            }
+
+            foreach ($project['technologies'] as $technology) {
+                $technologyModel = Technology::where('user_id', $userId)
+                                             ->where('name', $technology)
+                                             ->first();
+
+                $projectModel->technologies()->save($technologyModel);
+            }
+
+            $file = File::create([
+                'user_id' => $userId,
+                'name'    => $project['file']['name'],
+                'url'     => $project['file']['url'],
+            ]);
+
+            $projectModel->files()->save($file);
         }
     }
 }

@@ -2,45 +2,47 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\MoveFileAction;
-use App\Enums\{TypeEnum, UserEnum};
-use App\Exceptions\FileNotUploadedException;
-use App\Models\{File, Site};
+use App\Models\{File, Site, User};
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 
 class SiteSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run(Collection $users): void
     {
-        $githubSite    = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'GitHub', 'url'  => 'https://github.com/meshu-dev']);
-        $linkedInSite  = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'LinkedIn', 'url'  => 'https://www.linkedin.com/in/harmeshuppal']);
-        $portfolioSite = Site::create(['user_id' => UserEnum::ADMIN, 'name' => 'Portfolio', 'url'  => 'https://meshpro.io/portfolio']);
+        $data = require('data/user_data.php');
+        $sites = $data['sites'];
 
-        $this->addIconFile($githubSite, 'github-cv.png');
-        $this->addIconFile($linkedInSite, 'linkedin-cv.png');
-        $this->addIconFile($portfolioSite, 'portfolio-icon.png');
-
-        $githubSite->types()->attach([TypeEnum::CV->value, TypeEnum::PORTFOLIO->value]);
-        $linkedInSite->types()->attach([TypeEnum::CV->value, TypeEnum::PORTFOLIO->value]);
-        $portfolioSite->types()->attach([TypeEnum::CV->value]);
+        foreach ($users as $user) {
+            foreach ($sites as $site) {
+                $this->addSite($user, $site);
+            }
+        }
     }
 
-    protected function addIconFile(Site $site, string $filename): void
+    protected function addSite(User $user, array $site): void
     {
-        try {
-            $fileUrl = resolve(MoveFileAction::class)->execute($filename);
-        } catch (FileNotUploadedException) {
-            $fileUrl = fake()->placeholderImageUrl(64, 64);
-        }
+        $params = [
+            'user_id' => $user->id,
+            'name'    => $site['name'],
+            'url'     => $site['url'],
+        ];
 
-        $file = File::create([
-            'user_id' => UserEnum::ADMIN,
-            'name'    => $filename,
-            'url'     => $fileUrl,
-        ]);
+        $siteModel = Site::create($params);
+        $siteModel->types()->attach($site['types']);
+
+        $params = [
+            'user_id' => $user->id,
+            'name'    => $site['file']['name'],
+            'url'     => $site['file']['url'],
+        ];
+
+        $this->addFile($siteModel, $params);
+    }
+
+    protected function addFile(Site $site, array $params): void
+    {
+        $file = File::create($params);
 
         $site->file_id = $file->id;
         $site->save();

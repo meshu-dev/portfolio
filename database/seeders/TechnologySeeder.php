@@ -4,54 +4,28 @@ namespace Database\Seeders;
 
 use App\Models\{Technology, User};
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 
 class TechnologySeeder extends Seeder
 {
-    public function run(): void
+    public function run(Collection $users): void
     {
-        $users        = User::all();
-        $technologies = $this->getTechnologyData();
+        $data = require('data/user_data.php');
+        $technologies = $data['technologies'];
 
         foreach ($users as $user) {
             foreach ($technologies as $technology) {
-                $technology['user_id'] = $user->id;
-                Technology::create($technology);
+                $this->addTechnology($user, $technology);
             }
         }
     }
 
-    private function getTechnologyData(): array
+    protected function addTechnology(User $user, string $technology): void
     {
-        return [
-            ['name' => 'PHP'],
-            ['name' => 'Java'],
-            ['name' => 'Backbone.js'],
-            ['name' => 'jQuery'],
-            ['name' => 'Sass'],
-            ['name' => 'Symfony'],
-            ['name' => 'Amazon AWS'],
-            ['name' => 'Docker'],
-            ['name' => 'PHPUnit'],
-            ['name' => 'Objective-C'],
-            ['name' => 'C#'],
-            ['name' => 'Laravel'],
-            ['name' => 'Wordpress'],
-            ['name' => 'Node.js'],
-            ['name' => 'MySQL'],
-            ['name' => 'MongoDB'],
-            ['name' => 'PostgreSQL'],
-            ['name' => 'Express.js'],
-            ['name' => 'Fastify'],
-            ['name' => 'Angular'],
-            ['name' => 'React'],
-            ['name' => 'Next.js'],
-            ['name' => 'Vue.js'],
-            ['name' => 'Nuxt'],
-            ['name' => 'GraphQL'],
-            ['name' => 'Linux'],
-            ['name' => 'TailwindCSS'],
-            ['name' => 'Astro'],
-            ['name' => '.NET']
+        $params = [
+            'user_id' => $user->id,
+            'name' => $technology
         ];
+        Technology::create($params);
     }
 }
