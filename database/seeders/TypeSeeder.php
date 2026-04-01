@@ -8,9 +8,6 @@ use Illuminate\Database\Seeder;
 
 class TypeSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         Type::insert([

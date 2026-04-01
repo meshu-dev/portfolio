@@ -35,7 +35,7 @@ class CreatePdfAction
 
         // Create file DB data
         File::updateOrCreate(
-            ['name' => self::FILENAME],
+            ['user_id' => $userId, 'name' => self::FILENAME],
             ['url'  => $fileUrl]
         );
     }

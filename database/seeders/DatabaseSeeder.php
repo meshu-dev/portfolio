@@ -7,13 +7,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        $data = require('data/user_data.php');
-
         $this->call([
             UserSeeder::class,
             TypeSeeder::class,
