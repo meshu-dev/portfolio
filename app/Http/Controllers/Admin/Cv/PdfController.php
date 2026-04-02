@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Cv;
 use App\Actions\Cv\Pdf\GetPdfFileAction;
 use App\Enums\FlashTypeEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\PdfFileResource;
 use App\Jobs\CreateCvPdfJob;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +17,7 @@ class PdfController extends Controller
     {
         $pdfFile = resolve(GetPdfFileAction::class)->execute();
 
-        return Inertia::render('Cv/Pdf', ['pdf' => $pdfFile]);
+        return Inertia::render('Cv/Pdf', ['pdf' => new PdfFileResource($pdfFile)]);
     }
 
     public function generate(): RedirectResponse
