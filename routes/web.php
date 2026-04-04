@@ -44,8 +44,9 @@ Route::middleware(['auth:web'])->group(function () {
         });
 
         Route::prefix('pdf')->group(function () {
-            Route::get('/',  [PdfController::class, 'view'])->name('pdf.view');
-            Route::post('/', [PdfController::class, 'generate'])->name('pdf.generate');
+            Route::get('/',     [PdfController::class, 'view'])->name('pdf.view');
+            Route::get('/file', [PdfController::class, 'getPdfFile'])->name('pdf.file');
+            Route::post('/',    [PdfController::class, 'generate'])->name('pdf.generate'); 
         });
     });
 

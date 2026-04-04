@@ -1,3 +1,4 @@
+import { FlashTypeEnum } from '@/enums/FlashTypeEnum'
 import { CalendarDate } from '@internationalized/date'
 
 export type About = {
@@ -62,4 +63,17 @@ export type WorkExperience = {
     description: string
     responsibilities: string
     active: boolean
+}
+
+export type PdfFile = {
+    id: string
+    name: string
+    url: string
+    created_at: string
+    updated_at: string
+}
+
+export type FlashMessage = {
+    message: string,
+    type: FlashTypeEnum
 }

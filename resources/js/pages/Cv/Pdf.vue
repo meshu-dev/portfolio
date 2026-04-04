@@ -1,14 +1,57 @@
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3'
+import { router, useHttp, usePoll } from '@inertiajs/vue3'
 import PageHeader from '@/components/PageHeader.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { getFormattedDate } from '@/lib/utils'
+import { onBeforeUnmount, onMounted, ref, Ref } from 'vue'
+import { FlashMessage, PdfFile } from '@/types/portfolio'
+import { FlashTypeEnum } from '@/enums/FlashTypeEnum'
 
 let props = defineProps({ pdf: Object })
+const pdf: Ref<PdfFile|null> = ref(null)
+
+const http = useHttp()
 
 const createPdf = () => {
-  router.post(`/cv/pdf`)
+  router.post(`/cv/pdf`, {}, { onSuccess: () => start() })
 }
+
+const onPollStart = () => {
+  console.log('Polling request started')
+
+  http.get('/cv/pdf/file', {
+    onSuccess: (response: unknown): void => {
+      const responsePdf: PdfFile|null = response ? response as PdfFile : null
+
+      if (
+        (pdf.value === null && responsePdf?.id) ||
+        (pdf.value && responsePdf && pdf.value.updated_at != responsePdf.updated_at)
+      ) {
+        const flashMessage: FlashMessage = {
+          message: "Pdf has been updated",
+          type: FlashTypeEnum.SUCCESS
+        }
+        router.flash(() => (flashMessage))
+
+        pdf.value = responsePdf
+      }
+    },
+  })
+}
+
+const onPollFinish = () => {
+  console.log('Polling request finished')
+  stop()
+}
+
+const { start, stop } = usePoll(
+    2000,
+    { onStart: onPollStart, onFinish: onPollFinish },
+    { autoStart: false }
+)
+
+//onMounted(() => start())
+onBeforeUnmount(() => stop())
 </script>
 
 <template>
@@ -18,7 +61,7 @@ const createPdf = () => {
         <p class="flex mb-4 gap-1">
             <span class="font-bold">Url:</span>
             <span>
-                <a :href="pdf.image_url" target="_blank" class="hover:underline">{{ pdf.image_url }}</a>
+                <a :href="pdf.url" target="_blank" class="hover:underline">{{ pdf.url }}</a>
             </span>
         </p>
         <p class="flex mb-4 gap-1">

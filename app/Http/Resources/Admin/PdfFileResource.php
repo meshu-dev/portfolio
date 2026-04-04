@@ -21,8 +21,8 @@ class PdfFileResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
-            'url'        => $this->url,
-            'image_url'  => resolve(GetFileUrlAction::class)->execute($this->resource),
+            'url'        => resolve(GetFileUrlAction::class)->execute($this->resource),
+            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }

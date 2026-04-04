@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Cv\GetCvAction;
+use App\Actions\Cv\Pdf\GetPdfFileAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\{
     ProfileResource,
@@ -14,9 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CvController extends Controller
 {
-    /**
-     * Get CV data.
-     */
     public function get(GetCvAction $getCvAction): JsonResponse
     {
         $data = $getCvAction->execute((int) Auth::id());

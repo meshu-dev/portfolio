@@ -31,4 +31,11 @@ class PdfController extends Controller
 
         return to_route('pdf.view');
     }
+
+    public function getPdfFile(): PdfFileResource
+    {
+        $pdfFile = resolve(GetPdfFileAction::class)->execute();
+
+        return new PdfFileResource($pdfFile);
+    }
 }
