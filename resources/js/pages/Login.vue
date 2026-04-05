@@ -13,30 +13,32 @@ import {
 </script>
 
 <template>
-  <Card class="w-full max-w-sm mx-auto mt-50">
-    <CardHeader>
-      <CardTitle class="text-center">Portfolio Admin</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <Form action="/login" method="post">
-        <Field class="mb-4">
-          <Input type="email" name="email" autoComplete="off" placeholder="Email" />
-        </Field>
-        <Field class="mb-4">
-          <Input type="password" name="password" autoComplete="off" placeholder="Password" />
-        </Field>
-        <Button
-          class="w-full cursor-pointer"
-          type="submit">
-          Login
-        </Button>
-      </Form>
-      <div class="mt-2 text-center">
-        <span>No user account?</span>
-        <Link href="/login/demo" method="post" as="button" class="ml-1 cursor-pointer">
-          <span class="cursor-pointer">Use demo account</span>
-        </Link>
-      </div>
-    </CardContent>
-  </Card>
+  <div class="flex justify-center">
+    <Card class="w-full max-w-sm mt-50 mx-4">
+      <CardHeader>
+        <CardTitle class="text-center">Portfolio Admin</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form action="/login" method="post">
+          <Field class="mb-4">
+            <Input type="email" name="email" autoComplete="off" placeholder="Email" />
+          </Field>
+          <Field class="mb-4">
+            <Input type="password" name="password" autoComplete="off" placeholder="Password" />
+          </Field>
+          <Button
+            class="w-full cursor-pointer"
+            type="submit">
+            Login
+          </Button>
+        </Form>
+        <div class="mt-2 text-center">
+          <span>No user account?</span>
+          <Link href="/login/demo" method="post" as="button" class="ml-1 cursor-pointer">
+            <span class="cursor-pointer">Use demo account</span>
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
 </template>

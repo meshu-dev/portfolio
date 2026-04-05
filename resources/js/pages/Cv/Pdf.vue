@@ -13,12 +13,19 @@ const pdf: Ref<PdfFile|null> = ref(null)
 const http = useHttp()
 
 const createPdf = () => {
-  router.post(`/cv/pdf`, {}, { onSuccess: () => start() })
+  router.post(
+    `/cv/pdf`,
+    {},
+    {
+      onSuccess: () => {
+        stop()
+        start()
+      }
+    }
+  )
 }
 
 const onPollStart = () => {
-  console.log('Polling request started')
-
   http.get('/cv/pdf/file', {
     onSuccess: (response: unknown): void => {
       const responsePdf: PdfFile|null = response ? response as PdfFile : null
@@ -40,7 +47,6 @@ const onPollStart = () => {
 }
 
 const onPollFinish = () => {
-  console.log('Polling request finished')
   stop()
 }
 
@@ -50,7 +56,6 @@ const { start, stop } = usePoll(
     { autoStart: false }
 )
 
-//onMounted(() => start())
 onBeforeUnmount(() => stop())
 </script>
 
