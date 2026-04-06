@@ -13,7 +13,9 @@ defineProps<{ navLinkMenu: NavLinkMenu }>()
 
 <template>
   <NavigationMenuItem>
-    <NavigationMenuTrigger class="bg-transparent cursor-pointer">{{ navLinkMenu.name }}</NavigationMenuTrigger>
+    <NavigationMenuTrigger class="bg-transparent cursor-pointer">
+      {{ navLinkMenu.name }}
+    </NavigationMenuTrigger>
     <NavigationMenuContent class="z-1">
       <ul class="grid w-[200px] gap-4">
         <li v-for="navLink in navLinkMenu.links">
