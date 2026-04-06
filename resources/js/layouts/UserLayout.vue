@@ -6,8 +6,7 @@ import { toast } from 'vue-sonner'
 import { router } from '@inertiajs/vue3'
 import { onUnmounted } from 'vue'
 import Logo from '@/components/Logo.vue'
-import NavMenu from '@/components/NavMenu.vue'
-import NavMenuButton from '@/components/NavMenuButton.vue'
+import NavMenu from '@/components/NavMenu/NavMenu.vue'
 import { NavLink, NavLinkMenu } from '@/types/portfolio'
 
 const navLinks: Array<NavLink|NavLinkMenu> = [
@@ -52,7 +51,6 @@ onUnmounted(
     <header>
       <Logo />
       <NavMenu :navLinks="navLinks" />
-      <NavMenuButton />
     </header>
     <main>
       <slot />
