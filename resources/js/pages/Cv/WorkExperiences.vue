@@ -46,7 +46,7 @@ const deleteWorkExperience = () => {
   <Link href="/cv/work-experiences/new">
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
-  <div v-if="workExperiences" class="min-h-[650px]">
+  <div v-if="workExperiences" class="mt-4 min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>
         <TableRow class="text-xl font-extrabold">

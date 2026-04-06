@@ -1,6 +1,21 @@
 import { FlashTypeEnum } from '@/enums/FlashTypeEnum'
 import { CalendarDate } from '@internationalized/date'
 
+export type FlashMessage = {
+    message: string
+    type: FlashTypeEnum
+}
+
+export type NavLinkMenu = {
+    name: string
+    links: NavLink[]
+}
+
+export type NavLink = {
+    name: string
+    url: string
+}
+
 export type About = {
     id: string
     text: string
@@ -71,9 +86,4 @@ export type PdfFile = {
     url: string
     created_at: string
     updated_at: string
-}
-
-export type FlashMessage = {
-    message: string,
-    type: FlashTypeEnum
 }

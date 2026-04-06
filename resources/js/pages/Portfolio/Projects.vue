@@ -42,7 +42,7 @@ const deleteProject = () => {
   <Link href="/portfolio/projects/new">
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
-  <div v-if="projects && projects.length > 0" class="min-h-[650px]">
+  <div v-if="projects && projects.length > 0" class="mt-4 min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>
         <TableRow class="text-xl font-extrabold">

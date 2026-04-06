@@ -38,7 +38,7 @@ const deleteSite = () => {
   <Link href="/sites/new">
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
-  <div v-if="sites && sites.length > 0" class="min-h-[650px]">
+  <div v-if="sites && sites.length > 0" class="mt-4 min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>
         <TableRow class="text-xl font-extrabold">

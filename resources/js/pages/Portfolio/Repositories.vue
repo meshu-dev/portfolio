@@ -39,7 +39,7 @@ const deleteRepository = () => {
 <template>
   <PageHeader value="Repositories" />
   <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
-  <div v-if="repositories && repositories.length > 0" class="min-h-[650px]">
+  <div v-if="repositories && repositories.length > 0" class="mt-4 min-h-[650px]">
     <Table class="table-fixed">
       <TableHeader>
         <TableRow class="text-xl font-extrabold">

@@ -20,7 +20,7 @@ onUnmounted(
     <meta name="description" content="Your page description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </Head>
-  <main class="m-auto mt-15 mb-0 max-w-4xl">
+  <main class="auth-layout">
     <slot />
   </main>
   <Toaster position="top-center"
