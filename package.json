@@ -39,7 +39,7 @@
         "dayjs": "^1.11.20",
         "laravel-vite-plugin": "^2.0.0",
         "lucide-vue-next": "^0.575.0",
-        "reka-ui": "^2.9.3",
+        "reka-ui": "^2.9.4",
         "tailwind-merge": "^3.5.0",
         "tailwindcss": "^4.1.1",
         "typescript": "^5.2.2",
