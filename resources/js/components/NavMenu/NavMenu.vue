@@ -10,12 +10,12 @@ defineProps({ navLinks: Array<NavLink | NavLinkMenu> })
 <template>
   <NavigationMenu
     v-if="navLinks"
-    :viewport="false"
-    class="user-menu my-4"
+    :viewport="true"
+    class="hidden sm:block user-menu my-4"
     :orientation="'vertical'">
       <NavMenuLinks :navLinks="navLinks" />
   </NavigationMenu>
   <NavMenuButton
-    v-if="navLinks"
-    :navLinks="navLinks" />
+    :navLinks="navLinks"
+    class="inline sm:hidden" />
 </template>

@@ -48,11 +48,13 @@ onUnmounted(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </Head>
   <div class="user-layout">
-    <header>
-      <Logo />
-      <NavMenu :navLinks="navLinks" />
+    <header class="px-0">
+      <div class="flex justify-between w-full px-4 md:max-w-4xl md:mx-auto">
+        <Logo />
+        <NavMenu :navLinks="navLinks" />
+      </div>
     </header>
-    <main>
+    <main class="w-full px-4 md:max-w-4xl md:mx-auto">
       <slot />
     </main>
   </div>

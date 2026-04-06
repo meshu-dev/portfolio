@@ -17,8 +17,8 @@ class DeleteProjectAction
                           ->where('id', $id)
                           ->firstOrFail();
 
-        $project->image->delete();
+        $project->image?->delete();
 
-        return $project->delete();
+        return $project->delete() ?: false;
     }
 }

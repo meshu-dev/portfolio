@@ -12,17 +12,19 @@ defineProps<{ navLinks: Array<NavLink | NavLinkMenu> }>()
 </script>
 
 <template>
-  <Sheet v-model:open="isOpen">
-    <SheetTrigger as-child>
-      <Button variant="outline" size="icon" class="cursor-pointer">
-        <Menu className="h-5 w-5" />
-      </Button>
-    </SheetTrigger>
-    <SheetContent>
-      <SheetHeader />
-      <div class="grid flex-1 auto-rows-min gap-6 pt-10 px-4">
-        <NavSideMenu v-model:isMenuOpen="isOpen" :navLinks="navLinks" />
-      </div>
-    </SheetContent>
-  </Sheet>
+  <div>
+    <Sheet v-model:open="isOpen">
+      <SheetTrigger as-child>
+        <Button variant="outline" size="icon" class="cursor-pointer">
+          <Menu className="h-5 w-5" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader />
+        <div class="grid flex-1 auto-rows-min gap-6 pt-10 px-4">
+          <NavSideMenu v-model:isMenuOpen="isOpen" :navLinks="navLinks" />
+        </div>
+      </SheetContent>
+    </Sheet>
+  </div>
 </template>
