@@ -43,12 +43,12 @@
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+    --breakpoint-xs: 30rem;
 }
 
 :root {
     --radius: 0.625rem;
-    /*--background: oklch(1 0 0); */ 
-    --background: #F5F3F5;
+    --background: #FFF;
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -79,6 +79,7 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --auth-background: #F5F3F5; /* #F5F3F5; */
 }
 
 .dark {
@@ -119,8 +120,29 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    @apply h-full;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply h-full text-foreground;
+  }
+  nav {
+    @apply !my-0;
+  }
+  #app {
+    @apply min-h-full;
+  }
+  .auth-layout {
+    @apply bg-(--auth-background) h-full m-auto pt-10 mb-0 max-w-4xl max-h-full grow;
+  }
+  .user-layout {
+    @apply bg-background mt-0 mb-0;
+  }
+  .user-layout header {
+    @apply bg-(--auth-background) flex justify-between py-4 border-b-1 border-gray-200;
+  }
+  .user-layout main {
+    @apply py-6;
   }
   .form-row {
     @apply flex flex-col mb-4;

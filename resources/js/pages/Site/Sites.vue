@@ -39,11 +39,11 @@ const deleteSite = () => {
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
   <div v-if="sites && sites.length > 0" class="mt-4 min-h-[650px]">
-    <Table class="table-fixed">
+    <Table>
       <TableHeader>
         <TableRow class="text-xl font-extrabold">
           <TableHead>Name</TableHead>
-          <TableHead class="w-md">Url</TableHead>
+          <TableHead class="hidden sm:table-cell">Url</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -52,7 +52,7 @@ const deleteSite = () => {
           <TableCell>
             <Link :href="`/sites/${site.id}`">{{ site.name }}</Link>
           </TableCell>
-          <TableCell>{{ site.url }}</TableCell>
+          <TableCell class="hidden sm:table-cell">{{ site.url }}</TableCell>
           <TableCell>
             <Button
               class="btn-primary cursor-pointer"

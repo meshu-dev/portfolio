@@ -11,7 +11,6 @@ import {
 import { router } from '@inertiajs/vue3'
 import Button from '@/components/ui/button/Button.vue'
 import DeleteDialog from '@/components/DeleteDialog.vue'
-import { toRaw } from 'vue'
 import { Technology } from '@/types/portfolio'
 import PageHeader from '@/components/PageHeader.vue'
 import AddTechnologyDialog from '@/components/Technology/AddTechnologyDialog.vue'
@@ -40,7 +39,7 @@ const deleteTechnology = () => {
   <PageHeader value="Technologies" />
   <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
   <div v-if="technologies && technologies.length > 0" class="mt-4 min-h-[650px]">
-    <Table class="table-fixed">
+    <Table>
       <TableHeader>
         <TableRow class="text-xl font-extrabold">
           <TableHead class="w-lg">Name</TableHead>

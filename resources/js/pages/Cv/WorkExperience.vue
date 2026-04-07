@@ -117,12 +117,12 @@ const submitForm = (): void => {
         class="w-20 mb-4 cursor-pointer"
         variant="outline"
         @click="addResponsibility"
-        :disabled="form.responsibilities.length === responsibilityLimit">
+        :disabled="form.responsibilities && form.responsibilities.length === responsibilityLimit">
         Add
       </Button>
       <div
         v-for="(,index) in form.responsibilities"
-        class="flex mb-4 gap-2">
+        class="flex flex-col sm:flex-row mb-4 gap-2">
         <Input
           type="text"
           id="location"

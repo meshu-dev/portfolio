@@ -40,18 +40,18 @@ const deleteRepository = () => {
   <PageHeader value="Repositories" />
   <Button class="btn-primary cursor-pointer" @click="addDialogOpen = true">Add</Button>
   <div v-if="repositories && repositories.length > 0" class="mt-4 min-h-[650px]">
-    <Table class="table-fixed">
+    <Table>
       <TableHeader>
         <TableRow class="text-xl font-extrabold">
           <TableHead>Name</TableHead>
-          <TableHead class="w-md">Url</TableHead>
+          <TableHead class="hidden sm:table-cell">Url</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow v-for="repository in repositories" class="">
           <TableCell>{{ repository.name }}</TableCell>
-          <TableCell>{{ repository.url }}</TableCell>
+          <TableCell class="hidden sm:table-cell">{{ repository.url }}</TableCell>
           <TableCell>
             <Button
               class="btn-primary cursor-pointer"

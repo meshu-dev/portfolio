@@ -1,4 +1,5 @@
 import { FlashTypeEnum } from '@/enums/FlashTypeEnum'
+import { HttpMethodEnum } from '@/enums/HttpMethodEnum'
 import { CalendarDate } from '@internationalized/date'
 
 export type FlashMessage = {
@@ -14,6 +15,7 @@ export type NavLinkMenu = {
 export type NavLink = {
     name: string
     url: string
+    type?: HttpMethodEnum
 }
 
 export type About = {

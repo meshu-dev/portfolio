@@ -3,12 +3,12 @@ import { router, useHttp, usePoll } from '@inertiajs/vue3'
 import PageHeader from '@/components/PageHeader.vue'
 import Button from '@/components/ui/button/Button.vue'
 import { getFormattedDate } from '@/lib/utils'
-import { onBeforeUnmount, onMounted, ref, Ref } from 'vue'
+import { onBeforeUnmount, ref, Ref } from 'vue'
 import { FlashMessage, PdfFile } from '@/types/portfolio'
 import { FlashTypeEnum } from '@/enums/FlashTypeEnum'
 
 let props = defineProps({ pdf: Object })
-const pdf: Ref<PdfFile|null> = ref(null)
+const pdf: Ref<PdfFile|null> = ref(props.pdf as PdfFile)
 
 const http = useHttp()
 
@@ -63,13 +63,13 @@ onBeforeUnmount(() => stop())
     <PageHeader value="PDF File" />
     <template v-if="pdf">
         <p class="mb-4">PDF file has been created.</p>
-        <p class="flex mb-4 gap-1">
+        <p class="flex flex-col sm:flex-row mb-4 gap-1">
             <span class="font-bold">Url:</span>
             <span>
                 <a :href="pdf.url" target="_blank" class="hover:underline">{{ pdf.url }}</a>
             </span>
         </p>
-        <p class="flex mb-4 gap-1">
+        <p class="flex flex-col sm:flex-row mb-4 gap-1">
             <span class="font-bold">Last Created At:</span>
             <span>{{ getFormattedDate(pdf.updated_at, 'dddd wo YYYY - HH:mm A') }}</span>
         </p>

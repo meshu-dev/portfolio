@@ -43,11 +43,11 @@ const deleteProject = () => {
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
   <div v-if="projects && projects.length > 0" class="mt-4 min-h-[650px]">
-    <Table class="table-fixed">
+    <Table>
       <TableHeader>
         <TableRow class="text-xl font-extrabold">
           <TableHead>Name</TableHead>
-          <TableHead>Url</TableHead>
+          <TableHead class="hidden xs:table-cell">Url</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -56,7 +56,7 @@ const deleteProject = () => {
           <TableCell>
             <Link :href="`/portfolio/projects/${project.id}`">{{ project.name }}</Link>
           </TableCell>
-          <TableCell>{{ project.url }}</TableCell>
+          <TableCell class="hidden xs:table-cell">{{ project.url }}</TableCell>
           <TableCell>
             <Button
               class="btn-primary cursor-pointer"

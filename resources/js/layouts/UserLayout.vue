@@ -8,6 +8,7 @@ import { onUnmounted } from 'vue'
 import Logo from '@/components/Logo.vue'
 import NavMenu from '@/components/NavMenu/NavMenu.vue'
 import { NavLink, NavLinkMenu } from '@/types/portfolio'
+import { HttpMethodEnum } from '@/enums/HttpMethodEnum'
 
 const navLinks: Array<NavLink|NavLinkMenu> = [
   {
@@ -30,7 +31,7 @@ const navLinks: Array<NavLink|NavLinkMenu> = [
   },
   { name: 'Technologies', url: '/technologies' },
   { name: 'Sites', url: '/sites' },
-  { name: 'Logout', url: '/logout' }
+  { name: 'Logout', url: '/logout', type: HttpMethodEnum.POST }
 ]
 
 onUnmounted(

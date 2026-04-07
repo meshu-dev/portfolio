@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3'
 import type { NavLink } from '@/types/portfolio'
+import { HttpMethodEnum } from '@/enums/HttpMethodEnum';
 
 const props = defineProps<{ navLink: NavLink }>()
 const isMenuOpen = defineModel('isMenuOpen')
 
 const navigateToPage = () => {
-  router.get(props.navLink.url)
+  router.visit(props.navLink.url, { method: props.navLink.type || HttpMethodEnum.GET })
   isMenuOpen.value = false
 }
 </script>

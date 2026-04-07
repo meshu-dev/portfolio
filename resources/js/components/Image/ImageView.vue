@@ -9,8 +9,8 @@ const removeImage = (): void => {
 </script>
 
 <template>
-    <div class="flex mt-4 gap-4">
-        <img :src="imageUrl" class="max-w-xs shadow-md" />
-        <Button size="sm" class="cursor-pointer"  @click="removeImage">Remove</Button>
+    <div class="flex flex-col xs:flex-row mt-4 gap-4">
+        <img :src="imageUrl" class="w-full m-auto shadow-md xs:max-w-xs xs:m-0" />
+        <Button size="sm" class="cursor-pointer" @click="removeImage">Remove</Button>
     </div>
 </template>

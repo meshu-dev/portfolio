@@ -47,11 +47,11 @@ const deleteWorkExperience = () => {
     <Button class="btn-primary cursor-pointer">Add</Button>
   </Link>
   <div v-if="workExperiences" class="mt-4 min-h-[650px]">
-    <Table class="table-fixed">
+    <Table>
       <TableHeader>
         <TableRow class="text-xl font-extrabold">
           <TableHead>Name</TableHead>
-          <TableHead>Company</TableHead>
+          <TableHead class="hidden xs:table-cell">Company</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>
@@ -62,7 +62,7 @@ const deleteWorkExperience = () => {
               {{ workExperience.title }}
             </Link>
           </TableCell>
-          <TableCell>{{ workExperience.company }}</TableCell>
+          <TableCell class="hidden xs:table-cell">{{ workExperience.company }}</TableCell>
           <TableCell>
             <Button
               class="btn-primary cursor-pointer"
