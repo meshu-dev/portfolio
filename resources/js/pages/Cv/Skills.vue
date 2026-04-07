@@ -40,8 +40,8 @@ const transformData = (data) => {
   <Form action="/cv/skills" method="put" :transform="data => transformData(data)">
     <div v-for="(skill, index) in skills" class="mb-5">
       <Label :for="skill.name" class="mb-3">{{ skill.name }}</Label>
-      <Select name="bing" multiple v-model:modelValue="form[skill.id]" class="md:w-full">
-        <SelectTrigger class="w-xl">
+      <Select multiple v-model:modelValue="form[skill.id]" class="w-full">
+        <SelectTrigger class="w-full">
           <SelectValue placeholder="Select technology" />
         </SelectTrigger>
         <SelectContent>

@@ -17,7 +17,7 @@ defineProps<{ navLinkMenu: NavLinkMenu }>()
       {{ navLinkMenu.name }}
     </NavigationMenuTrigger>
     <NavigationMenuContent class="z-1">
-      <ul class="grid w-[200px] gap-4">
+      <ul class="grid w-[140px]">
         <li v-for="navLink in navLinkMenu.links">
           <NavigationMenuLink as-child>
             <Link :href="navLink.url">{{ navLink.name }}</Link>

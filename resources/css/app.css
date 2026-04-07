@@ -132,9 +132,6 @@
   #app {
     @apply min-h-full;
   }
-  .auth-layout {
-    @apply bg-(--auth-background) h-full m-auto pt-10 mb-0 max-w-4xl max-h-full grow;
-  }
   .user-layout {
     @apply bg-background mt-0 mb-0;
   }
