@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\Portfolio\{
 };
 use Illuminate\Support\Facades\Route;
 
+Route::inertia('/login', 'Login')->name('login');
+
+/*
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'userLogin']);
 Route::post('/login/demo', [AuthController::class, 'demoLogin']);
