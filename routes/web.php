@@ -19,12 +19,14 @@ use App\Http\Controllers\Admin\Portfolio\{
 };
 use Illuminate\Support\Facades\Route;
 
+Route::inertia('/', 'Welcome')->name('home');
+
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'userLogin']);
 Route::post('/login/demo', [AuthController::class, 'demoLogin']);
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/', [ProfileController::class, 'view'])->name('profile.view'); 
+    //Route::get('/', [ProfileController::class, 'view'])->name('profile.view'); 
 
     Route::prefix('cv')->group(function () {
         Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
