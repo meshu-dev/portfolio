@@ -12,6 +12,7 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./pages/**/*.vue')
+    console.log('pages', pages)
     return pages[`./pages/Login.vue`]()
   },
   setup({ el, App, props, plugin }) {
