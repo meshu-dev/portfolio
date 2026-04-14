@@ -19,8 +19,8 @@ use App\Http\Controllers\Admin\Portfolio\{
 };
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/login', 'Login')->name('login');
 Route::inertia('/', 'Welcome')->name('home');
+//Route::inertia('/login', 'Login')->name('login');
 
 /*
 Route::get('/login', [AuthController::class, 'index'])->name('login');
