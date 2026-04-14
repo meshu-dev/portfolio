@@ -20,9 +20,9 @@ use App\Http\Controllers\Admin\Portfolio\{
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
-Route::inertia('/login', 'Login')->name('login');
+//Route::inertia('/login', 'Login')->name('login');
 
-//Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'userLogin']);
 Route::post('/login/demo', [AuthController::class, 'demoLogin']);
 
