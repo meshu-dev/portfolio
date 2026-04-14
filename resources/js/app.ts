@@ -15,7 +15,7 @@ createInertiaApp({
 
     const page: Promise<DefineComponent> = resolvePageComponent(
       `./pages/${name}.vue`,
-      import.meta.glob<DefineComponent>('./pages/**/*.vue')
+      import.meta.glob<DefineComponent>('./pages/*.vue')
     )
 
     page.then((module) => {
