@@ -9,7 +9,7 @@ import '../css/app.css'
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
 createInertiaApp({
-  title: (title) => (title ? `${title} - ${appName}` : appName),
+  title: (title) => (title ? `${title} - ${appName}` : appName),/*
   resolve: (name) => {
     console.log('name', name);
 
@@ -18,13 +18,13 @@ createInertiaApp({
       import.meta.glob<DefineComponent>('./pages/*.vue')
     )
 
-    /*
+    
     page.then((module) => {
       module.default.layout = name === 'Login' ? AuthLayout : UserLayout
-    }) */
+    })
 
     return page
-  },
+  }, */
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
