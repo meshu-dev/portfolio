@@ -10,8 +10,8 @@ createInertiaApp({
         color: '#4B5563',
     },
     layout: (name) => {
-        console.log('name', name, name.startsWith('login'))
-        if (name.startsWith('login')) {
+        console.log('name', name, name.startsWith('Login'))
+        if (name.startsWith('Login')) {
             return AuthLayout
         }
 
