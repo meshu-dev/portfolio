@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3'
 import 'vue-sonner/style.css'
-import { Toaster } from '@/components/ui/sonner'
+//import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'vue-sonner'
 import { router } from '@inertiajs/vue3'
 import { onUnmounted } from 'vue'
