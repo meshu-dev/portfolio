@@ -2,14 +2,16 @@
 import { Head } from '@inertiajs/vue3'
 import 'vue-sonner/style.css'
 //import { Toaster } from '@/components/ui/sonner'
+/*
 import { toast } from 'vue-sonner'
 import { router } from '@inertiajs/vue3'
 import { onUnmounted } from 'vue'
 import Logo from '@/components/Logo.vue'
 import NavMenu from '@/components/NavMenu/NavMenu.vue'
 import { NavLink, NavLinkMenu } from '@/types/portfolio'
-import { HttpMethodEnum } from '@/enums/HttpMethodEnum'
+import { HttpMethodEnum } from '@/enums/HttpMethodEnum' */
 
+/*
 const navLinks: Array<NavLink|NavLinkMenu> = [
   {
     name: 'CV',
@@ -40,7 +42,7 @@ onUnmounted(
         toast(event.detail.flash['message'])
       }
   })
-)
+) */
 </script>
 
 <template>
@@ -50,10 +52,11 @@ onUnmounted(
   </Head>
   <div class="user-layout">
     <header class="px-0">
+      <!-- 
       <div class="flex justify-between w-full px-4 md:max-w-4xl md:mx-auto">
         <Logo />
         <NavMenu :navLinks="navLinks" />
-      </div>
+      </div>-->
     </header>
     <main class="w-full px-4 md:max-w-4xl md:mx-auto">
       <slot />
