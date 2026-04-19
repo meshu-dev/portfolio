@@ -3,6 +3,7 @@
 namespace App\Actions\Contact;
 
 use App\Mail\ContactEmail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailAction
@@ -12,6 +13,8 @@ class SendEmailAction
      */
     public function execute(array $params): void
     {
+        Log::info('SendEmailAction', ['params' => $params]);
+
         Mail::to(config('mail.to.address'))->send(
             new ContactEmail($params)
         );
