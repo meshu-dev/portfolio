@@ -22,6 +22,8 @@ class SendMessageAction
         if (!App::environment('local')) {
             $validator = resolve(TokenValidatorFactory::class)->make($type);
             $isValid   = $validator->execute($params['token']);
+        } else {
+            $isValid   = true;
         }
 
         unset($params['token']);
