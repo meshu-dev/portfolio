@@ -2,6 +2,7 @@
 
 namespace App\Actions\Cloudflare;
 
+use App\Enums\TurnstileErrorCodeEnum;
 use App\Exceptions\TurnstileTokenException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -26,10 +27,12 @@ class ValidateTrunstilesTokenAction
 
         Log::info('ValidateTrunstilesTokenAction', ['result' => $result]);
 
+        $errorCode = !empty($response['error-codes'][0]) ? $response['error-codes'][0] : TurnstileErrorCodeEnum::UNKNOWN_ERROR;
+
         throw_unless(
             $result['success'],
             TurnstileTokenException::class,
-            $response['error-codes'][0]
+            $errorCode
         );
 
         return true;

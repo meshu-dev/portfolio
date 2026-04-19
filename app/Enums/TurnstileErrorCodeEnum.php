@@ -11,6 +11,7 @@ enum TurnstileErrorCodeEnum: string
     case BAD_REQUEST       = 'bad-request';
     case DUPLICATE_REQUEST = 'timeout-or-duplicate';
     case INTERNAL_ERROR    = 'internal-error';
+    case UNKNOWN_ERROR     = 'unknown-error';
 
     public function message(): string
     {
@@ -21,7 +22,8 @@ enum TurnstileErrorCodeEnum: string
             self::INVALID_RESPONSE  => 'Token is invalid, malformed, or expired',
             self::BAD_REQUEST       => 'Request is malformed',
             self::DUPLICATE_REQUEST => 'Token has already been validated',
-            self::INTERNAL_ERROR    => 'Internal error occurred'
+            self::INTERNAL_ERROR    => 'Internal error occurred',
+            self::UNKNOWN_ERROR     => 'Unknown turnstile error occurred'
         };
     }
 }
