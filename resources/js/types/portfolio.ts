@@ -65,6 +65,7 @@ export type Site = {
     id: string
     name: string
     url: string
+    icon: string,
     image_url: string
     types: Type[]
 }

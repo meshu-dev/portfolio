@@ -13,7 +13,7 @@ class Site extends Model
 
     protected $table = 'sites';
 
-    protected $fillable = ['user_id', 'name', 'url'];
+    protected $fillable = ['user_id', 'name', 'url', 'icon'];
 
     public $timestamps = false;
 

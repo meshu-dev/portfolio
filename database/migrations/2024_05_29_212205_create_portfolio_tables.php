@@ -87,6 +87,7 @@ return new class () extends Migration {
             $table->foreignId('file_id')->nullable();
             $table->string('name');
             $table->string('url');
+            $table->string('icon')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('file_id')->references('id')->on('files');

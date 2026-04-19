@@ -256,6 +256,7 @@ return [
         [
             'name' => 'GitHub',
             'url'  => 'https://github.com/meshu-dev',
+            'icon' => 'i-simple-icons-github',
             'types' => [
                 TypeEnum::CV->value,
                 TypeEnum::PORTFOLIO->value,
@@ -268,6 +269,7 @@ return [
         [
             'name' => 'LinkedIn',
             'url'  => 'https://www.linkedin.com/in/harmeshuppal',
+            'icon' => 'i-simple-icons-linkedin',
             'types' => [
                 TypeEnum::CV->value,
                 TypeEnum::PORTFOLIO->value,
@@ -280,6 +282,7 @@ return [
         [
             'name' => 'Portfolio',
             'url'  => 'https://meshpro.io/portfolio',
+            'icon' => null,
             'types' => [
                 TypeEnum::CV->value,
             ],

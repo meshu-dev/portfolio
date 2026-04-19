@@ -30,6 +30,7 @@ props?.types?.forEach((type: Type) => {
 const form = useForm({
   name: site?.name,
   url: site?.url,
+  icon: site?.icon,
   image: null,
   image_url: site?.image_url || '',
   types: formTypes,
@@ -73,6 +74,11 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
         <Label :for="`type-${type.id}`" class="cursor-pointer">{{ type.name }}</Label>
       </div>
       <ErrorMessage v-if="errors?.types" :value="errors?.types" />
+    </Field>
+    <Field class="mb-4">
+      <Label for="icon">Icon</Label>
+      <Input type="text" name="icon" :class="errors?.icon ? `error-field` : ``" v-model="form.icon" autoComplete="off" />
+      <ErrorMessage v-if="errors?.url" :value="errors?.url" />
     </Field>
     <Field class="flex mb-4">
       <Label>Image</Label>
