@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ContactEmail extends Mailable
 {
@@ -40,6 +41,8 @@ class ContactEmail extends Mailable
      */
     public function content(): Content
     {
+        Log::info('ContactEmail', ['params' => $this->params]);
+
         return new Content(
             view: 'mail/contact',
             with: [
