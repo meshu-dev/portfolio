@@ -12,7 +12,7 @@ enum TurnstileErrorCodeEnum: string
     case DUPLICATE_REQUEST = 'timeout-or-duplicate';
     case INTERNAL_ERROR    = 'internal-error';
 
-    public function message()
+    public function message(): string
     {
         return match ($this) {
             self::MISSING_SECRET    => 'Secret parameter not provided',

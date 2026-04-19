@@ -8,7 +8,7 @@ use App\Enums\TypeEnum;
 
 class TokenValidatorFactory
 {
-    public function make(TypeEnum $type)
+    public function make(TypeEnum $type): ValidateReCaptchaTokenAction | ValidateTrunstilesTokenAction
     {
         return match ($type) {
             TypeEnum::CV        => resolve(ValidateReCaptchaTokenAction::class),

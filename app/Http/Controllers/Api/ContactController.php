@@ -24,6 +24,8 @@ class ContactController extends Controller
         try {
             $referer = $contactRequest->headers->get('referer');
 
+            throw_unless($referer, Exception::class, 'An error occurred');
+
             $type = resolve(GetTypeByUrlAction::class)->execute($referer);
             $type = TypeEnum::from($type->id);
 
