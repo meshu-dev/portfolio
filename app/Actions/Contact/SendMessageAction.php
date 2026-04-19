@@ -24,6 +24,7 @@ class SendMessageAction
             $isValid   = $validator->execute($params['token']);
         }
 
+        unset($params['token']);
         SendContactEmailJob::dispatchIf($isValid, $params);
 
         return $isValid;

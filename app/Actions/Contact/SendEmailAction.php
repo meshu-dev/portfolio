@@ -13,7 +13,7 @@ class SendEmailAction
      */
     public function execute(array $params): void
     {
-        Log::info('SendEmailAction', ['params' => $params]);
+        Log::info('SendEmailAction', ['ppp' => $params]);
 
         Mail::to(config('mail.to.address'))->send(
             new ContactEmail($params)
