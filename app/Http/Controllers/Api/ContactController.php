@@ -16,6 +16,7 @@ class ContactController extends Controller
      */
     public function sendMessage(ContactRequest $contactRequest, SendMessageAction $sendMessageAction): JsonResponse
     {
+        dd('$contactRequest', $contactRequest->host());
         try {
             $params  = $contactRequest->all();
             $result  = $sendMessageAction->execute($params);

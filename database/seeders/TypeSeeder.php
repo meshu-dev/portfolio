@@ -14,10 +14,12 @@ class TypeSeeder extends Seeder
             [
                 'id'   => TypeEnum::CV->value,
                 'name' => 'CV',
+                'url'  => '',
             ],
             [
                 'id'   => TypeEnum::PORTFOLIO->value,
                 'name' => 'Portfolio',
+                'url'  => 'http://portfolio.test',
             ]
         ]);
     }

@@ -46,4 +46,16 @@ return [
             ]
         ]
     ],
+
+    'cloudflare' => [
+        'turnstile' => [
+            'verify_url' => env('CLOUDFLARE_TURNSTILE_VERIFY_URL'),
+            'secret_key' => env('CLOUDFLARE_TURNSTILE_SECRET_KEY'),
+            'error_messages' => [
+                'invalid-input-response' => 'Submitted token is invalid',
+                'browser-error' => 'Could not connect to the verify site',
+                'default' => 'Verification for token has failed'
+            ], 
+        ]
+    ]
 ];
