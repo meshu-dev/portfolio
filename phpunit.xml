@@ -31,5 +31,7 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="CLOUDFLARE_TURNSTILE_VERIFY_URL" value="https://test.cloudflare.com/turnstile/v0/siteverify"/>
+        <env name="CLOUDFLARE_TURNSTILE_SECRET_KEY" value="turnstile_secret"/>
     </php>
 </phpunit>

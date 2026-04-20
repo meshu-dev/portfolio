@@ -1,9 +1,16 @@
 <?php
 
-use App\Exceptions\GoogleTokenException;
+use App\Actions\Cloudflare\ValidateTrunstilesTokenAction;
+use App\Enums\TurnstileErrorCodeEnum;
+use App\Exceptions\TurnstileTokenException;
+use Mockery\MockInterface;
 
 describe('Api\ContactController tests', function () {
     beforeEach(function () {
+        $this->headers = [
+            'Referer' => 'https://meshpro.io',
+        ];
+
         $this->contactParams = [
             'name'    => 'Mesh',
             'email'   => 'mesh@gmail.com',
@@ -13,11 +20,24 @@ describe('Api\ContactController tests', function () {
     });
 
     it('adds contact message to queue', function () {
+        // Arrange
         Queue::fake();
         Http::fake(fn () => Http::response(['success' => true], 200, ['Headers']));
 
-        $response = $this->post(route('contact'), $this->contactParams);
+        $validateTokenAction = mock(ValidateTrunstilesTokenAction::class, function (MockInterface $mock) {
+            $mock->shouldReceive('execute')
+                ->once()
+                ->with($this->contactParams['token'])
+                ->andReturn(true);
+        });
 
+        $this->app->bind(ValidateTrunstilesTokenAction::class, fn () => $validateTokenAction);
+
+        // Act
+        $response = $this->withHeaders($this->headers)
+                         ->post(route('contact'), $this->contactParams);
+
+        // Assert
         expect($response->status())
             ->toEqual(200)
             ->and($response->json())
@@ -26,62 +46,32 @@ describe('Api\ContactController tests', function () {
     });
 
     it('checks submitted token is invalid', function () {
+        // Arrange
         Queue::fake();
 
-        $message   = 'Submitted token is invalid';
-        $errorCode = 'invalid-input-response';
+        $message   = TurnstileErrorCodeEnum::INVALID_RESPONSE->message();
+        $errorCode = TurnstileErrorCodeEnum::INVALID_RESPONSE;
 
-        Http::fake(fn () => Http::response(getGoogleParams($errorCode), 200, ['Headers']));
+        Http::fake(fn () => Http::response(getValidateTokenParams($errorCode), 500, ['Headers']));
 
-        $response = $this->post(route('contact'), $this->contactParams);
+        // Act
+        $response = $this->withHeaders($this->headers)
+                         ->post(route('contact'), $this->contactParams);
 
+        // Assert
         expect($response->status())
             ->toEqual(500)
             ->and($response->json())
             ->message
             ->toBe($message);
-    })->throws(GoogleTokenException::class, 'Submitted token is invalid');
-
-    it('checks submitted token is not verified', function () {
-        Queue::fake();
-
-        $message   = 'Could not connect to the verify site';
-        $errorCode = 'browser-error';
-
-        Http::fake(fn () => Http::response(getGoogleParams($errorCode), 200, ['Headers']));
-
-        $response = $this->post(route('contact'), $this->contactParams);
-
-        expect($response->status())
-            ->toEqual(500)
-            ->and($response->json())
-            ->message
-            ->toBe($message);
-    })->throws(GoogleTokenException::class, 'Could not connect to the verify site');
-
-    it('checks submitted token has failed', function () {
-        Queue::fake();
-
-        $message   = 'Verification for token has failed';
-        $errorCode = 'default';
-
-        Http::fake(fn () => Http::response(getGoogleParams($errorCode), 200, ['Headers']));
-
-        $response = $this->post(route('contact'), $this->contactParams);
-
-        expect($response->status())
-            ->toEqual(500)
-            ->and($response->json())
-            ->message
-            ->toBe($message);
-    })->throws(GoogleTokenException::class, 'Verification for token has failed');
+    })->throws(TurnstileTokenException::class, TurnstileErrorCodeEnum::INVALID_RESPONSE->message());
 });
 
-function getGoogleParams(string $errorCode)
+function getValidateTokenParams(TurnstileErrorCodeEnum $errorCode)
 {
     $params = [
         'success' => false,
-        'error-codes' => $errorCode != 'no-code' ? [$errorCode] : null
+        'error-codes' => [$errorCode]
     ];
     return json_encode($params);
 }

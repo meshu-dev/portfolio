@@ -62,6 +62,7 @@ describe('SiteController tests', function () {
         $params = [
             'name'  => 'Laravel',
             'url'   => 'https://laravel.com',
+            'icon'  => 'laravel-icon',
             'types' => [$type->id],
             'image' => UploadedFile::fake(),
         ];
@@ -84,6 +85,7 @@ describe('SiteController tests', function () {
             'id'    => $site->id,
             'name'  => 'Laravel',
             'url'   => 'https://laravel.com',
+            'icon'  => 'laravel-icon',
             'types' => [$type->id],
             'image' => UploadedFile::fake(),
         ];

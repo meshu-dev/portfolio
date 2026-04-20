@@ -14,12 +14,12 @@ class TypeSeeder extends Seeder
             [
                 'id'   => TypeEnum::CV->value,
                 'name' => 'CV',
-                'url'  => '',
+                'url'  => 'https://cv.meshpro.io',
             ],
             [
                 'id'   => TypeEnum::PORTFOLIO->value,
                 'name' => 'Portfolio',
-                'url'  => 'http://portfolio.test',
+                'url'  => 'https://meshpro.io',
             ]
         ]);
     }
