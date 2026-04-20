@@ -16,7 +16,7 @@ class AboutResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'image_url'    => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image): null,
+            'image_url'    => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image) : null,
             'text'         => $this->text,
             'technologies' => $this->skill->technologies
         ];

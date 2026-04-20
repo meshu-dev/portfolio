@@ -5,7 +5,6 @@ namespace App\Actions\Cv\Pdf;
 use App\Actions\Cv\Profile\GetProfileAction;
 use App\Actions\Site\GetSitesByTypeAction;
 use App\Enums\TypeEnum;
-use App\Models\Profile;
 
 class GetProfileForPdfAction
 {

@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
 
         $params = ['users' => User::all()];
 
-        $this->call(SiteSeeder::class,       parameters: $params);
+        $this->call(SiteSeeder::class, parameters: $params);
         $this->call(TechnologySeeder::class, parameters: $params);
-        $this->call(CvSeeder::class,         parameters: $params);
-        $this->call(PortfolioSeeder::class,  parameters: $params);
+        $this->call(CvSeeder::class, parameters: $params);
+        $this->call(PortfolioSeeder::class, parameters: $params);
     }
 }

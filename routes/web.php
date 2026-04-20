@@ -24,7 +24,7 @@ Route::post('/login', [AuthController::class, 'userLogin']);
 Route::post('/login/demo', [AuthController::class, 'demoLogin']);
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/', [ProfileController::class, 'view'])->name('profile.view'); 
+    Route::get('/', [ProfileController::class, 'view'])->name('profile.view');
 
     Route::prefix('cv')->group(function () {
         Route::put('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,9 +44,9 @@ Route::middleware(['auth:web'])->group(function () {
         });
 
         Route::prefix('pdf')->group(function () {
-            Route::get('/',     [PdfController::class, 'view'])->name('pdf.view');
+            Route::get('/', [PdfController::class, 'view'])->name('pdf.view');
             Route::get('/file', [PdfController::class, 'getPdfFile'])->name('pdf.file');
-            Route::post('/',    [PdfController::class, 'generate'])->name('pdf.generate'); 
+            Route::post('/', [PdfController::class, 'generate'])->name('pdf.generate');
         });
     });
 
@@ -62,17 +62,17 @@ Route::middleware(['auth:web'])->group(function () {
         });
 
         Route::prefix('repositories')->group(function () {
-            Route::get('/',        [RepositoryController::class, 'list'])->name('repositories.list');
-            Route::post('/',       [RepositoryController::class, 'add'])->name('repositories.add');
+            Route::get('/', [RepositoryController::class, 'list'])->name('repositories.list');
+            Route::post('/', [RepositoryController::class, 'add'])->name('repositories.add');
             Route::delete('/{id}', [RepositoryController::class, 'delete'])->name('repositories.delete');
         });
 
         Route::prefix('projects')->group(function () {
-            Route::get('/',        [ProjectController::class, 'list'])->name('projects.list');
-            Route::get('/new',     [ProjectController::class, 'new'])->name('projects.new');
-            Route::get('/{id}',    [ProjectController::class, 'view'])->name('projects.view');
-            Route::post('/',       [ProjectController::class, 'add'])->name('projects.add');
-            Route::put('/{id}',    [ProjectController::class, 'edit'])->name('projects.edit');
+            Route::get('/', [ProjectController::class, 'list'])->name('projects.list');
+            Route::get('/new', [ProjectController::class, 'new'])->name('projects.new');
+            Route::get('/{id}', [ProjectController::class, 'view'])->name('projects.view');
+            Route::post('/', [ProjectController::class, 'add'])->name('projects.add');
+            Route::put('/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
             Route::delete('/{id}', [ProjectController::class, 'delete'])->name('projects.delete');
         });
     });

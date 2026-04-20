@@ -16,7 +16,7 @@ class GetSitesByTypeAction
     {
         return Site::where('user_id', $userId)
                    ->whereHas('types', function (Builder $query) use ($type) {
-                        $query->where('types.id', $type->value);
+                       $query->where('types.id', $type->value);
                    })
                    ->get();
     }

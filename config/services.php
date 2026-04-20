@@ -55,7 +55,7 @@ return [
                 'invalid-input-response' => 'Submitted token is invalid',
                 'browser-error' => 'Could not connect to the verify site',
                 'default' => 'Verification for token has failed'
-            ], 
+            ],
         ]
     ]
 ];

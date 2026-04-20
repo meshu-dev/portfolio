@@ -1,8 +1,6 @@
 <?php
 
 use App\Enums\{FlashTypeEnum, UserEnum};
-use App\Http\Resources\SiteResource;
-use App\Http\Resources\TypeResource;
 use App\Models\{Site, Type, User};
 use Illuminate\Http\UploadedFile;
 use Inertia\Testing\AssertableInertia as Assert;

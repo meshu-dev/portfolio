@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Cv\GetCvAction;
-use App\Actions\Cv\Pdf\GetPdfFileAction;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\{
     ProfileResource,

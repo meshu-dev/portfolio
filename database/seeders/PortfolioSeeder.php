@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Actions\File\MoveFileAction;
-use App\Enums\DynamicValueEnum;
-use App\Enums\UserEnum;
-use App\Exceptions\FileNotUploadedException;
 use App\Models\{
     About,
     File,
@@ -13,8 +9,7 @@ use App\Models\{
     Project,
     Repository,
     Skill,
-    Technology,
-    User
+    Technology
 };
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;

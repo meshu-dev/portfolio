@@ -16,7 +16,7 @@ class GetFileUrlAction
         if (Str::isUrl($file->url, ['http', 'https'])) {
             return $file->url;
         }
-        
+
         //return Storage::temporaryUrl($file->url, now()->addMinutes(60));
         return Storage::url($file->url);
     }

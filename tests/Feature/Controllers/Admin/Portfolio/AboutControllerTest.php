@@ -13,7 +13,7 @@ describe('AboutController tests', function () {
     it('loads about page', function () {
         // Arrange
         $about = About::where('user_id', UserEnum::ADMIN)->firstOrFail();
-        $imageUrl = $about->image ? resolve(GetFileUrlAction::class)->execute($about->image): null;
+        $imageUrl = $about->image ? resolve(GetFileUrlAction::class)->execute($about->image) : null;
         $technologies = $about->skill->technologies;
 
         // Act

@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Type\GetAllTypesAction;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class SiteRequest extends FormRequest
 {
