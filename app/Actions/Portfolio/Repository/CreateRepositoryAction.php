@@ -9,6 +9,7 @@ class CreateRepositoryAction
 {
     /**
      * @param string $name
+     * @param string $url
      */
     public function execute(string $name, string $url): void
     {

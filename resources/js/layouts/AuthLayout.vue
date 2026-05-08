@@ -23,6 +23,5 @@ onUnmounted(
   <main class="bg-(--auth-background) w-full h-full m-0 pt-10 flex h-screen flex-col">
     <slot />
   </main>
-  <Toaster position="top-center"
-  />
+  <Toaster position="top-center" />
 </template>

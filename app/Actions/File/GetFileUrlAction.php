@@ -17,7 +17,11 @@ class GetFileUrlAction
             return $file->url;
         }
 
-        //return Storage::temporaryUrl($file->url, now()->addMinutes(60));
+        $fileDriver = config('filesystems.default');
+
+        if ($fileDriver === 'local') {
+            return Storage::temporaryUrl($file->url, now()->addMinutes(60));
+        }
         return Storage::url($file->url);
     }
 }

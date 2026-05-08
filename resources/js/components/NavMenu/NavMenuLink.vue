@@ -8,8 +8,8 @@ defineProps<{ navLink: NavLink }>()
 </script>
 
 <template>
-  <NavigationMenuItem class="px-2">
-    <NavigationMenuLink class="cursor-pointer">
+  <NavigationMenuItem class="hover:cursor-pointer px-2">
+    <NavigationMenuLink>
       <Link :href="navLink.url" :method="navLink.type || HttpMethodEnum.GET">{{ navLink.name }}</Link>
     </NavigationMenuLink>
   </NavigationMenuItem>
