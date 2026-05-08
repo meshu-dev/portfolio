@@ -26,7 +26,7 @@ class SiteRequest extends FormRequest
             'url'           => 'required|string',
             'types'         => 'required|array|distinct',
             'types.*'       => 'exists:types,id',
-            'icon'          => 'required|string',
+            'icon'          => 'nullable|string',
             'image'         => 'sometimes|image',
             'remove_image'  => 'sometimes|boolean',
         ];

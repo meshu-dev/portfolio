@@ -27,7 +27,7 @@ class ProjectRequest extends FormRequest
             'url'           => 'required|string',
             'repositories'  => 'required|array',
             'technologies'  => 'required|array',
-            'image'         => 'sometimes|image',
+            'image'         => 'nullable|image',
             'remove_image'  => 'sometimes|boolean'
         ];
     }
