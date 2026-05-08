@@ -16,7 +16,7 @@
             <div class="grid justify-items-stretch">
               <img :src="project.image_url" :alt="project.name" class="h-fit sm:h-80 lg:h-100 object-fill" />
               <div class="p-4">
-                <div class="font-semibold text-2xl">{{ project.description }}</div>
+                <div class="font-semibold text-2xl">{{ project.name }}</div>
                 <div class="w-full mt-4 flex flex-col gap-4 md:justify-between lg:flex-row lg:gap-8">
                   <div class="flex gap-3">
                     <UButton :to="project.url" target="_blank">View</UButton>

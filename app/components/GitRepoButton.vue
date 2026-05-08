@@ -26,7 +26,7 @@
 <template>
   <template v-if="options.length > 1">
     <UDropdownMenu :items="options">
-      <UButton>Github</UButton>
+      <UButton class="cursor-pointer">Github</UButton>
     </UDropdownMenu>
   </template>
   <template v-else-if="props.repositories?.length == 1">
