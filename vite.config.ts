@@ -21,8 +21,9 @@ export default defineConfig({
                 },
             },
         }),
+        /*
         wayfinder({
-            formVariants: false,
-        }),
+            formVariants: true,
+        }), */
     ],
 });
