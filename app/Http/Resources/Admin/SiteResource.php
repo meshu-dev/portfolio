@@ -21,6 +21,7 @@ class SiteResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'url'       => $this->url,
+            'icon'      => $this->icon,
             'image_url' => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image) : null,
             'types'     => TypeResource::collection($this->types)
         ];

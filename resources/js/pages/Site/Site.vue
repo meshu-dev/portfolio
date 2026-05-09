@@ -78,7 +78,7 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
     <Field class="mb-4">
       <Label for="icon">Icon</Label>
       <Input type="text" name="icon" :class="errors?.icon ? `error-field` : ``" v-model="form.icon" autoComplete="off" />
-      <ErrorMessage v-if="errors?.url" :value="errors?.url" />
+      <ErrorMessage v-if="errors?.icon" :value="errors?.icon" />
     </Field>
     <Field class="flex mb-4">
       <Label>Image</Label>
