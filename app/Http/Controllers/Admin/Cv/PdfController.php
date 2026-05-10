@@ -16,8 +16,9 @@ class PdfController extends Controller
     public function view(): Response
     {
         $pdfFile = resolve(GetPdfFileAction::class)->execute();
+        $pdf = $pdfFile ? new PdfFileResource($pdfFile) : null;
 
-        return Inertia::render('Cv/Pdf', ['pdf' => new PdfFileResource($pdfFile)]);
+        return Inertia::render('Cv/Pdf', ['pdf' => $pdf]);
     }
 
     public function generate(): RedirectResponse
