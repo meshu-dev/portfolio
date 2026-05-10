@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Actions\Site\GetSitesByTypeAction;
 use App\Enums\TypeEnum;
+use App\Http\Resources\Portfolio\SiteResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;

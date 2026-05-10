@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Portfolio;
 
-use App\Actions\File\GetFileUrlAction;
+use App\Enums\TypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,10 +17,9 @@ class SiteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name'      => $this->name,
-            'url'       => $this->url,
-            'icon'      => $this->icon,
-            'image_url' => $this->image ? resolve(GetFileUrlAction::class)->execute($this->image) : null,
+            'name' => $this->name,
+            'url'  => $this->url,
+            'icon' => $this->icons[TypeEnum::PORTFOLIO->key()] ?? null,
         ];
     }
 }
