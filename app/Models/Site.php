@@ -13,7 +13,7 @@ class Site extends Model
 
     protected $table = 'sites';
 
-    protected $fillable = ['user_id', 'name', 'url', 'icon'];
+    protected $fillable = ['user_id', 'name', 'url', 'icons'];
 
     public $timestamps = false;
 
@@ -26,18 +26,17 @@ class Site extends Model
     }
 
     /**
-     * @return HasOne<File, $this>
-     */
-    public function image(): HasOne
-    {
-        return $this->hasOne(File::class, 'id', 'file_id');
-    }
-
-    /**
      * @return BelongsToMany<Type, $this>
      */
     public function types(): BelongsToMany
     {
         return $this->belongsToMany(Type::class, 'type_sites', 'site_id', 'type_id');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'icons' => 'json',
+        ];
     }
 }

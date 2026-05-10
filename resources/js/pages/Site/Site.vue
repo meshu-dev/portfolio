@@ -8,35 +8,40 @@ import Input from '@/components/ui/input/Input.vue'
 import Button from '@/components/ui/button/Button.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import type { Site, Type } from '@/types/portfolio'
-import ImageView from '@/components/Image/ImageView.vue'
-import ImageField from '@/components/Image/ImageField.vue'
 import { Checkbox } from '@/components/ui/checkbox'
 import ErrorMessage from '@/components/ErrorMessage.vue'
+import { toRaw } from 'vue'
 
 const props = defineProps({ site: Object, types: Array<Type>, errors: Object })
 const site: Site|null = props?.site?.data ? props.site.data as Site : null
+
+console.log('site', site)
 
 const formUrl: string = site ? `/sites/${site.id}` : '/sites'
 const formMethod: string = site ? 'put' : 'post'
 
 type FormType = {[key: number]: boolean}
+type IconType = {[key: string]: string}
+
 const formTypes: FormType = {}
+const formIcons: IconType = {}
 
 props?.types?.forEach((type: Type) => {
   const siteType: Type|undefined = site?.types.find((siteType: Type) => siteType.id == type.id)
   formTypes[type.id] = siteType ? true : false
+  formIcons[type.key] = site?.icons && site?.icons[type.key] ? site?.icons[type.key] : ''
 })
 
 const form = useForm({
   name: site?.name,
   url: site?.url,
-  icon: site?.icon,
-  image: null,
-  image_url: site?.image_url || '',
+  icons: formIcons,
   types: formTypes,
 })
 
 const transformData = (data: Record<string, FormDataConvertible>)  => {
+  // console.log('FORM!', toRaw(form.icons), data, { ...data, icons: toRaw(form.icons) })
+
   if (!props.types) {
     return { ...data }
   }
@@ -50,7 +55,8 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
   }
 
   data.types = typeIds
-  return { ...data }
+
+  return { ...data, icons: form.icons }
 }
 </script>
 
@@ -69,27 +75,20 @@ const transformData = (data: Record<string, FormDataConvertible>)  => {
     </Field>
     <Field class="flex mb-4">
       <Label for="image">Type</Label>
-      <div v-for="type in $props.types" class="flex gap-2 mb-2">
-        <Checkbox :id="`type-${type.id}`" v-model:modelValue="form.types[type.id]" class="cursor-pointer" />
-        <Label :for="`type-${type.id}`" class="cursor-pointer">{{ type.name }}</Label>
+      <div v-for="type in $props.types">
+        <div class="flex gap-2 mb-2">
+          <Checkbox :id="`type-${type.id}`" v-model:modelValue="form.types[type.id]" class="cursor-pointer" />
+          <Label :for="`type-${type.id}`" class="cursor-pointer">{{ type.name }}</Label>
+        </div>
+        <Input
+          v-if="form.types[type.id]"
+          type="text"
+          name="icons"
+          :class="errors?.icon ? `error-field` : ``"
+          v-model="form.icons[type.key]"
+          autoComplete="off" />
       </div>
       <ErrorMessage v-if="errors?.types" :value="errors?.types" />
-    </Field>
-    <Field class="mb-4">
-      <Label for="icon">Icon</Label>
-      <Input type="text" name="icon" :class="errors?.icon ? `error-field` : ``" v-model="form.icon" autoComplete="off" />
-      <ErrorMessage v-if="errors?.icon" :value="errors?.icon" />
-    </Field>
-    <Field class="flex mb-4">
-      <Label>Image</Label>
-      <ImageView
-        v-if="form.image_url"
-        v-model="form.image_url" />
-      <ImageField
-         v-else
-        v-model:image="form.image"
-        v-model:progress="form.progress" />
-      <ErrorMessage v-if="errors?.image" :value="errors?.image" />
     </Field>
     <Button
       class="cursor-pointer"

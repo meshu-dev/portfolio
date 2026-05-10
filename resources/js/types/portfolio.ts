@@ -58,6 +58,7 @@ export type Technology = {
 
 export type Type = {
     id: number
+    key: string
     name: string
 }
 
@@ -65,9 +66,8 @@ export type Site = {
     id: string
     name: string
     url: string
-    icon: string,
-    image_url: string
     types: Type[]
+    icons: {[key: string]: string}
 }
 
 export type WorkExperience = {

@@ -22,13 +22,11 @@ class SiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'required|string',
-            'url'           => 'required|string',
-            'types'         => 'required|array|distinct',
-            'types.*'       => 'exists:types,id',
-            'icon'          => 'nullable|string',
-            'image'         => 'sometimes|image',
-            'remove_image'  => 'sometimes|boolean',
+            'name'    => 'required|string',
+            'url'     => 'required|string',
+            'types'   => 'required|array|distinct',
+            'types.*' => 'exists:types,id',
+            'icons'   => 'required|array|distinct',
         ];
     }
 }
