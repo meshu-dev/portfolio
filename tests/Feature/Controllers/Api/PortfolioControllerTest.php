@@ -11,28 +11,8 @@ describe('Api\PortfolioController tests', function () {
         );
     });
 
-    it('gets portfolio intro data', function () {
-        $response = $this->get(route('portfolio.intro'));
-
-        expect($response->status())
-            ->toEqual(200)
-            ->and($response->json())
-            ->toBeArray()
-            ->toHaveKey('data');
-    });
-
-    it('gets porfolio about data', function () {
-        $response = $this->get(route('portfolio.about'));
-
-        expect($response->status())
-            ->toEqual(200)
-            ->and($response->json())
-            ->toBeArray()
-            ->toHaveKey('data');
-    });
-
-    it('gets porfolio project data', function () {
-        $response = $this->get(route('portfolio.projects'));
+    it('gets portfolio data', function () {
+        $response = $this->get(route('portfolio'));
 
         expect($response->status())
             ->toEqual(200)
