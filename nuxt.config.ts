@@ -11,10 +11,6 @@ export default defineNuxtConfig({
       secretKey: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
     },
     public: {
-      recaptcha: {
-        v3SiteKey: process.env.NUXT_PUBLIC_GOOGLE_RECAPTCHA_KEY,
-      },
-      cvUrl: process.env.NUXT_PUBLIC_CV_URL,
       portfolioApiUrl: process.env.NUXT_PUBLIC_PORTFOLIO_API_URL,
     },
   },

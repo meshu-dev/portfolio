@@ -1,75 +1,27 @@
-# Nuxt Minimal Starter
-
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt website for my personal portfolio.
 
 ## Setup
 
-Make sure to install dependencies:
+This is a frontend app that requires use of the [Portfolio Admin](https://github.com/meshu-dev/portfolio-admin) app.
+
+Download the Porfolio app and then follow the setup guide to get it up and running.
+
+Create the .env file by copying the .env.example file and then filling in the values.
 
 ```bash
-# npm
+cp .env.example .env
+```
+
+Install the node modules.
+
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Run the app.
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+It should be available at [http://localhost:3000](http://localhost:3000).
