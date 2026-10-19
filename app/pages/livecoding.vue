@@ -1,6 +1,9 @@
 <script setup lang="ts">
   const livestreams = getLivestreams()
 
+  const youtubeSite = getIntro()?.sites?.find((site) => site.name.toLowerCase() === 'youtube')
+  const youtubeStreamsUrl = youtubeSite ? `${youtubeSite.url.replace(/\/$/, '')}/streams` : null
+
   const formatDate = (date: string | null): string => {
     if (!date) {
       return ''
@@ -43,6 +46,9 @@
         </UCard>
       </div>
       <p v-else class="text-muted">No livestreams yet.</p>
+      <div v-if="youtubeStreamsUrl" class="mt-10 flex justify-center">
+        <UButton :to="youtubeStreamsUrl" target="_blank" size="lg">View More</UButton>
+      </div>
     </div>
   </div>
 </template>
