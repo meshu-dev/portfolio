@@ -21,6 +21,11 @@ const menuItems = computed<NavigationMenuItem[]>(() => [
     active: route.path.startsWith('/projects')
   },
   {
+    label: 'Livecoding',
+    to: '/livecoding',
+    active: route.path.startsWith('/livecoding')
+  },
+  {
     label: 'Contact',
     to: '/contact',
     active: route.path.startsWith('/contact')

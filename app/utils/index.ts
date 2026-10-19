@@ -1,5 +1,5 @@
 import type { AuthResponse, AuthPayload } from '~/types/Auth'
-import type { About, Intro, PortfolioResponse, Project } from '~/types/Portfolio'
+import type { About, Intro, Livestream, PortfolioResponse, Project } from '~/types/Portfolio'
 import type { RuntimeConfig } from 'nuxt/schema'
 import type { ContactPayload } from '@/types/Contact'
 
@@ -49,6 +49,11 @@ export const getAbout = function (): About|null {
 export const getProjects = function (): Project[]|null {
   const response: PortfolioResponse = getSiteData()
   return response?.data.projects || null
+}
+
+export const getLivestreams = function (): Livestream[]|null {
+  const response: PortfolioResponse = getSiteData()
+  return response?.data.livestreams || null
 }
 
 export const sendMessage = async function (config: RuntimeConfig, payload: ContactPayload): Promise<any> {
