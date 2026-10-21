@@ -6,36 +6,34 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <div class="w-full">
-      <UPageHeader title="Livecoding" description="Recordings of my past coding livestreams." class="mb-6" />
-      <div v-if="livestreams?.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        <UCard
-          v-for="livestream of livestreams"
-          :key="livestream.url"
-          :ui="{ root: 'flex flex-col', body: 'flex flex-col flex-1' }"
-          class="w-full p-0">
-          <a :href="livestream.url" target="_blank" rel="noopener" :aria-label="`Watch ${livestream.title}`">
-            <img
-              v-if="livestream.thumbnail"
-              :src="livestream.thumbnail"
-              :alt="livestream.title"
-              class="w-full aspect-video object-cover" />
-          </a>
-          <div class="p-4 flex flex-col flex-1">
-            <div class="text-sm text-muted">{{ formatDate(livestream.actual_start_at) }}</div>
-            <div class="font-semibold text-xl mt-1">{{ livestream.title }}</div>
-            <p v-if="livestream.description" class="mt-2 text-muted line-clamp-3">{{ livestream.description }}</p>
-            <div class="mt-auto pt-4">
-              <UButton :to="livestream.url" target="_blank">Watch</UButton>
-            </div>
-          </div>
-        </UCard>
-      </div>
-      <p v-else class="text-muted">No livestreams yet.</p>
-      <div v-if="youtubeStreamsUrl" class="mt-10 flex justify-center">
-        <UButton :to="youtubeStreamsUrl" target="_blank" size="lg">View More</UButton>
-      </div>
+  <div>
+    <PageTitle title="Livecoding" description="Recordings of my past coding livestreams." />
+    <ul v-if="livestreams?.length" class="border-t border-default">
+      <li
+        v-for="livestream of livestreams"
+        :key="livestream.url"
+        class="group relative grid gap-4 border-b border-default py-8 md:grid-cols-[8rem_1fr_14rem] md:gap-10">
+        <p class="font-medium text-muted md:pt-1">{{ formatDate(livestream.actual_start_at) }}</p>
+        <div>
+          <h2 class="text-2xl font-bold leading-tight tracking-tight text-highlighted">
+            <a
+              :href="livestream.url"
+              target="_blank"
+              rel="noopener"
+              class="underline-offset-4 outline-offset-4 after:absolute after:inset-0 group-hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-primary">{{ livestream.title }}</a>
+          </h2>
+          <p v-if="livestream.description" class="mt-3 max-w-[55ch] font-serif text-lg text-toned line-clamp-2">{{ livestream.description }}</p>
+        </div>
+        <img
+          v-if="livestream.thumbnail"
+          :src="livestream.thumbnail"
+          alt=""
+          class="aspect-video w-full rounded-sm object-cover md:order-last" />
+      </li>
+    </ul>
+    <p v-else class="text-lg text-muted">No livestreams yet.</p>
+    <div v-if="youtubeStreamsUrl" class="mt-10">
+      <UButton :to="youtubeStreamsUrl" target="_blank" size="xl" color="neutral" variant="outline">View More</UButton>
     </div>
   </div>
 </template>

@@ -37,13 +37,15 @@
     <div class="mt-10 flex flex-wrap gap-3">
       <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
     </div>
-    <p v-if="latestLivestream" class="mt-16 sm:mt-24 border-t border-default pt-6 text-xl sm:text-2xl">
-      <a
-        :href="latestLivestream.url"
-        target="_blank"
-        rel="noopener"
-        class="font-bold text-primary underline decoration-2 underline-offset-8 hover:decoration-4">Last coding session</a>
-      <template v-if="lastLivestreamed"> <span class="text-muted">was {{ lastLivestreamed }}</span></template>
-    </p>
+    <div v-if="latestLivestream" class="mt-16 sm:mt-24">
+      <p class="text-xl sm:text-2xl">
+        <a
+          :href="latestLivestream.url"
+          target="_blank"
+          rel="noopener"
+          class="font-bold text-primary underline decoration-2 underline-offset-8 hover:decoration-4">Last coding session</a>
+        <span v-if="lastLivestreamed" class="text-muted"> was {{ lastLivestreamed }}</span>
+      </p>
+    </div>
   </section>
 </template>
