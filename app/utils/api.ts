@@ -1,5 +1,5 @@
 import type { AuthResponse, AuthPayload } from '~/types/Auth'
-import type { About, Intro, Livestream, PortfolioResponse, Project } from '~/types/Portfolio'
+import type { PortfolioResponse } from '~/types/Portfolio'
 import type { RuntimeConfig } from 'nuxt/schema'
 import type { ContactPayload } from '@/types/Contact'
 
@@ -29,31 +29,6 @@ export const fetchPortfolio = async function (config: RuntimeConfig): Promise<Po
   )
 
   return response as PortfolioResponse
-}
-
-export const getSiteData = function (): PortfolioResponse {
-  const config = useState('siteData')
-  return config.value as PortfolioResponse
-}
-
-export const getIntro = function (): Intro|null {
-  const response: PortfolioResponse = getSiteData()
-  return response?.data.intro || null
-}
-
-export const getAbout = function (): About|null {
-  const response: PortfolioResponse = getSiteData()
-  return response?.data.about || null
-}
-
-export const getProjects = function (): Project[]|null {
-  const response: PortfolioResponse = getSiteData()
-  return response?.data.projects || null
-}
-
-export const getLivestreams = function (): Livestream[]|null {
-  const response: PortfolioResponse = getSiteData()
-  return response?.data.livestreams || null
 }
 
 export const sendMessage = async function (config: RuntimeConfig, payload: ContactPayload): Promise<any> {
