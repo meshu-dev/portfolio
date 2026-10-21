@@ -1,8 +1,11 @@
+import type { LivestreamStatus } from '~/enums/LivestreamStatus'
+
 export type PortfolioResponse = {
   data:  {
     intro: Intro
     about: About
     projects: Project[]
+    livestreams: Livestream[]
   }
 }
 
@@ -38,4 +41,15 @@ export type Project = {
   image_url: string
   repositories: Repository[]
   technologies: string[]
+}
+
+export type Livestream = {
+  title: string
+  description: string
+  url: string
+  thumbnail: string | null
+  status: LivestreamStatus
+  scheduled_start_at: string | null
+  actual_start_at: string | null
+  actual_end_at: string | null
 }
