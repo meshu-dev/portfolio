@@ -6,6 +6,16 @@
 
   const intro = getIntro()
 
+  const latestLivestream = getLivestreams()?.[0] ?? null
+  const latestLivestreamEndedAt = latestLivestream?.actual_end_at ?? latestLivestream?.actual_start_at ?? null
+
+  // The site is statically generated, so the relative time is worked out in the browser only; baking it into the HTML would leave it stale.
+  const lastLivestreamed = ref('')
+
+  onMounted(() => {
+    lastLivestreamed.value = formatRelativeTime(latestLivestreamEndedAt)
+  })
+
   const links = ref<ButtonProps[]>([
     {
       label: 'Contact me',
@@ -27,5 +37,13 @@
     <div class="mt-10 flex flex-wrap gap-3">
       <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
     </div>
+    <p v-if="latestLivestream" class="mt-16 sm:mt-24 border-t border-default pt-6 text-xl sm:text-2xl">
+      <a
+        :href="latestLivestream.url"
+        target="_blank"
+        rel="noopener"
+        class="font-bold text-primary underline decoration-2 underline-offset-8 hover:decoration-4">Last coding session</a>
+      <template v-if="lastLivestreamed"> <span class="text-muted">was {{ lastLivestreamed }}</span></template>
+    </p>
   </section>
 </template>

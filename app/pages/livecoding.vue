@@ -3,19 +3,6 @@
 
   const youtubeSite = getIntro()?.sites?.find((site) => site.name.toLowerCase() === 'youtube')
   const youtubeStreamsUrl = youtubeSite ? `${youtubeSite.url.replace(/\/$/, '')}/streams` : null
-
-  const formatDate = (date: string | null): string => {
-    if (!date) {
-      return ''
-    }
-
-    return new Date(date).toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      timeZone: 'UTC'
-    })
-  }
 </script>
 
 <template>
