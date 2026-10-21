@@ -42,7 +42,7 @@
         <div class="flex flex-wrap justify-center gap-x-6 gap-y-3">
           <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
         </div>
-        <p v-if="latestLivestream" class="mt-6 text-muted">
+        <p v-if="latestLivestream" class="mt-16 text-muted">
           <a
             :href="latestLivestream.url"
             target="_blank"
