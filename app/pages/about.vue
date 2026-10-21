@@ -6,11 +6,16 @@
 <template>
   <div>
     <PageTitle title="About me" />
-    <div class="grid gap-12 md:grid-cols-[1fr_16rem] md:gap-16">
-      <div id="about-text" class="max-w-[62ch] font-serif text-xl leading-relaxed text-default" v-html="about?.text"></div>
+    <div class="grid gap-10 md:grid-cols-[16rem_1fr] md:gap-16">
+      <img
+        v-if="about?.image_url"
+        :src="about.image_url"
+        alt="About me"
+        class="aspect-[4/5] w-48 self-start rounded-sm object-cover md:w-full" />
       <div>
-        <h2 class="mb-4 text-xl font-bold text-highlighted">Skills</h2>
-        <ul class="border-t border-default">
+        <div id="about-text" class="max-w-[62ch] font-serif text-xl leading-relaxed text-default" v-html="about?.text"></div>
+        <h2 class="mb-4 mt-12 text-xl font-bold text-highlighted">Skills</h2>
+        <ul class="grid border-t border-default sm:grid-cols-2 sm:gap-x-10">
           <li
             v-for="technology of about?.technologies"
             :key="technology"
