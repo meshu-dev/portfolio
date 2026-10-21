@@ -26,10 +26,10 @@
 <template>
   <template v-if="options.length > 1">
     <UDropdownMenu :items="options">
-      <UButton class="cursor-pointer">Github</UButton>
+      <UButton class="cursor-pointer" color="neutral" variant="outline">Github</UButton>
     </UDropdownMenu>
   </template>
   <template v-else-if="props.repositories?.length == 1">
-    <UButton :to="props.repositories[0]?.url" target="_blank">Github</UButton>
+    <UButton :to="props.repositories[0]?.url" target="_blank" color="neutral" variant="outline">Github</UButton>
   </template>
 </template>

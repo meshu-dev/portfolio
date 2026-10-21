@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <div class="flex gap-2">
-    <UIcon name="i-codex-brackets" class="size-8" />
-    <span class="">MeshPro</span>
+  <div class="flex items-center gap-2">
+    <UIcon name="i-codex-brackets" class="size-7" />
+    <span>MeshPro</span>
   </div>
 </template>

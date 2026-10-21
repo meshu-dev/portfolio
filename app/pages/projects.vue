@@ -6,36 +6,27 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <div>
-      <UPageHeader title="My Portfolio" class="mb-6" />
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
-        <UCard
-          v-for="project of projects"
-          class="w-full lg:w-120 p-0">
-            <div class="grid justify-items-stretch">
-              <img :src="project.image_url" :alt="project.name" class="h-fit sm:h-80 lg:h-100 object-fill" />
-              <div class="p-4">
-                <div class="font-semibold text-2xl">{{ project.name }}</div>
-                <div class="w-full mt-4 flex flex-col gap-4 md:justify-between lg:flex-row lg:gap-8">
-                  <div class="flex gap-3">
-                    <UButton :to="project.url" target="_blank">View</UButton>
-                    <GitRepoButton :repositories="project.repositories">View</GitRepoButton>
-                  </div>
-                  <div class="flex gap-3">
-                    <UBadge
-                      v-for="technology of project.technologies"
-                      class="text-xl font-normal px-2"
-                      color="neutral"
-                      variant="outline">
-                      {{ technology }}
-                    </UBadge>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </UCard>
-      </div>
-    </div>
+  <div>
+    <PageTitle title="Projects" />
+    <ul class="border-t border-default">
+      <li
+        v-for="project of projects"
+        :key="project.name"
+        class="grid gap-6 border-b border-default py-10 md:grid-cols-12 md:gap-10">
+        <img
+          :src="project.image_url"
+          :alt="project.name"
+          class="aspect-[16/10] w-full rounded-sm object-cover md:col-span-5" />
+        <div class="flex flex-col md:col-span-7">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-highlighted">{{ project.name }}</h2>
+          <p class="mt-3 max-w-[52ch] font-serif text-xl text-toned">{{ project.description }}</p>
+          <p class="mt-4 text-muted">{{ project.technologies.join(', ') }}</p>
+          <div class="mt-auto flex flex-wrap gap-3 pt-8">
+            <UButton :to="project.url" target="_blank">View</UButton>
+            <GitRepoButton :repositories="project.repositories">View</GitRepoButton>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>

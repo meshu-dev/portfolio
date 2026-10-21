@@ -47,12 +47,12 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
 
 <template>
   <div>
-    <UHeader>
+    <UHeader :ui="{ root: 'bg-default/90 backdrop-blur border-b border-default', title: 'font-extrabold text-xl tracking-tight' }">
       <template #title>
         <Logo class="h-6 w-auto" />
       </template>
       
-      <UNavigationMenu :items="menuItems" />
+      <UNavigationMenu :items="menuItems" variant="link" highlight class="font-medium" />
 
       <template #body>
         <UNavigationMenu orientation="vertical" :items="menuItems" />
@@ -63,22 +63,21 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
       </template>
 
       <template #right>
-        <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-          <UButton
-            v-for="site of intro?.sites"
-            color="neutral"
-            variant="ghost"
-            :to="site.url"
-            target="_blank"
-            :icon="site.icon"
-            :aria-label="site.name"
-            class="hidden md:flex"
-          />
-        </UTooltip>
+        <UButton
+          v-for="site of intro?.sites"
+          :key="site.name"
+          color="neutral"
+          variant="ghost"
+          :to="site.url"
+          target="_blank"
+          :icon="site.icon"
+          :aria-label="site.name"
+          class="hidden md:flex"
+        />
         <UColorModeButton class="hover:cursor-pointer" />
       </template>
     </UHeader>
-    <UContainer class="min-h-[610px] py-10">
+    <UContainer class="min-h-[610px] py-12 sm:py-20">
       <slot />
     </UContainer>
     <USeparator />
@@ -86,8 +85,8 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
       <template #left>
         <p class="text-muted text-sm">
           Built with 
-          <a href="https://laravel.com" class="bold text-[#f53003] hover:underline underline-offset-4" target="_blank">Laravel</a> &amp; 
-          <a href="https://nuxt.com" class="bold text-[#00dc82] hover:underline underline-offset-4" target="_blank">Nuxt.js</a>
+          <a href="https://laravel.com" class="font-semibold text-highlighted hover:underline underline-offset-4" target="_blank">Laravel</a> &amp;
+          <a href="https://nuxt.com" class="font-semibold text-highlighted hover:underline underline-offset-4" target="_blank">Nuxt.js</a>
         </p>
       </template>
       <template #right>

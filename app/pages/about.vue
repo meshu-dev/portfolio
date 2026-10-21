@@ -4,14 +4,17 @@
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <div class="flex flex-col max-w-[600px] gap-4">
-      <UPageHeader title="About Me" class="mb-6" />
-      <div id="about-text" v-html="about?.text"></div>
+  <div>
+    <PageTitle title="About me" />
+    <div class="grid gap-12 md:grid-cols-[1fr_16rem] md:gap-16">
+      <div id="about-text" class="max-w-[62ch] font-serif text-xl leading-relaxed text-default" v-html="about?.text"></div>
       <div>
-        <h2 class="bold mb-4 text-xl underline underline-offset-8">Skills</h2>
-        <ul class="list-disc ml-6">
-          <li v-for="technology of about?.technologies" class="mb-2">{{ technology }}</li>
+        <h2 class="mb-4 text-xl font-bold text-highlighted">Skills</h2>
+        <ul class="border-t border-default">
+          <li
+            v-for="technology of about?.technologies"
+            :key="technology"
+            class="border-b border-default py-2.5 text-lg font-medium">{{ technology }}</li>
         </ul>
       </div>
     </div>
