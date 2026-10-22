@@ -20,7 +20,12 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
+      # About, Projects and Contact are prerendered, so the build needs the portfolio API.
       - run: npm run build
+        env:
+          NUXT_PUBLIC_PORTFOLIO_API_URL: ${{ secrets.NUXT_PUBLIC_PORTFOLIO_API_URL }}
+          PORTFOLIO_API_EMAIL: ${{ secrets.PORTFOLIO_API_EMAIL }}
+          PORTFOLIO_API_PASSWORD: ${{ secrets.PORTFOLIO_API_PASSWORD }}
 
   lint:
     name: Run ESLint
