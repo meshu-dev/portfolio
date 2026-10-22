@@ -31,10 +31,10 @@ export const fetchPortfolio = async function (config: RuntimeConfig): Promise<Po
   return response as PortfolioResponse
 }
 
-export const sendMessage = async function (config: RuntimeConfig, payload: ContactPayload): Promise<any> {
+export const sendMessage = async function (config: RuntimeConfig, payload: ContactPayload): Promise<unknown> {
   const apiUrl: string = config.public.portfolioApiUrl
 
-  const response: PortfolioResponse|any = await $fetch(
+  const response: unknown = await $fetch(
     `${apiUrl}/contact`,
     { method: 'POST', body: payload  }
   )

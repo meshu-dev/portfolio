@@ -10,7 +10,9 @@
     "postinstall": "nuxt prepare",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@nuxt/ui": "^4.6.1",
@@ -21,9 +23,11 @@
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
     "@nuxt/test-utils": "^4.3.4",
     "@vitest/coverage-v8": "^5.0.5",
     "@vue/test-utils": "^2.5.1",
+    "eslint": "^10.13.0",
     "happy-dom": "^21.0.4",
     "vitest": "^5.0.5"
   }

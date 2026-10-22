@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-import Logo from '~/components/Logo.vue'
+import SiteLogo from '~/components/SiteLogo.vue'
 
 const route = useRoute()
 
@@ -37,7 +37,7 @@ const intro = getIntro()
 const siteItems: NavigationMenuItem[] = []
 
 if (intro?.sites) {
-  for (const site of intro?.sites) {
+  for (const site of intro.sites) {
     siteItems.push({
       label: site.name,
       icon: site.icon,
@@ -54,7 +54,7 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
   <div>
     <UHeader :ui="{ root: 'bg-default/90 backdrop-blur border-b border-default', title: 'font-extrabold text-xl tracking-tight' }">
       <template #title>
-        <Logo class="h-6 w-auto" />
+        <SiteLogo class="h-6 w-auto" />
       </template>
       
       <UNavigationMenu :items="menuItems" variant="link" highlight class="font-medium" />

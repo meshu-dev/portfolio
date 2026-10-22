@@ -3,7 +3,7 @@
   import type { Repository } from '~/types/Portfolio'
 
   type Props = {
-    repositories: Repository[] | null
+    repositories?: Repository[] | null
   }
 
   const props = withDefaults(defineProps<Props>(), {

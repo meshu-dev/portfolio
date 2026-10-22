@@ -28,7 +28,7 @@
           v-if="livestream.thumbnail"
           :src="livestream.thumbnail"
           alt=""
-          class="aspect-video w-full rounded-sm object-cover md:order-last" />
+          class="aspect-video w-full rounded-sm object-cover md:order-last" >
       </li>
     </ul>
     <p v-else class="text-lg text-muted">No livestreams yet.</p>

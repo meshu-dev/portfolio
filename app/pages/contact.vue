@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '@nuxt/ui'
+import type { FormError } from '@nuxt/ui'
 import type { Toast } from '@nuxt/ui/runtime/composables/useToast.js'
 import type { RuntimeConfig } from 'nuxt/schema'
 import type { ContactPayload } from '@/types/Contact'
-const appConfig = useAppConfig()
 
 const state = reactive({
   name: undefined,
@@ -35,7 +34,7 @@ function validate(state: Partial<Schema>): FormError[] {
 
 const toast = useToast()
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit() {
   console.log('cloudflare token', token.value, token)
 
   let toastData: Partial<Toast> | null = null

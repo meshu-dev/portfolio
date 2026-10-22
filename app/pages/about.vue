@@ -11,9 +11,10 @@
         v-if="about?.image_url"
         :src="about.image_url"
         alt="About me"
-        class="aspect-[4/5] w-48 self-start rounded-sm object-cover md:w-full" />
+        class="aspect-[4/5] w-48 self-start rounded-sm object-cover md:w-full" >
       <div>
-        <div id="about-text" class="max-w-[62ch] font-serif text-xl leading-relaxed text-default" v-html="about?.text"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -- the bio is HTML the site owner writes in the admin app -->
+        <div id="about-text" class="max-w-[62ch] font-serif text-xl leading-relaxed text-default" v-html="about?.text"/>
         <h2 class="mb-4 mt-12 text-xl font-bold text-highlighted">Skills</h2>
         <ul class="grid border-t border-default sm:grid-cols-2 sm:gap-x-10">
           <li

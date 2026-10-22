@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxtjs/turnstile'],
+  modules: ['@nuxt/ui', '@nuxtjs/turnstile', '@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     portfolioApiEmail: process.env.PORTFOLIO_API_EMAIL,
