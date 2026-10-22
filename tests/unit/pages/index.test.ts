@@ -58,9 +58,11 @@ describe('Home page', () => {
 
     it('counts from the start when the livestream has no end time', async () => {
       // Arrange
-      setSiteData(makePortfolio({
-        livestreams: [makeLivestream({ actual_start_at: '2026-10-14T16:45:00Z', actual_end_at: null })]
-      }))
+      setSiteData(
+        makePortfolio({
+          livestreams: [makeLivestream({ actual_start_at: '2026-10-14T16:45:00Z', actual_end_at: null })]
+        })
+      )
 
       // Act
       const wrapper = await mountSuspended(Index)
@@ -71,9 +73,11 @@ describe('Home page', () => {
 
     it('shows only the link when the livestream has no times at all', async () => {
       // Arrange
-      setSiteData(makePortfolio({
-        livestreams: [makeLivestream({ actual_start_at: null, actual_end_at: null })]
-      }))
+      setSiteData(
+        makePortfolio({
+          livestreams: [makeLivestream({ actual_start_at: null, actual_end_at: null })]
+        })
+      )
 
       // Act
       const wrapper = await mountSuspended(Index)

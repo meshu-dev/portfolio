@@ -44,7 +44,7 @@ describe('GitRepoButton', () => {
     // Assert
     expect(wrapper.find('button').text()).toBe('Github')
     expect(wrapper.find('a').exists()).toBe(false)
-    expect((wrapper.vm as unknown as { options: { label: string, to: string }[] }).options).toStrictEqual([
+    expect((wrapper.vm as unknown as { options: { label: string; to: string }[] }).options).toStrictEqual([
       { label: 'Starter Portfolio', to: starterPortfolio.url, target: '_blank' },
       { label: 'Starter API', to: starterApi.url, target: '_blank' }
     ])

@@ -11,9 +11,12 @@ const { sendMessageMock, toastAddMock } = vi.hoisted(() => ({
 mockNuxtImport('sendMessage', () => sendMessageMock)
 mockNuxtImport('useToast', () => () => ({ add: toastAddMock }))
 
-type ContactVm = { token: string | undefined, state: { name?: string, email?: string, message?: string } }
+type ContactVm = { token: string | undefined; state: { name?: string; email?: string; message?: string } }
 
-const fillIn = async (wrapper: Awaited<ReturnType<typeof mountSuspended>>, values: Partial<Record<'name' | 'email' | 'message', string>>) => {
+const fillIn = async (
+  wrapper: Awaited<ReturnType<typeof mountSuspended>>,
+  values: Partial<Record<'name' | 'email' | 'message', string>>
+) => {
   const [name, email] = wrapper.findAll('input')
 
   if (values.name !== undefined) {
@@ -98,11 +101,13 @@ describe('Contact page', () => {
       message: 'Hi there',
       token: 'turnstile-token'
     })
-    await vi.waitFor(() => expect(toastAddMock).toHaveBeenCalledWith({
-      title: 'Success',
-      description: 'The form has been submitted.',
-      color: 'success'
-    }))
+    await vi.waitFor(() =>
+      expect(toastAddMock).toHaveBeenCalledWith({
+        title: 'Success',
+        description: 'The form has been submitted.',
+        color: 'success'
+      })
+    )
     expect(vm.state).toStrictEqual({ name: undefined, email: undefined, message: undefined })
   })
 
@@ -115,11 +120,13 @@ describe('Contact page', () => {
     await submit(wrapper)
 
     // Assert
-    await vi.waitFor(() => expect(toastAddMock).toHaveBeenCalledWith({
-      title: 'error',
-      description: 'An error occurred validating submission. Please try again later.',
-      color: 'error'
-    }))
+    await vi.waitFor(() =>
+      expect(toastAddMock).toHaveBeenCalledWith({
+        title: 'error',
+        description: 'An error occurred validating submission. Please try again later.',
+        color: 'error'
+      })
+    )
     expect(sendMessageMock).not.toHaveBeenCalled()
   })
 })

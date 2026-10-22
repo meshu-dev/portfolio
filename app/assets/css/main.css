@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 
 @theme static {
   --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
@@ -47,7 +47,7 @@
 }
 
 body {
-  font-feature-settings: "ss01", "kern";
+  font-feature-settings: 'ss01', 'kern';
 }
 
 #about-text p {

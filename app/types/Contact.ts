@@ -1,5 +1,5 @@
 export type ContactPayload = {
-  name: string,
-  email: string,
+  name: string
+  email: string
   message: string
 }

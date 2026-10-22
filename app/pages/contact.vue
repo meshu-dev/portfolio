@@ -39,12 +39,7 @@ async function onSubmit() {
 
   let toastData: Partial<Toast> | null = null
 
-  if (
-    state.name &&
-    state.email &&
-    state.message &&
-    token.value
-  ) {
+  if (state.name && state.email && state.message && token.value) {
     const config: RuntimeConfig = useRuntimeConfig()
 
     const payload: ContactPayload = {
@@ -54,10 +49,7 @@ async function onSubmit() {
       token: token.value
     } as ContactPayload
 
-    const response = await sendMessage(
-      config,
-      payload
-    )
+    const response = await sendMessage(config, payload)
 
     console.log('response', response)
 
@@ -74,7 +66,7 @@ async function onSubmit() {
     toastData = {
       title: 'error',
       description: 'An error occurred validating submission. Please try again later.',
-      color: 'error',
+      color: 'error'
     }
   }
 
@@ -87,7 +79,8 @@ async function onSubmit() {
   <div>
     <PageTitle
       title="Let's connect"
-      description="I'm always on the lookout for new opportunities, so please send me a message and let's talk." />
+      description="I'm always on the lookout for new opportunities, so please send me a message and let's talk."
+    />
     <UForm :validate="validate" :state="state" class="w-full max-w-xl space-y-6" @submit="onSubmit">
       <UFormField label="Name" name="name" class="w-full">
         <UInput v-model="state.name" size="xl" class="w-full" />

@@ -1,10 +1,10 @@
 export type AuthResponse = {
-  data:  {
+  data: {
     token: string
   }
 }
 
 export type AuthPayload = {
-  email: string,
+  email: string
   password: string
 }

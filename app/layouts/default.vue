@@ -29,7 +29,7 @@ const menuItems = computed<NavigationMenuItem[]>(() => [
     label: 'Contact',
     to: '/contact',
     active: route.path.startsWith('/contact')
-  },
+  }
 ])
 
 const intro = getIntro()
@@ -52,11 +52,16 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
 
 <template>
   <div>
-    <UHeader :ui="{ root: 'bg-default/90 backdrop-blur border-b border-default', title: 'font-extrabold text-xl tracking-tight' }">
+    <UHeader
+      :ui="{
+        root: 'bg-default/90 backdrop-blur border-b border-default',
+        title: 'font-extrabold text-xl tracking-tight'
+      }"
+    >
       <template #title>
         <SiteLogo class="h-6 w-auto" />
       </template>
-      
+
       <UNavigationMenu :items="menuItems" variant="link" highlight class="font-medium" />
 
       <template #body>
@@ -89,15 +94,24 @@ const mobileSiteItems = computed<NavigationMenuItem[]>(() => siteItems)
     <UFooter>
       <template #left>
         <p class="text-muted text-sm">
-          Built with 
-          <a href="https://laravel.com" class="font-semibold text-highlighted hover:underline underline-offset-4" target="_blank">Laravel</a> &amp;
-          <a href="https://nuxt.com" class="font-semibold text-highlighted hover:underline underline-offset-4" target="_blank">Nuxt.js</a>
+          Built with
+          <a
+            href="https://laravel.com"
+            class="font-semibold text-highlighted hover:underline underline-offset-4"
+            target="_blank"
+            >Laravel</a
+          >
+          &amp;
+          <a
+            href="https://nuxt.com"
+            class="font-semibold text-highlighted hover:underline underline-offset-4"
+            target="_blank"
+            >Nuxt.js</a
+          >
         </p>
       </template>
       <template #right>
-        <p class="text-muted text-sm">
-          Copyright &copy; {{ new Date().getFullYear() }} Mesh Pro. All rights reserved
-        </p>
+        <p class="text-muted text-sm">Copyright &copy; {{ new Date().getFullYear() }} Mesh Pro. All rights reserved</p>
       </template>
     </UFooter>
   </div>

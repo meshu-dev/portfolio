@@ -11,7 +11,7 @@ const config = {
   public: { portfolioApiUrl: '/mock-api' }
 } as unknown as RuntimeConfig
 
-type Recorded = { body?: unknown, authorization?: string }
+type Recorded = { body?: unknown; authorization?: string }
 
 const loginRequests: Recorded[] = []
 const portfolioRequests: Recorded[] = []

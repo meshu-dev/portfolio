@@ -1,7 +1,7 @@
 import type { LivestreamStatus } from '~/enums/LivestreamStatus'
 
 export type PortfolioResponse = {
-  data:  {
+  data: {
     intro: Intro
     about: About
     projects: Project[]

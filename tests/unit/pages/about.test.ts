@@ -16,10 +16,12 @@ describe('About page', () => {
 
     // Assert
     expect(wrapper.find('h1').text()).toBe('About me')
-    expect(wrapper.find('#about-text').findAll('p').map((paragraph) => paragraph.text())).toStrictEqual([
-      'I am a full-stack developer.',
-      'I enjoy solving practical problems.'
-    ])
+    expect(
+      wrapper
+        .find('#about-text')
+        .findAll('p')
+        .map((paragraph) => paragraph.text())
+    ).toStrictEqual(['I am a full-stack developer.', 'I enjoy solving practical problems.'])
     expect(wrapper.find('h2').text()).toBe('Skills')
     expect(wrapper.findAll('li').map((item) => item.text())).toStrictEqual(['PHP', 'Laravel', 'TypeScript'])
   })

@@ -4,10 +4,11 @@ import DefaultLayout from '~/layouts/default.vue'
 import { makePortfolio } from '../../fixtures/portfolio'
 import { setSiteData } from '../../helpers/site-data'
 
-const mountLayout = (route = '/') => mountSuspended(DefaultLayout, {
-  route,
-  slots: { default: '<p data-test="page">Page content</p>' }
-})
+const mountLayout = (route = '/') =>
+  mountSuspended(DefaultLayout, {
+    route,
+    slots: { default: '<p data-test="page">Page content</p>' }
+  })
 
 describe('Default layout', () => {
   afterEach(() => setSiteData(undefined))
@@ -58,7 +59,7 @@ describe('Default layout', () => {
     expect(current.map((link) => link.text())).toStrictEqual([label])
   })
 
-  it('shows an icon link for each of the developer\'s sites', async () => {
+  it("shows an icon link for each of the developer's sites", async () => {
     // Arrange
     setSiteData(makePortfolio())
 
