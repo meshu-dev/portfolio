@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const livestreams = getLivestreams()
+import type { LivestreamsResponse } from '~/types/Portfolio'
+
+const { data: response } = await useFetch<LivestreamsResponse>('/api/livestreams')
+const livestreams = computed(() => response.value?.data ?? [])
 
 const youtubeSite = getIntro()?.sites?.find((site) => site.name.toLowerCase() === 'youtube')
 const youtubeStreamsUrl = youtubeSite ? `${youtubeSite.url.replace(/\/$/, '')}/streams` : null

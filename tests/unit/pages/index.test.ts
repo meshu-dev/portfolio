@@ -1,12 +1,20 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { clearNuxtData, useRuntimeConfig } from '#imports'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { useRuntimeConfig } from '#imports'
 import Index from '~/pages/index.vue'
-import { makeLivestream, makePortfolio } from '../../fixtures/portfolio'
+import type { LastStreamedResponse } from '~/types/Portfolio'
+import { makePortfolio } from '../../fixtures/portfolio'
+import { registerJsonEndpoint } from '../../helpers/endpoints'
 import { setSiteData } from '../../helpers/site-data'
+
+const lastStreamed = registerJsonEndpoint<LastStreamedResponse>('/api/last-streamed', {
+  data: { actual_end_at: '2026-10-12T19:45:00Z' }
+})
 
 describe('Home page', () => {
   beforeEach(() => {
+    clearNuxtData()
+    lastStreamed.respondWith({ data: { actual_end_at: '2026-10-12T19:45:00Z' } })
     useRuntimeConfig().public.cvUrl = 'https://cv.example.com/alex.pdf'
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(new Date('2026-10-14T19:45:00Z'))
@@ -42,27 +50,23 @@ describe('Home page', () => {
   })
 
   describe('last coding session', () => {
-    it('links to the latest livestream and says how long ago it ended', async () => {
+    it('links to the Livecoding page and says how long ago the last stream ended', async () => {
       // Arrange
       setSiteData(makePortfolio())
 
       // Act
       const wrapper = await mountSuspended(Index)
-      const link = wrapper.find('a[href="https://www.youtube.com/watch?v=abc123"]')
+      const link = wrapper.find('a[href="/livecoding"]')
 
       // Assert
       expect(link.text()).toBe('Last coding session')
-      expect(link.attributes('target')).toBe('_blank')
       expect(wrapper.text()).toContain('was 2 days ago')
     })
 
-    it('counts from the start when the livestream has no end time', async () => {
+    it('counts hours for a stream that ended more recently', async () => {
       // Arrange
-      setSiteData(
-        makePortfolio({
-          livestreams: [makeLivestream({ actual_start_at: '2026-10-14T16:45:00Z', actual_end_at: null })]
-        })
-      )
+      setSiteData(makePortfolio())
+      lastStreamed.respondWith({ data: { actual_end_at: '2026-10-14T16:45:00Z' } })
 
       // Act
       const wrapper = await mountSuspended(Index)
@@ -71,25 +75,10 @@ describe('Home page', () => {
       expect(wrapper.text()).toContain('was 3 hours ago')
     })
 
-    it('shows only the link when the livestream has no times at all', async () => {
+    it('is left out when nothing has been streamed yet', async () => {
       // Arrange
-      setSiteData(
-        makePortfolio({
-          livestreams: [makeLivestream({ actual_start_at: null, actual_end_at: null })]
-        })
-      )
-
-      // Act
-      const wrapper = await mountSuspended(Index)
-
-      // Assert
-      expect(wrapper.text()).toContain('Last coding session')
-      expect(wrapper.text()).not.toContain('was')
-    })
-
-    it('is left out when there are no livestreams', async () => {
-      // Arrange
-      setSiteData(makePortfolio({ livestreams: [] }))
+      setSiteData(makePortfolio())
+      lastStreamed.respondWith({ data: { actual_end_at: null } })
 
       // Act
       const wrapper = await mountSuspended(Index)
@@ -98,16 +87,16 @@ describe('Home page', () => {
       expect(wrapper.text()).not.toContain('Last coding session')
     })
 
-    it('is left out when the livestreams are missing', async () => {
+    it('is left out when the last streamed time cannot be loaded', async () => {
       // Arrange
-      const portfolio = makePortfolio()
-      portfolio.data.livestreams = undefined as never
-      setSiteData(portfolio)
+      setSiteData(makePortfolio())
+      lastStreamed.respondWith(null)
 
       // Act
       const wrapper = await mountSuspended(Index)
 
       // Assert
+      expect(wrapper.find('h1').text()).toBe("Hello, I'm Alex")
       expect(wrapper.text()).not.toContain('Last coding session')
     })
   })

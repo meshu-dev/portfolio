@@ -50,17 +50,6 @@ export const makePortfolio = (overrides: Partial<PortfolioResponse['data']> = {}
         technologies: ['Astro', 'Laravel']
       }
     ],
-    livestreams: [
-      makeLivestream(),
-      makeLivestream({
-        title: 'Using Claude AI to fix Tailwind CSS',
-        description: '',
-        url: 'https://www.youtube.com/watch?v=def456',
-        thumbnail: null,
-        actual_start_at: '2026-10-05T16:39:00Z',
-        actual_end_at: '2026-10-05T17:47:00Z'
-      })
-    ],
     ...overrides
   }
 })

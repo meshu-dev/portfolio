@@ -13,9 +13,10 @@ export default defineVitestConfig({
     include: ['tests/**/*.test.ts'],
     coverage: {
       provider: 'v8',
-      include: ['app/**/*.{ts,vue}'],
+      include: ['app/**/*.{ts,vue}', 'server/**/*.ts'],
       // Type-only files have no runtime code, and app.config.ts and the CSS are configuration.
-      exclude: ['app/types/**', 'app/app.config.ts', 'app/assets/**'],
+      // The server/api handlers are one-line wrappers around fetchPortfolioApi, which is tested.
+      exclude: ['app/types/**', 'app/app.config.ts', 'app/assets/**', 'server/api/**'],
       reporter: ['text', 'html'],
       thresholds: {
         statements: 80,

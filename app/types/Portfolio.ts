@@ -5,7 +5,6 @@ export type PortfolioResponse = {
     intro: Intro
     about: About
     projects: Project[]
-    livestreams: Livestream[]
   }
 }
 
@@ -41,6 +40,16 @@ export type Project = {
   image_url: string
   repositories: Repository[]
   technologies: string[]
+}
+
+export type LivestreamsResponse = {
+  data: Livestream[]
+}
+
+export type LastStreamedResponse = {
+  data: {
+    actual_end_at: string | null
+  }
 }
 
 export type Livestream = {

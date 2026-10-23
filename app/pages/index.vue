@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import type { RuntimeConfig } from 'nuxt/schema'
 import type { ButtonProps } from '@nuxt/ui'
+import type { LastStreamedResponse } from '~/types/Portfolio'
 
 const config: RuntimeConfig = useRuntimeConfig()
 
 const intro = getIntro()
 
-const latestLivestream = getLivestreams()?.[0] ?? null
-const latestLivestreamEndedAt = latestLivestream?.actual_end_at ?? latestLivestream?.actual_start_at ?? null
+const { data: lastStreamed } = await useFetch<LastStreamedResponse>('/api/last-streamed')
+const lastStreamedAt = lastStreamed.value?.data.actual_end_at ?? null
 
 // The site is statically generated, so the relative time is worked out in the browser only; baking it into the HTML would leave it stale.
 const lastLivestreamed = ref('')
 
 onMounted(() => {
-  lastLivestreamed.value = formatRelativeTime(latestLivestreamEndedAt)
+  lastLivestreamed.value = formatRelativeTime(lastStreamedAt)
 })
 
 const links = ref<ButtonProps[]>([
@@ -41,14 +42,12 @@ const links = ref<ButtonProps[]>([
     <div class="mt-10 flex flex-wrap gap-3">
       <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
     </div>
-    <div v-if="latestLivestream" class="mt-16 sm:mt-24">
+    <div v-if="lastStreamedAt" class="mt-16 sm:mt-24">
       <p class="text-xl sm:text-2xl">
-        <a
-          :href="latestLivestream.url"
-          target="_blank"
-          rel="noopener"
+        <NuxtLink
+          to="/livecoding"
           class="font-bold text-primary underline decoration-2 underline-offset-8 hover:decoration-4"
-          >Last coding session</a
+          >Last coding session</NuxtLink
         >
         <span v-if="lastLivestreamed" class="text-muted"> was {{ lastLivestreamed }}</span>
       </p>

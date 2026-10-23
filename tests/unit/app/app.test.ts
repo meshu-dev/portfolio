@@ -3,10 +3,13 @@ import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime'
 import { useState } from '#imports'
 import App from '~/app.vue'
 import { makePortfolio } from '../../fixtures/portfolio'
+import { registerJsonEndpoint } from '../../helpers/endpoints'
 
 const { fetchPortfolioMock } = vi.hoisted(() => ({ fetchPortfolioMock: vi.fn() }))
 
 mockNuxtImport('fetchPortfolio', () => fetchPortfolioMock)
+
+registerJsonEndpoint('/api/last-streamed', { data: { actual_end_at: '2026-10-12T19:45:00Z' } })
 
 describe('App', () => {
   it('loads the portfolio once and renders the current page in the default layout', async () => {

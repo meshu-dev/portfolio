@@ -1,16 +1,35 @@
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { clearNuxtData } from '#imports'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Livecoding from '~/pages/livecoding.vue'
+import type { LivestreamsResponse } from '~/types/Portfolio'
 import { makeLivestream, makePortfolio } from '../../fixtures/portfolio'
+import { registerJsonEndpoint } from '../../helpers/endpoints'
 import { setSiteData } from '../../helpers/site-data'
 
+const withoutDescription = makeLivestream({
+  title: 'Using Claude AI to fix Tailwind CSS',
+  description: '',
+  url: 'https://www.youtube.com/watch?v=def456',
+  thumbnail: null,
+  actual_start_at: '2026-10-05T16:39:00Z',
+  actual_end_at: '2026-10-05T17:47:00Z'
+})
+
+const livestreams = registerJsonEndpoint<LivestreamsResponse>('/api/livestreams', {
+  data: [makeLivestream(), withoutDescription]
+})
+
 describe('Livecoding page', () => {
+  beforeEach(() => {
+    clearNuxtData()
+    livestreams.respondWith({ data: [makeLivestream(), withoutDescription] })
+    setSiteData(makePortfolio())
+  })
+
   afterEach(() => setSiteData(undefined))
 
   it('lists each livestream with its date, title link and description', async () => {
-    // Arrange
-    setSiteData(makePortfolio())
-
     // Act
     const wrapper = await mountSuspended(Livecoding)
     const rows = wrapper.findAll('li')
@@ -25,9 +44,6 @@ describe('Livecoding page', () => {
   })
 
   it('shows the thumbnail when there is one and leaves it out when there is not', async () => {
-    // Arrange
-    setSiteData(makePortfolio())
-
     // Act
     const wrapper = await mountSuspended(Livecoding)
     const rows = wrapper.findAll('li')
@@ -38,9 +54,6 @@ describe('Livecoding page', () => {
   })
 
   it('leaves the description out when a livestream has none', async () => {
-    // Arrange
-    setSiteData(makePortfolio())
-
     // Act
     const wrapper = await mountSuspended(Livecoding)
 
@@ -48,9 +61,9 @@ describe('Livecoding page', () => {
     expect(wrapper.findAll('li')[1]!.find('p.font-serif').exists()).toBe(false)
   })
 
-  it.each([[[]], [undefined]])('shows an empty message when there are no livestreams (%o)', async (livestreams) => {
+  it('shows an empty message when there are no livestreams', async () => {
     // Arrange
-    setSiteData(livestreams === undefined ? undefined : makePortfolio({ livestreams }))
+    livestreams.respondWith({ data: [] })
 
     // Act
     const wrapper = await mountSuspended(Livecoding)
@@ -60,11 +73,20 @@ describe('Livecoding page', () => {
     expect(wrapper.findAll('li')).toHaveLength(0)
   })
 
+  it('shows the empty message instead of failing when the livestreams cannot be loaded', async () => {
+    // Arrange
+    livestreams.respondWith(null)
+
+    // Act
+    const wrapper = await mountSuspended(Livecoding)
+
+    // Assert
+    expect(wrapper.find('h1').text()).toBe('Livecoding')
+    expect(wrapper.text()).toContain('No livestreams yet.')
+  })
+
   describe('View More button', () => {
     it('links to the streams tab of the YouTube channel', async () => {
-      // Arrange
-      setSiteData(makePortfolio())
-
       // Act
       const wrapper = await mountSuspended(Livecoding)
       const link = wrapper.find('a[href="https://www.youtube.com/@Mesh-Pro/streams"]')
@@ -115,7 +137,7 @@ describe('Livecoding page', () => {
 
     it('is hidden when the intro has no sites at all', async () => {
       // Arrange
-      const portfolio = makePortfolio({ livestreams: [makeLivestream()] })
+      const portfolio = makePortfolio()
       portfolio.data.intro.sites = undefined as never
       setSiteData(portfolio)
 
