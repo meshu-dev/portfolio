@@ -8,14 +8,12 @@ const config: RuntimeConfig = useRuntimeConfig()
 const intro = getIntro()
 
 const { data: lastStreamed } = await useFetch<LastStreamedResponse>('/api/last-streamed')
-const lastStreamedAt = lastStreamed.value?.data.actual_end_at ?? null
+const lastStreamedAt = lastStreamed.value?.data?.actual_end_at ?? null
+const lastStreamedUrl = lastStreamed.value?.data?.url ?? null
 
-// The site is statically generated, so the relative time is worked out in the browser only; baking it into the HTML would leave it stale.
-const lastLivestreamed = ref('')
+console.log('lastStreamedAt', lastStreamedAt)
 
-onMounted(() => {
-  lastLivestreamed.value = formatRelativeTime(lastStreamedAt)
-})
+const lastLivestreamed = formatRelativeTime(lastStreamedAt)
 
 const links = ref<ButtonProps[]>([
   {
@@ -45,7 +43,9 @@ const links = ref<ButtonProps[]>([
     <div v-if="lastStreamedAt" class="mt-16 sm:mt-24">
       <p class="text-xl sm:text-2xl">
         <NuxtLink
-          to="/livecoding"
+          :to="lastStreamedUrl"
+          target="_blank"
+          rel="noopener"
           class="font-bold text-primary underline decoration-2 underline-offset-8 hover:decoration-4"
           >Last coding session</NuxtLink
         >

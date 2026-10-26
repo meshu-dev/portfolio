@@ -47,9 +47,7 @@ export type LivestreamsResponse = {
 }
 
 export type LastStreamedResponse = {
-  data: {
-    actual_end_at: string | null
-  }
+  data: Livestream | null
 }
 
 export type Livestream = {
