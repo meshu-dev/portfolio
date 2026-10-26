@@ -7,11 +7,9 @@ const config: RuntimeConfig = useRuntimeConfig()
 
 const intro = getIntro()
 
-const { data: lastStreamed } = await useFetch<LastStreamedResponse>('/api/last-streamed')
+const { data: lastStreamed } = await useFetch<LastStreamedResponse>('/api/latest-livestream')
 const lastStreamedAt = lastStreamed.value?.data?.actual_end_at ?? null
 const lastStreamedUrl = lastStreamed.value?.data?.url ?? null
-
-console.log('lastStreamedAt', lastStreamedAt)
 
 const lastLivestreamed = formatRelativeTime(lastStreamedAt)
 

@@ -7,7 +7,7 @@ import { makeLivestream, makePortfolio } from '../../fixtures/portfolio'
 import { registerJsonEndpoint } from '../../helpers/endpoints'
 import { setSiteData } from '../../helpers/site-data'
 
-const lastStreamed = registerJsonEndpoint<LastStreamedResponse>('/api/last-streamed', {
+const lastStreamed = registerJsonEndpoint<LastStreamedResponse>('/api/latest-livestream', {
   data: { actual_end_at: '2026-10-12T19:45:00Z' }
 })
 

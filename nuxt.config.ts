@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     // The routes the pages call for their data. Cached for an hour, so browsing between pages
     // does not log in to the portfolio API on every click.
     '/api/livestreams': { swr: 60 * 60 },
-    '/api/last-streamed': { swr: 60 * 60 },
+    '/api/latest-livestream': { swr: 60 * 60 },
     // Generated once at build time
     '/about': { prerender: true },
     '/projects': { prerender: true },
