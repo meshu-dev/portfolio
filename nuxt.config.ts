@@ -18,6 +18,13 @@ export default defineNuxtConfig({
   turnstile: {
     siteKey: process.env.CLOUDFLARE_TURNSTILE_SITE_KEY,
   },
+  vite: {
+    server: {
+      allowedHosts: process.env.ALLOWED_HOSTS
+        ? process.env.ALLOWED_HOSTS.split(',').map((h) => h.trim())
+        : [],
+    },
+  },
   routeRules: {
     // Rendered on the server and cached there for a day; once it expires, the old page is served
     // while a fresh one is rendered in the background
