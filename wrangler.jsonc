@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "compatibility_date": "2026-11-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": ".output/server/index.mjs",
+  "kv_namespaces": [{ "binding": "CACHE" }],
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
+  }
+}

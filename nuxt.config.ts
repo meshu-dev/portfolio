@@ -25,6 +25,14 @@ export default defineNuxtConfig({
         : [],
     },
   },
+  nitro: {
+    // On Cloudflare, the swr cache is stored in KV so it is shared by all Worker instances
+    // and survives restarts. Other presets keep Nitro's default cache storage.
+    storage:
+      process.env.NITRO_PRESET === 'cloudflare_module'
+        ? { cache: { driver: 'cloudflare-kv-binding', binding: 'CACHE' } }
+        : {},
+  },
   routeRules: {
     // Rendered on the server and cached there for a day; once it expires, the old page is served
     // while a fresh one is rendered in the background
