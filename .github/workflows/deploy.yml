@@ -53,7 +53,7 @@ jobs:
       - run: npm run build
         env:
           NITRO_PRESET: cloudflare_module
-          NUXT_PUBLIC_PORTFOLIO_API_URL: ${{ secrets.NUXT_PUBLIC_PORTFOLIO_API_URL }}
+          NUXT_PUBLIC_PORTFOLIO_API_URL: ${{ vars.NUXT_PUBLIC_PORTFOLIO_API_URL }}
           NUXT_PUBLIC_CV_URL: ${{ vars.NUXT_PUBLIC_CV_URL }}
           PORTFOLIO_API_EMAIL: ${{ secrets.PORTFOLIO_API_EMAIL }}
           PORTFOLIO_API_PASSWORD: ${{ secrets.PORTFOLIO_API_PASSWORD }}
