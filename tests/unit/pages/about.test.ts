@@ -52,6 +52,32 @@ describe('About page', () => {
     expect(wrapper.find('img').exists()).toBe(false)
   })
 
+  it('gives the text the full width when there is no image', async () => {
+    // Arrange
+    const portfolio = makePortfolio()
+    portfolio.data.about.image_url = ''
+    setSiteData(portfolio)
+
+    // Act
+    const wrapper = await mountSuspended(About)
+
+    // Assert
+    expect(wrapper.find('[data-testid="about-layout"]').classes()).not.toContain('md:grid-cols-[16rem_1fr]')
+    expect(wrapper.find('#about-text').classes()).not.toContain('max-w-[62ch]')
+  })
+
+  it('keeps the image column and a readable text width when there is an image', async () => {
+    // Arrange
+    setSiteData(makePortfolio())
+
+    // Act
+    const wrapper = await mountSuspended(About)
+
+    // Assert
+    expect(wrapper.find('[data-testid="about-layout"]').classes()).toContain('md:grid-cols-[16rem_1fr]')
+    expect(wrapper.find('#about-text').classes()).toContain('max-w-[62ch]')
+  })
+
   it('still renders the heading when the about data is missing', async () => {
     // Arrange
     setSiteData(undefined)

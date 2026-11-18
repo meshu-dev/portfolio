@@ -6,7 +6,7 @@ console.log('about', about)
 <template>
   <div>
     <PageTitle title="About me" />
-    <div class="grid gap-10 md:grid-cols-[16rem_1fr] md:gap-16">
+    <div :class="['grid gap-10 md:gap-16', about?.image_url && 'md:grid-cols-[16rem_1fr]']" data-testid="about-layout">
       <img
         v-if="about?.image_url"
         :src="about.image_url"
@@ -17,7 +17,7 @@ console.log('about', about)
         <!-- eslint-disable vue/no-v-html -- the bio is HTML the site owner writes in the admin app -->
         <div
           id="about-text"
-          class="max-w-[62ch] font-serif text-xl leading-relaxed text-default"
+          :class="['font-serif text-xl leading-relaxed text-default', about?.image_url && 'max-w-[62ch]']"
           v-html="about?.text"
         />
         <!-- eslint-enable vue/no-v-html -->
