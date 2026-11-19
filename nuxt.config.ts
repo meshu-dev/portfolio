@@ -25,6 +25,12 @@ export default defineNuxtConfig({
         : [],
     },
   },
+  experimental: {
+    // Keep each page's data inside its HTML. Extracted, it is a second file (/livecoding/_payload.json) that the
+    // swr cache stores separately from the page, and the two can go out of sync: the page renders with its
+    // livestreams, then the browser loads an older payload without them and the list empties on hydration.
+    payloadExtraction: false,
+  },
   nitro: {
     // On Cloudflare, the swr cache is stored in KV so it is shared by all Worker instances
     // and survives restarts. Other presets keep Nitro's default cache storage.
