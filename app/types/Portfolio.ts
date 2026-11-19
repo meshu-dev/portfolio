@@ -44,6 +44,8 @@ export type Project = {
 
 export type LivestreamsResponse = {
   data: Livestream[]
+  /** How many livestreams there are in all, which can be more than the ones in data */
+  total?: number
 }
 
 export type LastStreamedResponse = {

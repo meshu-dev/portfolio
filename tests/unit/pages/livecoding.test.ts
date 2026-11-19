@@ -16,14 +16,15 @@ const withoutDescription = makeLivestream({
   actual_end_at: '2026-10-05T17:47:00Z'
 })
 
-const livestreams = registerJsonEndpoint<LivestreamsResponse>('/api/livestreams', {
-  data: [makeLivestream(), withoutDescription]
-})
+// More livestreams in all (total) than the two listed, so the View More button shows
+const withMore = (): LivestreamsResponse => ({ data: [makeLivestream(), withoutDescription], total: 12 })
+
+const livestreams = registerJsonEndpoint<LivestreamsResponse>('/api/livestreams', withMore())
 
 describe('Livecoding page', () => {
   beforeEach(() => {
     clearNuxtData()
-    livestreams.respondWith({ data: [makeLivestream(), withoutDescription] })
+    livestreams.respondWith(withMore())
     setSiteData(makePortfolio())
   })
 
@@ -94,6 +95,28 @@ describe('Livecoding page', () => {
       // Assert
       expect(link.text()).toBe('View More')
       expect(link.attributes('target')).toBe('_blank')
+    })
+
+    it('is hidden when every livestream is already listed', async () => {
+      // Arrange
+      livestreams.respondWith({ data: [makeLivestream(), withoutDescription], total: 2 })
+
+      // Act
+      const wrapper = await mountSuspended(Livecoding)
+
+      // Assert
+      expect(wrapper.text()).not.toContain('View More')
+    })
+
+    it('is hidden when the total is not given', async () => {
+      // Arrange
+      livestreams.respondWith({ data: [makeLivestream(), withoutDescription] })
+
+      // Act
+      const wrapper = await mountSuspended(Livecoding)
+
+      // Assert
+      expect(wrapper.text()).not.toContain('View More')
     })
 
     it('does not double up a trailing slash on the channel URL', async () => {

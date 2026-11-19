@@ -6,6 +6,8 @@ const livestreams = computed(() => response.value?.data ?? [])
 
 const youtubeSite = getIntro()?.sites?.find((site) => site.name.toLowerCase() === 'youtube')
 const youtubeStreamsUrl = youtubeSite ? `${youtubeSite.url.replace(/\/$/, '')}/streams` : null
+// Only worth offering when there are more livestreams than the ones listed
+const hasMoreLivestreams = computed(() => (response.value?.total ?? 0) > livestreams.value.length)
 </script>
 
 <template>
@@ -41,7 +43,7 @@ const youtubeStreamsUrl = youtubeSite ? `${youtubeSite.url.replace(/\/$/, '')}/s
       </li>
     </ul>
     <p v-else class="text-lg text-muted">No livestreams yet.</p>
-    <div v-if="youtubeStreamsUrl" class="mt-10">
+    <div v-if="youtubeStreamsUrl && hasMoreLivestreams" class="mt-10">
       <UButton :to="youtubeStreamsUrl" target="_blank" size="xl" color="neutral" variant="outline">View More</UButton>
     </div>
   </div>
